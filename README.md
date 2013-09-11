@@ -1,8 +1,8 @@
-install:
+install: <br/>
 --------------------------------------------
 
-$ git clone git://github.com/raeefrefai/adrr
-$ cd adrr
-$ npm install -g grunt-cli
-$ npm install
-$ bower install
+$ git clone git://github.com/raeefrefai/adrr <br/>
+$ cd adrr <br/>
+$ npm install -g grunt-cli <br/>
+$ npm install <br/>
+$ bower install <br/>
