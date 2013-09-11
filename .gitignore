@@ -1,0 +1,8 @@
+*.sw*
+*~
+bin/assets/
+bin/index.html
+
+node_modules/
+
+vendor/
