@@ -14,9 +14,9 @@ module.exports =
 	{
 		js:
 		[
+			'vendor/jquery/jquery.min.js',
 			'vendor/angular/angular.min.js',
-			'vendor/angular-ui-router/release/angular-ui-router.min.js',
-			'vendor/jquery/jquery.min.js'
+			'vendor/angular-ui-router/release/angular-ui-router.min.js'
 		],
 		css:
 		[

@@ -67,30 +67,7 @@ module.exports = function (grunt)
 			}
 		},
 		
-		concat:
-		{
-			vendor:
-			{
-				src: ['<%= vendor_files.js %>'],
-				
-				dest: '<%= compile_dir %>/assets/js/vendor.js'
-			},
-			
-			app:
-			{
-				src:
-				[
-					'module.prefix',
-					'<%= app_files.js %>',
-					'<%= html2js.app.dest %>',
-					'<%= html2js.common.dest %>',
-					'module.suffix'
-				],
-				
-				dest: '<%= compile_dir %>/assets/js/<%= pkg.name %>.js'
-			}
-		},
-		
+
 		recess:
 		{
 			options:
@@ -109,7 +86,28 @@ module.exports = function (grunt)
 				files: { '<%= compile_dir %>/assets/css/<%= pkg.name %>.css': ['<%= app_files.less %>'] }
 			}
 		},
-		
+		concat:
+		{
+			vendor:
+			{
+				src: ['<%= vendor_files.js %>'],
+
+				dest: '<%= compile_dir %>/assets/js/vendor.js'
+			},
+			app:
+			{
+				src:
+					[
+						'module.prefix',
+						'<%= app_files.js %>',
+						'<%= html2js.app.dest %>',
+						'<%= html2js.common.dest %>',
+						'module.suffix'
+					],
+				dest: '<%= compile_dir %>/assets/js/<%= pkg.name %>.js'
+			}
+		},
+
 		ngmin:
 		{
 			all:
@@ -117,24 +115,19 @@ module.exports = function (grunt)
 				files:
 				[{
 					src: ['<%= compile_dir %>/assets/js/<%= pkg.name %>.js'],
-					dest: '<%= compile_dir %>/assets/js/<%= pkg.name %>.js',
+					dest: '<%= compile_dir %>/assets/js/<%= pkg.name %>.js'
 				}]
 			}
 		},
-		
+
 		uglify:
 		{
-			vendor:
-			{
-				files: { '<%= concat.vendor.dest %>': '<%= concat.vendor.dest %>' }
-			},
-			
 			app:
 			{
 				files: { '<%= concat.app.dest %>': '<%= concat.app.dest %>' }
 			}
 		},
-		
+
 		watch:
 		{
 			options: { livereload: true },
@@ -144,23 +137,21 @@ module.exports = function (grunt)
 				files: ['src/**/*'],
 				tasks: ['compile']
 			},
-			
 			css:
 			{
 				files: ['<%= app_files.less %>'],
 				tasks: ['recess:app']
 			},
-			
 			js:
 			{
 				files: ['<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
-				tasks: ['html2js:app', 'concat:app', 'ngmin', 'uglify:app']
+				tasks: ['html2js', 'concat:app', 'ngmin', 'uglify']
 			}
 		}
 	};
-	
+
 	grunt.initConfig (grunt.util._.extend (taskConfig, userConfig));
-	
+
 	grunt.registerTask ('compile', ['clean:all', 'copy', 'html2js', 'concat', 'recess', 'clean:templates', 'ngmin', 'uglify']);
 	grunt.registerTask ('default', ['compile']);
 };
