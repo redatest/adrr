@@ -1,16 +1,18 @@
 angular.module('adrrAuth', []).factory
 (
-	'adrrAuth', function ($state, $http)
+	'adrrAuth', function ($state, $http, $rootScope)
 	{
+		$rootScope.wrongCredentials = false;
+		
 		function check (username, password)
 		{
-			var data = (typeof username !== undefined && typeof password !== undefined) ? $.param ({ username: username, password: password	}) : null;
+			var credentials = (!angular.isUndefined(username) && !angular.isUndefined(password)) ? $.param ({ username: username, password: password }) : null;
 			
 			$http
 			({
 				method: 'POST',
 				url: adrrAuthConfig.loginUrl,
-				data: data,
+				data: credentials,
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			})
 			.success
@@ -27,6 +29,11 @@ angular.module('adrrAuth', []).factory
 					else
 					{
 						$state.transitionTo(adrrAuthConfig.loginState);
+						
+						if (credentials !== null)
+						{
+							$rootScope.wrongCredentials = true;
+						}
 					}
 				}
 			)
