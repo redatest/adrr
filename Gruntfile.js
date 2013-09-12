@@ -131,21 +131,11 @@ module.exports = function (grunt)
 		watch:
 		{
 			options: { livereload: true },
-			
-			all:
-			{
-				files: ['src/**/*'],
-				tasks: ['compile']
-			},
-			css:
-			{
-				files: ['<%= app_files.less %>'],
-				tasks: ['recess:app']
-			},
+
 			js:
 			{
-				files: ['<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
-				tasks: ['html2js', 'concat:app', 'ngmin', 'uglify']
+				files: ['<%= app_files.less %>','<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
+				tasks: ['html2js', 'concat:app', 'ngmin', 'uglify','recess:app']
 			}
 		}
 	};
