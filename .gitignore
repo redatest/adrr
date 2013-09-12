@@ -1,7 +1,6 @@
 *.sw*
 *~
-bin/assets/
-bin/index.html
+bin/
 
 node_modules/
 

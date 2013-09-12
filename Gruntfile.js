@@ -1,13 +1,13 @@
 module.exports = function (grunt)
 {
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-html2js');
+	grunt.loadNpmTasks('grunt-ngmin');
 	grunt.loadNpmTasks('grunt-recess');
-	// grunt.loadNpmTasks('grunt-ngmin');
+	grunt.loadNpmTasks('grunt-html2js');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	
 	var userConfig = require( './build.config.js' );
 	
@@ -73,7 +73,7 @@ module.exports = function (grunt)
 			{
 				src: ['<%= vendor_files.js %>'],
 				
-				dest: '<%= compile_dir %>/assets/vendor.js'
+				dest: '<%= compile_dir %>/assets/js/vendor.js'
 			},
 			
 			app:
@@ -87,7 +87,7 @@ module.exports = function (grunt)
 					'module.suffix'
 				],
 				
-				dest: '<%= compile_dir %>/assets/<%= pkg.name %>.js'
+				dest: '<%= compile_dir %>/assets/js/<%= pkg.name %>.js'
 			}
 		},
 		
@@ -101,27 +101,26 @@ module.exports = function (grunt)
 			
 			vendor:
 			{
-				files: { '<%= compile_dir %>/assets/vendor.css': ['<%= vendor_files.css %>'] }
+				files: { '<%= compile_dir %>/assets/css/vendor.css': ['<%= vendor_files.css %>'] }
 			},
 			
 			app:
 			{
-				files: { '<%= compile_dir %>/assets/<%= pkg.name %>.css': ['<%= app_files.less %>'] }
+				files: { '<%= compile_dir %>/assets/css/<%= pkg.name %>.css': ['<%= app_files.less %>'] }
 			}
 		},
 		
-		// ngmin:
-		// {
-			// all:
-			// {
-				// files:
-				// [{
-					// src: '<%= build_dir %>/assets/<%= pkg.name %>.js',
-					// dest: '<%= build_dir %>/assets/<%= pkg.name %>.js',
-					// expand: true
-				// }]
-			// }
-		// },
+		ngmin:
+		{
+			all:
+			{
+				files:
+				[{
+					src: ['<%= compile_dir %>/assets/js/<%= pkg.name %>.js'],
+					dest: '<%= compile_dir %>/assets/js/<%= pkg.name %>.js',
+				}]
+			}
+		},
 		
 		uglify:
 		{
@@ -155,13 +154,13 @@ module.exports = function (grunt)
 			js:
 			{
 				files: ['<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
-				tasks: ['html2js:app', 'concat:app', /*'ngmin',*/ 'uglify:app']
+				tasks: ['html2js:app', 'concat:app', 'ngmin', 'uglify:app']
 			}
 		}
 	};
 	
 	grunt.initConfig (grunt.util._.extend (taskConfig, userConfig));
 	
-	grunt.registerTask ('compile', ['clean:all', 'copy', 'html2js', 'concat', 'recess', 'clean:templates', /*'ngmin',*/ 'uglify']);
+	grunt.registerTask ('compile', ['clean:all', 'copy', 'html2js', 'concat', 'recess', 'clean:templates', 'ngmin', 'uglify']);
 	grunt.registerTask ('default', ['compile']);
 };
