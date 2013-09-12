@@ -12,8 +12,23 @@ angular.module
 			'wrapper',
 			{
 				abstract: true,
-				template: '<div ui-view></div>'
+				views:
+				{
+					'@':
+					{
+						controller: 'WrapperCtrl',
+						templateUrl: 'wrapper/wrapper.tpl.html'
+					}
+				}
 			}
 		)
+	}
+)
+
+.controller
+(
+	'WrapperCtrl', function ($scope)
+	{
+		$scope.isCollapsed = false;
 	}
 );
