@@ -42,8 +42,12 @@ angular.module
 
 .controller
 (
-	'LoginCtrl', function LoginCtrl ($scope)
+	'LoginCtrl', function LoginCtrl ($scope, adrrAuth, $rootScope)
 	{
+		$scope.login = function ()
+		{
+			adrrAuth.check($scope.username, $scope.password);
+		};
 	}
 )
 
