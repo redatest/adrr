@@ -24,7 +24,6 @@ angular.module
 (
 	function run (adrrAuth)
 	{
-		console.log('Aladdin Mhaimeed');
 		adrrAuth.check();
 	}
 )
