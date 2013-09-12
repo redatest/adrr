@@ -19,7 +19,6 @@ module.exports =
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
 			'vendor/jquery/jquery.min.js',
 			'vendor/angular-bootstrap/ui-bootstrap.min.js'
-
 		],
 		css:
 		[
