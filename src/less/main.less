@@ -1,8 +1,9 @@
-body
-{
-	background-color: #eee;
-}
+/* variables */
+@sidenav_border: 1px solid #cccccc;
 
+
+
+/* login */
 .form-signin
 {
     margin: 0 auto;
@@ -26,24 +27,78 @@ body
     margin: 20px 0;
     padding: 15px 30px 15px 15px;
 }
+/* End */
 
+
+
+/* top nav */
 #topnav
 {
-	background-color: #438eb9;
-	
-	padding: 0 20px;
-	
 	margin-bottom: 0;
 	
 	border: none;
+	
+	border-radius: 0;
+	
+	background: #438eb9;
 }
+/* End */
 
-.navbar-default .navbar-brand, .navbar-default .navbar-link
+
+
+/* side nav */
+#sidenav .navbar
 {
-	color: #FFFFFF;
+	margin-bottom: 0;
+	
+	border: none;
+	border-right: @sidenav_border;
+	border-left: @sidenav_border;
+	border-bottom: @sidenav_border;
+	
+	background-color: #f2f2f2;
+	
+	border-radius: 0;
 }
 
-#mainmenu ul li
+#sidenav .navbar-collapse
+{
+	padding: 0;
+}
+
+#sidenav li
 {
 	margin-top: 0;
+	
+	border-top: @sidenav_border;
+}
+
+#sidenav > .navbar > .navbar-collapse > ul > li:first-child
+{
+	border: none;
+}
+
+#sidenav a
+{
+	border-radius: 0;
+	
+	color: #585858;
+}
+
+#sidenav li.active > a, #sidenav li a:hover
+{
+	background-color: #ffffff;
+}
+
+#sidenav .sub li a
+{
+	padding-left: 30px;
+}
+/* End */
+
+
+
+.gridStyle
+{
+	height: 200px;
 }

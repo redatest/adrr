@@ -15,14 +15,18 @@ module.exports =
 		js:
 		[
 			'vendor/jquery/jquery.min.js',
+			'vendor/jquery-ui/ui/jquery-ui.js',
 			'vendor/angular/angular.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
-			'vendor/jquery/jquery.min.js',
-			'vendor/angular-bootstrap/ui-bootstrap.min.js'
+			'vendor/ng-grid/ng-grid-2.0.7.min.js',
+			'vendor/bootstrap/dist/js/bootstrap.min.js',
+			'vendor/lodash/lodash.js',
+			'vendor/restangular/dist/restangular.js'
 		],
 		css:
 		[
-			'vendor/bootstrap/dist/css/bootstrap.min.css'
+			'vendor/bootstrap/dist/css/bootstrap.min.css',
+			'vendor/ng-grid/ng-grid.min.css'
 		]
 	}
 };

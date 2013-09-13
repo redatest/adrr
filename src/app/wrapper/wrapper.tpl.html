@@ -1,50 +1,52 @@
-<div class="row">
-	<nav id="topnav" class="navbar navbar-default" role="navigation">
+<nav id="topnav" class="navbar navbar-default" role="navigation">
+	<a class="navbar-brand" href="#">Concrete</a>
+	
+	<p class="navbar-text pull-right"><a href="#" class="navbar-link">Sign out</a></p>
+</nav>
+
+<div id="sidenav" class="col-md-2">
+	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			
-			<a class="navbar-brand" href="#">Concrete</a>
 		</div>
-		<p class="navbar-text pull-right"><a href="#" class="navbar-link">Sign out</a></p>
-	</nav>
-</div>
-
-<div class="row">
-	<div class="col-md-2">
-		<div>
+		
+		<div class="collapse navbar-collapse navbar-ex8-collapse">
 			<ul class="nav nav-pills nav-stacked">
-				<li class="active">
-					<a href="#">Home</a>
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active">
-							<a href="#">Home</a>
+				<li ng-class="{active: state === 'wrapper.dashboard'}">
+					<a href="#/dashboard">Dashboard</a>
+				</li>
+				<li class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
+					<a onclick="return false;" class="accordion-toggle" ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse" href="#collapseOne">Settings</a>
+					
+					<ul id="collapseOne" class="nav nav-pills nav-stacked collapse" ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
+						<li ng-class="{active: state.indexOf('wrapper.settings.zone') > -1}">
+							<a href="#/settings/zone/create">Zones</a>
 						</li>
-						
-						<li>
-							<a href="#">Profile</a>
+						<li ng-class="{active: state.indexOf('wrapper.settings.pump') > -1}">
+							<a href="#/settings/pump/create">Pumps</a>
 						</li>
-						
-						<li>
-							<a href="#">Messages</a>
+						<li ng-class="{active: state.indexOf('wrapper.settings.supplier') > -1}">
+							<a href="#/settings/supplier/create">Suppliers</a>
+						</li>
+						<li ng-class="{active: state.indexOf('wrapper.settings.pouringType') > -1}">
+							<a href="#/settings/pouring-type/create">Pouring Types</a>
+						</li>
+						<li ng-class="{active: state.indexOf('wrapper.settings.concreteType') > -1}">
+							<a href="#/settings/concrete-type/create">Concrete Types</a>
 						</li>
 					</ul>
 				</li>
-				
-				<li>
-					<a href="#">Profile</a>
-				</li>
-				
-				<li>
-					<a href="#">Messages</a>
-				</li>
 			</ul>
 		</div>
-	</div>
-	
-	<div class="col-md-10" ui-view></div>
+	</nav>
+</div>
+
+<div class="col-md-10">
+	{{$state}}
+	<div ui-view></div>
 </div>
