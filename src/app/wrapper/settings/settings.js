@@ -757,14 +757,14 @@ angular.module
 	{
 		$scope.restValues = function ()
 		{
-			$scope.formData['flow_norm_from'] = '';
-			$scope.formData['flow_norm_to'] = '';
-			$scope.formData['flow_acpt_from'] = '';
-			$scope.formData['flow_acpt_to'] = '';
-			$scope.formData['slamp_norm_from'] = '';
-			$scope.formData['slamp_norm_to'] = '';
-			$scope.formData['slamp_acpt_from'] = '';
-			$scope.formData['slamp_acpt_to'] = '';
+			// $scope.formData['flow_norm_from'] = '';
+			// $scope.formData['flow_norm_to'] = '';
+			// $scope.formData['flow_acpt_from'] = '';
+			// $scope.formData['flow_acpt_to'] = '';
+			// $scope.formData['slamp_norm_from'] = '';
+			// $scope.formData['slamp_norm_to'] = '';
+			// $scope.formData['slamp_acpt_from'] = '';
+			// $scope.formData['slamp_acpt_to'] = '';
 		};
 	}
 )
