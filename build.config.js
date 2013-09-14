@@ -18,7 +18,7 @@ module.exports =
 			'vendor/jquery-ui/ui/jquery-ui.js',
 			'vendor/angular/angular.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
-			'vendor/ng-grid/ng-grid-2.0.7.min.js',
+			'vendor/ng-grid/build/ng-grid.min.js',
 			'vendor/angular-ui-date/src/date.js',
 			'vendor/bootstrap/dist/js/bootstrap.min.js',
 			'vendor/lodash/lodash.js',
