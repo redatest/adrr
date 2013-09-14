@@ -1,84 +1,69 @@
-<div class="page-header position-relative">
+<!--<div class="page-header position-relative">
 	<h1>
 		{{headTitle}}
 	</h1>
-</div>
+</div>-->
 
-<form class="form-horizontal" name="form" novalidate>
+<form class="form-horizontal" role="form" novalidate>
 
-	<div class="control-group" ng-class="{error: subForm.$invalid}" ng-repeat="attr in metaData.cols" ng-form="subForm">
+	<div class="form-group" ng-class="{'has-error': subForm.$invalid}" ng-repeat="attr in metaData.cols" ng-form="subForm">
 	
-		<label class="control-label" for="{{attr.name}}">{{attr.label}}</label>
+		<label ng-hide="attr.type === 'integer' && attr.size === 1" class="col-lg-2 control-label" for="{{attr.name}}">{{attr.label}}</label>
 		
 		<ng-switch on="attr.type">
 		
-			<div class="controls" ng-switch-when="string">
+			<blank ng-switch-when="string">
 				<ng-switch on="attr.dbType">
-					<blank ng-switch-when="text">
-						<span class="input-icon input-icon-right">
-							<textarea ng-model="formData[attr.name]" ng-required="!attr.allowNull"></textarea>
-						</span>
-						<span class="help-inline" ng-show="subForm.$invalid">Can't be blank</span>
-					</blank>
-					<blank ng-switch-when="date">
-						<span class="input-icon input-icon-right">
-							<input ng-model="formData[attr.name]" class="date-picker" type="text" data-date-format="dd-mm-yyyy" ng-required="!attr.allowNull" ng-change="dada()" />
-							<span class="add-on">
-								<i class="icon-calendar"></i>
-							</span>
-						</span>
-						<span class="help-inline" ng-show="subForm.$invalid">Can't be blank</span>
-					</blank>
-					<blank ng-switch-default>
-						<span class="input-icon input-icon-right">
-							<input ng-model="formData[attr.name]" type="text" ng-required="!attr.allowNull" />
-							<i class="icon-remove-sign" ng-show="subForm.$invalid"></i>
-						</span>
-						<span class="help-inline" ng-show="subForm.$invalid">Can't be blank</span>
-					</blank>
+					<div class="col-lg-6" ng-switch-when="text">
+						<textarea class="form-control" ng-model="formData[attr.name]" ng-required="!attr.allowNull"></textarea>
+					</div>
+					<div class="col-lg-6" ng-switch-when="date">
+						<input ui-date ng-model="formData[attr.name]" class="form-control" type="date" ng-required="!attr.allowNull" />
+					</div>
+					<div class="col-lg-6" ng-switch-default>
+						<input class="form-control" ng-model="formData[attr.name]" type="text" ng-required="!attr.allowNull" />
+					</div>
 				</ng-switch>
-			</div>
+			</blank>
 			
-			<div class="controls" ng-switch-when="integer">
+			<blank ng-switch-when="integer">
 				<ng-switch on="attr.size">
 				
-					<label ng-switch-when="1">
-						<input class="ace ace-switch" type="checkbox" ng-model="formData[attr.name]" ng-checked="formData[attr.name]" />
-						<span class="lbl"></span>
-					</label>
+					<div class="col-lg-offset-2 col-lg-6" ng-switch-when="1">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="formData[attr.name]" ng-checked="formData[attr.name]" /> {{attr.label}}
+							</label>
+						</div>
+					</div>
 					
-					<blank ng-switch-default>
-						<span class="input-icon input-icon-right">
-							<input ng-model="formData[attr.name]" type="number" ng-maxlength="{{attr.size}}" ng-required="!attr.allowNull" />
-							<i class="icon-remove-sign" ng-show="subForm.$invalid"></i>
-						</span>
-						<span class="help-inline" ng-show="subForm.$invalid">Can't be blank</span>
-					</blank>
+					<div class="col-lg-6" ng-switch-default>
+						<input class="form-control" ng-model="formData[attr.name]" type="number" ng-maxlength="{{attr.size}}" ng-required="!attr.allowNull" />
+					</div>
 					
 				</ng-switch>
-			</div>
+			</blank>
 			
 		</ng-switch>
 	</div>
 	
-	<div class="form-actions">
-		<button class="btn btn-info" ng-click="submit(formData)" type="submit" ng-disabled="form.$invalid">
-			<i class="icon-ok bigger-110"></i>
-			<just_text ng-show="isCreate">Create</just_text>
-			<just_text ng-hide="isCreate">Update</just_text>
-		</button>
-		
-		<ng-switch on="isCreate">
-			<button class="btn" type="reset" ng-click="rest()" ng-switch-when="true">
-				<i class="icon-undo bigger-110"></i>
-				Reset
+	<div class="form-group">
+		<div class="col-lg-offset-2 col-lg-6">
+			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="form.$invalid">
+				<just_text ng-show="isCreate">Create</just_text>
+				<just_text ng-hide="isCreate">Update</just_text>
 			</button>
 			
-			<button class="btn" ng-click="deselectItem()" type="cancel" ng-switch-default>
-				<i class="icon-remove bigger-110"></i>
-				Cancel
-			</button>
-		</ng-switch>
+			<ng-switch on="isCreate">
+				<button class="btn btn-warning" type="reset" ng-click="rest()" ng-switch-when="true">
+					Reset
+				</button>
+				
+				<button class="btn btn-danger" ng-click="deselectItem()" type="cancel" ng-switch-default>
+					Cancel
+				</button>
+			</ng-switch>
+		</div>
 	</div>
 	
 	<hr />

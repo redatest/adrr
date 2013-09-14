@@ -33,97 +33,97 @@ angular.module
 			}
 		)
 		
-		// .state
-		// (
-			// 'wrapper.settings.pouringType',
-			// {
-				// abstract: true,
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'PouringTypeCtrl',
-						// templateUrl: 'settings/pouringType.tpl.html'
-					// }
-				// }
-			// }
-		// )
+		.state
+		(
+			'wrapper.settings.pouringType',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'PouringTypeCtrl',
+						templateUrl: 'wrapper/settings/pouringType.tpl.html'
+					}
+				}
+			}
+		)
 		
-		// .state
-		// (
-			// 'wrapper.settings.pouringType.create',
-			// {
-				// url: '^/settings/pouring-type/create',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/pouringTypeForm.tpl.html'
-					// }
-				// }
-			// }
-		// )
+		.state
+		(
+			'wrapper.settings.pouringType.create',
+			{
+				url: '^/settings/pouring-type/create',
+				views:
+				{
+					"@wrapper.settings.pouringType":
+					{
+						templateUrl: 'wrapper/settings/pouringTypeForm.tpl.html'
+					}
+				}
+			}
+		)
 		
-		// .state
-		// (
-			// 'wrapper.settings.pouringType.update',
-			// {
-				// url: '^/settings/pouring-type/update/:id',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/pouringTypeForm.tpl.html'
-					// }
-				// }
-			// }
-		// )
+		.state
+		(
+			'wrapper.settings.pouringType.update',
+			{
+				url: '^/settings/pouring-type/update/:id',
+				views:
+				{
+					"@wrapper.settings.pouringType":
+					{
+						templateUrl: 'wrapper/settings/pouringTypeForm.tpl.html'
+					}
+				}
+			}
+		)
 		
-		// .state
-		// (
-			// 'wrapper.settings.concreteType',
-			// {
-				// abstract: true,
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'ConcreteTypeCtrl',
-						// templateUrl: 'settings/concreteType.tpl.html'
-					// }
-				// }
-			// }
-		// )
+		.state
+		(
+			'wrapper.settings.concreteType',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'ConcreteTypeCtrl',
+						templateUrl: 'wrapper/settings/concreteType.tpl.html'
+					}
+				}
+			}
+		)
 		
-		// .state
-		// (
-			// 'wrapper.settings.concreteType.create',
-			// {
-				// url: '^/settings/concrete-type/create',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/concreteTypeForm.tpl.html'
-					// }
-				// }
-			// }
-		// )
+		.state
+		(
+			'wrapper.settings.concreteType.create',
+			{
+				url: '^/settings/concrete-type/create',
+				views:
+				{
+					"@wrapper.settings.concreteType":
+					{
+						templateUrl: 'wrapper/settings/concreteTypeForm.tpl.html'
+					}
+				}
+			}
+		)
 		
-		// .state
-		// (
-			// 'wrapper.settings.concreteType.update',
-			// {
-				// url: '^/settings/concrete-type/update/:id',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/concreteTypeForm.tpl.html'
-					// }
-				// }
-			// }
-		// )
+		.state
+		(
+			'wrapper.settings.concreteType.update',
+			{
+				url: '^/settings/concrete-type/update/:id',
+				views:
+				{
+					"@wrapper.settings.concreteType":
+					{
+						templateUrl: 'wrapper/settings/concreteTypeForm.tpl.html'
+					}
+				}
+			}
+		)
 		
 		.state
 		(
@@ -169,192 +169,192 @@ angular.module
 					}
 				}
 			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.supplier',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'SupplierCtrl',
+						templateUrl: 'wrapper/settings/supplier.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.supplier.create',
+			{
+				url: '^/settings/supplier/create',
+				views:
+				{
+					"@wrapper.settings.supplier":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.supplier.update',
+			{
+				url: '^/settings/supplier/update/:id',
+				views:
+				{
+					"@wrapper.settings.supplier":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.shiftType',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'ShiftTypeCtrl',
+						templateUrl: 'wrapper/settings/shiftType.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.shiftType.create',
+			{
+				url: '^/settings/shift-type/create',
+				views:
+				{
+					"@wrapper.settings.shiftType":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.shiftType.update',
+			{
+				url: '^/settings/shift-type/update/:id',
+				views:
+				{
+					"@wrapper.settings.shiftType":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.shiftList',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'ShiftListCtrl',
+						templateUrl: 'wrapper/settings/shiftList.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.shiftList.create',
+			{
+				url: '^/settings/shift-list/create',
+				views:
+				{
+					"@wrapper.settings.shiftList":
+					{
+						controller: 'ShiftListFormCtrl',
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.shiftList.update',
+			{
+				url: '^/settings/shift-list/update/:id',
+				views:
+				{
+					"@wrapper.settings.shiftList":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.pump',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'PumpCtrl',
+						templateUrl: 'wrapper/settings/pump.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.pump.create',
+			{
+				url: '^/settings/pump/create',
+				views:
+				{
+					"@wrapper.settings.pump":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.pump.update',
+			{
+				url: '^/settings/pump/update/:id',
+				views:
+				{
+					"@wrapper.settings.pump":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
 		);
-		
-		// .state
-		// (
-			// 'wrapper.settings.supplier',
-			// {
-				// abstract: true,
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'SupplierCtrl',
-						// templateUrl: 'settings/supplier.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.supplier.create',
-			// {
-				// url: '^/settings/supplier/create',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.supplier.update',
-			// {
-				// url: '^/settings/supplier/update/:id',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.shiftType',
-			// {
-				// abstract: true,
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'ShiftTypeCtrl',
-						// templateUrl: 'settings/shiftType.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.shiftType.create',
-			// {
-				// url: '^/settings/shift-type/create',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.shiftType.update',
-			// {
-				// url: '^/settings/shift-type/update/:id',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.shiftList',
-			// {
-				// abstract: true,
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'ShiftListCtrl',
-						// templateUrl: 'settings/shiftList.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.shiftList.create',
-			// {
-				// url: '^/settings/shift-list/create',
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'ShiftListFormCtrl',
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.shiftList.update',
-			// {
-				// url: '^/settings/shift-list/update/:id',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.pump',
-			// {
-				// abstract: true,
-				// views:
-				// {
-					// "main":
-					// {
-						// controller: 'PumpCtrl',
-						// templateUrl: 'settings/pump.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.pump.create',
-			// {
-				// url: '^/settings/pump/create',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// )
-		
-		// .state
-		// (
-			// 'wrapper.settings.pump.update',
-			// {
-				// url: '^/settings/pump/update/:id',
-				// views:
-				// {
-					// "main":
-					// {
-						// templateUrl: 'settings/form.tpl.html'
-					// }
-				// }
-			// }
-		// );
 	}
 )
 //---------------------------------------------------------
@@ -598,7 +598,7 @@ angular.module
 						
 						$scope.columnDefs.push
 						({
-							field: '',
+							field: '#',
 							cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)"><i class="icon-trash bigger-130"></i></a>'
 						});
 						
@@ -691,12 +691,12 @@ angular.module
 //---------------------------------------------------------
 // Pouring Type Controller
 //---------------------------------------------------------
-// .controller
-// (
-	// 'PouringTypeCtrl', function PouringTypeCtrl ($scope, Restangular, $location, yii)
-	// {
-	// }
-// )
+.controller
+(
+	'PouringTypeCtrl', function PouringTypeCtrl ($scope, Restangular, $location, yii)
+	{
+	}
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
@@ -721,12 +721,12 @@ angular.module
 //---------------------------------------------------------
 // Supplier Controller
 //---------------------------------------------------------
-// .controller
-// (
-	// 'SupplierCtrl', function SupplierCtrl ()
-	// {
-	// }
-// )
+.controller
+(
+	'SupplierCtrl', function SupplierCtrl ()
+	{
+	}
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
@@ -736,12 +736,12 @@ angular.module
 //---------------------------------------------------------
 // Pump Controller
 //---------------------------------------------------------
-// .controller
-// (
-	// 'PumpCtrl', function PumpCtrl ()
-	// {
-	// }
-// )
+.controller
+(
+	'PumpCtrl', function PumpCtrl ()
+	{
+	}
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
@@ -751,23 +751,23 @@ angular.module
 //---------------------------------------------------------
 // Concrete Type Controller
 //---------------------------------------------------------
-// .controller
-// (
-	// 'ConcreteTypeCtrl', function ConcreteTypeCtrl ($scope)
-	// {
-		// $scope.restValues = function ()
-		// {
-			// $scope.formData['flow_norm_from'] = '';
-			// $scope.formData['flow_norm_to'] = '';
-			// $scope.formData['flow_acpt_from'] = '';
-			// $scope.formData['flow_acpt_to'] = '';
-			// $scope.formData['slamp_norm_from'] = '';
-			// $scope.formData['slamp_norm_to'] = '';
-			// $scope.formData['slamp_acpt_from'] = '';
-			// $scope.formData['slamp_acpt_to'] = '';
-		// };
-	// }
-// )
+.controller
+(
+	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($scope)
+	{
+		$scope.restValues = function ()
+		{
+			$scope.formData['flow_norm_from'] = '';
+			$scope.formData['flow_norm_to'] = '';
+			$scope.formData['flow_acpt_from'] = '';
+			$scope.formData['flow_acpt_to'] = '';
+			$scope.formData['slamp_norm_from'] = '';
+			$scope.formData['slamp_norm_to'] = '';
+			$scope.formData['slamp_acpt_from'] = '';
+			$scope.formData['slamp_acpt_to'] = '';
+		};
+	}
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
@@ -777,12 +777,12 @@ angular.module
 //---------------------------------------------------------
 // Shift Types Controller
 //---------------------------------------------------------
-// .controller
-// (
-	// 'ShiftTypeCtrl', function ShiftTypeCtrl ()
-	// {
-	// }
-// )
+.controller
+(
+	'ShiftTypeCtrl', function ShiftTypeCtrl ()
+	{
+	}
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
@@ -792,44 +792,21 @@ angular.module
 //---------------------------------------------------------
 // Shift Types Controller
 //---------------------------------------------------------
-// .controller
-// (
-	// 'ShiftListCtrl', function ShiftListCtrl ()
-	// {
-	// }
-// )
+.controller
+(
+	'ShiftListCtrl', function ShiftListCtrl ()
+	{
+	}
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
 
 
 
-// .controller
-// (
-	// 'ShiftListFormCtrl', function ShiftListFormCtrl ($scope)
-	// {
-		// setTimeout
-		// (
-			// function ()
-			// {
-				// console.log('da');
-				// $('.date-picker').datepicker
-				// ({
-					// onSelect: function (d, o)
-					// {
-						// console.log('da');
-						
-						// $scope.$apply();
-					// }
-				// })
-				// .next().on
-				// (
-					// ace.click_event, function()
-					// {
-						// $(this).prev().focus();
-					// }
-				// );
-			// }, 100
-		// );
-	// }
-// );
+.controller
+(
+	'ShiftListFormCtrl', function ShiftListFormCtrl ($scope)
+	{
+	}
+);

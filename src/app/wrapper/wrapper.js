@@ -28,8 +28,10 @@ angular.module
 
 .config
 (
-	function config	($stateProvider)
+	function config	($stateProvider, $urlRouterProvider)
 	{
+		$urlRouterProvider.otherwise(appConfig.defaultRoute);
+		
 		$stateProvider.state
 		(
 			'wrapper',

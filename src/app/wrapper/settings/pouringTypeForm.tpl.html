@@ -1,0 +1,79 @@
+<div class="page-header position-relative">
+	<h1>
+		{{headTitle}}
+	</h1>
+</div>
+
+<form class="form-horizontal" name="form" novalidate>
+
+	<div class="control-group" ng-class="{error: nameForm.$invalid}" ng-form="nameForm">
+		<label class="control-label" for="name">{{metaData.cols['name'].label}}</label>
+		
+		<div class="controls">
+			<span class="input-icon input-icon-right">
+				<input ng-model="formData['name']" type="text" ng-required="!metaData.cols['name']['allowNull']" />
+				<i class="icon-remove-sign" ng-show="nameForm.$invalid"></i>
+			</span>
+			<span class="help-inline" ng-show="nameForm.$invalid">Can't be blank</span>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label" for="state">{{metaData.cols['state'].label}}</label>
+		
+		<div class="controls">
+			<label>
+				<input class="ace ace-switch" type="checkbox" ng-model="formData['state']" ng-checked="formData['state']" />
+				<span class="lbl"></span>
+			</label>
+		</div>
+	</div>
+	
+	<div class="control-group" ng-class="{error: vrForm.$invalid}" ng-form="vrForm">
+		<label class="control-label" for="v_r">{{metaData.cols['v_r'].label}}</label>
+		
+		<div class="controls">
+			<span class="input-icon input-icon-right">
+				<select ng-model="formData['v_r']" ng-required="!metaData.cols['v_r']['allowNull']">
+					<option ng-repeat="(key, val) in metaData.cols['v_r']['values']" value="{{key}}" ng-selected="formData['v_r'] == key">{{val}}</option>
+				</select>
+			</span>
+			<span class="help-inline" ng-show="vrForm.$invalid">Can't be blank</span>
+		</div>
+	</div>
+	
+	<div class="control-group" ng-class="{error: priorityForm.$invalid}" ng-form="priorityForm">
+		<label class="control-label" for="priority">{{metaData.cols['priority'].label}}</label>
+		
+		<div class="controls">
+			<span class="input-icon input-icon-right">
+				<select ng-model="formData['priority']" ng-required="!metaData.cols['priority']['allowNull']">
+					<option ng-repeat="(key, val) in metaData.cols['priority']['values']" value="{{key}}" ng-selected="formData['priority'] == key">{{val}}</option>
+				</select>
+			</span>
+			<span class="help-inline" ng-show="priorityForm.$invalid">Can't be blank</span>
+		</div>
+	</div>
+	
+	<div class="form-actions">
+		<button class="btn btn-info" ng-click="submit(formData)" type="submit" ng-disabled="form.$invalid">
+			<i class="icon-ok bigger-110"></i>
+			<just_text ng-show="isCreate">Create</just_text>
+			<just_text ng-hide="isCreate">Update</just_text>
+		</button>
+		
+		<ng-switch on="isCreate">
+			<button class="btn" type="reset" ng-click="rest()" ng-switch-when="true">
+				<i class="icon-undo bigger-110"></i>
+				Reset
+			</button>
+			
+			<button class="btn" ng-click="deselectItem()" type="cancel" ng-switch-default>
+				<i class="icon-remove bigger-110"></i>
+				Cancel
+			</button>
+		</ng-switch>
+	</div>
+	
+	<hr />
+</form>
