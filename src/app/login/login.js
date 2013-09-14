@@ -53,7 +53,8 @@ angular.module
 
 .controller
 (
-	'LogoutCtrl', function LogoutCtrl ()
+	'LogoutCtrl', function LogoutCtrl (adrrAuth)
 	{
+		adrrAuth.logout();
 	}
 );

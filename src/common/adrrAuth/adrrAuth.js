@@ -51,7 +51,7 @@ angular.module('adrrAuth', []).factory
 			$http
 			({
 				method: 'POST',
-				url: logoutUrl
+				url: adrrAuthConfig.logoutUrl
 			})
 			.success
 			(
