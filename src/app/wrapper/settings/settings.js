@@ -428,6 +428,8 @@ angular.module
 					}
 					else
 					{
+						$scope.rest();
+						
 						$location.path($attrs.route + '/create');
 					}
 				};
