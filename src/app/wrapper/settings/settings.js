@@ -479,22 +479,28 @@ angular.module
 				
 				$scope.getList = function (pagNum, pagSiz)
 				{
-					var offset = (pagNum - 1) * pagSiz;
-					
-					$scope.model.getList
+					setTimeout
 					(
+						function ()
 						{
-							offset: offset < 0 ? 0 : offset,
-							limit: pagSiz
-						}
+							var offset = (pagNum - 1) * pagSiz;
+							
+							$scope.model.getList
+							(
+								{
+									offset: offset < 0 ? 0 : offset,
+									limit: pagSiz
+								}
+							)
+							.then
+							(
+								function (data)
+								{
+									$scope.gridData = angular.isArray(data) ? data : [];
+								}
+							);
+						}, 100
 					)
-					.then
-					(
-						function (data)
-						{
-							$scope.gridData = angular.isArray(data) ? data : [];
-						}
-					);
 				};
 				
 				$scope.rest = function ()
@@ -537,7 +543,8 @@ angular.module
 					showFooter: true,
 					multiSelect: false,
 					keepLastSelected: false,
-					jqueryUIDraggable: true
+					jqueryUIDraggable: true,
+					plugins: [new ngGridFlexibleHeightPlugin(opts ={minHeight: 50})]
 				};
 				
 				$scope.$watch
