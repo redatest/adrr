@@ -17,53 +17,16 @@ module.exports =
 			'vendor/lodash/lodash.js',
 			
 			'vendor/jquery/jquery.min.js',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
-=======
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 			'vendor/jquery-ui/ui/minified/jquery-ui.min.js',
 			
 			'vendor/bootstrap/dist/js/bootstrap.min.js',
 			
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
-=======
-			'vendor/jquery-ui/ui/minified/i18n/jquery-ui.min.js',
-			'vendor/bootstrap/dist/js/bootstrap.min.js',
->>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
-<<<<<<< HEAD
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
-=======
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 			'vendor/angular/angular.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
 			'vendor/ng-grid/build/ng-grid.min.js',
 			'vendor/angular-ui-date/src/date.js',
-<<<<<<< HEAD
 			
 			'vendor/restangular/dist/restangular.js',
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
-			'vendor/restangular/dist/restangular.js',
-=======
-=======
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
-
-			'vendor/lodash/lodash.js',
-			'vendor/restangular/dist/restangular.js'
->>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
-<<<<<<< HEAD
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
-=======
->>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 		],
 		css:
 		[
