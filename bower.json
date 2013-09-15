@@ -11,6 +11,10 @@
 		"angular-bootstrap": "~0.6.0",
 		"angular-ui-router": "~0.2.0",
 		"angular-ui-utils": "~0.0.4",
+<<<<<<< HEAD
 		"angular-ui-date": "~0.0.3"
+=======
+		"angular-ui-date": "latest"
+>>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
 	}
 }

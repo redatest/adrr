@@ -77,6 +77,7 @@
 			
 			'db' => array
 			(
+<<<<<<< HEAD
 				'connectionString' => 'mysql:host=localhost;dbname=conc', // local
 				// 'connectionString' => 'mysql:host=localhost;dbname=heptc1_demo', // server
 				'emulatePrepare' => true,
@@ -84,6 +85,15 @@
 				// 'username' => 'heptc1_raeef', // server
 				'password' => '', // local
 				// 'password' => 'Hf%Ho5HV~{kH', // server
+=======
+				// 'connectionString' => 'mysql:host=localhost;dbname=conc', // local
+				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc', // server
+				'emulatePrepare' => true,
+				'username' => 'root', // local
+				//'username' => 'heptc1_raeef', // server
+				'password' => '', // local
+				//'password' => 'Hf%Ho5HV~{kH', // server
+>>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
 				'charset' => 'utf8',
 				'tablePrefix' => 'tbl_'
 			),
@@ -91,6 +101,7 @@
 			'db2' => array
 			(
 				'class' => 'CDbConnection',
+<<<<<<< HEAD
 				'connectionString' => 'mysql:host=localhost;dbname=conc', // local
 				// 'connectionString' => 'mysql:host=localhost;dbname=heptc1_demo', // server
 				'emulatePrepare' => true,
@@ -98,6 +109,15 @@
 				// 'username' => 'heptc1_raeef', // server
 				'password' => '', // local
 				// 'password' => 'Hf%Ho5HV~{kH', // server
+=======
+				// 'connectionString' => 'mysql:host=localhost;dbname=conc', // local
+				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc', // server
+				'emulatePrepare' => true,
+				 'username' => 'root', // local
+				//'username' => 'heptc1_raeef', // server
+				 'password' => '', // local
+				//'password' => 'Hf%Ho5HV~{kH', // server
+>>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
 				'charset' => 'utf8',
 				'tablePrefix' => 'tbl_'
 			),
