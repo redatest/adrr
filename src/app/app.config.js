@@ -6,8 +6,11 @@ var appConfig = new function()
 	
 	this.defaultState = 'wrapper.dashboard';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 	
 	this.localUrl = '../yii';
@@ -21,7 +24,10 @@ var appConfig = new function()
 	
 	this.yiiUrl = this.getYiiUrl();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 =======
 
 //Aladdin yii url stuff
@@ -33,6 +39,9 @@ var appConfig = new function()
 	this.yiiUrl = this.getYiiUrl();
 ///Aladdin
 >>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
+<<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 
 	this.restfulApiBaseUrl = this.yiiUrl;

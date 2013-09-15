@@ -2289,8 +2289,11 @@ REQUEST_URI=/alaa/conc/yii/api/settings/shiftList?limit=10&offset=0
 HTTP_REFERER=http://localhost/alaa/conc/build/
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 2013/09/14 15:51:16 [error] [exception.CDbException] SQLSTATE[HY000] [1045] Access denied for user 'heptc1_raeef'@'localhost' (using password: YES)
 2013/09/14 15:51:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in D:\Raeef\Programs\wamp\www\alaa\adrr\bin\yii\framework\db\CDbConnection.php:388
@@ -2631,7 +2634,10 @@ Stack trace:
 REQUEST_URI=/alaa/adrr/bin/yii/api/user/jsonLogin/
 HTTP_REFERER=http://localhost/alaa/adrr/bin/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 =======
 2013/09/14 07:35:49 [error] [exception.CDbException] SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
 2013/09/14 07:35:49 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in /home/heptc1/public_html/app/conc/yii/framework/db/CDbConnection.php:388
@@ -2753,5 +2759,8 @@ Stack trace:
 REQUEST_URI=/adrr/bin/yii/api/user/jsonLogin/
 HTTP_REFERER=http://localhost/adrr/bin/
 >>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
+<<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 ---

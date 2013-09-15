@@ -78,8 +78,11 @@
 			'db' => array
 			(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 				'connectionString' => 'mysql:host=localhost;dbname=conc', // local
 				// 'connectionString' => 'mysql:host=localhost;dbname=heptc1_demo', // server
@@ -89,7 +92,10 @@
 				'password' => '', // local
 				// 'password' => 'Hf%Ho5HV~{kH', // server
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 =======
 				// 'connectionString' => 'mysql:host=localhost;dbname=conc', // local
 				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc', // server
@@ -99,6 +105,9 @@
 				'password' => '', // local
 				//'password' => 'Hf%Ho5HV~{kH', // server
 >>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
+<<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 				'charset' => 'utf8',
 				'tablePrefix' => 'tbl_'
@@ -108,8 +117,11 @@
 			(
 				'class' => 'CDbConnection',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 				'connectionString' => 'mysql:host=localhost;dbname=conc', // local
 				// 'connectionString' => 'mysql:host=localhost;dbname=heptc1_demo', // server
@@ -119,7 +131,10 @@
 				'password' => '', // local
 				// 'password' => 'Hf%Ho5HV~{kH', // server
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 =======
 				// 'connectionString' => 'mysql:host=localhost;dbname=conc', // local
 				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc', // server
@@ -129,6 +144,9 @@
 				 'password' => '', // local
 				//'password' => 'Hf%Ho5HV~{kH', // server
 >>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
+<<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 				'charset' => 'utf8',
 				'tablePrefix' => 'tbl_'

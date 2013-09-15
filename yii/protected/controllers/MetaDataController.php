@@ -6,8 +6,11 @@
 			$models = array
 			(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 				Zone::model(),
 				Pump::model(),
@@ -18,7 +21,10 @@
 				PouringType::model(),
 				ConcreteType::model()
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 =======
 				ShiftType::model(),
 				ShiftList::model(),
@@ -28,6 +34,9 @@
 				Pump::model(),
 				Supplier::model()
 >>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
+<<<<<<< HEAD
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
+=======
 >>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 			);
 			
@@ -40,6 +49,11 @@
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			// var_dump($data['PouringType']);
+>>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
+>>>>>>> 6398a81c96a3aacc992ae61769144802b2a0961b
 =======
 			// var_dump($data['PouringType']);
 >>>>>>> cbb2b8ac391e3f642f9bab8520d5cb8f9eeab910
