@@ -7,6 +7,7 @@ angular.module
 		'ngGrid',
 		'ui.router',
 		'restangular',
+		'ui.date',
 		'adrrAuth',
 		'adrrApp.login',
 		'adrrApp.wrapper',

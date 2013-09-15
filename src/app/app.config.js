@@ -1,10 +1,21 @@
-var appConfig =
+var appConfig = new function()
 {
-	loginRoute: '/login',
+	this.loginRoute = '/login';
 	
-	defaultRoute: '/dashboard',
+	this.defaultRoute = '/dashboard';
 	
-	defaultState: 'wrapper.dashboard',
+	this.defaultState = 'wrapper.dashboard';
 	
-	restfulApiBaseUrl: 'yii'
+	this.localUrl = '../yii';
+	
+	this.remoteUrl = 'yii';
+	
+	this.getYiiUrl = function()
+	{
+		return document.URL.indexOf ('//localhost') > 0 ? this.localUrl : this.remoteUrl;
+	}
+	
+	this.yiiUrl = this.getYiiUrl();
+
+	this.restfulApiBaseUrl = this.yiiUrl;
 }

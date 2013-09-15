@@ -18,7 +18,7 @@
 						<textarea class="form-control" ng-model="formData[attr.name]" ng-required="!attr.allowNull"></textarea>
 					</div>
 					<div class="col-lg-6" ng-switch-when="date">
-						<input ui-date ng-model="formData[attr.name]" class="form-control" type="date" ng-required="!attr.allowNull" />
+						<input ui-date ng-model="formData[attr.name]" class="form-control" ng-required="!attr.allowNull" />
 					</div>
 					<div class="col-lg-6" ng-switch-default>
 						<input class="form-control" ng-model="formData[attr.name]" type="text" ng-required="!attr.allowNull" />

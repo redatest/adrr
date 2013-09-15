@@ -14,21 +14,25 @@ module.exports =
 	{
 		js:
 		[
+			'vendor/lodash/lodash.js',
+			
 			'vendor/jquery/jquery.min.js',
-			'vendor/jquery-ui/ui/jquery-ui.js',
+			'vendor/jquery-ui/ui/minified/jquery-ui.min.js',
+			
+			'vendor/bootstrap/dist/js/bootstrap.min.js',
+			
 			'vendor/angular/angular.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
-			'vendor/ng-grid/ng-grid-2.0.7.min.js',
-			'vendor/ng-grid/plugins/ng-grid-flexible-height.js',
+			'vendor/ng-grid/build/ng-grid.min.js',
 			'vendor/angular-ui-date/src/date.js',
-			'vendor/bootstrap/dist/js/bootstrap.min.js',
-			'vendor/lodash/lodash.js',
-			'vendor/restangular/dist/restangular.js'
+			
+			'vendor/restangular/dist/restangular.js',
 		],
 		css:
 		[
 			'vendor/bootstrap/dist/css/bootstrap.min.css',
-			'vendor/ng-grid/ng-grid.min.css'
+			'vendor/ng-grid/ng-grid.min.css',
+			'vendor/jquery-ui/themes/flick/jquery-ui.min.css'
 		]
 	}
 };

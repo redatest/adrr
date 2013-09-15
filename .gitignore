@@ -7,3 +7,8 @@ node_modules/
 vendor/
 
 .idea/
+
+yii/assets
+yii/css
+yii/images
+yii/themes
