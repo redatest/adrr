@@ -1,10 +1,12 @@
-var appConfig =
+var appConfig = new function()
 {
-	loginRoute: '/login',
+	this.loginRoute = '/login';
 	
-	defaultRoute: '/dashboard',
+	this.defaultRoute = '/dashboard';
 	
-	defaultState: 'wrapper.dashboard',
-	
-	restfulApiBaseUrl: 'yii'
+	this.defaultState = 'wrapper.dashboard';
+
+	this.yiiUrl = '../yii';
+
+	this.restfulApiBaseUrl = this.yiiUrl;
 }
