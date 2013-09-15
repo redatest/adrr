@@ -15,12 +15,13 @@ module.exports =
 		js:
 		[
 			'vendor/jquery/jquery.min.js',
-			'vendor/jquery-ui/ui/jquery-ui.js',
+			'vendor/jquery-ui/ui/minified/i18n/jquery-ui.min.js',
+			'vendor/bootstrap/dist/js/bootstrap.min.js',
 			'vendor/angular/angular.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
 			'vendor/ng-grid/build/ng-grid.min.js',
 			'vendor/angular-ui-date/src/date.js',
-			'vendor/bootstrap/dist/js/bootstrap.min.js',
+
 			'vendor/lodash/lodash.js',
 			'vendor/restangular/dist/restangular.js'
 		],
