@@ -173,6 +173,52 @@ angular.module
 		
 		.state
 		(
+			'wrapper.settings.project',
+			{
+				abstract: true,
+				views:
+				{
+					"@wrapper.settings":
+					{
+						controller: 'ProjectCtrl',
+						templateUrl: 'wrapper/settings/project.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.project.create',
+			{
+				url: '^/settings/project/create',
+				views:
+				{
+					"@wrapper.settings.project":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.settings.project.update',
+			{
+				url: '^/settings/project/update/:id',
+				views:
+				{
+					"@wrapper.settings.project":
+					{
+						templateUrl: 'wrapper/settings/form.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
 			'wrapper.settings.supplier',
 			{
 				abstract: true,
@@ -808,4 +854,12 @@ angular.module
 	'ShiftListFormCtrl', function ShiftListFormCtrl ($scope)
 	{
 	}
+)
+
+.controller
+(
+	'ProjectCtrl', function ProjectCtrl ($scope)
+	{
+	}
 );
+

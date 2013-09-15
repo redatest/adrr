@@ -10,7 +10,7 @@
 		{
 			return array
 			(
-				array('name, description', 'required'),
+				array('name', 'required'),
 				array('name', 'length', 'max' => 255),
 				array('id, name, description', 'safe', 'on' => 'search'),
 			);
