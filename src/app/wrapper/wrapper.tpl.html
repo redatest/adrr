@@ -24,6 +24,9 @@
 					<a onclick="return false;" class="accordion-toggle" ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse" href="#collapseOne">Settings</a>
 					
 					<ul id="collapseOne" class="nav nav-pills nav-stacked collapse" ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
+						<li ng-class="{active: state.indexOf('wrapper.settings.ir') > -1}">
+							<a href="#/settings/ir/create">IR</a>
+						</li>
 						<li ng-class="{active: state.indexOf('wrapper.settings.zone') > -1}">
 							<a href="#/settings/zone/create">Zones</a>
 						</li>

@@ -5,6 +5,9 @@
 		{
 			$models = array
 			(
+				Ir::model(),
+				IrAl::model(),
+				IrPt::model(),
 				Zone::model(),
 				Pump::model(),
 				Project::model(),

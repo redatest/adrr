@@ -22,11 +22,12 @@ module.exports =
 			'vendor/bootstrap/dist/js/bootstrap.min.js',
 			
 			'vendor/angular/angular.min.js',
+			'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',
 			'vendor/ng-grid/build/ng-grid.min.js',
 			'vendor/angular-ui-date/src/date.js',
 			
-			'vendor/restangular/dist/restangular.js',
+			'vendor/restangular/dist/restangular.js'
 		],
 		css:
 		[
