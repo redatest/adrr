@@ -42,9 +42,35 @@
 		</div>
 	</div>
 	
+	<div class="col-lg-offset-2 col-lg-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Axis</th>
+					<th>Level</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr ng-repeat="obj in al">
+					<td>{{obj.axis}}</td>
+					<td>{{obj.level}}</td>
+					<td><a href="" ng-click="deleteAl(obj, isCreate)">delete</a></td>
+				</tr>
+				
+				<tr ng-form="alForm">
+					<td><input name="axis" ng-model="axis" class="form-control" type="text" required /></td>
+					<td><input name="level" ng-model="level" class="form-control" type="text" required /></td>
+					<td><button class="btn btn-primary" ng-click="addAl(axis, level)" ng-disabled="alForm.axis.$error.required && alForm.level.$error.required">Add</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
 	<div class="form-group">
 		<div class="col-lg-offset-3 col-lg-6">
-			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="form.$invalid">
+			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="irForm.$invalid || valForm.$invalid || zoneForm.$invalid || areaForm.$invalid">
 				<just_text ng-show="isCreate">Create</just_text>
 				<just_text ng-hide="isCreate">Update</just_text>
 			</button>

@@ -671,9 +671,14 @@ angular.module
 		
 		$scope.$watch
 		(
-			'model', function (oldModel, newModel)
+			'model', function ()
 			{
+				$scope.formsv = [];
+				$scope.gridData = [];
+				$scope.formData = {};
 				$scope.columnDefs = [];
+				$scope.totalServerItems = 0;
+				$scope.selectedItemIndex = 0;
 				
 				$scope.metaData = yii[$scope.className];
 				
@@ -784,7 +789,9 @@ angular.module
 	{
 		$scope.$parent.className = 'PouringType';
 		$scope.$parent.route = '/settings/pouring-type';
-		$scope.$parent.model = Restangular.all('settings/PouringType');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/PouringType'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 //---------------------------------------------------------
@@ -802,7 +809,9 @@ angular.module
 	{
 		$scope.$parent.className = 'Zone';
 		$scope.$parent.route = '/settings/zone';
-		$scope.$parent.model = Restangular.all('settings/zone');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/zone'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 //---------------------------------------------------------
@@ -820,7 +829,9 @@ angular.module
 	{
 		$scope.$parent.className = 'Supplier';
 		$scope.$parent.route = '/settings/supplier';
-		$scope.$parent.model = Restangular.all('settings/supplier');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/supplier'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 //---------------------------------------------------------
@@ -838,7 +849,9 @@ angular.module
 	{
 		$scope.$parent.className = 'Pump';
 		$scope.$parent.route = '/settings/pump';
-		$scope.$parent.model = Restangular.all('settings/pump');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/pump'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 //---------------------------------------------------------
@@ -856,7 +869,9 @@ angular.module
 	{
 		$scope.$parent.className = 'ConcreteType';
 		$scope.$parent.route = '/settings/concrete-type';
-		$scope.$parent.model = Restangular.all('settings/concreteType');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/concreteType'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 		
 		$scope.restValues = function ()
 		{
@@ -886,7 +901,9 @@ angular.module
 	{
 		$scope.$parent.className = 'ShiftType';
 		$scope.$parent.route = '/settings/shift-type';
-		$scope.$parent.model = Restangular.all('settings/shiftType');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftType'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 //---------------------------------------------------------
@@ -904,7 +921,9 @@ angular.module
 	{
 		$scope.$parent.className = 'ShiftList';
 		$scope.$parent.route = '/settings/shift-list';
-		$scope.$parent.model = Restangular.all('settings/shiftList');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftList'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 //---------------------------------------------------------
@@ -926,23 +945,27 @@ angular.module
 	{
 		$scope.$parent.className = 'Project';
 		$scope.$parent.route = '/settings/project';
-		$scope.$parent.model = Restangular.all('settings/project');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/project'));
+		
+		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
 )
 
 .controller
 (
-	'IrCtrl', function IrCtrl ($scope, Restangular)
+	'IrCtrl', function IrCtrl ($scope, Restangular, $q)
 	{
 		$scope.$parent.className = 'Ir';
 		$scope.$parent.route = '/settings/ir';
-		$scope.$parent.model = Restangular.all('settings/ir');
+		$scope.$parent.model = angular.copy(Restangular.all('settings/ir'));
+		
+		$scope.al = [];
 		
 		Restangular.all('settings/zone').getList().then
 		(
 			function (data)
 			{
-				$scope.zones = data;
+				$scope.zones = angular.isArray(data) ? data : [];
 			}
 		);
 		
@@ -950,8 +973,121 @@ angular.module
 		(
 			function (data)
 			{
-				$scope.projects = data;
+				$scope.projects = angular.isArray(data) ? data : [];
 			}
 		);
+		
+		$scope.addAl = function (axis, level)
+		{
+			$scope.al.push ( { axis: axis, level: level } );
+		};
+		
+		$scope.onSelectRow = function (rowItem)
+		{
+			$scope.al = [];
+			
+			$scope.$parent.onSelectRow(rowItem);
+			
+			if (rowItem.config.selectedItems.length)
+			{
+				$scope.model.one(rowItem.entity.id).getList('als').then
+				(
+					function (data)
+					{
+						if (angular.isArray(data))
+						{
+							angular.forEach
+							(
+								data, function (obj)
+								{
+									$scope.al.push (obj);
+								}
+							);
+						}
+					}
+				);
+			}
+		};
+		
+		$scope.gridOptions.afterSelectionChange = $scope.onSelectRow;
+		
+		$scope.deleteAl = function (obj, isCreate)
+		{
+			if (isCreate)
+			{
+				$scope.al.splice($scope.al.indexOf(obj), 1);
+			}
+			else
+			{
+				obj.options().then
+				(
+					function ()
+					{
+						delete $scope.al.splice($scope.al.indexOf(obj), 1);
+					}
+				);
+			}
+		}
+		
+		$scope.submit = function (data)
+		{
+			if ($scope.isCreate)
+			{
+				var post = angular.copy(data);
+				
+				if (isNaN(post.project_id)) delete post.project_id;
+				
+				$scope.model.post(post).then
+				(
+					function (obj)
+					{
+						var requests = [];
+						
+						angular.forEach
+						(
+							$scope.al, function (al)
+							{
+								requests.push (obj.all('als').post(al));
+							}
+						);
+						
+						$q.all(requests).then
+						(
+							function (dataArr)
+							{
+								$scope.al = [];
+								
+								$scope.rest();
+						
+								$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems + 1);
+							}
+						);
+					}
+				);
+			}
+			else
+			{
+				var item = Restangular.copy($scope.gridData[$scope.selectedItem]);
+				
+				angular.forEach
+				(
+					data, function (val, key)
+					{
+						if (!isNaN(val)) item[key] = val;
+					}
+				);
+
+				item.put().then
+				(
+					function ()
+					{
+						
+						angular.copy(item, $scope.gridData[$scope.selectedItem]);
+						
+						$scope.deselectItem();
+					}
+				);
+			}
+		};
 	}
 );

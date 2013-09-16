@@ -2683,3 +2683,113 @@ Stack trace:
 REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
 HTTP_REFERER=http://localhost/alaa/adrr/bin/
 ---
+2013/09/16 14:37:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/16 14:38:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/16 14:38:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/16 14:38:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+---
+2013/09/16 14:42:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/settings/ir/undefined/als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/settings/ir...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/undefined/als
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/16 14:43:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/settings/ir/undefined/als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/settings/ir...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/undefined/als
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/16 15:12:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+---
+2013/09/16 15:15:30 [error] [php] Object of class IrController could not be converted to string (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\RESTful.php:210)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): IrController->runAction()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): IrController->runActionWithFilters()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): IrController->run()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/3/als
+2013/09/16 15:19:07 [error] [php] Object of class IrController could not be converted to string (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\RESTful.php:210)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): IrController->runAction()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): IrController->runActionWithFilters()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): IrController->run()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/3/als
+2013/09/16 17:07:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/16 18:33:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "als".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('als')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('als')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/ir/als')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
+---

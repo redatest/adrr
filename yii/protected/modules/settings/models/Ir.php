@@ -10,7 +10,7 @@
 		{
 			return array
 			(
-				array('ir, zone_id, area, val, project_id', 'required'),
+				array('ir, zone_id, area, val', 'required'),
 				array('ir, zone_id, val, project_id', 'numerical', 'integerOnly' => true),
 				array('id, ir, zone_id, area, val, project_id', 'safe', 'on' => 'search'),
 			);
@@ -18,7 +18,10 @@
 		
 		public function relations()
 		{
-			return array ();
+			return array
+			(
+				'als' => array(self::HAS_MANY, 'IrAl', 'ir_id')
+			);
 		}
 		
 		public function attributeLabels()
