@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2013 at 08:04 PM
+-- Generation Time: Sep 16, 2013 at 11:58 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -45,14 +45,7 @@ CREATE TABLE IF NOT EXISTS `tbl_concrete_type` (
   `sample_counter` int(11) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `tbl_concrete_type`
---
-
-INSERT INTO `tbl_concrete_type` (`id`, `name`, `category`, `flow_norm_from`, `flow_norm_to`, `flow_acpt_from`, `flow_acpt_to`, `slamp_norm_from`, `slamp_norm_to`, `slamp_acpt_from`, `slamp_acpt_to`, `temp_from`, `temp_to`, `sample_counter`, `note`) VALUES
-(1, 'raeef', 'slamp', NULL, NULL, NULL, NULL, 23, 4, 23, 543, 23, 13, NULL, '');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -68,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ir` (
   `val` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -82,14 +75,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ir_al` (
   `axis` text NOT NULL,
   `level` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
-
---
--- Dumping data for table `tbl_ir_al`
---
-
-INSERT INTO `tbl_ir_al` (`id`, `ir_id`, `axis`, `level`) VALUES
-(20, 17, 'qwe', 'wer');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -184,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `tbl_project` (
   `name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -197,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pump` (
   `name` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -288,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `tbl_zone` (
   `name` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
