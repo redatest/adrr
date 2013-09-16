@@ -20,7 +20,8 @@
 		{
 			return array
 			(
-				'als' => array(self::HAS_MANY, 'IrAl', 'ir_id')
+				'als' => array(self::HAS_MANY, 'IrAl', 'ir_id'),
+				'pouringTypes' => array(self::HAS_MANY, 'IrPt', 'ir_id')
 			);
 		}
 		

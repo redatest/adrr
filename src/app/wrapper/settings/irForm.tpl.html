@@ -62,7 +62,34 @@
 				<tr ng-form="alForm">
 					<td><input name="axis" ng-model="axis" class="form-control" type="text" required /></td>
 					<td><input name="level" ng-model="level" class="form-control" type="text" required /></td>
-					<td><button class="btn btn-primary" ng-click="addAl(axis, level)" ng-disabled="alForm.axis.$error.required && alForm.level.$error.required">Add</button></td>
+					<td><button class="btn btn-primary" ng-click="addAl(axis, level, isCreate)" ng-disabled="alForm.axis.$error.required && alForm.level.$error.required">Add</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="col-lg-offset-2 col-lg-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Pouring Type</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr ng-repeat="pouringType in pt">
+					<td>{{pouringType.name}}</td>
+					<td><a ng-show="pt.length > 1" href="" ng-click="deletePt(pouringType, isCreate)">delete</a></td>
+				</tr>
+				
+				<tr ng-form="ptForm">
+					<td>
+						<select name="pouringType" ng-model="pouringType" class="form-control" type="text" required>
+							<option ng-repeat="pouringType in pouringTypes" value="{{pouringType.id}}">{{pouringType.name}}</option>
+						</select>
+					</td>
+					<td><button class="btn btn-primary" ng-click="addPt(pouringType, isCreate)" ng-disabled="ptForm.pouringType.$error.required">Add</button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -70,7 +97,7 @@
 	
 	<div class="form-group">
 		<div class="col-lg-offset-3 col-lg-6">
-			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="irForm.$invalid || valForm.$invalid || zoneForm.$invalid || areaForm.$invalid">
+			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="irForm.$invalid || valForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)">
 				<just_text ng-show="isCreate">Create</just_text>
 				<just_text ng-hide="isCreate">Update</just_text>
 			</button>

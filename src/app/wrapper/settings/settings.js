@@ -960,6 +960,7 @@ angular.module
 		$scope.$parent.model = angular.copy(Restangular.all('settings/ir'));
 		
 		$scope.al = [];
+		$scope.pt = [];
 		
 		Restangular.all('settings/zone').getList().then
 		(
@@ -977,14 +978,18 @@ angular.module
 			}
 		);
 		
-		$scope.addAl = function (axis, level)
-		{
-			$scope.al.push ( { axis: axis, level: level } );
-		};
+		Restangular.all('settings/pouringType').getList().then
+		(
+			function (data)
+			{
+				$scope.pouringTypes = angular.isArray(data) ? data : [];
+			}
+		);
 		
 		$scope.onSelectRow = function (rowItem)
 		{
 			$scope.al = [];
+			$scope.pt = [];
 			
 			$scope.$parent.onSelectRow(rowItem);
 			
@@ -1006,10 +1011,67 @@ angular.module
 						}
 					}
 				);
+				
+				$scope.model.one (rowItem.entity.id).getList ('pouringTypes').then
+				(
+					function (data)
+					{
+						if (angular.isArray(data))
+						{
+							angular.forEach
+							(
+								data, function (obj)
+								{
+									// angular.forEach
+									// (
+										// $scope.pouringTypes, function (pt)
+										// {
+											// console.log(pt.id);
+										// }
+									// );
+									// 
+									var pouringType = _.find
+									(
+										$scope.pouringTypes, function (pt)
+										{
+											return pt.id === obj.pouring_type_id;
+										}
+									);
+									
+									obj.name = pouringType.name;
+									
+									$scope.pt.push (obj);
+								}
+							);
+						}
+					}
+				);
 			}
 		};
 		
 		$scope.gridOptions.afterSelectionChange = $scope.onSelectRow;
+		
+		$scope.addAl = function (axis, level, isCreate)
+		{
+			var post = { axis: axis, level: level };
+			
+			if (isCreate)
+			{
+				$scope.al.push (post);
+			}
+			else
+			{
+				var item = Restangular.copy($scope.gridData[$scope.selectedItem]);
+				
+				item.all ('als').post (post).then
+				(
+					function (addedItem)
+					{
+						$scope.al.push (addedItem);
+					}
+				)
+			}
+		};
 		
 		$scope.deleteAl = function (obj, isCreate)
 		{
@@ -1024,6 +1086,56 @@ angular.module
 					function ()
 					{
 						delete $scope.al.splice($scope.al.indexOf(obj), 1);
+					}
+				);
+			}
+		}
+		
+		$scope.addPt = function (pt, isCreate)
+		{
+			var post = { pouring_type_id: pt };
+			
+			if (isCreate)
+			{
+				$scope.pt.push (post);
+			}
+			else
+			{
+				var item = Restangular.copy($scope.gridData[$scope.selectedItem]);
+				
+				item.all ('pouringTypes').post (post).then
+				(
+					function (addedItem)
+					{
+						var pouringType = _.find
+						(
+							$scope.pouringTypes, function (pt)
+							{
+								return pt.id === addedItem.pouring_type_id;
+							}
+						);
+						
+						addedItem.name = pouringType.name;
+						
+						$scope.pt.push (addedItem);
+					}
+				)
+			}
+		};
+		
+		$scope.deletePt = function (obj, isCreate)
+		{
+			if (isCreate)
+			{
+				$scope.pt.splice($scope.pt.indexOf(obj), 1);
+			}
+			else
+			{
+				obj.options().then
+				(
+					function ()
+					{
+						delete $scope.pt.splice($scope.pt.indexOf(obj), 1);
 					}
 				);
 			}
@@ -1051,6 +1163,14 @@ angular.module
 							}
 						);
 						
+						angular.forEach
+						(
+							$scope.pt, function (pt)
+							{
+								requests.push (obj.all('pouringTypes').post(pt));
+							}
+						);
+						
 						$q.all(requests).then
 						(
 							function (dataArr)
@@ -1067,26 +1187,28 @@ angular.module
 			}
 			else
 			{
-				var item = Restangular.copy($scope.gridData[$scope.selectedItem]);
+				// var item = Restangular.copy($scope.gridData[$scope.selectedItem]);
 				
-				angular.forEach
-				(
-					data, function (val, key)
-					{
-						if (!isNaN(val)) item[key] = val;
-					}
-				);
+				// angular.forEach
+				// (
+					// data, function (val, key)
+					// {
+						// if (!isNaN(val)) item[key] = val;
+					// }
+				// );
 
-				item.put().then
-				(
-					function ()
-					{
+				// item.put().then
+				// (
+					// function ()
+					// {
 						
-						angular.copy(item, $scope.gridData[$scope.selectedItem]);
+						// angular.copy(item, $scope.gridData[$scope.selectedItem]);
 						
-						$scope.deselectItem();
-					}
-				);
+						// $scope.deselectItem();
+					// }
+				// );
+				
+				$scope.$parent.submit(data);
 			}
 		};
 	}
