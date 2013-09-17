@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2013 at 11:58 PM
+-- Generation Time: Sep 17, 2013 at 05:39 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `tbl_concrete_type` (
   `sample_counter` int(11) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `tbl_ir` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ir` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
-  `area` text NOT NULL,
-  `val` int(11) NOT NULL,
+  `area` varchar(255) NOT NULL,
+  `volume` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pouring_type` (
   `name` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `v_r` enum('hor','ver') CHARACTER SET latin1 NOT NULL,
-  `priority` enum('normal','medium') CHARACTER SET latin1 NOT NULL,
+  `priority` enum('normal','medium','high','urgent') CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -182,6 +182,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pump` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
+  `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -197,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `tbl_shift_list` (
   `date` date NOT NULL,
   `time` int(11) DEFAULT NULL,
   `shift_id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -231,7 +232,8 @@ CREATE TABLE IF NOT EXISTS `tbl_shift_type` (
 CREATE TABLE IF NOT EXISTS `tbl_supplier` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `state` tinyint(1) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '1',
+  `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -261,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-16 09:28:40');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-17 12:00:58');
 
 -- --------------------------------------------------------
 
@@ -273,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `tbl_zone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
+  `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
