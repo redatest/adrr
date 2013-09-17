@@ -12,6 +12,7 @@ angular.module
 			'login',
 			{
 				url: '/login',
+				title: 'Login to Concrete App',
 				views:
 				{
 					"login":

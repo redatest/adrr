@@ -10,7 +10,7 @@
 		{
 			return array
 			(
-				array('name, state', 'required'),
+				array('name', 'required'),
 				array('state', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 255),
 				array('id, name, state', 'safe', 'on' => 'search'),
@@ -30,6 +30,15 @@
 				'name' => 'Name',
 				'state' => 'Active',
 			);
+		}
+		
+		public function getMap()
+		{
+			$map = parent::getMap();
+			
+			unset($map['cols']['state']);
+			
+			return $map;
 		}
 		
 		public function search()

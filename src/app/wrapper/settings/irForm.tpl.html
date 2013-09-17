@@ -7,10 +7,10 @@
 		</div>
 	</div>
 	
-	<div class="form-group" ng-class="{'has-error': valForm.$invalid}" ng-form="valForm">
-		<label class="col-lg-3 control-label" for="val">{{metaData.cols['val'].label}}</label>
+	<div class="form-group" ng-class="{'has-error': volumeForm.$invalid}" ng-form="volumeForm">
+		<label class="col-lg-3 control-label" for="volume">{{metaData.cols['volume'].label}}</label>
 		<div class="col-lg-6">
-			<input class="form-control" ng-model="formData['val']" type="number" ng-required="!metaData.cols['val']['allowNull']" />
+			<input class="form-control" ng-model="formData['volume']" type="number" ng-required="!metaData.cols['volume']['allowNull']" />
 		</div>
 	</div>
 	
@@ -38,7 +38,7 @@
 		<label class="col-lg-3 control-label" for="area">{{metaData.cols['area'].label}}</label>
 		
 		<div class="col-lg-6">
-			<textarea class="form-control" ng-model="formData['area']" placeholder="" ng-required="!metaData.cols['area']['allowNull']"></textarea>
+			<input type="text" class="form-control" ng-model="formData['area']" placeholder="" ng-required="!metaData.cols['area']['allowNull']"></input>
 		</div>
 	</div>
 	
@@ -60,9 +60,9 @@
 				</tr>
 				
 				<tr ng-form="alForm">
-					<td><input name="axis" ng-model="axis" class="form-control" type="text" required /></td>
-					<td><input name="level" ng-model="level" class="form-control" type="text" required /></td>
-					<td><button class="btn btn-primary" ng-click="addAl(axis, level, isCreate)" ng-disabled="alForm.axis.$error.required && alForm.level.$error.required">Add</button></td>
+					<td><input name="axis" ng-model="$parent.axis" class="form-control" type="text" required /></td>
+					<td><input name="level" ng-model="$parent.level" class="form-control" type="text" required /></td>
+					<td><button class="btn btn-primary" ng-click="addAl($parent.axis, $parent.level, isCreate)" ng-disabled="alForm.axis.$error.required && alForm.level.$error.required">Add</button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -97,7 +97,7 @@
 	
 	<div class="form-group">
 		<div class="col-lg-offset-3 col-lg-6">
-			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="irForm.$invalid || valForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)">
+			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="irForm.$invalid || volumeForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)">
 				<just_text ng-show="isCreate">Create</just_text>
 				<just_text ng-hide="isCreate">Update</just_text>
 			</button>

@@ -55,6 +55,7 @@ angular.module
 			'wrapper.settings.pouringType.create',
 			{
 				url: '^/settings/pouring-type/create',
+				title: 'Create a Pouring Type',
 				views:
 				{
 					"@wrapper.settings.pouringType":
@@ -70,6 +71,7 @@ angular.module
 			'wrapper.settings.pouringType.update',
 			{
 				url: '^/settings/pouring-type/update/:id',
+				title: 'Update a Pouring Type',
 				views:
 				{
 					"@wrapper.settings.pouringType":
@@ -101,6 +103,7 @@ angular.module
 			'wrapper.settings.ir.create',
 			{
 				url: '^/settings/ir/create',
+				title: 'Create an IR',
 				views:
 				{
 					"@wrapper.settings.ir":
@@ -116,6 +119,7 @@ angular.module
 			'wrapper.settings.ir.update',
 			{
 				url: '^/settings/ir/update/:id',
+				title: 'Update an IR',
 				views:
 				{
 					"@wrapper.settings.ir":
@@ -147,6 +151,7 @@ angular.module
 			'wrapper.settings.concreteType.create',
 			{
 				url: '^/settings/concrete-type/create',
+				title: 'Create a Concrete Type',
 				views:
 				{
 					"@wrapper.settings.concreteType":
@@ -162,6 +167,7 @@ angular.module
 			'wrapper.settings.concreteType.update',
 			{
 				url: '^/settings/concrete-type/update/:id',
+				title: 'Update a Concrete Type',
 				views:
 				{
 					"@wrapper.settings.concreteType":
@@ -193,6 +199,7 @@ angular.module
 			'wrapper.settings.zone.create',
 			{
 				url: '^/settings/zone/create',
+				title: 'Create a Zone',
 				views:
 				{
 					"@wrapper.settings.zone":
@@ -208,6 +215,7 @@ angular.module
 			'wrapper.settings.zone.update',
 			{
 				url: '^/settings/zone/update/:id',
+				title: 'Update a Zone',
 				views:
 				{
 					"@wrapper.settings.zone":
@@ -239,6 +247,7 @@ angular.module
 			'wrapper.settings.project.create',
 			{
 				url: '^/settings/project/create',
+				title: 'Create a Project',
 				views:
 				{
 					"@wrapper.settings.project":
@@ -254,6 +263,7 @@ angular.module
 			'wrapper.settings.project.update',
 			{
 				url: '^/settings/project/update/:id',
+				title: 'Update a Project',
 				views:
 				{
 					"@wrapper.settings.project":
@@ -285,6 +295,7 @@ angular.module
 			'wrapper.settings.supplier.create',
 			{
 				url: '^/settings/supplier/create',
+				title: 'Create a Supplier',
 				views:
 				{
 					"@wrapper.settings.supplier":
@@ -300,6 +311,7 @@ angular.module
 			'wrapper.settings.supplier.update',
 			{
 				url: '^/settings/supplier/update/:id',
+				title: 'Update a Supplier',
 				views:
 				{
 					"@wrapper.settings.supplier":
@@ -331,6 +343,7 @@ angular.module
 			'wrapper.settings.shiftType.create',
 			{
 				url: '^/settings/shift-type/create',
+				title: 'Create a Shift Type',
 				views:
 				{
 					"@wrapper.settings.shiftType":
@@ -346,6 +359,7 @@ angular.module
 			'wrapper.settings.shiftType.update',
 			{
 				url: '^/settings/shift-type/update/:id',
+				title: 'Update a Shift Type',
 				views:
 				{
 					"@wrapper.settings.shiftType":
@@ -377,6 +391,7 @@ angular.module
 			'wrapper.settings.shiftList.create',
 			{
 				url: '^/settings/shift-list/create',
+				title: 'Create a Shift List',
 				views:
 				{
 					"@wrapper.settings.shiftList":
@@ -393,6 +408,7 @@ angular.module
 			'wrapper.settings.shiftList.update',
 			{
 				url: '^/settings/shift-list/update/:id',
+				title: 'Update a Shift List',
 				views:
 				{
 					"@wrapper.settings.shiftList":
@@ -424,6 +440,7 @@ angular.module
 			'wrapper.settings.pump.create',
 			{
 				url: '^/settings/pump/create',
+				title: 'Create a Pump',
 				views:
 				{
 					"@wrapper.settings.pump":
@@ -439,6 +456,7 @@ angular.module
 			'wrapper.settings.pump.update',
 			{
 				url: '^/settings/pump/update/:id',
+				title: 'Update a Pump',
 				views:
 				{
 					"@wrapper.settings.pump":
@@ -486,6 +504,7 @@ angular.module
 		$scope.className = '';
 		// End ------------------------------------------------------
 		
+		$scope.isAutoColumns = true;
 		$scope.formsv = [];
 		$scope.gridData = [];
 		$scope.formData = {};
@@ -682,28 +701,31 @@ angular.module
 				
 				$scope.metaData = yii[$scope.className];
 				
-				angular.forEach
-				(
-					$scope.metaData.cols, function (value, key)
-					{
-						if (!value.autoIncrement)
+				if ($scope.isAutoColumns)
+				{
+					angular.forEach
+					(
+						$scope.metaData.cols, function (value, key)
 						{
-							$scope.columnDefs.push
-							({
-								field: key,
-								displayName: value.label
-							});
+							if (!value.autoIncrement)
+							{
+								$scope.columnDefs.push
+								({
+									field: key,
+									displayName: value.label
+								});
+							}
+							else
+							{
+								delete $scope.metaData.cols[key];
+							}
 						}
-						else
-						{
-							delete $scope.metaData.cols[key];
-						}
-					}
-				);
+					);
+				}
 				
 				$scope.columnDefs.push
 				({
-					field: '#',
+					field: '',
 					cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>'
 				});
 				
@@ -867,6 +889,8 @@ angular.module
 (
 	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($scope, Restangular)
 	{
+		$scope.$parent.isAutoColumns = false;
+		
 		$scope.$parent.className = 'ConcreteType';
 		$scope.$parent.route = '/settings/concrete-type';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/concreteType'));
@@ -884,6 +908,13 @@ angular.module
 			$scope.formData['slamp_acpt_from'] = NaN;
 			$scope.formData['slamp_acpt_to'] = NaN;
 		};
+		
+		$scope.columnDefs =
+		[
+			{ field: 'name',	 displayName: 'Name' },
+			{ field: 'category', displayName: 'Category' },
+			{ field: '', cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>' }
+		];
 	}
 )
 //---------------------------------------------------------
@@ -1022,14 +1053,6 @@ angular.module
 							(
 								data, function (obj)
 								{
-									// angular.forEach
-									// (
-										// $scope.pouringTypes, function (pt)
-										// {
-											// console.log(pt.id);
-										// }
-									// );
-									// 
 									var pouringType = _.find
 									(
 										$scope.pouringTypes, function (pt)
@@ -1058,6 +1081,9 @@ angular.module
 			if (isCreate)
 			{
 				$scope.al.push (post);
+				
+				$scope.axis = '';
+				$scope.level = '';
 			}
 			else
 			{
@@ -1068,6 +1094,9 @@ angular.module
 					function (addedItem)
 					{
 						$scope.al.push (addedItem);
+						
+						$scope.axis = '';
+						$scope.level = '';
 					}
 				)
 			}

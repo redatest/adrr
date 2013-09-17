@@ -12,6 +12,7 @@ angular.module
 			'wrapper.dashboard',
 			{
 				url: '^/dashboard',
+				title: 'Dashboard',
 				controller: 'DashboardCtrl',
 				templateUrl: 'wrapper/dashboard/dashboard.tpl.html'
 			}

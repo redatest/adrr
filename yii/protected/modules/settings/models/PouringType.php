@@ -6,6 +6,8 @@
 		
 		const PRIORITY_NOR = 'normal';
 		const PRIORITY_MID = 'medium';
+		const PRIORITY_HIG = 'high';
+		const PRIORITY_URG = 'urgent';
 		
 		public function tableName()
 		{
@@ -16,7 +18,7 @@
 		{
 			return array
 			(
-				array('name, state, v_r, priority', 'required'),
+				array('name, v_r, priority', 'required'),
 				array('state', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 255),
 				array('id, name, state, v_r, priority', 'safe', 'on' => 'search'),
@@ -37,7 +39,9 @@
 			return array
 			(
 				self::PRIORITY_NOR => Yii::t('en', 'Normal'),
-				self::PRIORITY_MID => Yii::t('en', 'Medium')
+				self::PRIORITY_MID => Yii::t('en', 'Medium'),
+				self::PRIORITY_HIG => Yii::t('en', 'High'),
+				self::PRIORITY_URG => Yii::t('en', 'Urgent')
 			);
 		}
 		
@@ -45,6 +49,7 @@
 		{
 			$map = parent::getMap();
 			
+			unset($map['cols']['state']);
 			$map['cols']['v_r']['values'] = $this->vrAlias;
 			$map['cols']['priority']['values'] = $this->priorityAlias;
 			
