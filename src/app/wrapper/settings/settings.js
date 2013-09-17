@@ -1152,6 +1152,16 @@ angular.module
 			
 			if (isCreate)
 			{
+				var pouringType = _.find
+				(
+					$scope.pouringTypes, function (pt)
+					{
+						return pt.id === post.pouring_type_id;
+					}
+				);
+				
+				post.name = pouringType.name;
+				
 				$scope.pt.push (post);
 			}
 			else
@@ -1222,6 +1232,8 @@ angular.module
 						(
 							$scope.pt, function (pt)
 							{
+								delete pt.name;
+								
 								requests.push (obj.all('pouringTypes').post(pt));
 							}
 						);
@@ -1231,6 +1243,7 @@ angular.module
 							function (dataArr)
 							{
 								$scope.al = [];
+								$scope.pt = [];
 								
 								$scope.rest();
 						
