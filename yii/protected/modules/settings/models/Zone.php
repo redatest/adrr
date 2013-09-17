@@ -13,7 +13,7 @@
 				array('name', 'required'),
 				array('state', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 255),
-				array('id, name, state', 'safe', 'on' => 'search'),
+				array('id, name, state, description', 'safe', 'on' => 'search'),
 			);
 		}
 		
@@ -29,6 +29,7 @@
 				'id' => 'ID',
 				'name' => 'Name',
 				'state' => 'Active',
+				'description' => 'Description',
 			);
 		}
 		
@@ -48,6 +49,7 @@
 			$criteria->compare('id', $this->id);
 			$criteria->compare('name', $this->name, true);
 			$criteria->compare('state', $this->state);
+			$criteria->compare('description', $this->description, true);
 
 			return new CActiveDataProvider($this, array('criteria' => $criteria));
 		}

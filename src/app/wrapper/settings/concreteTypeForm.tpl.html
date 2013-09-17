@@ -1,17 +1,17 @@
 <form class="form-horizontal" name="form" novalidate>
 
 	<div class="form-group" ng-class="{'has-error': nameForm.$invalid}" ng-form="nameForm">
-		<label class="col-lg-3 control-label" for="name">{{metaData.cols['name'].label}}</label>
+		<label class="col-lg-4 control-label" for="name">{{metaData.cols['name'].label}}</label>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			<input class="form-control" ng-model="formData['name']" type="text" ng-required="!metaData.cols['name']['allowNull']" />
 		</div>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': catForm.$invalid}" ng-form="catForm">
-		<label class="col-lg-3 control-label" for="category">{{metaData.cols['category'].label}}</label>
+		<label class="col-lg-4 control-label" for="category">{{metaData.cols['category'].label}}</label>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			<select class="form-control" ng-model="formData['category']" required ng-change="restValues()">
 				<option ng-repeat="(key , value) in metaData.cols['category']['values']" value="{{key}}" ng-selected="formData['category'] == key">{{value}}</option>
 			</select>
@@ -20,41 +20,41 @@
 	
 	<div ng-show="formData['category'] == 'flow'">
 		<div class="form-group">
-			<label class="col-lg-3 control-label" for="category">Normal:</label>
+			<label class="col-lg-4 control-label" for="category">Normal:</label>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': flowNormFrom.$invalid}" ng-form="flowNormFrom">
-			<label class="col-lg-3 control-label" for="flow_norm_from">{{metaData.cols['flow_norm_from'].label}}</label>
+			<label class="col-lg-4 control-label" for="flow_norm_from">{{metaData.cols['flow_norm_from'].label}}</label>
 			
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['flow_norm_from']" type="number" ng-required="formData['category'] == 'flow'" />
 			</div>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': flowNormTo.$invalid}" ng-form="flowNormTo">
-			<label class="col-lg-3 control-label" for="flow_norm_to">{{metaData.cols['flow_norm_to'].label}}</label>
+			<label class="col-lg-4 control-label" for="flow_norm_to">{{metaData.cols['flow_norm_to'].label}}</label>
 			
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['flow_norm_to']" type="number" ng-required="formData['category'] == 'flow'" />
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label class="col-lg-3 control-label" for="category">Acceptable:</label>
+			<label class="col-lg-4 control-label" for="category">Acceptable:</label>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': flowAcptFrom.$invalid}" ng-form="flowAcptFrom">
-			<label class="col-lg-3 control-label" for="flow_acpt_from">{{metaData.cols['flow_acpt_from'].label}}</label>
+			<label class="col-lg-4 control-label" for="flow_acpt_from">{{metaData.cols['flow_acpt_from'].label}}</label>
 			
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['flow_acpt_from']" type="number" ng-required="formData['category'] == 'flow'" />
 			</div>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': flowAcptTo.$invalid}" ng-form="flowAcptTo">
-			<label class="col-lg-3 control-label" for="flow_acpt_to">{{metaData.cols['flow_acpt_to'].label}}</label>
+			<label class="col-lg-4 control-label" for="flow_acpt_to">{{metaData.cols['flow_acpt_to'].label}}</label>
 			
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['flow_acpt_to']" type="number" ng-required="formData['category'] == 'flow'" />
 			</div>
 		</div>
@@ -62,77 +62,77 @@
 	
 	<div ng-show="formData['category'] == 'slamp'">
 		<div class="form-group">
-			<label class="col-lg-3 control-label" for="category">Normal:</label>
+			<label class="col-lg-4 control-label" for="category">Normal:</label>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': slampNormFrom.$invalid}" ng-form="slampNormFrom">
-			<label class="col-lg-3 control-label" for="slamp_norm_from">{{metaData.cols['slamp_norm_from'].label}}</label>
-			<div class="col-lg-6">
+			<label class="col-lg-4 control-label" for="slamp_norm_from">{{metaData.cols['slamp_norm_from'].label}}</label>
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['slamp_norm_from']" type="number" ng-required="formData['category'] == 'slamp'" />
 			</div>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': slampNormTo.$invalid}" ng-form="slampNormTo">
-			<label class="col-lg-3 control-label" for="slamp_norm_to">{{metaData.cols['slamp_norm_to'].label}}</label>
-			<div class="col-lg-6">
+			<label class="col-lg-4 control-label" for="slamp_norm_to">{{metaData.cols['slamp_norm_to'].label}}</label>
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['slamp_norm_to']" type="number" ng-required="formData['category'] == 'slamp'" />
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label class="col-lg-3 control-label" for="category">Acceptable:</label>
+			<label class="col-lg-4 control-label" for="category">Acceptable:</label>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': slampAcptFrom.$invalid}" ng-form="slampAcptFrom">
-			<label class="col-lg-3 control-label" for="slamp_acpt_from">{{metaData.cols['slamp_acpt_from'].label}}</label>
-			<div class="col-lg-6">
+			<label class="col-lg-4 control-label" for="slamp_acpt_from">{{metaData.cols['slamp_acpt_from'].label}}</label>
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['slamp_acpt_from']" type="number" ng-required="formData['category'] == 'slamp'" />
 			</div>
 		</div>
 		
 		<div class="form-group" ng-class="{'has-error': slampAcptTo.$invalid}" ng-form="slampAcptTo">
-			<label class="col-lg-3 control-label" for="slamp_acpt_to">{{metaData.cols['slamp_acpt_to'].label}}</label>
-			<div class="col-lg-6">
+			<label class="col-lg-4 control-label" for="slamp_acpt_to">{{metaData.cols['slamp_acpt_to'].label}}</label>
+			<div class="col-lg-8">
 				<input class="form-control" ng-model="formData['slamp_acpt_to']" type="number" ng-required="formData['category'] == 'slamp'" />
 			</div>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="col-lg-3 control-label" for="category">Temperature:</label>
+		<label class="col-lg-4 control-label" for="category">Temperature:</label>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': tempFrom.$invalid}" ng-form="tempFrom">
-		<label class="col-lg-3 control-label" for="temp_from">{{metaData.cols['temp_from'].label}}</label>
-		<div class="col-lg-6">
+		<label class="col-lg-4 control-label" for="temp_from">{{metaData.cols['temp_from'].label}}</label>
+		<div class="col-lg-8">
 			<input class="form-control" ng-model="formData['temp_from']" type="number" required />
 		</div>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': tempTo.$invalid}" ng-form="tempTo">
-		<label class="col-lg-3 control-label" for="temp_to">{{metaData.cols['temp_to'].label}}</label>
-		<div class="col-lg-6">
+		<label class="col-lg-4 control-label" for="temp_to">{{metaData.cols['temp_to'].label}}</label>
+		<div class="col-lg-8">
 			<input class="form-control" ng-model="formData['temp_to']" type="number" required />
 		</div>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': sampleCounterForm.$invalid}" ng-form="sampleCounterForm">
-		<label class="col-lg-3 control-label" for="sample_counter">{{metaData.cols['sample_counter'].label}}</label>
+		<label class="col-lg-4 control-label" for="sample_counter">{{metaData.cols['sample_counter'].label}}</label>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			<input class="form-control" ng-model="formData['sample_counter']" type="number" />
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="col-lg-3 control-label" for="note">{{metaData.cols['note'].label}}</label>
-		<div class="col-lg-6">
+		<label class="col-lg-4 control-label" for="note">{{metaData.cols['note'].label}}</label>
+		<div class="col-lg-8">
 			<textarea class="form-control" ng-model="formData['note']" placeholder=""></textarea>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<div class="col-lg-offset-3 col-lg-6">
+		<div class="col-lg-offset-4 col-lg-8">
 			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="form.$invalid">
 				<just_text ng-show="isCreate">Create</just_text>
 				<just_text ng-hide="isCreate">Update</just_text>

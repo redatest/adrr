@@ -2793,3 +2793,29 @@ Stack trace:
 #5 {main}
 REQUEST_URI=/alaa/adrr/yii/api/settings/ir/als
 ---
+2013/09/17 16:13:17 [error] [php] Undefined index: description (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\ArModel.php:12)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\db\ar\CActiveRecord.php(145): Zone->__get()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(23): Zone->__get()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData
+2013/09/17 16:13:25 [error] [php] Undefined index: description (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\ArModel.php:12)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\db\ar\CActiveRecord.php(145): Zone->__get()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(23): Zone->__get()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#9 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData

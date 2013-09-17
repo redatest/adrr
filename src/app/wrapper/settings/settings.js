@@ -472,6 +472,32 @@ angular.module
 // End
 //---------------------------------------------------------
 
+
+
+.filter
+(
+	'keepOriginal', function ()
+	{
+		return function (items)
+		{
+			var sorted = {};
+			
+			var i = 0;
+			
+			angular.forEach
+			(
+				items, function (val, key)
+				{
+					sorted[i] = val;
+					
+					i++;
+				}
+			);
+			return sorted;
+		}
+	}
+)
+
 //---------------------------------------------------------
 // Module 'Settings' Controller
 //---------------------------------------------------------
@@ -889,7 +915,7 @@ angular.module
 (
 	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($scope, Restangular)
 	{
-		$scope.$parent.isAutoColumns = false;
+		// $scope.$parent.isAutoColumns = false;
 		
 		$scope.$parent.className = 'ConcreteType';
 		$scope.$parent.route = '/settings/concrete-type';
@@ -909,12 +935,12 @@ angular.module
 			$scope.formData['slamp_acpt_to'] = NaN;
 		};
 		
-		$scope.columnDefs =
-		[
-			{ field: 'name',	 displayName: 'Name' },
-			{ field: 'category', displayName: 'Category' },
-			{ field: '', cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>' }
-		];
+		// $scope.columnDefs =
+		// [
+			// { field: 'name',	 displayName: 'Name' },
+			// { field: 'category', displayName: 'Category' },
+			// { field: '', cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>' }
+		// ];
 	}
 )
 //---------------------------------------------------------
