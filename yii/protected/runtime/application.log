@@ -2819,3 +2819,680 @@ Stack trace:
 #8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #9 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(17): CWebApplication->run()
 REQUEST_URI=/alaa/adrr/yii/metaData
+2013/09/18 08:30:32 [error] [exception.CDbException] SQLSTATE[HY000] [1049] Unknown database 'conc'
+2013/09/18 08:30:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in C:\xampp\htdocs\adrr\yii\framework\db\CDbConnection.php:388
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\xampp\htdocs\adrr\yii\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): CActiveRecord->getDbConnection()
+#6 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Ir))
+#7 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(138): CActiveRecord->getMetaData()
+#8 C:\xampp\htdocs\adrr\yii\protected\controllers\MetaDataController.php(23): CActiveRecord->__get('class')
+#9 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#10 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('')
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('metaData')
+#15 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#17 {main}
+REQUEST_URI=/adrr/yii/metaData
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 08:31:07 [error] [exception.CDbException] SQLSTATE[HY000] [1049] Unknown database 'conc'
+2013/09/18 08:31:07 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection.' in C:\xampp\htdocs\adrr\yii\framework\db\CDbConnection.php:388
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\xampp\htdocs\adrr\yii\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): CActiveRecord->getDbConnection()
+#6 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Ir))
+#7 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(138): CActiveRecord->getMetaData()
+#8 C:\xampp\htdocs\adrr\yii\protected\controllers\MetaDataController.php(23): CActiveRecord->__get('class')
+#9 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#10 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('')
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('metaData')
+#15 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#17 {main}
+REQUEST_URI=/adrr/yii/metaData
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 08:33:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'heptc1_conc.tbl_ir' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_ir`.
+2013/09/18 08:33:40 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{ir}}" for active record class "Ir" cannot be found in the database.' in C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Ir))
+#1 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(138): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\adrr\yii\protected\controllers\MetaDataController.php(23): CActiveRecord->__get('class')
+#3 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#4 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('')
+#8 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('metaData')
+#9 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#11 {main}
+REQUEST_URI=/adrr/yii/metaData
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 08:59:14 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_ir`.
+2013/09/18 08:59:14 [error] [exception.CDbException] exception 'CDbException' with message 'The table "{{ir}}" for active record class "Ir" cannot be found in the database.' in C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php:2362
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Ir))
+#1 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(138): CActiveRecord->getMetaData()
+#2 C:\xampp\htdocs\adrr\yii\protected\controllers\MetaDataController.php(23): CActiveRecord->__get('class')
+#3 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#4 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('')
+#8 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('metaData')
+#9 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\adrr\yii\index.php(19): CApplication->run()
+#11 {main}
+REQUEST_URI=/adrr/yii/metaData
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:47:54 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:47:55 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:49:07 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:51:14 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:54:39 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:55:06 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:55:25 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:55:57 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:57:02 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(21): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:57:35 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(21): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:57:47 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(21): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:59:09 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(21): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 09:59:27 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(21): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 10:00:29 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(21): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 10:01:19 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 10:02:22 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(29): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 10:12:57 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 10:13:32 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 10:14:16 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(17): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 12:18:18 [error] [exception.CException] exception 'CException' with message 'Property "CWebApplication.db2" is not defined.' in C:\xampp\htdocs\adrr\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(105): CComponent->__get('db2')
+#1 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#2 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#5 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#8 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#10 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#11 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#12 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#18 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\adrr\yii\index.php(20): CApplication->run()
+#20 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 12:19:06 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(20): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---
+2013/09/18 12:20:07 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in C:\xampp\htdocs\adrr\yii\framework\YiiBase.php:193
+Stack trace:
+#0 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(386): YiiBase::createComponent(Array)
+#1 C:\xampp\htdocs\adrr\yii\framework\base\CModule.php(103): CModule->getComponent('db2')
+#2 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\User.php(88): CModule->__get('db2')
+#3 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(2361): User->getDbConnection()
+#4 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(User))
+#5 C:\xampp\htdocs\adrr\yii\framework\db\ar\CActiveRecord.php(212): CActiveRecord->getMetaData()
+#6 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): CActiveRecord->__call('notsafe', Array)
+#7 C:\xampp\htdocs\adrr\yii\protected\modules\user\components\UserIdentity.php(27): User->notsafe()
+#8 C:\xampp\htdocs\adrr\yii\protected\modules\user\models\UserLogin.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\adrr\yii\framework\validators\CInlineValidator.php(42): UserLogin->authenticate('password', Array)
+#10 C:\xampp\htdocs\adrr\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(UserLogin), 'password')
+#11 C:\xampp\htdocs\adrr\yii\framework\base\CModel.php(159): CValidator->validate(Object(UserLogin), NULL)
+#12 C:\xampp\htdocs\adrr\yii\protected\modules\user\controllers\JsonLoginController.php(17): CModel->validate()
+#13 C:\xampp\htdocs\adrr\yii\framework\web\actions\CInlineAction.php(49): JsonLoginController->actionCreate()
+#14 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#18 C:\xampp\htdocs\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/jsonLogin/...')
+#19 C:\xampp\htdocs\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\adrr\yii\index.php(20): CApplication->run()
+#21 {main}
+REQUEST_URI=/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/adrr/bin/
+---

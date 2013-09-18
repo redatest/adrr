@@ -12,3 +12,4 @@ yii/assets
 yii/css
 yii/images
 yii/themes
+yii/protected/runtime/

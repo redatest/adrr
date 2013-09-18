@@ -1,11 +1,10 @@
 <?php
 	// uncomment the following to define a path alias
 	// Yii::setPathOfAlias('local','path/to/local-folder');
-	
+
 	return array
 	(
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-		
 		'name' => 'Concrete',
 
 		'preload' => array('log'),
@@ -43,7 +42,6 @@
 			),
 			'settings'
 		),
-		
 		'components' => array
 		(
 			'user' => array
@@ -74,34 +72,8 @@
 					array('<module>/<controller>/createRelated',  'pattern' => 'api/<module\w+>/<controller:\w+>/<id:\d+>/<related:\w+>', 'verb' => 'POST'),
 				),
 			),
-			
-			'db' => array
-			(
-				'connectionString' => 'mysql:host=localhost;dbname=conc', // local
-				// 'connectionString' => 'mysql:host=localhost;dbname=heptc1_demo', // server
-				'emulatePrepare' => true,
-				'username' => 'root', // local
-				// 'username' => 'heptc1_raeef', // server
-				'password' => '', // local
-				// 'password' => 'Hf%Ho5HV~{kH', // server
-				'charset' => 'utf8',
-				'tablePrefix' => 'tbl_'
-			),
-			
-			'db2' => array
-			(
-				'class' => 'CDbConnection',
-				'connectionString' => 'mysql:host=localhost;dbname=conc', // local
-				// 'connectionString' => 'mysql:host=localhost;dbname=heptc1_demo', // server
-				'emulatePrepare' => true,
-				'username' => 'root', // local
-				// 'username' => 'heptc1_raeef', // server
-				'password' => '', // local
-				// 'password' => 'Hf%Ho5HV~{kH', // server
-				'charset' => 'utf8',
-				'tablePrefix' => 'tbl_'
-			),
-			
+
+
 			'errorHandler' => array('errorAction' => 'site/error'),
 			
 			'log' => array

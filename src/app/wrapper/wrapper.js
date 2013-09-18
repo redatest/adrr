@@ -8,7 +8,7 @@ angular.module
 	'yii', function ($q, $http)
 	{
 		var deferred = $q.defer();
-		
+
 		$http
 		({
 			method: 'GET',
