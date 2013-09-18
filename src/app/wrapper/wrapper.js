@@ -56,8 +56,9 @@ angular.module
 
 .controller
 (
-	'WrapperCtrl', function ($scope, $state)
+	'WrapperCtrl', function ($scope, $rootScope, $state)
 	{
-		
+		$rootScope.modalTitle	= 'Confirmation';
+		$rootScope.modalMessage = 'Are you sure?';
 	}
 );

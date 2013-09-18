@@ -913,7 +913,7 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($scope, Restangular)
+	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($rootScope, $scope, Restangular)
 	{
 		// $scope.$parent.isAutoColumns = false;
 		
@@ -941,6 +941,8 @@ angular.module
 			// { field: 'category', displayName: 'Category' },
 			// { field: '', cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>' }
 		// ];
+		
+		$rootScope.modalMessage = 'Raeef';
 	}
 )
 //---------------------------------------------------------
