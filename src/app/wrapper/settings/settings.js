@@ -371,23 +371,23 @@ angular.module
 			{
 				// watch state ----------------------------------------------
 				$scope.isCreate = true;
-				
+
 				$scope.headTitle = 'Create';
-				
+
 				$scope.$on
 				(
 					'$stateChangeStart', function (event, state)
 					{
 						var name = state.name.split('.');
 							name = name[name.length - 1];
-						
+
 						$scope.isCreate = name === 'create' ? true : false;
-						
+
 						$scope.headTitle = ($scope.isCreate ? 'Create' : 'Update');
 					}
 				);
 				// ----------------------------------------------------------
-				
+
 				$scope.formsv = [];
 				$scope.gridData = [];
 				$scope.formData = {};
@@ -396,7 +396,7 @@ angular.module
 				$scope.selectedItemIndex = 0;
 				$scope.model = Restangular.all($attrs.apiExt);
 				$scope.pagingOptions = { pageSizes: [10, 20, 30], pageSize: 10, currentPage: 1 };
-				
+
 				$scope.onSelectRow = function (rowItem)
 				{
 					if (rowItem.config.selectedItems.length)
@@ -410,39 +410,39 @@ angular.module
 									case 'boolean':
 										$scope.formData[key] = rowItem.entity[key] === '1' ? true : false;
 									break;
-									
+
 									case 'number':
 										$scope.formData[key] = parseInt(rowItem.entity[key], 10);
 									break;
-									
+
 									default:
 										$scope.formData[key] = rowItem.entity[key];
 									break;
 								}
 							}
 						);
-						
+
 						$scope.selectedItem = rowItem.rowIndex;
-						
+
 						$location.path($attrs.route + '/update/' + rowItem.entity.id);
 					}
 					else
 					{
 						$scope.rest();
-						
+
 						$location.path($attrs.route + '/create');
 					}
 				};
-				
+
 				$scope.deselectItem = function ()
 				{
 					$scope.rest();
-					
+
 					$scope.gridOptions.selectItem ($scope.selectedItem, false);
-					
+
 					$location.path ($attrs.route + '/create');
 				};
-				
+
 				$scope.updateTotalServerItems = function (pagNum, pagSiz, val)
 				{
 					if (typeof val === 'undefined')
@@ -459,28 +459,28 @@ angular.module
 					{
 						$scope.totalServerItems = val;
 					}
-					
+
 					var lastPage = Math.ceil(val / $scope.pagingOptions.pageSize);
-					
+
 					if (!lastPage)
 					{
 						lastPage = 1;
 					}
-					
+
 					if (lastPage < $scope.pagingOptions.currentPage)
 					{
 						$scope.pagingOptions.currentPage = lastPage;
-						
+
 						return;
 					}
-					
+
 					$scope.getList(pagNum, pagSiz);
 				};
-				
+
 				$scope.getList = function (pagNum, pagSiz)
 				{
 					var offset = (pagNum - 1) * pagSiz;
-					
+
 					$scope.model.getList
 					(
 						{
@@ -496,7 +496,7 @@ angular.module
 						}
 					);
 				};
-				
+
 				$scope.rest = function ()
 				{
 					angular.forEach
@@ -511,13 +511,13 @@ angular.module
 										case 1:
 											$scope.formData[key] = ((value.defaultValue === null) ? false : (value.defaultValue === 1 ? true : false));
 										break;
-										
+
 										default:
 											$scope.formData[key] = (value.defaultValue === null ? NaN : parseFloat(value.defaultValue, 10));
 										break;
 									}
 								break;
-								
+
 								default:
 									$scope.formData[key] = (value.defaultValue === null ? '' : value.defaultValue);
 								break;
@@ -525,7 +525,7 @@ angular.module
 						}
 					);
 				};
-				
+
 				$scope.gridOptions =
 				{
 					data: 'gridData',
@@ -539,7 +539,7 @@ angular.module
 					keepLastSelected: false,
 					jqueryUIDraggable: true
 				};
-				
+
 				$scope.$watch
 				(
 					'pagingOptions', function (newVal, oldVal)
@@ -547,7 +547,7 @@ angular.module
 						if (newVal !== oldVal)
 						{
 							$scope.deselectItem();
-							
+
 							if (newVal.currentPage !== oldVal.currentPage)
 							{
 								$scope.getList(newVal.currentPage, newVal.pageSize);
@@ -559,7 +559,7 @@ angular.module
 						}
 					}, true
 				);
-				
+
 				$scope.deleteItem = function (row)
 				{
 					row.entity.options().then
@@ -567,18 +567,18 @@ angular.module
 						function ()
 						{
 							$scope.deselectItem();
-							
+
 							$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems - 1);
 						}
 					);
 				};
-				
+
 				yii.then
 				(
 					function (res)
 					{
 						$scope.metaData = res[$attrs.metaData];
-						
+
 						angular.forEach
 						(
 							$scope.metaData.cols, function (value, key)
@@ -597,25 +597,25 @@ angular.module
 								}
 							}
 						);
-						
+
 						$scope.columnDefs.push
 						({
 							field: '#',
 							cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)"><i class="icon-trash bigger-130"></i></a>'
 						});
-						
+
 						$scope.rest();
-						
+
 						$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize);
 					}
 				);
-				
+
 				$scope.submit = function (data)
 				{
 					if ($scope.isCreate)
 					{
 						var post = angular.copy(data);
-						
+
 						angular.forEach
 						(
 							post, function (val, key)
@@ -626,13 +626,13 @@ angular.module
 								}
 							}
 						);
-						
+
 						$scope.model.post(post).then
 						(
 							function ()
 							{
 								$scope.rest();
-								
+
 								$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems + 1);
 							}
 						);
@@ -640,7 +640,7 @@ angular.module
 					else
 					{
 						var item = Restangular.copy($scope.gridData[$scope.selectedItem]);
-						
+
 						angular.forEach
 						(
 							data, function (val, key)
@@ -650,20 +650,20 @@ angular.module
 									case 'boolean':
 										item[key] = val ? '1' : '0';
 									break;
-									
+
 									default:
 										item[key] = val;
 									break;
 								}
 							}
 						);
-						
+
 						item.put().then
 						(
 							function (rest)
 							{
 								angular.copy(item, $scope.gridData[$scope.selectedItem]);
-								
+
 								$scope.deselectItem();
 							}
 						);

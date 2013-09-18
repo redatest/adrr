@@ -20,7 +20,7 @@ angular.module
 	function adrrAppConfig ($stateProvider, $urlRouterProvider, RestangularProvider)
 	{
 		$urlRouterProvider.otherwise(appConfig.loginRoute);
-		
+
 		RestangularProvider.setBaseUrl(appConfig.restfulApiBaseUrl + '/api');
 		RestangularProvider.setMethodOverriders(["put"]);
 	}
@@ -30,6 +30,7 @@ angular.module
 (
 	function run (adrrAuth)
 	{
+		console.log('mmmm m d mm');
 		adrrAuth.check();
 	}
 )

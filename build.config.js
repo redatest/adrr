@@ -15,7 +15,7 @@ module.exports =
 		js:
 		[
 			'vendor/jquery/jquery.min.js',
-			'vendor/jquery-ui/ui/minified/i18n/jquery-ui.min.js',
+			'vendor/jquery-ui/ui/minified/jquery-ui.min.js',
 			'vendor/bootstrap/dist/js/bootstrap.min.js',
 			'vendor/angular/angular.min.js',
 			'vendor/angular-ui-router/release/angular-ui-router.min.js',

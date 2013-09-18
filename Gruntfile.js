@@ -8,13 +8,15 @@ module.exports = function (grunt)
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-karma');
 	
 	var userConfig = require( './build.config.js' );
 	
 	var taskConfig =
 	{
 		pkg: grunt.file.readJSON("package.json"),
-		
+
+
 		clean:
 		{
 			all:
@@ -128,10 +130,25 @@ module.exports = function (grunt)
 			}
 		},
 
+		karma: {
+			unit: {
+				options: {
+					files: [],
+					frameworks: ['jasmine']
+				},
+
+				background: true,
+				browsers: ['PhantomJS']
+			}
+		},
 		watch:
 		{
 			options: { livereload: true },
 
+			karma: {
+				files: ['src/app/app.specs.js','<%= app_files.less %>','<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
+				tasks: ['karma:unit:run'] //NOTE the :run flag
+			},
 			js:
 			{
 				files: ['<%= app_files.less %>','<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
