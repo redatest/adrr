@@ -31,7 +31,6 @@ angular.module
 (
 	function run (adrrAuth)
 	{
-		console.log('mmmm m d mm');
 		adrrAuth.check();
 	}
 )

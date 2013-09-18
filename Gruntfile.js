@@ -145,10 +145,6 @@ module.exports = function (grunt)
 		{
 			options: { livereload: true },
 
-			karma: {
-				files: ['src/app/app.specs.js','<%= app_files.less %>','<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
-				tasks: ['karma:unit:run'] //NOTE the :run flag
-			},
 			js:
 			{
 				files: ['<%= app_files.less %>','<%= app_files.js %>', '<%= app_files.atpl %>', '<%= app_files.ctpl %>'],
