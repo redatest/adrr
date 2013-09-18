@@ -13,3 +13,4 @@ yii/css
 yii/images
 yii/themes
 yii/protected/runtime/
+yii/protected/config/local_mrc.php
