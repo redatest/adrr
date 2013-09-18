@@ -3,11 +3,8 @@
 		{{headTitle}}
 	</h1>
 </div>-->
-
 <form class="form-horizontal" role="form" name="form" novalidate>
-
-	<div class="form-group" ng-class="{'has-error': subForm.$invalid}" ng-repeat="attr in metaData.cols" ng-form="subForm">
-
+	<div class="form-group" ng-class="{'has-error': subForm.$invalid}" ng-repeat="(key, attr) in metaData.cols | keepOriginal" ng-form="subForm">
 		<label ng-hide="attr.type === 'integer' && attr.size === 1" class="col-lg-3 control-label" for="{{attr.name}}">{{attr.label}}</label>
 
 		<ng-switch on="attr.type">
@@ -18,7 +15,7 @@
 						<textarea class="form-control" ng-model="formData[attr.name]" ng-required="!attr.allowNull"></textarea>
 					</div>
 					<div class="col-lg-6" ng-switch-when="date">
-						<input ui-date ng-model="formData[attr.name]" class="form-control" type="date" ng-required="!attr.allowNull" />
+						<input ui-date ng-model="formData[attr.name]" class="form-control" ng-required="!attr.allowNull" />
 					</div>
 					<div class="col-lg-6" ng-switch-default>
 						<input class="form-control" ng-model="formData[attr.name]" type="text" ng-required="!attr.allowNull" />

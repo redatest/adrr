@@ -7,6 +7,7 @@ angular.module
 		'ngGrid',
 		'ui.router',
 		'restangular',
+		'ui.date',
 		'adrrAuth',
 		'adrrApp.login',
 		'adrrApp.wrapper',
@@ -37,7 +38,18 @@ angular.module
 
 .controller
 (
-	'AdrrAppCtrl', function AdrrAppCtrl ()
+	'AdrrAppCtrl', function AdrrAppCtrl ($scope, $state, $rootScope)
 	{
+		$scope.state = $state.current.name;
+		
+		$scope.$on
+		(
+			'$stateChangeStart', function (a, b)
+			{
+				$scope.state = b.name;
+				
+				$rootScope.pageTitle = b.title;
+			}
+		);
 	}
 );

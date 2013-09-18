@@ -207,6 +207,10 @@
 				else $this->_sendResponse(500, sprintf('Parameter <b>%s</b> is not allowed', $var));
 			}
 			
+			$foreignKey = $this->_relationship->foreignKey;
+			
+			$model->$foreignKey = $_GET['id'];
+			
 			if ($model->save()) $this->_sendResponse(200, CJSON::encode($model));
 			else
 			{

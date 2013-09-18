@@ -5,13 +5,17 @@
 		{
 			$models = array
 			(
-				ShiftType::model(),
-				ShiftList::model(),
-				ConcreteType::model(),
-				PouringType::model(),
+				Ir::model(),
+				IrAl::model(),
+				IrPt::model(),
 				Zone::model(),
 				Pump::model(),
-				Supplier::model()
+				Project::model(),
+				Supplier::model(),
+				ShiftType::model(),
+				ShiftList::model(),
+				PouringType::model(),
+				ConcreteType::model()
 			);
 			
 			foreach ($models as $model)
@@ -20,7 +24,6 @@
 			}
 			
 			echo CJSON::encode($data);
-			// var_dump($data['PouringType']);
 		}
 	}
 ?>

@@ -58,14 +58,6 @@ angular.module
 (
 	'WrapperCtrl', function ($scope, $state)
 	{
-		$scope.state = $state.current.name;
 		
-		$scope.$on
-		(
-			'$stateChangeStart', function (a, b)
-			{
-				$scope.state = b.name;
-			}
-		);
 	}
 );
