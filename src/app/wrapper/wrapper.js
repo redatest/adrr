@@ -58,7 +58,12 @@ angular.module
 (
 	'WrapperCtrl', function ($scope, $rootScope, $state)
 	{
-		$rootScope.modalTitle	= 'Confirmation';
-		$rootScope.modalMessage = 'Are you sure?';
+		$rootScope.configModal = function (title, message, btnClass, func)
+		{
+			$rootScope.modalTitle = title;
+			$rootScope.modalMessage = message;
+			$rootScope.modalBtnClass = btnClass;
+			$rootScope.modalFunc = func;
+		}
 	}
 );

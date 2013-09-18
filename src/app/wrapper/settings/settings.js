@@ -2,9 +2,9 @@
 // Module Initialization
 //---------------------------------------------------------
 angular.module
-	(
-		'adrrApp.wrapper.settings', []
-	)
+(
+	'adrrApp.wrapper.settings', []
+)
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
@@ -14,7 +14,7 @@ angular.module
 //---------------------------------------------------------
 // Module Configurations
 //---------------------------------------------------------
-	.config
+.config
 (
 	function config ($stateProvider)
 	{
@@ -474,7 +474,7 @@ angular.module
 
 
 
-	.filter
+.filter
 (
 	'keepOriginal', function ()
 	{
@@ -493,6 +493,7 @@ angular.module
 					i++;
 				}
 			);
+			
 			return sorted;
 		}
 	}
@@ -501,7 +502,7 @@ angular.module
 //---------------------------------------------------------
 // Module 'Settings' Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'SettingsCtrl', function SettingsCtrl ($scope, yii, Restangular, $location, $state)
 	{
@@ -701,9 +702,9 @@ angular.module
 			}, true
 		);
 
-		$scope.deleteItem = function (row)
+		$scope.deleteItem = function ()
 		{
-			row.entity.options().then
+			$scope.gridData[$scope.selectedItemIndex].options().then
 			(
 				function ()
 				{
@@ -752,7 +753,9 @@ angular.module
 				$scope.columnDefs.push
 				({
 					 field: '',
-					 cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>'
+					 // cellTemplate: '<a style="line-height: 30px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>'
+					 cellTemplate: '<a ng-click="configModal(\'delete\', \'Are you sure?\', \'btn-primary\', deleteItem)" data-toggle="modal" href="#myModal" onclick="return false;" style="line-height: 30px; margin-left: 5px;" class="red">delete</i></a>'
+					 // cellTemplate: '<a ng-click="configModal()" data-toggle="modal" href="#myModal" onclick="return false;" style="line-height: 30px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>'
 				 });
 
 				$scope.rest();
