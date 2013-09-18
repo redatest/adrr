@@ -10,29 +10,29 @@
 // don't forget to add this file to .gitignore
 return
 	array(
-		'components'=>
-			array('db'=>
-				array
-				(
-					'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
-					'emulatePrepare' => true,
-					'username' => 'root',
-					'password' => '',
-					'charset' => 'utf8',
-					'tablePrefix' => 'tbl_'
-				)
+		'components' =>
+		array(
+			'db'  =>
+			array
+			(
+				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
+				'emulatePrepare'   => true,
+				'username'         => 'root',
+				'password'         => '',
+				'charset'          => 'utf8',
+				'tablePrefix'      => 'tbl_'
 			),
-			array('db2'=>
-			      array
-			      (
-				      'class'=>'CDbConnection',
-				      'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
-				      'emulatePrepare' => true,
-				      'username' => 'root',
-				      'password' => '',
-				      'charset' => 'utf8',
-				      'tablePrefix' => 'tbl_'
-			      )
+			'db2' =>
+			array
+			(
+				'class'            => 'CDbConnection',
+				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
+				'emulatePrepare'   => true,
+				'username'         => 'root',
+				'password'         => '',
+				'charset'          => 'utf8',
+				'tablePrefix'      => 'tbl_'
 			)
+		)
 	);
 ?>
