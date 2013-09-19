@@ -17,8 +17,8 @@ return
 			(
 				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
 				'emulatePrepare'   => true,
-				'username'         => 'root',
-				'password'         => '',
+				'username'         => 'heptc1_raeef',
+				'password'         => 'Hf%Ho5HV~{kH',
 				'charset'          => 'utf8',
 				'tablePrefix'      => 'tbl_'
 			),
@@ -28,8 +28,8 @@ return
 				'class'            => 'CDbConnection',
 				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
 				'emulatePrepare'   => true,
-				'username'         => 'root',
-				'password'         => '',
+				'username'         => 'heptc1_raeef',
+				'password'         => 'Hf%Ho5HV~{kH',
 				'charset'          => 'utf8',
 				'tablePrefix'      => 'tbl_'
 			)
