@@ -8,12 +8,11 @@
  */
 
 // don't forget to add this file to .gitignore
-return
-	array(
-		'components' =>
-		array(
-			'db'  =>
-			array
+	return array
+	(
+		'components' => array
+		(
+			'db' => array
 			(
 				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
 				'emulatePrepare'   => true,
@@ -22,11 +21,11 @@ return
 				'charset'          => 'utf8',
 				'tablePrefix'      => 'tbl_'
 			),
-			'db2' =>
-			array
+			
+			'db2' => array
 			(
 				'class'            => 'CDbConnection',
-				'connectionString' => 'mysql:host=localhost;dbname=heptc1_conc',
+				'connectionString' => 'mysql:host=localhost;dbname=heptc1_neworm',
 				'emulatePrepare'   => true,
 				'username'         => 'heptc1_raeef',
 				'password'         => 'Hf%Ho5HV~{kH',
