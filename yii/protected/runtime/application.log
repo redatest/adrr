@@ -4679,3 +4679,132 @@ Stack trace:
 #9 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #10 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
 REQUEST_URI=/alaa/adrr/yii/user/user/list
+2013/09/19 14:20:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "admin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php:483
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(270): CController->missingAction('admin')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/user/admin')
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#5 {main}
+REQUEST_URI=/alaa/adrr/yii/user/user/admin
+---
+2013/09/19 14:20:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "user/index".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/index')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/user/index
+---
+2013/09/19 14:21:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/3
+---
+2013/09/19 14:23:10 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'employ_no'; check that column/key exists. The SQL statement executed was: ALTER TABLE tbl_profiles DROP `employ_no`.
+2013/09/19 14:23:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'employ_no'; check that column/key exists' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\modules\user\controllers\ProfileFieldController.php(448): CDbCommand->execute()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): ProfileFieldController->actionDelete()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): CController->run('delete')
+#11 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/profileFie...')
+#12 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#14 {main}
+REQUEST_URI=/alaa/adrr/yii/user/profileField/delete/id/3?ajax=yw1
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/admin
+---
+2013/09/19 14:24:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/create
+---
+2013/09/19 14:25:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:26:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:26:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:26:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:26:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:27:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:27:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---
+2013/09/19 14:27:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
+---

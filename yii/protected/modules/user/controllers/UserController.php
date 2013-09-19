@@ -87,7 +87,7 @@ class UserController extends Controller
 		
 		foreach ($list as $i => $no)
 		{
-			$profile = Profile::model()->findbyAttributes(array('employ_no' => $no));
+			$profile = Profile::model()->findbyAttributes(array('emp_num' => $no));
 			
 			if ($profile !== null) $list[$i] = $profile->first_name;
 		}

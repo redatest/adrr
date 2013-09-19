@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 19, 2013 at 06:23 AM
+-- Generation Time: Sep 19, 2013 at 02:32 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
-  `employ_no` int(10) NOT NULL DEFAULT '0',
+  `emp_num` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
 -- Dumping data for table `tbl_profiles`
 --
 
-INSERT INTO `tbl_profiles` (`user_id`, `first_name`, `last_name`, `employ_no`) VALUES
+INSERT INTO `tbl_profiles` (`user_id`, `first_name`, `last_name`, `emp_num`) VALUES
 (1, 'Administrator', 'Admin', 1);
 
 -- --------------------------------------------------------
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
   `position` int(3) NOT NULL DEFAULT '0',
   `visible` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tbl_profiles_fields`
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
 INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
 (1, 'first_name', 'First Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'last_name', 'Last Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 2, 3),
-(3, 'employ_no', 'Employee No.', 'INTEGER', 10, 1, 3, '', '', '', '', '0', '', '', 0, 3);
+(4, 'emp_num', 'Employee No.', 'INTEGER', 11, 0, 1, '', '', '', '', '', '', '', 0, 3);
 
 -- --------------------------------------------------------
 
