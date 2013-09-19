@@ -985,6 +985,14 @@ angular.module
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 		
+		Restangular.all('settings/shiftType').getList().then
+		(
+			function (data)
+			{
+				$scope.shiftTypes = angular.isArray(data) ? data : [];
+			}
+		);
+		
 		$scope.listChangeHandler = function ()
 		{
 			var list = $scope.formData['list'];

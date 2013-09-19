@@ -10,7 +10,7 @@
 		{
 			return array
 			(
-				array('list, date, time, shift_id', 'required'),
+				array('list, date, shift_id', 'required'),
 				array('time, shift_id, status', 'numerical', 'integerOnly' => true),
 				array('id, list, date, time, shift_id, status', 'safe', 'on' => 'search'),
 			);
