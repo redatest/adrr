@@ -24,6 +24,7 @@ module.exports =
 				'vendor/angular/angular.min.js',
 				'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'vendor/angular-ui-router/release/angular-ui-router.min.js',
+				'vendor/ng-grid/plugins/ng-grid-flexible-height.js',
 				'vendor/ng-grid/build/ng-grid.min.js',
 				'vendor/angular-ui-date/src/date.js',
 

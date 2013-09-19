@@ -31,7 +31,7 @@
 			return array
 			(
 				'id' => 'ID',
-				'ir' => 'Ir',
+				'ir' => 'IR',
 				'zone_id' => 'Zone',
 				'area' => 'Area',
 				'volume' => 'Estimated Volume',

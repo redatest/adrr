@@ -25,7 +25,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'list'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -79,6 +79,20 @@ class UserController extends Controller
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
+	}
+	
+	public function actionList ()
+	{
+		$list = explode (',', $_GET['list']);
+		
+		foreach ($list as $i => $no)
+		{
+			$profile = Profile::model()->findbyAttributes(array('employ_no' => $no));
+			
+			if ($profile !== null) $list[$i] = $profile->first_name;
+		}
+		
+		echo CJSON::encode ($list);
 	}
 
 

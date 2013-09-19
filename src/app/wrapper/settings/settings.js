@@ -34,7 +34,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.pouringType',
 			{
@@ -50,7 +50,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.pouringType.create',
 			{
@@ -66,7 +66,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.pouringType.update',
 			{
@@ -82,7 +82,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.ir',
 			{
@@ -98,7 +98,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.ir.create',
 			{
@@ -114,7 +114,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.ir.update',
 			{
@@ -130,7 +130,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.concreteType',
 			{
@@ -146,7 +146,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.concreteType.create',
 			{
@@ -162,7 +162,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.concreteType.update',
 			{
@@ -178,7 +178,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.zone',
 			{
@@ -194,7 +194,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.zone.create',
 			{
@@ -210,7 +210,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.zone.update',
 			{
@@ -226,7 +226,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.project',
 			{
@@ -242,7 +242,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.project.create',
 			{
@@ -258,7 +258,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.project.update',
 			{
@@ -274,7 +274,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.supplier',
 			{
@@ -290,7 +290,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.supplier.create',
 			{
@@ -306,7 +306,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.supplier.update',
 			{
@@ -322,7 +322,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.shiftType',
 			{
@@ -338,7 +338,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.shiftType.create',
 			{
@@ -354,7 +354,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.shiftType.update',
 			{
@@ -370,7 +370,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.shiftList',
 			{
@@ -386,7 +386,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.shiftList.create',
 			{
@@ -396,14 +396,13 @@ angular.module
 				{
 					"@wrapper.settings.shiftList":
 					{
-						controller: 'ShiftListFormCtrl',
-						templateUrl: 'wrapper/settings/form.tpl.html'
+						templateUrl: 'wrapper/settings/shiftListForm.tpl.html'
 					}
 				}
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.shiftList.update',
 			{
@@ -413,13 +412,13 @@ angular.module
 				{
 					"@wrapper.settings.shiftList":
 					{
-						templateUrl: 'wrapper/settings/form.tpl.html'
+						templateUrl: 'wrapper/settings/shiftListForm.tpl.html'
 					}
 				}
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.pump',
 			{
@@ -435,7 +434,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.pump.create',
 			{
@@ -451,7 +450,7 @@ angular.module
 			}
 		)
 
-			.state
+		.state
 		(
 			'wrapper.settings.pump.update',
 			{
@@ -471,8 +470,6 @@ angular.module
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
-
-
 
 .filter
 (
@@ -679,7 +676,8 @@ angular.module
 			enablePaging: true,
 			showFooter: true,
 			multiSelect: false,
-			keepLastSelected: false
+			keepLastSelected: false,
+			plugins: [new ngGridFlexibleHeightPlugin( { minHeight: 150 } )]
 		};
 
 		$scope.$watch
@@ -834,7 +832,7 @@ angular.module
 //---------------------------------------------------------
 // Pouring Type Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'PouringTypeCtrl', function PouringTypeCtrl ($scope, Restangular)
 	{
@@ -854,7 +852,7 @@ angular.module
 //---------------------------------------------------------
 // Zone Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'ZoneCtrl', function ZoneCtrl ($scope, Restangular)
 	{
@@ -874,7 +872,7 @@ angular.module
 //---------------------------------------------------------
 // Supplier Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'SupplierCtrl', function SupplierCtrl ($scope, Restangular)
 	{
@@ -894,7 +892,7 @@ angular.module
 //---------------------------------------------------------
 // Pump Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'PumpCtrl', function PumpCtrl ($scope, Restangular)
 	{
@@ -914,7 +912,7 @@ angular.module
 //---------------------------------------------------------
 // Concrete Type Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($rootScope, $scope, Restangular)
 	{
@@ -957,7 +955,7 @@ angular.module
 //---------------------------------------------------------
 // Shift Types Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
 	'ShiftTypeCtrl', function ShiftTypeCtrl ($scope, Restangular)
 	{
@@ -975,33 +973,59 @@ angular.module
 
 
 //---------------------------------------------------------
-// Shift Types Controller
+// Shift Lists Controller
 //---------------------------------------------------------
-	.controller
+.controller
 (
-	'ShiftListCtrl', function ShiftListCtrl ($scope, Restangular)
+	'ShiftListCtrl', function ShiftListCtrl ($scope, Restangular, $http)
 	{
 		$scope.$parent.className = 'ShiftList';
 		$scope.$parent.route = '/settings/shift-list';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftList'));
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
+		
+		$scope.listChangeHandler = function ()
+		{
+			var list = $scope.formData['list'];
+			
+			if (!angular.isUndefined(list))
+			{
+				list = list.replace (/[^0-9,]+/g, '');
+				list = list.replace (/,,+/g, ',');
+				
+				if (list[0] === ',') list = list.slice(1, list.length);
+				
+				var listLength = list.length - 1;
+				
+				if (list[listLength] === ',') list = list.slice(0, listLength);
+				
+				if (list !== '')
+				{
+					console.log(list);
+					$http
+					({
+						method: 'GET',
+						url: appConfig.yiiUrl + '/user/user/list',
+						params: { list: list }
+					})
+					.success
+					(
+						function (data)
+						{
+							$scope.usersList = data;
+						}
+					)
+				}
+			}
+		}
 	}
 )
 //---------------------------------------------------------
 // End
 //---------------------------------------------------------
 
-
-
-	.controller
-(
-	'ShiftListFormCtrl', function ShiftListFormCtrl ($scope)
-	{
-	}
-)
-
-	.controller
+.controller
 (
 	'ProjectCtrl', function ProjectCtrl ($scope, Restangular)
 	{
@@ -1013,7 +1037,7 @@ angular.module
 	}
 )
 
-	.controller
+.controller
 (
 	'IrCtrl', function IrCtrl ($scope, Restangular, $q)
 	{
