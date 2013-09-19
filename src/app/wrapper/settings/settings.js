@@ -998,6 +998,8 @@ angular.module
 				
 				var listLength = list.length - 1;
 				
+				$scope.formData['list'] = list;
+				
 				if (list[listLength] === ',') list = list.slice(0, listLength);
 				
 				if (list !== '')
