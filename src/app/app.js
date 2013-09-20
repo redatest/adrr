@@ -6,7 +6,7 @@ angular.module
 		'templates-common',
 		'ngGrid',
 		'ui.router',
-		// 'ui.bootstrap',
+		'ui.bootstrap',
 		'restangular',
 		'ui.date',
 		'adrrAuth',
