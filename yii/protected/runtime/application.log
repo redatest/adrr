@@ -4808,3 +4808,55 @@ Stack trace:
 REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
 HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/4
 ---
+2013/09/19 16:01:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user/jsonLogin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user/jsonLo...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/19 16:02:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/b4149a43/js/form.js".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/b4149a43...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/assets/b4149a43/js/form.js
+HTTP_REFERER=http://localhost/alaa/adrr/yii/user/profileField/update/id/1
+---
+2013/09/19 16:04:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user/jsonLogin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user/jsonLo...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/19 16:04:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user/jsonLogin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user/jsonLo...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/19 16:04:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user/jsonLogin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user/jsonLo...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
+---
+2013/09/19 16:05:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user
+---

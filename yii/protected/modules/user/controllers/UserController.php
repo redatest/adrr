@@ -89,7 +89,7 @@ class UserController extends Controller
 		{
 			$profile = Profile::model()->findbyAttributes(array('emp_num' => $no));
 			
-			if ($profile !== null) $list[$i] = $profile->first_name;
+			if ($profile !== null) $list[$i] = $profile->name;
 		}
 		
 		echo CJSON::encode ($list);
