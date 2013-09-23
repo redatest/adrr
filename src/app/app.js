@@ -9,6 +9,7 @@ angular.module
 		'ui.bootstrap',
 		'restangular',
 		'ui.date',
+		'ui.select2',
 		'adrrAuth',
 		'adrrApp.login',
 		'adrrApp.wrapper',

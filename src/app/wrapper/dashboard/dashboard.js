@@ -22,7 +22,10 @@ angular.module
 
 .controller
 (
-	'DashboardCtrl', function DashboardCtrl ($scope)
+	'DashboardCtrl', function DashboardCtrl ($rootScope, $scope)
 	{
+		$rootScope.pageHeader = 'Dashboard';
+		
+		$rootScope.breadcrumbItems = ['Dashboard'];
 	}
 );

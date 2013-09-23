@@ -1,6 +1,13 @@
+@import '../../vendor/bootstrap/less/variables.less';
+
 /* variables */
 	@sidenav_border: 1px solid #cccccc;
 /* End */
+
+html, body
+{
+	height: 100%;
+}
 
 /* login */
 	.form-signin
@@ -37,8 +44,6 @@
 		
 		border: none;
 		
-		border-radius: 0;
-		
 		background: #428bca;
 	}
 	
@@ -68,7 +73,6 @@
 		border: none;
 		border-right: @sidenav_border;
 		border-left: @sidenav_border;
-		border-bottom: @sidenav_border;
 		
 		background-color: #f2f2f2;
 		
@@ -83,20 +87,15 @@
 	#sidenav li
 	{
 		margin-top: 0;
-		
-		border-top: @sidenav_border;
-	}
-
-	#sidenav > .navbar > .navbar-collapse > ul > li:first-child
-	{
-		border: none;
 	}
 
 	#sidenav a
 	{
+		color: #585858;
+		
 		border-radius: 0;
 		
-		color: #585858;
+		border-bottom: @sidenav_border;
 	}
 
 	#sidenav li.active > a, #sidenav li a:hover
@@ -135,4 +134,56 @@
 		
 		/*height: 250px;*/
 	}
-/* End */  
+/* End */
+
+
+
+/* Select2 fix */
+.select2-container
+{
+	padding: 0px;
+	border-width: 0px;
+}
+.select2-container .select2-choice
+{
+	height: 34px;
+	line-height: 34px;
+}
+/* End */
+
+
+.cBtn
+{
+	margin-top: 15px;
+}
+
+
+@media (min-width: @screen-sm)
+{
+    body
+    {
+        padding-top: 50px;
+    }
+    
+	#topnav
+	{
+		position: absolute;
+        
+        width: 100%;
+        
+        margin-top: -50px;
+	}
+    
+    #sidenav, #sidenav nav
+    {
+        height: 100%;
+    }
+}
+
+@media (max-width: @screen-sm)
+{
+	#sidenav nav .navbar-header
+	{
+		border-bottom: @sidenav_border;
+	}
+}

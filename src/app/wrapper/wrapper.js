@@ -58,12 +58,13 @@ angular.module
 (
 	'WrapperCtrl', function ($scope, $rootScope, $state)
 	{
-		$rootScope.configModal = function (title, message, btnClass, func)
+		$rootScope.configModal = function (title, message, btnClass, func, closeFunc)
 		{
 			$rootScope.modalTitle = title;
 			$rootScope.modalMessage = message;
 			$rootScope.modalBtnClass = btnClass;
 			$rootScope.modalFunc = func;
+			$rootScope.modalCloseFunc = closeFunc;
 		}
 	}
 );

@@ -1,10 +1,10 @@
-<nav id="topnav" class="navbar navbar-default" role="navigation">
-	<a class="navbar-brand" href="#">Concrete Casting Management</a>
+<nav id="topnav" class="navbar navbar-default navbar-static-top" role="navigation">
+	<a class="navbar-brand" href="#">C.C.M</a>
 	
 	<p class="navbar-text pull-right"><a href="#/logout" class="navbar-link">Sign out</a></p>
 </nav>
 
-<div id="sidenav" class="col-md-2">
+<div id="sidenav" class="col-sm-3 col-lg-2">
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
 			<button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
@@ -58,7 +58,16 @@
 	</nav>
 </div>
 
-<div id="maincont" class="col-md-10" ui-view></div>
+<div id="maincont" class="col-sm-9 col-lg-10">
+	<ol class="breadcrumb">
+		<li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">{{item}}</li>
+	</ol>
+	
+	<div class="page-header">
+		<h1>{{pageHeader}}</h1>
+	</div>
+	<view ui-view></view>
+</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -73,7 +82,7 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button ng-click="modalCloseFunc()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button ng-click="modalFunc()" type="button" class="btn {{modalBtnClass}}" data-dismiss="modal">Ok</button>
 			</div>
 		</div>

@@ -677,7 +677,8 @@ angular.module
 			showFooter: true,
 			multiSelect: false,
 			keepLastSelected: false,
-			plugins: [new ngGridFlexibleHeightPlugin( { minHeight: 150 } )]
+			plugins: [new ngGridFlexibleHeightPlugin( { minHeight: 150 } )],
+			rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="(i, col) in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}"><a style="text-decoration: none; cursor: pointer;" data-toggle="modal" href="#formModal" onclick="return false;"><div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">&nbsp;</div><div ng-cell ng-show="i !== renderedColumns.length - 1"></div></a><div ng-cell ng-show="i === renderedColumns.length - 1"></div></div>'
 		};
 
 		$scope.$watch
@@ -750,11 +751,9 @@ angular.module
 
 				$scope.columnDefs.push
 				({
-					 field: '',
-					 // cellTemplate: '<a style="line-height: 30px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>'
-					 cellTemplate: '<a ng-click="configModal(\'delete\', \'Are you sure?\', \'btn-primary\', deleteItem)" data-toggle="modal" href="#myModal" onclick="return false;" style="line-height: 30px; margin-left: 5px;" class="red">delete</i></a>'
-					 // cellTemplate: '<a ng-click="configModal()" data-toggle="modal" href="#myModal" onclick="return false;" style="line-height: 30px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>'
-				 });
+					field: '',
+					cellTemplate: '<a ng-click="configModal(\'delete\', \'Are you sure?\', \'btn-primary\', deleteItem, deselectItem)" data-toggle="modal" href="#myModal" onclick="return false;" style="line-height: 30px; margin-left: 5px;" class="red">delete</i></a>'
+				});
 
 				$scope.rest();
 
@@ -834,8 +833,12 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'PouringTypeCtrl', function PouringTypeCtrl ($scope, Restangular)
+	'PouringTypeCtrl', function PouringTypeCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Pouring Types';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Pouring Types'];
+		
 		$scope.$parent.className = 'PouringType';
 		$scope.$parent.route = '/settings/pouring-type';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/PouringType'));
@@ -854,8 +857,12 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'ZoneCtrl', function ZoneCtrl ($scope, Restangular)
+	'ZoneCtrl', function ZoneCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Zones';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Zones'];
+		
 		$scope.$parent.className = 'Zone';
 		$scope.$parent.route = '/settings/zone';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/zone'));
@@ -874,8 +881,12 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'SupplierCtrl', function SupplierCtrl ($scope, Restangular)
+	'SupplierCtrl', function SupplierCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Suppliers';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Suppliers'];
+		
 		$scope.$parent.className = 'Supplier';
 		$scope.$parent.route = '/settings/supplier';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/supplier'));
@@ -894,8 +905,12 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'PumpCtrl', function PumpCtrl ($scope, Restangular)
+	'PumpCtrl', function PumpCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Pumps';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Pumps'];
+		
 		$scope.$parent.className = 'Pump';
 		$scope.$parent.route = '/settings/pump';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/pump'));
@@ -916,6 +931,10 @@ angular.module
 (
 	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Concrete Types';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Concrete Types'];
+		
 		// $scope.$parent.isAutoColumns = false;
 
 		$scope.$parent.className = 'ConcreteType';
@@ -957,8 +976,12 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'ShiftTypeCtrl', function ShiftTypeCtrl ($scope, Restangular)
+	'ShiftTypeCtrl', function ShiftTypeCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Shift Types';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Shift Types'];
+		
 		$scope.$parent.className = 'ShiftType';
 		$scope.$parent.route = '/settings/shift-type';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftType'));
@@ -977,8 +1000,12 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'ShiftListCtrl', function ShiftListCtrl ($scope, Restangular, $http)
+	'ShiftListCtrl', function ShiftListCtrl ($rootScope, $scope, Restangular, $http)
 	{
+		$rootScope.pageHeader = 'Shift Lists';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Shift Lists'];
+		
 		$scope.$parent.className = 'ShiftList';
 		$scope.$parent.route = '/settings/shift-list';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftList'));
@@ -1037,8 +1064,12 @@ angular.module
 
 .controller
 (
-	'ProjectCtrl', function ProjectCtrl ($scope, Restangular)
+	'ProjectCtrl', function ProjectCtrl ($rootScope, $scope, Restangular)
 	{
+		$rootScope.pageHeader = 'Projects';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Projects'];
+		
 		$scope.$parent.className = 'Project';
 		$scope.$parent.route = '/settings/project';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/project'));
@@ -1049,8 +1080,12 @@ angular.module
 
 .controller
 (
-	'IrCtrl', function IrCtrl ($scope, Restangular, $q)
+	'IrCtrl', function IrCtrl ($rootScope, $scope, Restangular, $q)
 	{
+		$rootScope.pageHeader = 'IRs';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Settings', 'IRs'];
+		
 		$scope.$parent.className = 'Ir';
 		$scope.$parent.route = '/settings/ir';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/ir'));

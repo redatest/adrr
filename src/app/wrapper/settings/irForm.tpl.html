@@ -1,23 +1,23 @@
 <form class="form-horizontal" role="form" name="form" novalidate>
 
 	<div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
-		<label class="col-lg-3 control-label" for="ir">{{metaData.cols['ir'].label}}</label>
-		<div class="col-lg-6">
+		<label class="col-lg-4 control-label" for="ir">{{metaData.cols['ir'].label}}</label>
+		<div class="col-lg-7">
 			<input class="form-control" ng-model="formData['ir']" type="number" ng-required="!metaData.cols['ir']['allowNull']" />
 		</div>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': volumeForm.$invalid}" ng-form="volumeForm">
-		<label class="col-lg-3 control-label" for="volume">{{metaData.cols['volume'].label}}</label>
-		<div class="col-lg-6">
+		<label class="col-lg-4 control-label" for="volume">{{metaData.cols['volume'].label}}</label>
+		<div class="col-lg-7">
 			<input class="form-control" ng-model="formData['volume']" type="number" ng-required="!metaData.cols['volume']['allowNull']" />
 		</div>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': zoneForm.$invalid}" ng-form="zoneForm"> 
-		<label class="col-lg-3 control-label" for="zone_id">{{metaData.cols['zone_id'].label}}</label>
+		<label class="col-lg-4 control-label" for="zone_id">{{metaData.cols['zone_id'].label}}</label>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-7">
 			<select class="form-control" data-placeholder="Pick a number" ng-model="formData['zone_id']" ng-required="!metaData.cols['zone_id']['allowNull']">
 				<option ng-repeat="zone in zones" value="{{zone.id}}" ng-selected="formData['zone_id'] == key">{{zone.name}}</option>
 			</select>
@@ -25,9 +25,9 @@
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': projectForm.$invalid}" ng-form="projectForm"> 
-		<label class="col-lg-3 control-label" for="project_id">{{metaData.cols['project_id'].label}}</label>
+		<label class="col-lg-4 control-label" for="project_id">{{metaData.cols['project_id'].label}}</label>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-7">
 			<select class="form-control" ng-model="formData['project_id']" ng-required="!metaData.cols['project_id']['allowNull']">
 				<option ng-repeat="project in projects" value="{{project.id}}" ng-selected="formData['project_id'] == key">{{project.name}}</option>
 			</select>
@@ -35,14 +35,14 @@
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': areaForm.$invalid}" ng-form="areaForm">
-		<label class="col-lg-3 control-label" for="area">{{metaData.cols['area'].label}}</label>
+		<label class="col-lg-4 control-label" for="area">{{metaData.cols['area'].label}}</label>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-7">
 			<input type="text" class="form-control" ng-model="formData['area']" placeholder="" ng-required="!metaData.cols['area']['allowNull']"></input>
 		</div>
 	</div>
 	
-	<div class="col-lg-offset-2 col-lg-8">
+	<div class="col-lg-12">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -68,7 +68,7 @@
 		</table>
 	</div>
 	
-	<div class="col-lg-offset-2 col-lg-8">
+	<div class="col-lg-12">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -95,8 +95,8 @@
 		</table>
 	</div>
 	
-	<div class="form-group">
-		<div class="col-lg-offset-3 col-lg-6">
+	<!--<div class="form-group">
+		<div class="col-lg-offset-4 col-lg-7">
 			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="irForm.$invalid || volumeForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)">
 				<just_text ng-show="isCreate">Create</just_text>
 				<just_text ng-hide="isCreate">Update</just_text>
@@ -112,7 +112,5 @@
 				</button>
 			</ng-switch>
 		</div>
-	</div>
-	
-	<hr />
+	</div>-->
 </form>
