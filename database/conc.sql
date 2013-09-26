@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 19, 2013 at 02:32 PM
+-- Generation Time: Sep 26, 2013 at 03:47 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -42,10 +42,11 @@ CREATE TABLE IF NOT EXISTS `tbl_concrete_type` (
   `slamp_acpt_to` int(11) DEFAULT NULL,
   `temp_from` int(11) NOT NULL,
   `temp_to` int(11) NOT NULL,
+  `very_frequent` tinyint(1) NOT NULL DEFAULT '0',
   `sample_counter` int(11) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ir` (
   `volume` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ir_pt` (
   `ir_id` int(11) NOT NULL,
   `pouring_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -102,8 +103,9 @@ CREATE TABLE IF NOT EXISTS `tbl_pouring_type` (
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `v_r` enum('hor','ver') CHARACTER SET latin1 NOT NULL,
   `priority` enum('normal','medium','high','urgent') CHARACTER SET latin1 NOT NULL,
+  `very_frequent` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pouring_type` (
 
 CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `emp_num` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
@@ -123,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
 -- Dumping data for table `tbl_profiles`
 --
 
-INSERT INTO `tbl_profiles` (`user_id`, `first_name`, `last_name`, `emp_num`) VALUES
+INSERT INTO `tbl_profiles` (`user_id`, `name`, `last_name`, `emp_num`) VALUES
 (1, 'Administrator', 'Admin', 1);
 
 -- --------------------------------------------------------
@@ -157,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
 --
 
 INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
-(1, 'first_name', 'First Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
+(1, 'name', 'First Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
 (2, 'last_name', 'Last Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 2, 3),
 (4, 'emp_num', 'Employee No.', 'INTEGER', 11, 0, 1, '', '', '', '', '', '', '', 0, 3);
 
@@ -183,6 +185,7 @@ CREATE TABLE IF NOT EXISTS `tbl_project` (
 CREATE TABLE IF NOT EXISTS `tbl_pump` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `very_frequent` tinyint(1) NOT NULL DEFAULT '0',
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `description` text,
   PRIMARY KEY (`id`)
@@ -234,6 +237,7 @@ CREATE TABLE IF NOT EXISTS `tbl_shift_type` (
 CREATE TABLE IF NOT EXISTS `tbl_supplier` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `prefix` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `description` text,
   PRIMARY KEY (`id`)
@@ -265,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-19 02:48:37');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-26 00:09:29');
 
 -- --------------------------------------------------------
 
@@ -279,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `tbl_zone` (
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Constraints for dumped tables

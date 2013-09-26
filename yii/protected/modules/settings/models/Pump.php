@@ -11,9 +11,9 @@
 			return array
 			(
 				array('name', 'required'),
-				array('state', 'numerical', 'integerOnly' => true),
+				array('state, very_frequent', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 255),
-				array('id, name, state, description', 'safe', 'on' => 'search'),
+				array('id, name, very_frequent, state, description', 'safe', 'on' => 'search'),
 			);
 		}
 		
@@ -28,6 +28,7 @@
 			(
 				'id' => 'ID',
 				'name' => 'Name',
+				'very_frequent' => 'Very Frequent',
 				'state' => 'Active',
 				'description' => 'Description'
 			);
@@ -48,6 +49,7 @@
 
 			$criteria->compare('id', $this->id);
 			$criteria->compare('name', $this->name, true);
+			$criteria->compare('very_frequent', $this->very_frequent);
 			$criteria->compare('state', $this->state);
 			$criteria->compare('description', $this->description, true);
 

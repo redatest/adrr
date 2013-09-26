@@ -14,11 +14,11 @@
 			return array
 			(
 				array('name, category, temp_from, temp_to', 'required'),
-				array('flow_norm_from, flow_norm_to, flow_acpt_from, flow_acpt_to, slamp_norm_from, slamp_norm_to, slamp_acpt_from, slamp_acpt_to, temp_from, temp_to, sample_counter', 'numerical', 'integerOnly' => true),
+				array('flow_norm_from, flow_norm_to, flow_acpt_from, flow_acpt_to, slamp_norm_from, slamp_norm_to, slamp_acpt_from, slamp_acpt_to, temp_from, temp_to, very_frequent, sample_counter', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 255),
 				array('category', 'length', 'max' => 5),
 				array('note', 'safe'),
-				array('id, name, category, flow_norm_from, flow_norm_to, flow_acpt_from, flow_acpt_to, slamp_norm_from, slamp_norm_to, slamp_acpt_from, slamp_acpt_to, temp_from, temp_to, sample_counter, note', 'safe', 'on' => 'search'),
+				array('id, name, category, flow_norm_from, flow_norm_to, flow_acpt_from, flow_acpt_to, slamp_norm_from, slamp_norm_to, slamp_acpt_from, slamp_acpt_to, temp_from, temp_to, very_frequent, sample_counter, note', 'safe', 'on' => 'search'),
 			);
 		}
 		
@@ -64,6 +64,7 @@
 				'slamp_acpt_to'	  => 'To',
 				'temp_from'		  => 'From',
 				'temp_to'		  => 'To',
+				'very_frequent'	  => 'Very Frequent',
 				'sample_counter'  => 'Sample Counter',
 				'note'			  => 'Note',
 			);
@@ -86,6 +87,7 @@
 			$criteria->compare('slamp_acpt_to',	  $this->slamp_acpt_to);
 			$criteria->compare('temp_from',		  $this->temp_from);
 			$criteria->compare('temp_to',		  $this->temp_to);
+			$criteria->compare('very_frequent',	  $this->very_frequent);
 			$criteria->compare('sample_counter',  $this->sample_counter);
 			$criteria->compare('note',			  $this->note, true);
 

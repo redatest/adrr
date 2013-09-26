@@ -10,10 +10,10 @@
 		{
 			return array
 			(
-				array('name', 'required'),
+				array('name, prefix', 'required'),
 				array('state', 'numerical', 'integerOnly' => true),
-				array('name', 'length', 'max' => 255),
-				array('id, name, state, description', 'safe', 'on' => 'search'),
+				array('name, prefix', 'length', 'max' => 255),
+				array('id, name, prefix, state, description', 'safe', 'on' => 'search'),
 			);
 		}
 		
@@ -28,6 +28,7 @@
 			(
 				'id' => 'ID',
 				'name' => 'Name',
+				'prefix' => 'Prefix',
 				'state' => 'Active',
 				'description' => 'Description',
 			);
@@ -48,6 +49,7 @@
 
 			$criteria->compare('id', $this->id);
 			$criteria->compare('name', $this->name, true);
+			$criteria->compare('prefix', $this->prefix, true);
 			$criteria->compare('state', $this->state);
 			$criteria->compare('Description', $this->description, true);
 
