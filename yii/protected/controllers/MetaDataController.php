@@ -15,7 +15,11 @@
 				ShiftType::model(),
 				ShiftList::model(),
 				PouringType::model(),
-				ConcreteType::model()
+				ConcreteType::model(),
+				
+				Lab::model(),
+				LabPlant::model(),
+				LabTruck::model()
 			);
 			
 			foreach ($models as $model)

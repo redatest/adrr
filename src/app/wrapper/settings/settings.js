@@ -471,30 +471,7 @@ angular.module
 // End
 //---------------------------------------------------------
 
-.filter
-(
-	'keepOriginal', function ()
-	{
-		return function (items)
-		{
-			var sorted = {};
 
-			var i = 0;
-
-			angular.forEach
-			(
-				items, function (val, key)
-				{
-					sorted[i] = val;
-
-					i++;
-				}
-			);
-			
-			return sorted;
-		}
-	}
-)
 
 //---------------------------------------------------------
 // Module 'Settings' Controller

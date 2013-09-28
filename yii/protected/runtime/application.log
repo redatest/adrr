@@ -4982,3 +4982,84 @@ Stack trace:
 #8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #9 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
 REQUEST_URI=/alaa/adrr/yii/metaData
+2013/09/28 05:24:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user/jsonLogin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user/jsonLo...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/28 05:50:18 [error] [php] include(Lab.php): failed to open stream: No such file or directory (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(20): spl_autoload_call()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData
+2013/09/28 05:51:00 [error] [php] include(Lab.php): failed to open stream: No such file or directory (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(20): spl_autoload_call()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData
+2013/09/28 05:51:02 [error] [php] include(Lab.php): failed to open stream: No such file or directory (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(20): spl_autoload_call()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData
+2013/09/28 06:46:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "settings/shift/index".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/shift/...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/shift
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/28 06:46:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "settings/shift/index".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/shift/...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/shift
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/28 06:47:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "settings/shift/index".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/shift/...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/shift
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/09/28 06:47:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "settings/labTruck/index".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('settings/labTru...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/settings/labTruck
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---

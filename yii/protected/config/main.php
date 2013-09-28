@@ -15,6 +15,7 @@
 			'application.components.*',
 			'application.modules.user.models.*',
 			'application.modules.user.components.*',
+			'application.modules.eng.models.*',
 			'application.modules.settings.models.*'
 		),
 
@@ -40,7 +41,10 @@
 				'returnUrl' => array('/user/profile'),
 				'returnLogoutUrl' => array('/user/login')
 			),
-			'settings'
+			
+			'settings',
+			
+			'eng'
 		),
 		'components' => array
 		(

@@ -14,8 +14,34 @@ angular.module
 		'adrrApp.login',
 		'adrrApp.wrapper',
 		'adrrApp.wrapper.dashboard',
-		'adrrApp.wrapper.settings'
+		'adrrApp.wrapper.settings',
+		'adrrApp.wrapper.eng'
 	]
+)
+
+.filter
+(
+	'keepOriginal', function ()
+	{
+		return function (items)
+		{
+			var sorted = {};
+
+			var i = 0;
+
+			angular.forEach
+			(
+				items, function (val, key)
+				{
+					sorted[i] = val;
+
+					i++;
+				}
+			);
+			
+			return sorted;
+		}
+	}
 )
 
 .directive
@@ -35,32 +61,29 @@ angular.module
 			
 			template: "<div><div ng-repeat='frequent in frequents'><a href='#' ng-click='programmaticallySelect(frequent)'>{{format(frequent)}}</a></div><div class='s2w'></div></div>",
 			
-			controller:
-			[
-				'$scope', '$element', '$attrs', function (scope, element, attrs)
+			controller: function (scope, element, attrs)
+			{
+				scope.format = function (item)
 				{
-					scope.format = function (item)
+					if (attrs.textProp)
 					{
-						if (attrs.textProp)
-						{
-							return item[attrs.textProp];
-						}
-						else
-						{
-							return item.name;
-						}
-					};
+						return item[attrs.textProp];
+					}
+					else
+					{
+						return item.name;
+					}
+				};
 
-					scope.programmaticallySelect = function (frequent)
-					{
-						var $div = element.find('.s2w');
-						
-						$div.select2('data', frequent);
-						
-						scope.ngModel = frequent;
-					};
-				}
-			],
+				scope.programmaticallySelect = function (frequent)
+				{
+					var $div = element.find('.s2w');
+					
+					$div.select2('data', frequent);
+					
+					scope.ngModel = frequent;
+				};
+			},
 			
 			link: function (scope, iElement, iAttrs, ctrl)
 			{
