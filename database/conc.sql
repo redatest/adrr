@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 26, 2013 at 03:47 AM
+-- Generation Time: Sep 28, 2013 at 07:08 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -48,6 +48,13 @@ CREATE TABLE IF NOT EXISTS `tbl_concrete_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `tbl_concrete_type`
+--
+
+INSERT INTO `tbl_concrete_type` (`id`, `name`, `category`, `flow_norm_from`, `flow_norm_to`, `flow_acpt_from`, `flow_acpt_to`, `slamp_norm_from`, `slamp_norm_to`, `slamp_acpt_from`, `slamp_acpt_to`, `temp_from`, `temp_to`, `very_frequent`, `sample_counter`, `note`) VALUES
+(1, 'First Conc Type', 'flow', 12, 23, 12, 23, NULL, NULL, NULL, NULL, 12, 23, 1, NULL, '');
+
 -- --------------------------------------------------------
 
 --
@@ -62,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ir` (
   `volume` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -89,8 +96,54 @@ CREATE TABLE IF NOT EXISTS `tbl_ir_pt` (
   `ir_id` int(11) NOT NULL,
   `pouring_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_lab`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_lab` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `shift_id` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `conc_type_id` int(11) NOT NULL,
+  `plant` int(11) NOT NULL,
+  `truck` int(11) NOT NULL,
+  `ticket` varchar(255) NOT NULL,
+  `dept_time` time NOT NULL,
+  `arriv_time` time NOT NULL,
+  `truck_load` int(11) NOT NULL DEFAULT '12',
+  `accepted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tbl_lab`
+--
+
+INSERT INTO `tbl_lab` (`id`, `date`, `shift_id`, `supplier_id`, `conc_type_id`, `plant`, `truck`, `ticket`, `dept_time`, `arriv_time`, `truck_load`, `accepted`) VALUES
+(1, '2013-09-26', 1, 1, 1, 123, 123, '12t5vb', '12:00:00', '12:00:00', 12, 1),
+(2, '2013-09-26', 1, 1, 1, 123, 3246, '654sd65f4', '12:00:00', '12:00:00', 12, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tbl_lab_plant`
+--
+CREATE TABLE IF NOT EXISTS `tbl_lab_plant` (
+`plant` int(11)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tbl_lab_truck`
+--
+CREATE TABLE IF NOT EXISTS `tbl_lab_truck` (
+`truck` int(11)
+);
 -- --------------------------------------------------------
 
 --
@@ -105,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pouring_type` (
   `priority` enum('normal','medium','high','urgent') CHARACTER SET latin1 NOT NULL,
   `very_frequent` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -269,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-26 00:09:29');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-28 02:51:00');
 
 -- --------------------------------------------------------
 
@@ -283,7 +336,25 @@ CREATE TABLE IF NOT EXISTS `tbl_zone` (
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tbl_lab_plant`
+--
+DROP TABLE IF EXISTS `tbl_lab_plant`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_lab_plant` AS select distinct `tbl_lab`.`plant` AS `plant` from `tbl_lab`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tbl_lab_truck`
+--
+DROP TABLE IF EXISTS `tbl_lab_truck`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tbl_lab_truck` AS select distinct `tbl_lab`.`truck` AS `truck` from `tbl_lab`;
 
 --
 -- Constraints for dumped tables
