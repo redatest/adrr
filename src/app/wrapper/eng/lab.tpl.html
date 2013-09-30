@@ -1,43 +1,49 @@
-<form class="form-horizontal" role="form">
-	<div class="form-group">
+<form class="form-horizontal" name="mainForm" novalidate >
+	<div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['date'].label}}</label>
-		<div class="col-lg-4"><input ui-date ng-model="date" class="form-control" name="date" type="text" /></div>
+		
+		<div class="col-lg-4">
+			<input ui-date ng-model="date" class="form-control" name="date" type="text" required />
+		</div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['shift_id'].label}}</label>
+		
 		<div class="col-lg-4">
-			<adrr-select2-wrapper ng-model="shift_id" frequent-prop="very_frequent" adrr-data="shiftTypes"></adrr-select2-wrapper>
+			<adrr-select2-wrapper name="wow" ng-model="shift_id" frequent-prop="very_frequent" adrr-data="shiftTypes" required></adrr-select2-wrapper>
 		</div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': supplierForm.$invalid}" ng-form="supplierForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['supplier_id'].label}}</label>
+		
 		<div class="col-lg-4">
-			<adrr-select2-wrapper ng-model="supplier_id" frequent-prop="very_frequent" adrr-data="suppliers"></adrr-select2-wrapper>
+			<adrr-select2-wrapper ng-model="supplier_id" frequent-prop="very_frequent" adrr-data="suppliers" required></adrr-select2-wrapper>
 		</div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}" ng-form="concTypeForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['conc_type_id'].label}}</label>
+		
 		<div class="col-lg-4">
-			<adrr-select2-wrapper ng-model="conc_type_id" frequent-prop="very_frequent" adrr-data="concreteTypes"></adrr-select2-wrapper>
+			<adrr-select2-wrapper ng-model="conc_type_id" frequent-prop="very_frequent" adrr-data="concreteTypes" required></adrr-select2-wrapper>
 		</div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['plant'].label}}</label>
 		
 		<div class="col-lg-4">
-			<input class="form-control" type="text" ng-model="plant" typeahead="obj.plant for obj in plants | filter:$viewValue | limitTo:8" />
+			<input class="form-control" type="text" ng-model="plant" typeahead="obj.plant for obj in plants | filter:$viewValue | limitTo:8" required />
 		</div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['truck'].label}}</label>
 		
 		<div class="col-lg-4">
-			<input class="form-control" type="text" ng-model="truck" typeahead="obj.truck for obj in trucks | filter:$viewValue | limitTo:8" />
+			<input class="form-control" type="text" ng-model="truck" typeahead="obj.truck for obj in trucks | filter:$viewValue | limitTo:8" required />
 		</div>
 	</div>
 	
@@ -57,11 +63,19 @@
 		</div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}" ng-form="truckLoadForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['truck_load'].label}}</label>
 		
 		<div class="col-lg-4">
-			<input adrr-num-range value="12" max="12" min="1" ng-model="truck_load" class="form-control" />
+			<input adrr-num-range max="12" min="1" ng-model="truck_load" class="form-control" required />
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-offset-2 col-lg-4">
+			<button class="btn btn-primary" ng-click="" ng-disabled="false">
+				Create
+			</button>
 		</div>
 	</div>
 </form>

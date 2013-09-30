@@ -121,7 +121,9 @@ angular.module
 						(
 							function ()
 							{
-								scope.ngModel = findById(e.val);
+								scope.ngModel = e.val !== '' ? findById(e.val) : '';
+								
+								if (!angular.isUndefined(attrs.required)) ctrl.$setValidity('required', $div.select2('val') !== '');
 							}
 						);
 					}
@@ -136,7 +138,9 @@ angular.module
 							data: { results: scope.adrrData(), text: 'name' },
 							formatSelection: scope.format,
 							formatResult: scope.format,
-							width: '100%'
+							width: '100%',
+							placeholder: 'Select...',
+							allowClear: true
 						});
 						
 						scope.frequents = _.filter
@@ -328,7 +332,7 @@ angular.module
 					'ngModel', function (newVal, oldVal)
 					{
 						var timeArr = newVal.split(':');
-						console.log(newVal, oldVal);
+						
 						scope.hour = timeArr[0];
 						
 						scope.min = timeArr[1];
