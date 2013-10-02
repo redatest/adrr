@@ -51,7 +51,7 @@ angular.module
 		return {
 			restrict: 'E',
 			
-			require: '^ngModel',
+			require: 'ngModel',
 			
 			scope:
 			{
@@ -59,88 +59,54 @@ angular.module
 				adrrData: '&'
 			},
 			
-			template: '<div><button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent)">{{format(frequent)}}</button><div class="s2w"></div></div>',
+			template: '<button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button><div class="s2w"></div>',
 			
-			controller: function ($scope, $element, $attrs)
+			link: function (scope, element, attrs, ctrl)
 			{
-				$scope.format = function (item)
-				{
-					if ($attrs.textProp)
-					{
-						return item[$attrs.textProp];
-					}
-					else
-					{
-						return item.name;
-					}
-				};
+				var data = [];
 				
-				$scope.programmaticallySelect = function (frequent)
-				{
-					var $div = $element.find('.s2w');
-					
-					$div.select2('data', frequent);
-					
-					$scope.ngModel = frequent;
-				};
-			},
-			
-			link: function (scope, iElement, iAttrs, ctrl)
-			{
-				function findById(id)
-				{
-					id = parseInt(id, 10);
-					
-					var source = scope.adrrData();
-					
-					for (var i = 0; i < source.length; i++)
-					{
-						if (parseInt(source[i].id, 10) === id)
-						{
-							return source[i];
-						}
-					}
-					
-					throw "Couldn't find object with id: " + id;
-				}
-
-				var attrs = iAttrs;
+				var $div = element.find('.s2w');
 				
-				var $div = iElement.find('.s2w');
-				
-				if (scope.ngModel)
+				function format (item)
 				{
-					$div.select2('data', findById(scope.ngModel.id));
+					return item.name;
 				}
 				
-				$div.on
-				(
-					"change", function (e)
+				scope.programmaticallySelect = function (id)
+				{
+					ctrl.$setViewValue(id);
+					
+					scope.ngModel = id;
+					
+					if (!angular.isUndefined(id))
 					{
-						scope.$apply
-						(
-							function ()
-							{
-								scope.ngModel = e.val !== '' ? findById(e.val) : '';
-								
-								if (!angular.isUndefined(attrs.required)) ctrl.$setValidity('required', $div.select2('val') !== '');
-							}
-						);
+						$div.select2('val', id.toString() );
 					}
-				);
+				};
 				
 				scope.$watch
 				(
-					'adrrData()', function ()
+					'adrrData()', function (newVal)
 					{
+						data = newVal;
+						
 						$div.select2
 						({
-							data: { results: scope.adrrData(), text: 'name' },
-							formatSelection: scope.format,
-							formatResult: scope.format,
+							data:
+							{
+								results: data,
+								text: 'name'
+							},
+							
 							width: '100%',
-							placeholder: 'Select...',
-							allowClear: true
+							
+							formatSelection: format,
+							
+							formatResult: format,
+							
+							allowClear: true,
+							
+							placeholder: 'Select...'
 						});
 						
 						scope.frequents = _.filter
@@ -157,10 +123,34 @@ angular.module
 								}
 							}
 						);
+						
 					}, true
 				);
+				
+				scope.$watch
+				(
+					'ngModel', function (newVal)
+					{
+						scope.programmaticallySelect(newVal);
+						
+					}, true
+				);
+				
+				$div.on
+				(
+					'change', function (evt)
+					{
+						scope.$apply
+						(
+							function ()
+							{
+								scope.ngModel = evt.val;
+							}
+						)
+					}
+				)
 			}
-		};
+		}
 	}
 )
 
@@ -210,7 +200,7 @@ angular.module
 				ngModel.$render = function ()
 				{
 					check(ngModel.$modelValue);
-				}
+				};
 				
 				element.on
 				(
@@ -240,7 +230,7 @@ angular.module
 							if (val > maxVal) val = maxVal;
 						}
 						
-						val = isNaN(val) ? attrs.min : val;
+						val = isNaN(val) ? (angular.isUndefined(attrs.value) ? attrs.min : attrs.value) : val;
 						
 						element.val(val);
 						

@@ -1,9 +1,14 @@
+<div class="alert" ng-class="{ 'alert-success': alert, 'alert-danger': !alert }">
+	<any ng-show="alert">Successfully saved.</any>
+	<any ng-hide="alert">Something went wrong.</any>
+</div>
+
 <form class="form-horizontal" name="mainForm" novalidate >
 	<div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['date'].label}}</label>
 		
 		<div class="col-lg-4">
-			<input ui-date ng-model="date" class="form-control" name="date" type="text" required />
+			<input ui-date ui-date-format="yy-mm-dd" ng-model="date" class="form-control" name="date" type="text" required />
 		</div>
 	</div>
 	
@@ -11,7 +16,7 @@
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['shift_id'].label}}</label>
 		
 		<div class="col-lg-4">
-			<adrr-select2-wrapper name="wow" ng-model="shift_id" frequent-prop="very_frequent" adrr-data="shiftTypes" required></adrr-select2-wrapper>
+			<adrr-select2-wrapper ng-model="shiftId" frequent-prop="very_frequent" adrr-data="shiftTypes" required></adrr-select2-wrapper>
 		</div>
 	</div>
 	
@@ -19,7 +24,7 @@
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['supplier_id'].label}}</label>
 		
 		<div class="col-lg-4">
-			<adrr-select2-wrapper ng-model="supplier_id" frequent-prop="very_frequent" adrr-data="suppliers" required></adrr-select2-wrapper>
+			<adrr-select2-wrapper ng-model="supplierId" frequent-prop="very_frequent" adrr-data="suppliers" required></adrr-select2-wrapper>
 		</div>
 	</div>
 	
@@ -27,7 +32,7 @@
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['conc_type_id'].label}}</label>
 		
 		<div class="col-lg-4">
-			<adrr-select2-wrapper ng-model="conc_type_id" frequent-prop="very_frequent" adrr-data="concreteTypes" required></adrr-select2-wrapper>
+			<adrr-select2-wrapper ng-model="concTypeId" frequent-prop="very_frequent" adrr-data="concreteTypes" required></adrr-select2-wrapper>
 		</div>
 	</div>
 	
@@ -47,11 +52,19 @@
 		</div>
 	</div>
 	
+	<div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
+		<label for="date" class="control-label col-lg-2">{{metaData.cols['ticket'].label}}</label>
+		
+		<div class="col-lg-4">
+			<input class="form-control" type="text" ng-model="ticket" required />
+		</div>
+	</div>
+	
 	<div class="form-group">
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['dept_time'].label}}</label>
 		
 		<div class="col-lg-4">
-			<adrr-timepicker ng-model="dept_time"></adrr-timepicker>
+			<adrr-timepicker ng-model="deptTime"></adrr-timepicker>
 		</div>
 	</div>
 	
@@ -59,7 +72,7 @@
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['arriv_time'].label}}</label>
 		
 		<div class="col-lg-4">
-			<adrr-timepicker ng-model="arriv_time"></adrr-timepicker>
+			<adrr-timepicker ng-model="arrivTime"></adrr-timepicker>
 		</div>
 	</div>
 	
@@ -67,15 +80,76 @@
 		<label for="date" class="control-label col-lg-2">{{metaData.cols['truck_load'].label}}</label>
 		
 		<div class="col-lg-4">
-			<input adrr-num-range max="12" min="1" ng-model="truck_load" class="form-control" required />
+			<input adrr-num-range min="1" max="12" value="12" ng-model="truckLoad" class="form-control" required />
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<div class="col-lg-offset-2 col-lg-4">
-			<button class="btn btn-primary" ng-click="" ng-disabled="false">
+			<button class="btn btn-primary" data-toggle="modal" href="#myModal" onclick="return false;" ng-disabled="mainForm.$invalid">
 				Create
 			</button>
 		</div>
 	</div>
 </form>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			
+			<div class="modal-body">
+				<table class="table table-striped">
+					<tr>
+						<td>Date</td>
+						<td>{{date}}</td>
+					</tr>
+					<tr>
+						<td>Shift</td>
+						<td>{{getItemById(shiftTypes, shiftId).name}}</td>
+					</tr>
+					<tr>
+						<td>Supplier</td>
+						<td>{{getItemById(suppliers, supplierId).name}}</td>
+					</tr>
+					<tr>
+						<td>Concrete Type</td>
+						<td>{{getItemById(concreteTypes, concTypeId).name}}</td>
+					</tr>
+					<tr>
+						<td>Plant</td>
+						<td>{{plant}}</td>
+					</tr>
+					<tr>
+						<td>Truck</td>
+						<td>{{truck}}</td>
+					</tr>
+					<tr>
+						<td>Ticket</td>
+						<td>{{ticket}}</td>
+					</tr>
+					<tr>
+						<td>Departure time</td>
+						<td>{{deptTime}}</td>
+					</tr>
+					<tr>
+						<td>Arrival time</td>
+						<td>{{arrivTime}}</td>
+					</tr>
+					<tr>
+						<td>Truck load (m3)</td>
+						<td>{{truckLoad}}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>

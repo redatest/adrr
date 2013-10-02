@@ -76,5 +76,73 @@ angular.module
 				$scope.concreteTypes = angular.isArray(dataArr[2]) ? dataArr[2] : [];
 			}
 		);
+		
+		$scope.getItemById = function (arr, id)
+		{
+			if (!angular.isUndefined(arr))
+			{
+				var arrLength = arr.length;
+				
+				for (var i = 0; i < arrLength; i++)
+				{
+					if (arr[i].id === id)
+					{
+						return arr[i];
+					}
+				}
+			}
+		}
+		
+		$scope.$watch
+		(
+			'supplierId', function (newVal)
+			{
+				if (!angular.isUndefined(newVal) && newVal !== '')
+				{
+					$scope.ticket = $scope.getItemById($scope.suppliers, newVal).prefix + '-';
+				}
+			}
+		);
+		
+		$scope.model = Restangular.all('eng/lab');
+		
+		$scope.submit = function ()
+		{
+			$scope.model.post
+			({
+				date:		  $scope.date,
+				shift_id:	  $scope.shiftId,
+				supplier_id:  $scope.supplierId,
+				conc_type_id: $scope.concTypeId,
+				plant:		  $scope.plant,
+				truck:		  $scope.truck,
+				ticket:		  $scope.ticket,
+				dept_time:	  $scope.deptTime,
+				arriv_time:	  $scope.arrivTime,
+				truck_load:	  $scope.truckLoad
+			}).then
+			(
+				function ()
+				{
+					$scope.date = null;
+					$scope.shiftId = '';
+					$scope.supplierId = '';
+					$scope.concTypeId = '';
+					$scope.plant = '';
+					$scope.truck = '';
+					$scope.ticket = '';
+					$scope.deptTime = '00:00:00';
+					$scope.arrivTime = '00:00:00';
+					$scope.truckLoad = 12;
+					
+					$scope.alert = true;
+				},
+				
+				function ()
+				{
+					$scope.alert = false;
+				}
+			);
+		}
 	}
 );
