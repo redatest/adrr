@@ -135,11 +135,13 @@ angular.module
 					$scope.arrivTime = '00:00:00';
 					$scope.truckLoad = 12;
 					
+					$scope.showAlert = true;
 					$scope.alert = true;
 				},
 				
 				function ()
 				{
+					$scope.showAlert = true;
 					$scope.alert = false;
 				}
 			);
