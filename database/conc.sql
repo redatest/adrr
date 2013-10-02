@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2013 at 01:55 AM
+-- Generation Time: Oct 02, 2013 at 02:03 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `tbl_concrete_type` (
   `sample_counter` int(11) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `tbl_lab` (
   `truck_load` int(11) NOT NULL DEFAULT '12',
   `accepted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -159,6 +159,13 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `tbl_profiles`
+--
+
+INSERT INTO `tbl_profiles` (`user_id`, `name`, `last_name`, `emp_num`) VALUES
+(1, 'Administrator', 'Admin', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -184,6 +191,15 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
   `visible` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `tbl_profiles_fields`
+--
+
+INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
+(1, 'name', 'First Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
+(2, 'last_name', 'Last Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 2, 3),
+(4, 'emp_num', 'Employee No.', 'INTEGER', 11, 0, 1, '', '', '', '', '', '', '', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -248,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `tbl_shift_type` (
   `update_time` datetime DEFAULT NULL,
   `update_user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -263,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `tbl_supplier` (
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -285,6 +301,13 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   UNIQUE KEY `user_username` (`username`),
   UNIQUE KEY `user_email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-10-01 17:45:20');
 
 -- --------------------------------------------------------
 
