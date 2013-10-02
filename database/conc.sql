@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 28, 2013 at 07:08 AM
+-- Generation Time: Oct 02, 2013 at 01:55 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -46,14 +46,7 @@ CREATE TABLE IF NOT EXISTS `tbl_concrete_type` (
   `sample_counter` int(11) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `tbl_concrete_type`
---
-
-INSERT INTO `tbl_concrete_type` (`id`, `name`, `category`, `flow_norm_from`, `flow_norm_to`, `flow_acpt_from`, `flow_acpt_to`, `slamp_norm_from`, `slamp_norm_to`, `slamp_acpt_from`, `slamp_acpt_to`, `temp_from`, `temp_to`, `very_frequent`, `sample_counter`, `note`) VALUES
-(1, 'First Conc Type', 'flow', 12, 23, 12, 23, NULL, NULL, NULL, NULL, 12, 23, 1, NULL, '');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -118,15 +111,7 @@ CREATE TABLE IF NOT EXISTS `tbl_lab` (
   `truck_load` int(11) NOT NULL DEFAULT '12',
   `accepted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `tbl_lab`
---
-
-INSERT INTO `tbl_lab` (`id`, `date`, `shift_id`, `supplier_id`, `conc_type_id`, `plant`, `truck`, `ticket`, `dept_time`, `arriv_time`, `truck_load`, `accepted`) VALUES
-(1, '2013-09-26', 1, 1, 1, 123, 123, '12t5vb', '12:00:00', '12:00:00', 12, 1),
-(2, '2013-09-26', 1, 1, 1, 123, 3246, '654sd65f4', '12:00:00', '12:00:00', 12, 0);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -174,13 +159,6 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `tbl_profiles`
---
-
-INSERT INTO `tbl_profiles` (`user_id`, `name`, `last_name`, `emp_num`) VALUES
-(1, 'Administrator', 'Admin', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -206,15 +184,6 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles_fields` (
   `visible` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `tbl_profiles_fields`
---
-
-INSERT INTO `tbl_profiles_fields` (`id`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `widget`, `widgetparams`, `position`, `visible`) VALUES
-(1, 'name', 'First Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect First Name (length between 3 and 50 characters).', '', '', '', '', 1, 3),
-(2, 'last_name', 'Last Name', 'VARCHAR', 255, 3, 2, '', '', 'Incorrect Last Name (length between 3 and 50 characters).', '', '', '', '', 2, 3),
-(4, 'emp_num', 'Employee No.', 'INTEGER', 11, 0, 1, '', '', '', '', '', '', '', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -279,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `tbl_shift_type` (
   `update_time` datetime DEFAULT NULL,
   `update_user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -294,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `tbl_supplier` (
   `state` tinyint(1) NOT NULL DEFAULT '1',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -316,13 +285,6 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   UNIQUE KEY `user_username` (`username`),
   UNIQUE KEY `user_email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `tbl_users`
---
-
-INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-09-28 02:51:00');
 
 -- --------------------------------------------------------
 
