@@ -59,7 +59,7 @@ angular.module
 				adrrData: '&'
 			},
 			
-			template: '<button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button><div class="s2w"></div>',
+			template: '<div><button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button></div><div class="s2w"></div>',
 			
 			link: function (scope, element, attrs, ctrl)
 			{
@@ -199,18 +199,18 @@ angular.module
 			{
 				ngModel.$render = function ()
 				{
-					check(ngModel.$modelValue);
+					check (ngModel.$modelValue);
 				};
 				
 				element.on
 				(
-					'blur keyup change', function ()
+					'keyup change blur', function (evt)
 					{
-						scope.$apply(check(element.val()));
+						scope.$apply (check(element.val()));
 					}
 				);
 				
-				function check(val)
+				function check (val)
 				{
 					if (val !== '' && val !== '-')
 					{
@@ -231,11 +231,11 @@ angular.module
 						}
 						
 						val = isNaN(val) ? (angular.isUndefined(attrs.value) ? attrs.min : attrs.value) : val;
-						
-						element.val(val);
-						
-						ngModel.$setViewValue(val);
 					}
+					
+					element.val(val);
+					
+					ngModel.$setViewValue(val);
 				}
 			}
 		};
@@ -244,14 +244,18 @@ angular.module
 
 .directive
 (
-	'adrrTimepicker', function ()
+	'adrrTimepicker', function ($compile)
 	{
 		return {
 			restrict: 'E',
 			
 			require: 'ngModel',
 			
-			scope: { ngModel: '=' },
+			scope:
+			{
+				ngModel: '=',
+				adrrOptions: '&'
+			},
 			
 			template: '<div class="well well-small">' +
 						'<table class="col-xs-12">' +
@@ -261,10 +265,10 @@ angular.module
 							'</tr>' +
 							'<tr>' +
 								'<td>' +
-									'<input ng-model="hour" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
+									'<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
 								'</td>' +
 								'<td>' +
-									'<input ng-model="min" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
+									'<input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
 								'</td>' +
 							'</tr>' +
 							'<tr>' +
@@ -307,16 +311,8 @@ angular.module
 				
 			},
 			
-			link: function (scope, element, attrs)
+			link: function (scope, element, attrs, ctrl)
 			{
-				scope.hour = 0;
-				scope.min = 0;
-				
-				if (angular.isUndefined(scope.ngModel))
-				{
-					scope.ngModel = '00:00:00';
-				}
-				
 				scope.$watch
 				(
 					'ngModel', function (newVal, oldVal)
@@ -337,6 +333,25 @@ angular.module
 					time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
 					
 					scope.ngModel = time;
+				};
+				
+				if (!angular.isUndefined(attrs.adrrOptions))
+				{
+					scope.$watch
+					(
+						'adrrOptions()', function (newVal)
+						{
+							if (!angular.isUndefined(newVal.template))
+							{
+								element.html($compile(newVal.template)(scope));
+							}
+						}
+					);
+				}
+				
+				if (angular.isUndefined(scope.ngModel))
+				{
+					scope.ngModel = '00:00:00';
 				}
 			}
 		}
@@ -356,9 +371,16 @@ angular.module
 
 .run
 (
-	function run (adrrAuth)
+	function run (adrrAuth, $rootScope)
 	{
-		adrrAuth.check();
+		adrrAuth.check().then
+		(
+			function (data)
+			{
+				$rootScope.isSenior = data.isSenior;
+				$rootScope.isEng	= data.isEng;
+			}
+		);
 	}
 )
 

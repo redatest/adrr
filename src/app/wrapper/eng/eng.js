@@ -61,6 +61,14 @@ angular.module
 		
 		$scope.metaData = yii['Lab'];
 		
+		$scope.adrrTimepickerOptions =
+		{
+			template: '<table class="col-xs-12"><tr>' +
+						  '<td><input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
+						  '<td><input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
+					  '</tr></table>'
+		};
+		
 		$q.all([Restangular.all('settings/shiftType').getList(), Restangular.all('settings/supplier').getList(), Restangular.all('settings/concreteType').getList(), Restangular.all('eng/labPlant').getList(), Restangular.all('eng/labTruck').getList()]).then
 		(
 			function (dataArr)
@@ -99,7 +107,7 @@ angular.module
 			{
 				if (!angular.isUndefined(newVal) && newVal !== '')
 				{
-					$scope.ticket = $scope.getItemById($scope.suppliers, newVal).prefix + '-';
+					$scope.ticket = $scope.getItemById($scope.suppliers, newVal).prefix;
 				}
 			}
 		);
@@ -133,7 +141,7 @@ angular.module
 					$scope.ticket = '';
 					$scope.deptTime = '00:00:00';
 					$scope.arrivTime = '00:00:00';
-					$scope.truckLoad = 12;
+					$scope.truckLoad = '';
 					
 					$scope.showAlert = true;
 					$scope.alert = true;

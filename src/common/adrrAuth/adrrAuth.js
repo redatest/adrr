@@ -1,12 +1,14 @@
 angular.module('adrrAuth', []).factory
 (
-	'adrrAuth', function ($state, $http, $rootScope)
+	'adrrAuth', function ($state, $http, $rootScope, $q)
 	{
 		$rootScope.wrongCredentials = false;
 		
-		function check (username, password)
+		var check = function (username, password)
 		{
 			var credentials = (!angular.isUndefined(username) && !angular.isUndefined(password)) ? $.param ({ username: username, password: password }) : null;
+			
+			var deferred = $q.defer();
 			
 			$http
 			({
@@ -19,6 +21,8 @@ angular.module('adrrAuth', []).factory
 			(
 				function (data, status, headers)
 				{
+					deferred.resolve(data);
+					
 					if (data.logged === true)
 					{
 						if ($state.current.name == 'login')
@@ -39,11 +43,15 @@ angular.module('adrrAuth', []).factory
 			)
 			.error
 			(
-				function ()
+				function (data)
 				{
+					deferred.reject(data);
+					
 					$state.transitionTo(adrrAuthConfig.loginState);
 				}
 			);
+			
+			return deferred.promise;
 		}
 		
 		function logout()

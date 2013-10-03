@@ -65,5 +65,14 @@ class WebUser extends CWebUser
     public function isAdmin() {
         return Yii::app()->getModule('user')->isAdmin();
     }
-
+	
+	public function getIsSenior()
+	{
+		return Yii::app()->getModule('user')->isSenior();
+	}
+	
+	public function getIsEng()
+	{
+		return Yii::app()->getModule('user')->isEng();
+	}
 }

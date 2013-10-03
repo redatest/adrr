@@ -47,7 +47,14 @@ angular.module
 	{
 		$scope.login = function ()
 		{
-			adrrAuth.check($scope.username, $scope.password);
+			adrrAuth.check($scope.username, $scope.password).then
+			(
+				function (data)
+				{
+					$rootScope.isSenior = data.isSenior;
+					$rootScope.isEng	= data.isEng;
+				}
+			);
 		};
 	}
 )

@@ -5,6 +5,9 @@
 		{
 			$result["logged"] = true;
 			
+			$result["isEng"] = Yii::app()->user->isEng;
+			$result["isSenior"] = Yii::app()->user->isSenior;
+			
 			if (Yii::app()->user->isGuest)
 			{
 				$model = new UserLogin;
@@ -17,6 +20,9 @@
 					if ($model->validate())
 					{
 						$this->lastViset();
+						
+						$result["isEng"] = Yii::app()->user->isEng;
+						$result["isSenior"] = Yii::app()->user->isSenior;
 						
 						$this->_sendResponse(200, CJSON::encode($result));
 					}
