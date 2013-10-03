@@ -38,6 +38,11 @@ class ProfileField extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function getDbConnection()
+	{
+		return Yii::app()->db2;
+	}
 
 	/**
 	 * @return string the associated database table name
