@@ -66,26 +66,20 @@ html, body
 
 
 /* side nav */
+	#sidenav
+	{
+		padding: 0;
+	}
+	
+	#sidenav .navbar
+	{
+		border: none;
+	}
+
 	#sidenav .navbar-collapse
 	{
 		max-height: 100%;
-	}
-
-	#sidenav .navbar
-	{
-		margin-bottom: 0;
 		
-		border: none;
-		border-right: @sidenav_border;
-		border-left: @sidenav_border;
-		
-		background-color: #f2f2f2;
-		
-		border-radius: 0;
-	}
-
-	#sidenav .navbar-collapse
-	{
 		padding: 0;
 	}
 
@@ -102,12 +96,14 @@ html, body
 		
 		border-bottom: @sidenav_border;
 	}
-
+	
 	#sidenav li.active > a, #sidenav li a:hover
 	{
-		background-color: #ffffff;
+		background: #ffffff url(../images/sidenav_arrow.jpg) no-repeat right;
 		
 		color: #428bca;
+		
+		border-right: #428bca solid 1px;
 	}
 	
 	#sidenav .sub li
@@ -118,6 +114,23 @@ html, body
 	#sidenav .sub li a
 	{
 		padding-left: 30px;
+	}
+	
+	#sidenavBg
+	{
+		height: 100%;
+		
+		background: #F8F8F8;
+		
+		position: fixed;
+		
+		padding: 0;
+		
+		top: 0;
+		
+		left: 1px;
+		
+		border-right: @sidenav_border;
 	}
 /* End */
 
@@ -201,9 +214,7 @@ html, body
     
 	#topnav
 	{
-		position: absolute;
-        
-        width: 100%;
+		width: 100%;
         
         margin-top: -50px;
 	}

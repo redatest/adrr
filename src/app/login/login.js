@@ -45,14 +45,17 @@ angular.module
 (
 	'LoginCtrl', function LoginCtrl ($scope, adrrAuth, $rootScope)
 	{
+		var beforeLoginUrl = String(window.location).split('/#/');
+		
 		$scope.login = function ()
 		{
-			adrrAuth.check($scope.username, $scope.password).then
+			adrrAuth.check($scope.username, $scope.password, beforeLoginUrl[1]).then
 			(
 				function (data)
 				{
 					$rootScope.isSenior = data.isSenior;
 					$rootScope.isEng	= data.isEng;
+					$rootScope.userName = data.name;
 				}
 			);
 		};

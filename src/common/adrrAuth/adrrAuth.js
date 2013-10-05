@@ -4,7 +4,7 @@ angular.module('adrrAuth', []).factory
 	{
 		$rootScope.wrongCredentials = false;
 		
-		var check = function (username, password)
+		var check = function (username, password, oldUrl)
 		{
 			var credentials = (!angular.isUndefined(username) && !angular.isUndefined(password)) ? $.param ({ username: username, password: password }) : null;
 			
@@ -27,7 +27,14 @@ angular.module('adrrAuth', []).factory
 					{
 						if ($state.current.name == 'login')
 						{
-							$state.transitionTo(adrrAuthConfig.defaultState);
+							if (!angular.isUndefined(oldUrl) && oldUrl !== 'login')
+							{
+								window.location.href = '#/' + oldUrl;
+							}
+							else
+							{
+								$state.transitionTo(adrrAuthConfig.defaultState);
+							}
 						}
 					}
 					else

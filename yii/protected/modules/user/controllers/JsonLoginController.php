@@ -7,6 +7,7 @@
 			
 			$result["isEng"] = Yii::app()->user->isEng;
 			$result["isSenior"] = Yii::app()->user->isSenior;
+			$result["name"] = Yii::app()->user->name;
 			
 			if (Yii::app()->user->isGuest)
 			{
@@ -23,6 +24,7 @@
 						
 						$result["isEng"] = Yii::app()->user->isEng;
 						$result["isSenior"] = Yii::app()->user->isSenior;
+						$result["name"] = Yii::app()->user->name;
 						
 						$this->_sendResponse(200, CJSON::encode($result));
 					}
