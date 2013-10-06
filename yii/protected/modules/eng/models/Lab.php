@@ -11,10 +11,10 @@
 			return array
 			(
 				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time', 'required'),
-				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, accepted', 'numerical', 'integerOnly'=>true),
+				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temperature, slump, flow, accepted', 'numerical', 'integerOnly'=>true),
 				array('ticket', 'length', 'max'=>255),
 				
-				array('id, date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, truck_load, accepted', 'safe', 'on'=>'search'),
+				array('id, date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, truck_load, temperature, slump, flow, accepted', 'safe', 'on'=>'search'),
 			);
 		}
 		
@@ -38,29 +38,32 @@
 				'dept_time'	   => 'Dept Time',
 				'arriv_time'   => 'Arriv Time',
 				'truck_load'   => 'Truck Load',
+				'temperature'  => 'Temperature',
+				'slump'		   => 'Slump',
+				'flow'		   => 'Flow',
 				'accepted'	   => 'Accepted',
 			);
 		}
 		
-		public function search()
-		{
-			$criteria = new CDbCriteria;
+		// public function search()
+		// {
+			// $criteria = new CDbCriteria;
 
-			$criteria->compare('id',		   $this->id);
-			$criteria->compare('date',		   $this->date,		  true);
-			$criteria->compare('shift_id',	   $this->shift_id);
-			$criteria->compare('supplier_id',  $this->supplier_id);
-			$criteria->compare('conc_type_id', $this->conc_type_id);
-			$criteria->compare('plant',		   $this->plant);
-			$criteria->compare('truck',		   $this->truck);
-			$criteria->compare('ticket',	   $this->ticket,	  true);
-			$criteria->compare('dept_time',	   $this->dept_time,  true);
-			$criteria->compare('arriv_time',   $this->arriv_time, true);
-			$criteria->compare('truck_load',   $this->truck_load);
-			$criteria->compare('accepted',	   $this->accepted);
+			// $criteria->compare('id',		   $this->id);
+			// $criteria->compare('date',		   $this->date,		  true);
+			// $criteria->compare('shift_id',	   $this->shift_id);
+			// $criteria->compare('supplier_id',  $this->supplier_id);
+			// $criteria->compare('conc_type_id', $this->conc_type_id);
+			// $criteria->compare('plant',		   $this->plant);
+			// $criteria->compare('truck',		   $this->truck);
+			// $criteria->compare('ticket',	   $this->ticket,	  true);
+			// $criteria->compare('dept_time',	   $this->dept_time,  true);
+			// $criteria->compare('arriv_time',   $this->arriv_time, true);
+			// $criteria->compare('truck_load',   $this->truck_load);
+			// $criteria->compare('accepted',	   $this->accepted);
 
-			return new CActiveDataProvider($this, array('criteria' => $criteria));
-		}
+			// return new CActiveDataProvider($this, array('criteria' => $criteria));
+		// }
 		
 		public static function model($className = __CLASS__)
 		{

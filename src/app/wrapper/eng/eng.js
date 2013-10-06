@@ -127,21 +127,27 @@ angular.module
 				ticket:		  $scope.ticket,
 				dept_time:	  $scope.deptTime,
 				arriv_time:	  $scope.arrivTime,
-				truck_load:	  $scope.truckLoad
+				truck_load:	  $scope.truckLoad,
+				temperature:  $scope.temperature,
+				slump:		  $scope.slump,
+				flow:		  $scope.flow
 			}).then
 			(
 				function ()
 				{
-					$scope.date = null;
-					$scope.shiftId = '';
-					$scope.supplierId = '';
-					$scope.concTypeId = '';
-					$scope.plant = '';
-					$scope.truck = '';
-					$scope.ticket = '';
-					$scope.deptTime = '00:00:00';
-					$scope.arrivTime = '00:00:00';
-					$scope.truckLoad = '';
+					$scope.date		   = null;
+					$scope.shiftId	   = '';
+					$scope.supplierId  = '';
+					$scope.concTypeId  = '';
+					$scope.plant	   = '';
+					$scope.truck	   = '';
+					$scope.ticket	   = '';
+					$scope.deptTime	   = '00:00:00';
+					$scope.arrivTime   = '00:00:00';
+					$scope.truckLoad   = '';
+					$scope.temperature = '';
+					$scope.slump	   = '';
+					$scope.flow		   = '';
 					
 					$scope.showAlert = true;
 					$scope.alert = true;

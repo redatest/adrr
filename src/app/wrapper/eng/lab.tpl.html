@@ -5,68 +5,86 @@
 
 <form role="form" name="mainForm" class="col-md-4" novalidate >
 	<div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
-		<label for="date" class="control-label">{{metaData.cols['date'].label}}</label>
+		<label class="control-label">{{metaData.cols['date'].label}}</label>
 		
-		<input readonly="readonly" ui-date ui-date-format="yy-mm-dd" ng-model="date" class="form-control" name="date" type="text" required />
+		<input readonly="readonly" ui-date ui-date-format="yy-mm-dd" ng-model="date" class="form-control" type="text" required />
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
-		<label for="date" class="control-label">{{metaData.cols['shift_id'].label}}</label>
+		<label class="control-label">{{metaData.cols['shift_id'].label}}</label>
 		
 		<adrr-select2-wrapper ng-model="shiftId" frequent-prop="very_frequent" adrr-data="shiftTypes" required></adrr-select2-wrapper>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': supplierForm.$invalid}" ng-form="supplierForm">
-		<label for="date" class="control-label">{{metaData.cols['supplier_id'].label}}</label>
+		<label class="control-label">{{metaData.cols['supplier_id'].label}}</label>
 		
 		<adrr-select2-wrapper ng-model="supplierId" frequent-prop="very_frequent" adrr-data="suppliers" required></adrr-select2-wrapper>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}" ng-form="concTypeForm">
-		<label for="date" class="control-label">{{metaData.cols['conc_type_id'].label}}</label>
+		<label class="control-label">{{metaData.cols['conc_type_id'].label}}</label>
 		
 		<adrr-select2-wrapper ng-model="concTypeId" frequent-prop="very_frequent" adrr-data="concreteTypes" required></adrr-select2-wrapper>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
-		<label for="date" class="control-label">{{metaData.cols['plant'].label}}</label>
+		<label class="control-label">{{metaData.cols['plant'].label}}</label>
 		
 		<input class="form-control" type="number" pattern="[0-9]*" ng-model="plant" typeahead="obj.plant for obj in plants | filter:$viewValue | limitTo:8" required />
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
-		<label for="date" class="control-label">{{metaData.cols['truck'].label}}</label>
+		<label class="control-label">{{metaData.cols['truck'].label}}</label>
 		
 		<input class="form-control" type="number" pattern="[0-9]*" ng-model="truck" typeahead="obj.truck for obj in trucks | filter:$viewValue | limitTo:8" required />
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
-		<label for="date" class="control-label">{{metaData.cols['ticket'].label}}</label>
+		<label class="control-label">{{metaData.cols['ticket'].label}}</label>
 		
 		<input class="form-control" type="text" ng-model="ticket" required />
 	</div>
 	
 	<div class="form-group">
-		<label for="date" class="control-label">{{metaData.cols['dept_time'].label}}</label>
+		<label class="control-label">{{metaData.cols['dept_time'].label}}</label>
 		
 		<adrr-timepicker adrr-options="adrrTimepickerOptions" ng-model="deptTime"></adrr-timepicker>
 	</div>
 	
 	<div class="form-group">
-		<label for="date" class="control-label">{{metaData.cols['arriv_time'].label}}</label>
+		<label class="control-label">{{metaData.cols['arriv_time'].label}}</label>
 		
 		<adrr-timepicker adrr-options="adrrTimepickerOptions" ng-model="arrivTime"></adrr-timepicker>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}" ng-form="truckLoadForm">
-		<label for="date" class="control-label">{{metaData.cols['truck_load'].label}}</label>
+		<label class="control-label">{{metaData.cols['truck_load'].label}}</label>
 		
 		<input adrr-num-range adrr-options="adrrTimepickerOptions" min="1" max="12" type="text" pattern="[0-9]*" value="" ng-model="truckLoad" class="form-control" required />
 	</div>
 	
+	<div class="form-group" ng-class="{'has-error': temperatureForm.$invalid}" ng-form="temperatureForm">
+		<label class="control-label">{{metaData.cols['temperature'].label}}</label>
+		
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="temperature" required />
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': slumpForm.$invalid}" ng-form="slumpForm">
+		<label class="control-label">{{metaData.cols['slump'].label}}</label>
+		
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="slump" required />
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': flowForm.$invalid}" ng-form="flowForm">
+		<label class="control-label">{{metaData.cols['flow'].label}}</label>
+		
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="flow" required />
+	</div>
+	
 	<div class="form-group">
 		<button class="btn btn-primary" data-toggle="modal" href="#myModal" onclick="return false;" ng-disabled="mainForm.$invalid">
-			Create
+			Save
 		</button>
 	</div>
 </form>
@@ -120,6 +138,18 @@
 					<tr>
 						<td>Truck load (m3)</td>
 						<td>{{truckLoad}}</td>
+					</tr>
+					<tr>
+						<td>Temperature</td>
+						<td>{{temperature}}</td>
+					</tr>
+					<tr>
+						<td>Slump</td>
+						<td>{{slump}}</td>
+					</tr>
+					<tr>
+						<td>Flow</td>
+						<td>{{flow}}</td>
 					</tr>
 				</table>
 			</div>
