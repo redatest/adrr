@@ -27,7 +27,7 @@ angular.module('adrrAuth', []).factory
 					{
 						if ($state.current.name == 'login')
 						{
-							if (!angular.isUndefined(oldUrl) && oldUrl !== 'login')
+							if (!angular.isUndefined(oldUrl) && oldUrl !== 'login' && oldUrl !== 'logout')
 							{
 								window.location.href = '#/' + oldUrl;
 							}
