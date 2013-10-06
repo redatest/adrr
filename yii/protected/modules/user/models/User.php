@@ -83,10 +83,10 @@ class User extends CActiveRecord
         return $relations;
 	}
 	
-	public function getDbConnection()
-	{
-		return Yii::app()->db2;
-	}
+	// public function getDbConnection()
+	// {
+		// return Yii::app()->db2;
+	// }
 
 	/**
 	 * @return array customized attribute labels (name=>label)

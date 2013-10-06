@@ -22,10 +22,10 @@ class Profile extends UActiveRecord
 		return parent::model($className);
 	}
 	
-	public function getDbConnection()
-	{
-		return Yii::app()->db2;
-	}
+	// public function getDbConnection()
+	// {
+		// return Yii::app()->db2;
+	// }
 
 	/**
 	 * @return string the associated database table name
