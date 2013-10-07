@@ -70,16 +70,16 @@
 		<input class="form-control" type="number" pattern="[0-9]*" ng-model="temperature" required />
 	</div>
 	
-	<div class="form-group" ng-class="{'has-error': slumpForm.$invalid}" ng-form="slumpForm">
+	<div class="form-group" ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}" ng-form="slumpForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
 		<label class="control-label">{{metaData.cols['slump'].label}}</label>
 		
-		<input class="form-control" type="number" pattern="[0-9]*" ng-model="slump" required />
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="slump" ng-required="getItemById(concreteTypes, concTypeId).category === 'slump'" />
 	</div>
 	
-	<div class="form-group" ng-class="{'has-error': flowForm.$invalid}" ng-form="flowForm">
+	<div class="form-group" ng-class="{'has-error': flowForm.$invalid || checkFlowRed(), 'has-warning': checkFlowYellow()}" ng-form="flowForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'flow'">
 		<label class="control-label">{{metaData.cols['flow'].label}}</label>
 		
-		<input class="form-control" type="number" pattern="[0-9]*" ng-model="flow" required />
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="flow" ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'" />
 	</div>
 	
 	<div class="form-group">

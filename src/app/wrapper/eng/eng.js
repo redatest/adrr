@@ -160,5 +160,33 @@ angular.module
 				}
 			);
 		}
+		
+		$scope.checkFlowRed = function ()
+		{
+			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+			
+			return (!angular.isUndefined(concType) && (concType.flow_acpt_from > $scope.flow || concType.flow_acpt_to < $scope.flow)) ? true : false;
+		}
+		
+		$scope.checkFlowYellow = function ()
+		{
+			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+			
+			return (!angular.isUndefined(concType) && (concType.flow_norm_from > $scope.flow || concType.flow_norm_to < $scope.flow)) ? true : false;
+		}
+		
+		$scope.checkSlumpRed = function ()
+		{
+			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+			
+			return (!angular.isUndefined(concType) && (concType.slump_acpt_from > $scope.slump || concType.slump_acpt_to < $scope.slump)) ? true : false;
+		}
+		
+		$scope.checkSlumpYellow = function ()
+		{
+			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+			
+			return (!angular.isUndefined(concType) && (concType.slump_norm_from > $scope.slump || concType.slump_norm_to < $scope.slump)) ? true : false;
+		}
 	}
 );
