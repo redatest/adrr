@@ -188,5 +188,12 @@ angular.module
 			
 			return (!angular.isUndefined(concType) && (concType.slump_norm_from > $scope.slump || concType.slump_norm_to < $scope.slump)) ? true : false;
 		}
+		
+		$scope.checkTempRed = function ()
+		{
+			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+			
+			return (!angular.isUndefined(concType) && (concType.temp_from > $scope.temperature || concType.temp_to < $scope.temperature)) ? true : false; 
+		}
 	}
 );

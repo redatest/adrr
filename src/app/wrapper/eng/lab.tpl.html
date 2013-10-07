@@ -28,6 +28,24 @@
 		<adrr-select2-wrapper ng-model="concTypeId" frequent-prop="very_frequent" adrr-data="concreteTypes" required></adrr-select2-wrapper>
 	</div>
 	
+	<div class="form-group" ng-class="{'has-error': temperatureForm.$invalid || checkTempRed()}" ng-form="temperatureForm" ng-hide="concTypeId === '' || concTypeId === undefined">
+		<label class="control-label">{{metaData.cols['temperature'].label}}</label>
+		
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="temperature" required />
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}" ng-form="slumpForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
+		<label class="control-label">{{metaData.cols['slump'].label}}</label>
+		
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="slump" ng-required="getItemById(concreteTypes, concTypeId).category === 'slump'" />
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': flowForm.$invalid || checkFlowRed(), 'has-warning': checkFlowYellow()}" ng-form="flowForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'flow'">
+		<label class="control-label">{{metaData.cols['flow'].label}}</label>
+		
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="flow" ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'" />
+	</div>
+	
 	<div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
 		<label class="control-label">{{metaData.cols['plant'].label}}</label>
 		
@@ -62,24 +80,6 @@
 		<label class="control-label">{{metaData.cols['truck_load'].label}}</label>
 		
 		<input adrr-num-range adrr-options="adrrTimepickerOptions" min="1" max="12" type="text" pattern="[0-9]*" value="" ng-model="truckLoad" class="form-control" required />
-	</div>
-	
-	<div class="form-group" ng-class="{'has-error': temperatureForm.$invalid}" ng-form="temperatureForm">
-		<label class="control-label">{{metaData.cols['temperature'].label}}</label>
-		
-		<input class="form-control" type="number" pattern="[0-9]*" ng-model="temperature" required />
-	</div>
-	
-	<div class="form-group" ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}" ng-form="slumpForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
-		<label class="control-label">{{metaData.cols['slump'].label}}</label>
-		
-		<input class="form-control" type="number" pattern="[0-9]*" ng-model="slump" ng-required="getItemById(concreteTypes, concTypeId).category === 'slump'" />
-	</div>
-	
-	<div class="form-group" ng-class="{'has-error': flowForm.$invalid || checkFlowRed(), 'has-warning': checkFlowYellow()}" ng-form="flowForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'flow'">
-		<label class="control-label">{{metaData.cols['flow'].label}}</label>
-		
-		<input class="form-control" type="number" pattern="[0-9]*" ng-model="flow" ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'" />
 	</div>
 	
 	<div class="form-group">
