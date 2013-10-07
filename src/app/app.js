@@ -154,37 +154,37 @@ angular.module
 	}
 )
 
-.directive
-(
-	'adrrJtimepicker', function ()
-	{
-		return {
-			restrict: 'E',
+// .directive
+// (
+	// 'adrrJtimepicker', function ()
+	// {
+		// return {
+			// restrict: 'E',
 			
-			require: '^ngModel',
+			// require: '^ngModel',
 			
-			template: '<div class="input-group"><input class="wow {{adrrClass}}" type="text" /><span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span></div>',
+			// template: '<div class="input-group"><input class="wow {{adrrClass}}" type="text" /><span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span></div>',
 			
-			scope:
-			{
-				ngModel: '='
-			},
+			// scope:
+			// {
+				// ngModel: '='
+			// },
 			
-			link: function (scope, iElement, iAttrs, ctrl)
-			{
-				scope.adrrClass = iAttrs.adrrClass;
+			// link: function (scope, iElement, iAttrs, ctrl)
+			// {
+				// scope.adrrClass = iAttrs.adrrClass;
 				
-				iElement.find('.wow').timepicker
-				({
-					timeFormat: 'HH:mm:ss',
-					hourMin: 0,
-					hourMax: 23,
-					sliderAccessArgs: { touchonly: false }
-				});
-			}
-		}
-	}
-)
+				// iElement.find('.wow').timepicker
+				// ({
+					// timeFormat: 'HH:mm:ss',
+					// hourMin: 0,
+					// hourMax: 23,
+					// sliderAccessArgs: { touchonly: false }
+				// });
+			// }
+		// }
+	// }
+// )
 
 .directive
 (
