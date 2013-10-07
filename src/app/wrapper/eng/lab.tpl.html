@@ -7,9 +7,11 @@
 	<div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
 		<label class="control-label">{{metaData.cols['date'].label}}</label>
 		
-		<input readonly="readonly" ui-date ui-date-format="yy-mm-dd" ng-model="date" class="form-control" type="text" required />
+		<div>
+			<button class="btn btn-default" ng-click="setToday()">Today</button>
+			<input readonly="readonly" ui-date ui-date-format="yy-mm-dd" ng-model="date" class="form-control" type="text" required />
+		</div>
 	</div>
-	
 	<div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
 		<label class="control-label">{{metaData.cols['shift_id'].label}}</label>
 		

@@ -195,5 +195,10 @@ angular.module
 			
 			return (!angular.isUndefined(concType) && (concType.temp_from > $scope.temperature || concType.temp_to < $scope.temperature)) ? true : false; 
 		}
+		
+		$scope.setToday = function ()
+		{
+			$scope.date = $.datepicker.formatDate('yy-mm-dd', new Date()).toString();
+		}
 	}
 );
