@@ -398,6 +398,8 @@ angular.module
 				$scope.state = b.name;
 				
 				$rootScope.pageTitle = b.title;
+				
+				$rootScope.showAlert = false;
 			}
 		);
 	}

@@ -60,22 +60,22 @@
 		</div>
 	</div>
 	
-	<div ng-show="formData['category'] == 'slamp'">
+	<div ng-show="formData['category'] == 'slump'">
 		<div class="form-group">
 			<label class="col-lg-4 control-label" for="category">Normal:</label>
 		</div>
 		
-		<div class="form-group" ng-class="{'has-error': slampNormFrom.$invalid}" ng-form="slampNormFrom">
-			<label class="col-lg-4 control-label" for="slamp_norm_from">{{metaData.cols['slamp_norm_from'].label}}</label>
+		<div class="form-group" ng-class="{'has-error': slumpNormFrom.$invalid}" ng-form="slumpNormFrom">
+			<label class="col-lg-4 control-label" for="slump_norm_from">{{metaData.cols['slump_norm_from'].label}}</label>
 			<div class="col-lg-8">
-				<input class="form-control" ng-model="formData['slamp_norm_from']" type="number" ng-required="formData['category'] == 'slamp'" />
+				<input class="form-control" ng-model="formData['slump_norm_from']" type="number" ng-required="formData['category'] == 'slump'" />
 			</div>
 		</div>
 		
-		<div class="form-group" ng-class="{'has-error': slampNormTo.$invalid}" ng-form="slampNormTo">
-			<label class="col-lg-4 control-label" for="slamp_norm_to">{{metaData.cols['slamp_norm_to'].label}}</label>
+		<div class="form-group" ng-class="{'has-error': slumpNormTo.$invalid}" ng-form="slumpNormTo">
+			<label class="col-lg-4 control-label" for="slump_norm_to">{{metaData.cols['slump_norm_to'].label}}</label>
 			<div class="col-lg-8">
-				<input class="form-control" ng-model="formData['slamp_norm_to']" type="number" ng-required="formData['category'] == 'slamp'" />
+				<input class="form-control" ng-model="formData['slump_norm_to']" type="number" ng-required="formData['category'] == 'slump'" />
 			</div>
 		</div>
 		
@@ -83,17 +83,17 @@
 			<label class="col-lg-4 control-label" for="category">Acceptable:</label>
 		</div>
 		
-		<div class="form-group" ng-class="{'has-error': slampAcptFrom.$invalid}" ng-form="slampAcptFrom">
-			<label class="col-lg-4 control-label" for="slamp_acpt_from">{{metaData.cols['slamp_acpt_from'].label}}</label>
+		<div class="form-group" ng-class="{'has-error': slumpAcptFrom.$invalid}" ng-form="slumpAcptFrom">
+			<label class="col-lg-4 control-label" for="slump_acpt_from">{{metaData.cols['slump_acpt_from'].label}}</label>
 			<div class="col-lg-8">
-				<input class="form-control" ng-model="formData['slamp_acpt_from']" type="number" ng-required="formData['category'] == 'slamp'" />
+				<input class="form-control" ng-model="formData['slump_acpt_from']" type="number" ng-required="formData['category'] == 'slump'" />
 			</div>
 		</div>
 		
-		<div class="form-group" ng-class="{'has-error': slampAcptTo.$invalid}" ng-form="slampAcptTo">
-			<label class="col-lg-4 control-label" for="slamp_acpt_to">{{metaData.cols['slamp_acpt_to'].label}}</label>
+		<div class="form-group" ng-class="{'has-error': slumpAcptTo.$invalid}" ng-form="slumpAcptTo">
+			<label class="col-lg-4 control-label" for="slump_acpt_to">{{metaData.cols['slump_acpt_to'].label}}</label>
 			<div class="col-lg-8">
-				<input class="form-control" ng-model="formData['slamp_acpt_to']" type="number" ng-required="formData['category'] == 'slamp'" />
+				<input class="form-control" ng-model="formData['slump_acpt_to']" type="number" ng-required="formData['category'] == 'slump'" />
 			</div>
 		</div>
 	</div>

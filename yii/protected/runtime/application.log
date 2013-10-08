@@ -5282,3 +5282,39 @@ Stack trace:
 REQUEST_URI=/alaa/adrr/yii/metaData
 HTTP_REFERER=http://localhost/alaa/adrr/bin/
 ---
+2013/10/08 06:42:24 [error] [php] Undefined index: red (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\ArModel.php:12)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(27): Lab->__get()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData
+2013/10/08 06:42:39 [error] [php] Undefined index: red (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\ArModel.php:12)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(27): Lab->__get()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData
+2013/10/08 06:43:43 [error] [php] Undefined index: red (D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\components\ArModel.php:12)
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\protected\controllers\MetaDataController.php(27): Lab->__get()
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\actions\CInlineAction.php(49): MetaDataController->actionIndex()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(286): MetaDataController->runAction()
+#4 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CController.php(265): MetaDataController->runActionWithFilters()
+#5 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(282): MetaDataController->run()
+#6 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
+REQUEST_URI=/alaa/adrr/yii/metaData

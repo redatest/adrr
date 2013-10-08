@@ -30,10 +30,10 @@
 		<adrr-select2-wrapper ng-model="concTypeId" frequent-prop="very_frequent" adrr-data="concreteTypes" required></adrr-select2-wrapper>
 	</div>
 	
-	<div class="form-group" ng-class="{'has-error': temperatureForm.$invalid || checkTempRed()}" ng-form="temperatureForm" ng-hide="concTypeId === '' || concTypeId === undefined">
-		<label class="control-label">{{metaData.cols['temperature'].label}}</label>
+	<div class="form-group" ng-class="{'has-error': tempForm.$invalid || checkTempRed()}" ng-form="tempForm" ng-hide="concTypeId === '' || concTypeId === undefined">
+		<label class="control-label">{{metaData.cols['temp'].label}}</label>
 		
-		<input class="form-control" type="number" pattern="[0-9]*" ng-model="temperature" required />
+		<input class="form-control" type="number" pattern="[0-9]*" ng-model="temp" required />
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}" ng-form="slumpForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
@@ -142,8 +142,8 @@
 						<td>{{truckLoad}}</td>
 					</tr>
 					<tr>
-						<td>Temperature</td>
-						<td>{{temperature}}</td>
+						<td>temp</td>
+						<td>{{temp}}</td>
 					</tr>
 					<tr>
 						<td>Slump</td>

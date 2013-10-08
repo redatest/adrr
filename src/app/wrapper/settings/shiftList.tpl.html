@@ -2,18 +2,18 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="deselectItem()">&times;</button>
-				<h4 class="modal-title"><any ng-show="isCreate">Create </any><any ng-hide="isCreate">Update </any>IR</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><any ng-show="isCreate">Create </any><any ng-hide="isCreate">Update </any>Shift List</h4>
 			</div>
 			
 			<div class="modal-body" ui-view></div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" ng-click="deselectItem()" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button class="btn btn-warning" type="reset" ng-click="rest()" ng-show="isCreate">
 					Reset
 				</button>
-				<button type="button" class="btn btn-primary" ng-click="submit(formData)" ng-disabled="irForm.$invalid || volumeForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)">
+				<button type="button" class="btn btn-primary" ng-click="submit(formData)" ng-disabled="irForm.$invalid || volumeForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)" data-dismiss="modal">
 					<just_text ng-show="isCreate">Create</just_text>
 					<just_text ng-hide="isCreate">Update</just_text>
 				</button>

@@ -10,11 +10,11 @@
 		{
 			return array
 			(
-				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temperature', 'required'),
-				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temperature, slump, flow, accepted', 'numerical', 'integerOnly' => true),
+				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp', 'required'),
+				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted', 'numerical', 'integerOnly' => true),
 				array('ticket', 'length', 'max' => 255),
 				
-				array('id, date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, truck_load, temperature, slump, flow, accepted', 'safe', 'on' => 'search'),
+				array('id, date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, truck_load, temp, slump, flow, accepted', 'safe', 'on' => 'search'),
 			);
 		}
 		
@@ -38,10 +38,12 @@
 				'dept_time'	   => 'Dept Time',
 				'arriv_time'   => 'Arriv Time',
 				'truck_load'   => 'Truck Load',
-				'temperature'  => 'Temperature',
+				'temp'		   => 'Temperature',
 				'slump'		   => 'Slump',
 				'flow'		   => 'Flow',
 				'accepted'	   => 'Accepted',
+				'red'		   => 'Red Alert',
+				'yellow'	   => 'Yellow Alert'
 			);
 		}
 		

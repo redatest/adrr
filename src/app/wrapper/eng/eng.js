@@ -85,6 +85,9 @@ angular.module
 			}
 		);
 		
+		$scope.red	  = '';
+		$scope.yellow = '';
+		
 		$scope.getItemById = function (arr, id)
 		{
 			if (!angular.isUndefined(arr))
@@ -128,9 +131,11 @@ angular.module
 				dept_time:	  $scope.deptTime,
 				arriv_time:	  $scope.arrivTime,
 				truck_load:	  $scope.truckLoad,
-				temperature:  $scope.temperature,
+				temp:		  $scope.temp,
 				slump:		  $scope.slump,
-				flow:		  $scope.flow
+				flow:		  $scope.flow,
+				red:		  $scope.red,
+				yellow:		  $scope.yellow
 			}).then
 			(
 				function ()
@@ -145,55 +150,105 @@ angular.module
 					$scope.deptTime	   = '00:00:00';
 					$scope.arrivTime   = '00:00:00';
 					$scope.truckLoad   = '';
-					$scope.temperature = '';
+					$scope.temp		   = '';
 					$scope.slump	   = '';
 					$scope.flow		   = '';
+					$scope.red		   = '';
+					$scope.yellow	   = '';
 					
-					$scope.showAlert = true;
-					$scope.alert = true;
+					$rootScope.showAlert = true;
+					$rootScope.alert = true;
 				},
 				
 				function ()
 				{
-					$scope.showAlert = true;
-					$scope.alert = false;
+					$rootScope.showAlert = true;
+					$rootScope.alert = false;
 				}
 			);
 		}
 		
-		$scope.checkFlowRed = function ()
+		function checkRed (from, to, prop, type)
 		{
 			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
 			
-			return (!angular.isUndefined(concType) && (concType.flow_acpt_from > $scope.flow || concType.flow_acpt_to < $scope.flow)) ? true : false;
+			var isRed = !angular.isUndefined(concType) && (concType[from] > prop || concType[to] < prop);
+			
+			var pattern = new RegExp("(" + type + "|," + type + ")", "ig");
+			
+			if (isRed)
+			{
+				if ($scope.red === '')
+				{
+					$scope.red = type;
+				}
+				else if (!pattern.test($scope.red))
+				{
+					$scope.red += ',' + type
+				}
+			}
+			else
+			{
+				$scope.red = $scope.red.replace(pattern, ''); 
+			}
+			
+			$scope.red = $scope.red.replace(/^,/ig, '');
+			
+			return isRed;
+		}
+		
+		function checkYellow (from, to, prop, type)
+		{
+			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+			
+			var isYellow = !angular.isUndefined(concType) && (concType[from] > prop || concType[to] < prop);
+			
+			var pattern = new RegExp("(" + type + "|," + type + ")", "ig");
+			
+			if (isYellow)
+			{
+				if ($scope.yellow === '')
+				{
+					$scope.yellow = type;
+				}
+				else if (!pattern.test($scope.yellow))
+				{
+					$scope.yellow += ',' + type
+				}
+			}
+			else
+			{
+				$scope.yellow = $scope.yellow.replace(pattern, ''); 
+			}
+			
+			$scope.yellow = $scope.yellow.replace(/^,/ig, '');
+			
+			return isYellow;
+		}
+		
+		$scope.checkFlowRed = function ()
+		{
+			return checkRed ('flow_acpt_from', 'flow_acpt_to', $scope.flow, 'flow');
 		}
 		
 		$scope.checkFlowYellow = function ()
 		{
-			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
-			
-			return (!angular.isUndefined(concType) && (concType.flow_norm_from > $scope.flow || concType.flow_norm_to < $scope.flow)) ? true : false;
+			return checkYellow ('flow_norm_from', 'flow_norm_to', $scope.flow, 'flow');
 		}
 		
 		$scope.checkSlumpRed = function ()
 		{
-			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
-			
-			return (!angular.isUndefined(concType) && (concType.slump_acpt_from > $scope.slump || concType.slump_acpt_to < $scope.slump)) ? true : false;
+			return checkRed ('slump_acpt_from', 'slump_acpt_to', $scope.slump, 'slump');
 		}
 		
 		$scope.checkSlumpYellow = function ()
 		{
-			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
-			
-			return (!angular.isUndefined(concType) && (concType.slump_norm_from > $scope.slump || concType.slump_norm_to < $scope.slump)) ? true : false;
+			return checkYellow ('slump_norm_from', 'slump_norm_to', $scope.slump, 'slump');
 		}
 		
 		$scope.checkTempRed = function ()
 		{
-			var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
-			
-			return (!angular.isUndefined(concType) && (concType.temp_from > $scope.temperature || concType.temp_to < $scope.temperature)) ? true : false; 
+			return checkRed ('temp_from', 'temp_to', $scope.temp, 'temp');
 		}
 		
 		$scope.setToday = function ()

@@ -478,7 +478,7 @@ angular.module
 //---------------------------------------------------------
 .controller
 (
-	'SettingsCtrl', function SettingsCtrl ($scope, yii, Restangular, $location, $state)
+	'SettingsCtrl', function SettingsCtrl ($rootScope, $scope, yii, Restangular, $location, $state)
 	{
 		// watch state ----------------------------------------------
 		$scope.isCreate = true;
@@ -513,7 +513,17 @@ angular.module
 		$scope.totalServerItems = 0;
 		$scope.selectedItemIndex = 0;
 		$scope.pagingOptions = { pageSizes: [10, 20, 30], pageSize: 10, currentPage: 1 };
-
+		
+		$(document).on
+		(
+			'hide.bs.modal', '#formModal', function ()
+			{
+				$scope.deselectItem();
+				
+				$scope.$apply();
+			}
+		);
+		
 		$scope.onSelectRow = function (rowItem)
 		{
 			if (rowItem.config.selectedItems.length)
@@ -760,8 +770,17 @@ angular.module
 					function ()
 					{
 						$scope.rest();
-
+						
+						$rootScope.showAlert = true;
+						$rootScope.alert = true;
+						
 						$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems + 1);
+					},
+					
+					function ()
+					{
+						$rootScope.showAlert = true;
+						$rootScope.alert = false;
 					}
 				);
 			}
@@ -791,8 +810,17 @@ angular.module
 					function (rest)
 					{
 						angular.copy(item, $scope.gridData[$scope.selectedItem]);
-
+						
+						$rootScope.showAlert = true;
+						$rootScope.alert = true;
+						
 						$scope.deselectItem();
+					},
+					
+					function ()
+					{
+						$rootScope.showAlert = true;
+						$rootScope.alert = false;
 					}
 				);
 			}
@@ -926,10 +954,10 @@ angular.module
 			$scope.formData['flow_norm_to'] = NaN;
 			$scope.formData['flow_acpt_from'] = NaN;
 			$scope.formData['flow_acpt_to'] = NaN;
-			$scope.formData['slamp_norm_from'] = NaN;
-			$scope.formData['slamp_norm_to'] = NaN;
-			$scope.formData['slamp_acpt_from'] = NaN;
-			$scope.formData['slamp_acpt_to'] = NaN;
+			$scope.formData['slump_norm_from'] = NaN;
+			$scope.formData['slump_norm_to'] = NaN;
+			$scope.formData['slump_acpt_from'] = NaN;
+			$scope.formData['slump_acpt_to'] = NaN;
 		};
 
 		// $scope.columnDefs =
@@ -1016,7 +1044,6 @@ angular.module
 				
 				if (list !== '')
 				{
-					console.log(list);
 					$http
 					({
 						method: 'GET',
@@ -1295,10 +1322,19 @@ angular.module
 							{
 								$scope.al = [];
 								$scope.pt = [];
-
+								
 								$scope.rest();
-
+								
+								$rootScope.showAlert = true;
+								$rootScope.alert = true;
+								
 								$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems + 1);
+							},
+							
+							function ()
+							{
+								$rootScope.showAlert = true;
+								$rootScope.alert = false;
 							}
 						);
 					}
