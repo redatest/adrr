@@ -5318,3 +5318,39 @@ Stack trace:
 #7 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #8 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CWebApplication->run()
 REQUEST_URI=/alaa/adrr/yii/metaData
+2013/10/09 03:00:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/user/jsonLogin".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/user/jsonLo...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/user/jsonLogin/
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/10/09 06:28:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/eng/lab/comments".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/eng/lab/com...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/eng/lab/comments
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/10/09 06:30:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/eng/lab/comments".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/eng/lab/com...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/eng/lab/comments
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---
+2013/10/09 06:32:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "api/eng/lab/comments".' in D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('api/eng/lab/com...')
+#1 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\Raeef\Programs\wamp\www\alaa\adrr\yii\index.php(24): CApplication->run()
+#3 {main}
+REQUEST_URI=/alaa/adrr/yii/api/eng/lab/comments
+HTTP_REFERER=http://localhost/alaa/adrr/bin/
+---

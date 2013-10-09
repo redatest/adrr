@@ -138,26 +138,51 @@ angular.module
 				yellow:		  $scope.yellow
 			}).then
 			(
-				function ()
+				function (data)
 				{
-					$scope.date		   = null;
-					$scope.shiftId	   = '';
-					$scope.supplierId  = '';
-					$scope.concTypeId  = '';
-					$scope.plant	   = '';
-					$scope.truck	   = '';
-					$scope.ticket	   = '';
-					$scope.deptTime	   = '00:00:00';
-					$scope.arrivTime   = '00:00:00';
-					$scope.truckLoad   = '';
-					$scope.temp		   = '';
-					$scope.slump	   = '';
-					$scope.flow		   = '';
-					$scope.red		   = '';
-					$scope.yellow	   = '';
-					
-					$rootScope.showAlert = true;
-					$rootScope.alert = true;
+					if ($scope.comment !== '')
+					{
+						data.all('comments').post
+						({
+							user_id: $rootScope.userID,
+							comment: $scope.comment
+						}).then
+						(
+							function ()
+							{
+								$scope.date		   = null;
+								$scope.shiftId	   = '';
+								$scope.supplierId  = '';
+								$scope.concTypeId  = '';
+								$scope.plant	   = '';
+								$scope.truck	   = '';
+								$scope.ticket	   = '';
+								$scope.deptTime	   = '00:00:00';
+								$scope.arrivTime   = '00:00:00';
+								$scope.truckLoad   = '';
+								$scope.temp		   = '';
+								$scope.slump	   = '';
+								$scope.flow		   = '';
+								$scope.red		   = '';
+								$scope.yellow	   = '';
+								$scope.comment	   = '';
+								
+								$rootScope.showAlert = true;
+								$rootScope.alert = true;
+							},
+							
+							function ()
+							{
+								$rootScope.showAlert = true;
+								$rootScope.alert = false;
+							}
+						);
+					}
+					else
+					{
+						$rootScope.showAlert = true;
+						$rootScope.alert = true;
+					}
 				},
 				
 				function ()

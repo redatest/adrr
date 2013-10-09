@@ -19,7 +19,8 @@
 				
 				Lab::model(),
 				LabPlant::model(),
-				LabTruck::model()
+				LabTruck::model(),
+				LabComment::model()
 			);
 			
 			foreach ($models as $model)

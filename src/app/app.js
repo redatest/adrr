@@ -380,6 +380,7 @@ angular.module
 				$rootScope.isSenior = data.isSenior;
 				$rootScope.isEng	= data.isEng;
 				$rootScope.userName = data.name;
+				$rootScope.userID	= data.id;
 			}
 		);
 	}

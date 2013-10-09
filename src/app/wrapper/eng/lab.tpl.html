@@ -3,7 +3,7 @@
 	<any ng-hide="alert">Something went wrong.</any>
 </div>
 
-<form role="form" name="mainForm" class="col-md-4" novalidate >
+<form role="form" name="mainForm" class="col-md-4 labForm" novalidate >
 	<div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
 		<label class="control-label">{{metaData.cols['date'].label}}</label>
 		
@@ -48,6 +48,12 @@
 		<input class="form-control" type="number" pattern="[0-9]*" ng-model="flow" ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'" />
 	</div>
 	
+	<div class="from-group" ng-class="{ 'has-error': red !== '' }" ng-show="red !== '' || yellow !== ''" ng-form="commentForm">
+		<label class="control-label">Comment</label>
+		
+		<textarea ng-model="comment" class="form-control" rows="3" ng-required="red !== ''"></textarea>
+	</div>
+	
 	<div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
 		<label class="control-label">{{metaData.cols['plant'].label}}</label>
 		
@@ -82,6 +88,12 @@
 		<label class="control-label">{{metaData.cols['truck_load'].label}}</label>
 		
 		<input adrr-num-range adrr-options="adrrTimepickerOptions" min="1" max="12" type="text" pattern="[0-9]*" value="" ng-model="truckLoad" class="form-control" required />
+	</div>
+	
+	<div class="from-group" ng-show="red === '' && yellow === ''">
+		<label class="control-label">Comment</label>
+		
+		<textarea ng-model="comment" class="form-control" rows="3"></textarea>
 	</div>
 	
 	<div class="form-group">

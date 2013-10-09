@@ -20,7 +20,10 @@
 		
 		public function relations()
 		{
-			return array();
+			return array
+			(
+				'comments' => array(self::HAS_MANY, 'LabComment', 'lab_id')
+			);
 		}
 		
 		public function attributeLabels()
