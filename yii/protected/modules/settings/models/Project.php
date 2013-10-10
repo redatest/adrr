@@ -11,8 +11,7 @@
 			return array
 			(
 				array('name', 'required'),
-				array('name', 'length', 'max' => 255),
-				array('id, name, description', 'safe', 'on' => 'search'),
+				array('name', 'length', 'max' => 255)
 			);
 		}
 		
@@ -25,21 +24,10 @@
 		{
 			return array
 			(
-				'id' => 'ID',
-				'name' => 'Name',
-				'description' => 'Description',
+				'id'		  => 'ID',
+				'name'		  => 'Name',
+				'description' => 'Description'
 			);
-		}
-		
-		public function search()
-		{
-			$criteria = new CDbCriteria;
-
-			$criteria->compare('id', $this->id);
-			$criteria->compare('name', $this->name, true);
-			$criteria->compare('description', $this->description, true);
-
-			return new CActiveDataProvider($this, array('criteria' => $criteria));
 		}
 		
 		public static function model($className = __CLASS__)

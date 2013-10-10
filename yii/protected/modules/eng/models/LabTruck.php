@@ -11,9 +11,7 @@
 			return array
 			(
 				array('truck', 'required'),
-				array('truck', 'numerical', 'integerOnly' => true),
-				
-				array('truck', 'safe', 'on' => 'search'),
+				array('truck', 'numerical', 'integerOnly' => true)
 			);
 		}
 		
@@ -25,15 +23,6 @@
 		public function attributeLabels()
 		{
 			return array ('truck' => 'Truck');
-		}
-		
-		public function search()
-		{
-			$criteria = new CDbCriteria;
-
-			$criteria->compare('truck', $this->truck);
-
-			return new CActiveDataProvider($this, array('criteria' => $criteria));
 		}
 		
 		public static function model($className = __CLASS__)

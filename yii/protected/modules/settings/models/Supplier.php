@@ -12,8 +12,7 @@
 			(
 				array('name, prefix, very_frequent', 'required'),
 				array('state, very_frequent', 'numerical', 'integerOnly' => true),
-				array('name, prefix', 'length', 'max' => 255),
-				array('id, name, prefix, state, very_frequent, description', 'safe', 'on' => 'search'),
+				array('name, prefix', 'length', 'max' => 255)
 			);
 		}
 		
@@ -31,7 +30,7 @@
 				'prefix'		=> 'Prefix',
 				'state'			=> 'Active',
 				'very_frequent' => 'Very Frequent',
-				'description'	=> 'Description',
+				'description'	=> 'Description'
 			);
 		}
 		

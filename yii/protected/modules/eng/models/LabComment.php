@@ -11,8 +11,7 @@
 			return array
 			(
 				array('lab_id, user_id, comment', 'required'),
-				array('lab_id, user_id', 'numerical', 'integerOnly' => true),
-				array('id, lab_id, user_id, comment', 'safe', 'on' => 'search'),
+				array('lab_id, user_id', 'numerical', 'integerOnly' => true)
 			);
 		}
 		
@@ -25,8 +24,8 @@
 		{
 			return array
 			(
-				'id' => 'ID',
-				'lab_id' => 'Lab',
+				'id'	  => 'ID',
+				'lab_id'  => 'Lab',
 				'user_id' => 'User',
 				'comment' => 'Comment',
 			);
