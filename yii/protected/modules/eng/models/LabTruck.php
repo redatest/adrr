@@ -3,7 +3,7 @@
 	{
 		public function tableName()
 		{
-			return '{{lab_truck}}';
+			return 'view_lab_truck';
 		}
 		
 		public function rules()
