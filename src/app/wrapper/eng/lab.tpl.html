@@ -9,7 +9,7 @@
 		
 		<div>
 			<button class="btn btn-default" ng-click="setToday()">Today</button>
-			<input readonly="readonly" ui-date ui-date-format="yy-mm-dd" ng-model="date" class="form-control" type="text" required />
+			<input readonly="readonly" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" ng-model="date" class="form-control" type="text" required />
 		</div>
 	</div>
 	<div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
@@ -97,13 +97,13 @@
 	</div>
 	
 	<div class="form-group">
-		<button class="btn btn-primary" data-toggle="modal" href="#myModal" onclick="return false;" ng-disabled="mainForm.$invalid">
+		<button class="btn btn-primary" data-toggle="modal" href="#confirmationModal" onclick="return false;" ng-disabled="mainForm.$invalid">
 			Save
 		</button>
 	</div>
 </form>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">

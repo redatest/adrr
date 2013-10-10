@@ -10,10 +10,10 @@
 		{
 			return array
 			(
-				array('name', 'required'),
-				array('state', 'numerical', 'integerOnly' => true),
+				array('name, very_frequent', 'required'),
+				array('state, very_frequent', 'numerical', 'integerOnly' => true),
 				array('name', 'length', 'max' => 255),
-				array('id, name, state, description', 'safe', 'on' => 'search'),
+				array('id, name, state, very_frequent, description', 'safe', 'on' => 'search'),
 			);
 		}
 		
@@ -26,10 +26,11 @@
 		{
 			return array
 			(
-				'id' => 'ID',
-				'name' => 'Name',
-				'state' => 'Active',
-				'description' => 'Description',
+				'id'			=> 'ID',
+				'name'			=> 'Name',
+				'state'			=> 'Active',
+				'very_frequent' => 'Very Frequent',
+				'description'	=> 'Description',
 			);
 		}
 		

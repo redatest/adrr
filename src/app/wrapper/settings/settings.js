@@ -516,7 +516,7 @@ angular.module
 		
 		$(document).on
 		(
-			'hide.bs.modal', '#formModal', function ()
+			'hide.bs.modal', '#formModal, #myModal', function ()
 			{
 				$scope.deselectItem();
 				
