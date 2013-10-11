@@ -157,6 +157,8 @@ angular.module
 			
 			require: 'ngModel',
 			
+			scope: false,
+			
 			link: function (scope, element, attrs, ngModel)
 			{
 				ngModel.$render = function ()
@@ -174,7 +176,7 @@ angular.module
 				
 				function check (val)
 				{
-					if (val !== '' && val !== '-')
+					if (val !== '' && val !== '-' && !angular.isUndefined(val))
 					{
 						val = parseInt(val, 10);
 						
@@ -193,6 +195,32 @@ angular.module
 						}
 						
 						val = isNaN(val) ? (angular.isUndefined(attrs.value) ? attrs.min : attrs.value) : val;
+						
+						if (!angular.isUndefined(attrs.length))
+						{
+							var valStr = val.toString();
+							
+							var isMin = valStr.charAt(0) === '-';
+							
+							var valLength = parseInt(attrs.length, 10) - valStr.length - (isMin ? 1 : 0);
+							
+							if (isMin)
+							{
+								for (var i = 0; i < valLength; i++)
+								{
+									valStr = valStr.substr (0, 1) + '0' + valStr.substr(1);
+								}
+							}
+							else
+							{
+								for (i = 0; i < valLength; i++)
+								{
+									valStr = '0' + valStr;
+								}
+							}
+							
+							val = valStr;
+						}
 					}
 					
 					element.val(val);
@@ -227,10 +255,10 @@ angular.module
 							'</tr>' +
 							'<tr>' +
 								'<td>' +
-									'<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
+									'<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" length="2" class="form-control text-center" />' +
 								'</td>' +
 								'<td>' +
-									'<input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
+									'<input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" length="2" class="form-control text-center" />' +
 								'</td>' +
 							'</tr>' +
 							'<tr>' +
@@ -269,8 +297,6 @@ angular.module
 					
 					$scope.formatTime();
 				}
-				
-				
 			},
 			
 			link: function (scope, element, attrs, ctrl)
@@ -279,20 +305,23 @@ angular.module
 				(
 					'ngModel', function (newVal, oldVal)
 					{
-						var timeArr = newVal.split(':');
-						
-						scope.hour = timeArr[0];
-						
-						scope.min = timeArr[1];
-						
+						if (!angular.isUndefined(newVal))
+						{
+							var timeArr = newVal.split(':');
+							
+							scope.hour = timeArr[0];
+							
+							scope.min = timeArr[1];
+						}
 					}, true
 				);
 				
 				scope.formatTime = function ()
 				{
 					var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
+						time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
 					
-					time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
+					ctrl.$setViewValue (time);
 					
 					scope.ngModel = time;
 				};
@@ -309,11 +338,6 @@ angular.module
 							}
 						}
 					);
-				}
-				
-				if (angular.isUndefined(scope.ngModel))
-				{
-					scope.ngModel = '00:00:00';
 				}
 			}
 		}

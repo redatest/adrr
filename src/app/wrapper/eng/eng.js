@@ -64,8 +64,8 @@ angular.module
 		$scope.adrrTimepickerOptions =
 		{
 			template: '<table class="col-xs-12"><tr>' +
-						  '<td><input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
-						  '<td><input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
+						  '<td><input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
+						  '<td><input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
 					  '</tr></table>'
 		};
 		
@@ -157,8 +157,8 @@ angular.module
 								$scope.plant	   = '';
 								$scope.truck	   = '';
 								$scope.ticket	   = '';
-								$scope.deptTime	   = '00:00:00';
-								$scope.arrivTime   = '00:00:00';
+								$scope.deptTime	   = '';
+								$scope.arrivTime   = '';
 								$scope.truckLoad   = '';
 								$scope.temp		   = '';
 								$scope.slump	   = '';

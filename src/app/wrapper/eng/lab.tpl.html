@@ -72,16 +72,16 @@
 		<input class="form-control" type="text" ng-model="ticket" required />
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': deptTimeForm.$invalid}" ng-form="deptTimeForm">
 		<label class="control-label">{{metaData.cols['dept_time'].label}}</label>
 		
-		<adrr-timepicker adrr-options="adrrTimepickerOptions" ng-model="deptTime"></adrr-timepicker>
+		<adrr-timepicker required adrr-options="adrrTimepickerOptions" ng-model="deptTime"></adrr-timepicker>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': arivTimeForm.$invalid}" ng-form="arivTimeForm">
 		<label class="control-label">{{metaData.cols['arriv_time'].label}}</label>
 		
-		<adrr-timepicker adrr-options="adrrTimepickerOptions" ng-model="arrivTime"></adrr-timepicker>
+		<adrr-timepicker required adrr-options="adrrTimepickerOptions" ng-model="arrivTime"></adrr-timepicker>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}" ng-form="truckLoadForm">
