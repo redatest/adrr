@@ -7,7 +7,7 @@ module.exports =
 		js: ['src/**/*.js'],
 		atpl: ['src/app/**/*.tpl.html'],
 		ctpl: ['src/common/**/*.tpl.html'],
-		less: 'src/less/main.less'
+		less: ['src/less/main.less', 'src/less/login.less']
 	},
 
 	vendor_files:
