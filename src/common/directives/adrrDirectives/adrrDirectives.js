@@ -150,6 +150,45 @@ angular.module
 
 .directive
 (
+	'adrrB3radio', function ()
+	{
+		return {
+			restrict: 'A',
+			
+			scope: false,
+			
+			require: 'ngModel',
+			
+			link: function (scope, element, attrs, ctrl)
+			{
+				element.on
+				(
+					'click', function (evt)
+					{
+						var input = $(evt.target).children('input');
+						
+						scope.$apply(ctrl.$setViewValue(input.val()));
+					}
+				);
+				
+				ctrl.$render = function ()
+				{
+					var da = element.find('input[value=' + ctrl.$viewValue + ']');
+					
+					if (!angular.isUndefined(da))
+					{
+						element.children().removeClass("active");
+						
+						da.parent().addClass('active');
+					}
+				}
+			}
+		}
+	}
+)
+
+.directive
+(
 	'adrrNumRange', function ()
 	{
 		return {

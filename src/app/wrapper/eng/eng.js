@@ -135,7 +135,8 @@ angular.module
 				slump:		  $scope.slump,
 				flow:		  $scope.flow,
 				red:		  $scope.red,
-				yellow:		  $scope.yellow
+				yellow:		  $scope.yellow,
+				accepted:	  $scope.accepted
 			}).then
 			(
 				function (data)
@@ -166,6 +167,7 @@ angular.module
 								$scope.red		   = '';
 								$scope.yellow	   = '';
 								$scope.comment	   = '';
+								$scope.accepted	   = '';
 								
 								$rootScope.showAlert = true;
 								$rootScope.alert = true;

@@ -10,8 +10,8 @@
 		{
 			return array
 			(
-				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp', 'required'),
-				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted', 'numerical', 'integerOnly' => true),
+				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp, returned, approved, archived', 'required'),
+				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted, returned, approved, archived', 'numerical', 'integerOnly' => true),
 				array('ticket', 'length', 'max' => 255),
 			);
 		}
@@ -45,7 +45,10 @@
 				'accepted'	   => 'Accepted',
 				'red'		   => 'Red Alert',
 				'yellow'	   => 'Yellow Alert',
-				'create_time'  => 'Create Time'
+				'create_time'  => 'Create Time',
+				'returned'	   => 'Returend',
+				'approved'	   => 'Approved',
+				'archived'	   => 'Archived'
 			);
 		}
 		

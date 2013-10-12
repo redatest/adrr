@@ -90,6 +90,20 @@
 		<input adrr-num-range adrr-options="adrrTimepickerOptions" min="1" max="12" type="text" pattern="[0-9]*" value="" ng-model="truckLoad" class="form-control" required />
 	</div>
 	
+	<div class="form-group" ng-class="{'has-error': acceptedForm.$invalid}" ng-form="acceptedForm">
+		<label class="control-label">{{metaData.cols['accepted'].label}}</label>
+		
+		<div class="btn-group" data-toggle="buttons" adrr-b3radio ng-model="accepted" required>
+			<label class="btn btn-primary">
+				<input type="radio" value="1"> Yes
+			</label>
+			
+			<label class="btn btn-primary">
+				<input type="radio" value="0"> No
+			</label>
+		</div>
+	</div>
+	
 	<div class="from-group" ng-show="red === '' && yellow === ''">
 		<label class="control-label">Comment</label>
 		
