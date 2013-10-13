@@ -6,115 +6,115 @@ angular.module
 	]
 )
 
-.directive
-(
-	'adrrSelect2Wrapper', function ()
-	{
-		return {
-			restrict: 'E',
+// .directive
+// (
+	// 'adrrSelect2Wrapper', function ()
+	// {
+		// return {
+			// restrict: 'E',
 			
-			require: 'ngModel',
+			// require: 'ngModel',
 			
-			scope:
-			{
-				ngModel: '=',
-				adrrData: '&'
-			},
+			// scope:
+			// {
+				// ngModel: '=',
+				// adrrData: '&'
+			// },
 			
-			template: '<div><button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button></div><div class="s2w"></div>',
+			// template: '<div><button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button></div><div class="s2w"></div>',
 			
-			link: function (scope, element, attrs, ctrl)
-			{
-				var data = [];
+			// link: function (scope, element, attrs, ctrl)
+			// {
+				// var data = [];
 				
-				var $div = element.find('.s2w');
+				// var $div = element.find('.s2w');
 				
-				function format (item)
-				{
-					return item.name;
-				}
+				// function format (item)
+				// {
+					// return item.name;
+				// }
 				
-				scope.programmaticallySelect = function (id)
-				{
-					ctrl.$setViewValue(id);
+				// scope.programmaticallySelect = function (id)
+				// {
+					// ctrl.$setViewValue(id);
 					
-					scope.ngModel = id;
+					// scope.ngModel = id;
 					
-					if (!angular.isUndefined(id))
-					{
-						$div.select2('val', id.toString() );
-					}
-				};
+					// if (!angular.isUndefined(id))
+					// {
+						// $div.select2('val', id.toString() );
+					// }
+				// };
 				
-				scope.$watch
-				(
-					'adrrData()', function (newVal)
-					{
-						data = newVal;
+				// scope.$watch
+				// (
+					// 'adrrData()', function (newVal)
+					// {
+						// data = newVal;
 						
-						$div.select2
-						({
-							data:
-							{
-								results: data,
-								text: 'name'
-							},
+						// $div.select2
+						// ({
+							// data:
+							// {
+								// results: data,
+								// text: 'name'
+							// },
 							
-							width: '100%',
+							// width: '100%',
 							
-							formatSelection: format,
+							// formatSelection: format,
 							
-							formatResult: format,
+							// formatResult: format,
 							
-							allowClear: true,
+							// allowClear: true,
 							
-							placeholder: 'Select...'
-						});
+							// placeholder: 'Select...'
+						// });
 						
-						scope.frequents = _.filter
-						(
-							scope.adrrData(), function (item)
-							{
-								if (attrs.frequentProp)
-								{
-									return item[attrs.frequentProp];
-								}
-								else
-								{
-									return item.mostFrequent;
-								}
-							}
-						);
+						// scope.frequents = _.filter
+						// (
+							// scope.adrrData(), function (item)
+							// {
+								// if (attrs.frequentProp)
+								// {
+									// return item[attrs.frequentProp];
+								// }
+								// else
+								// {
+									// return item.mostFrequent;
+								// }
+							// }
+						// );
 						
-					}, true
-				);
+					// }, true
+				// );
 				
-				scope.$watch
-				(
-					'ngModel', function (newVal)
-					{
-						scope.programmaticallySelect(newVal);
+				// scope.$watch
+				// (
+					// 'ngModel', function (newVal)
+					// {
+						// scope.programmaticallySelect(newVal);
 						
-					}, true
-				);
+					// }, true
+				// );
 				
-				$div.on
-				(
-					'change', function (evt)
-					{
-						scope.$apply
-						(
-							function ()
-							{
-								scope.ngModel = evt.val;
-							}
-						)
-					}
-				)
-			}
-		}
-	}
-)
+				// $div.on
+				// (
+					// 'change', function (evt)
+					// {
+						// scope.$apply
+						// (
+							// function ()
+							// {
+								// scope.ngModel = evt.val;
+							// }
+						// )
+					// }
+				// )
+			// }
+		// }
+	// }
+// )
 
 // .directive
 // (
@@ -147,6 +147,85 @@ angular.module
 		// }
 	// }
 // )
+
+.directive
+(
+	'adrrSelect2Wrapper', function ()
+	{
+		return {
+			restrict: 'E',
+			
+			require: 'ngModel',
+			
+			scope:
+			{
+				ngModel: '=',
+				adrrData: '&'
+			},
+			
+			template: '<div>' + 
+						'<button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button>' +
+					  '</div>' +
+					  '<select class="form-control s2w"><option value="">Select...</option><option ng-repeat="item in adrrData()" value="{{item.id}}" ng-selected="item.id == ngModel">{{item.name}}</option></select>',
+			
+			link: function (scope, element, attrs, ctrl)
+			{
+				var data = [];
+				
+				var $select = element.find('.s2w');
+				
+				scope.$watch
+				(
+					'adrrData()', function (newVal)
+					{
+						scope.frequents = _.filter
+						(
+							newVal, function (item)
+							{
+								if (attrs.frequentProp)
+								{
+									return item[attrs.frequentProp];
+								}
+								else
+								{
+									return item.mostFrequent;
+								}
+							}
+						);
+					}
+				);
+				
+				scope.programmaticallySelect = function (id)
+				{
+					scope.ngModel = id;
+				}
+				
+				$select.on
+				(
+					'change', function (evt)
+					{
+						scope.ngModel = $select.val();
+						
+						if (!scope.$$phase)
+						{
+							scope.$apply();
+						}
+					}
+				);
+				
+				scope.$watch
+				(
+					'ngModel', function (newVal)
+					{
+						ctrl.$setViewValue (newVal);
+						
+						$select.val (newVal);
+					}, true
+				);
+			}
+		}
+	}
+)
 
 .directive
 (

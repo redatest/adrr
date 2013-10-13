@@ -29,13 +29,34 @@ angular.module
 			'wrapper.eng.lab',
 			{
 				url: '^/labs',
+				
 				title: 'Labs',
+				
 				views:
 				{
 					"@wrapper.eng":
 					{
 						controller: 'LabCtrl',
 						templateUrl: 'wrapper/eng/lab.tpl.html'
+					}
+				}
+			}
+		)
+		
+		.state
+		(
+			'wrapper.eng.lab.create',
+			{
+				url: '^/labs/create',
+				
+				title: 'Create Lab',
+				
+				views:
+				{
+					"@wrapper.eng":
+					{
+						controller: 'LabCreateCtrl',
+						templateUrl: 'wrapper/eng/labForm.tpl.html'
 					}
 				}
 			}
@@ -53,11 +74,44 @@ angular.module
 
 .controller
 (
-	'LabCtrl', function ($rootScope, $scope, yii, Restangular, $q)
+	'LabCtrl', function ($rootScope, $scope, yii, Restangular)
 	{
+		// ------------------------------------------------
 		$rootScope.pageHeader = 'Labs';
 		
 		$rootScope.breadcrumbItems = ['Home', 'Labs'];
+		// ------------------------------------------------
+		
+		$scope.pagingOptions =
+		{
+			pageSizes: [1, 250, 500, 1000],
+			pageSize: 1,
+			currentPage: 1
+		};
+		
+		$scope.gridOptions =
+		{
+			data: 'motherFucker',
+			enablePaging: true,
+			showFooter: true,
+			totalServerItems: 'totalServerItems',
+			pagingOptions: $scope.pagingOptions,
+			adrrPagingOptions: 'pagingOptions',
+			numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numRows',
+			dataSource: appConfig.yiiUrl + '/api/eng/lab',
+			multiSelect: false,
+			plugins: [new ngGridFlexibleHeightPlugin( { minHeight: 150 } )],
+		};
+	}
+)
+
+.controller
+(
+	'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $q)
+	{
+		$rootScope.pageHeader = 'Labs';
+		
+		$rootScope.breadcrumbItems = ['Home', 'Labs', 'Create'];
 		
 		$scope.metaData = yii['Lab'];
 		
