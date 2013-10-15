@@ -9,7 +9,7 @@
 		<label ng-hide="attr.type === 'integer' && attr.size === 1" class="col-lg-4 control-label" for="{{attr.name}}">{{attr.label}}</label>
 
 		<ng-switch on="attr.type">
-
+			
 			<blank ng-switch-when="string">
 				<ng-switch on="attr.dbType">
 					<div class="col-lg-8" ng-switch-when="text">
@@ -18,6 +18,7 @@
 					<div class="col-lg-8" ng-switch-when="date">
 						<input ui-date ng-model="formData[attr.name]" class="form-control" ng-required="!attr.allowNull" />
 					</div>
+					<div class="col-lg-8" ng-switch-when="time"><adrr-timepicker required ng-model="arrivTime"></adrr-timepicker></div>
 					<div class="col-lg-8" ng-switch-default>
 						<input class="form-control" ng-model="formData[attr.name]" type="text" ng-required="!attr.allowNull" />
 					</div>

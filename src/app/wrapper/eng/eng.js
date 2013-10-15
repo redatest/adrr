@@ -84,8 +84,8 @@ angular.module
 		
 		$scope.pagingOptions =
 		{
-			pageSizes: [1, 250, 500, 1000],
-			pageSize: 1,
+			pageSizes: [10, 20, 30],
+			pageSize: 10,
 			currentPage: 1
 		};
 		
@@ -97,10 +97,33 @@ angular.module
 			totalServerItems: 'totalServerItems',
 			pagingOptions: $scope.pagingOptions,
 			adrrPagingOptions: 'pagingOptions',
-			numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numRows',
-			dataSource: appConfig.yiiUrl + '/api/eng/lab',
+			numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
+			dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
 			multiSelect: false,
 			plugins: [new ngGridFlexibleHeightPlugin( { minHeight: 150 } )],
+			columnDefs:
+			[
+				{ field: 'date', displayName: 'Date' },
+				{ field: 'shift_id', displayName: 'Shift' },
+				{ field: 'supplier_id', displayName: 'Supplier' },
+				{ field: 'conc_type_id', displayName: 'concrete Type' },
+				{ field: 'plant', displayName: 'Plant' },
+				{ field: 'truck', displayName: 'Truck' },
+				{ field: 'ticket', displayName: 'Ticket' },
+				{ field: 'dept_time', displayName: 'Departure Time' },
+				{ field: 'arriv_time', displayName: 'Arrival Time' },
+				{ field: 'truck_load', displayName: 'Truck Load' },
+				{ field: 'temp', displayName: 'Temperature' },
+				{ field: 'slump', displayName: 'Slump' },
+				{ field: 'flow', displayName: 'Flow' },
+				{ field: 'accepted', displayName: 'Accepted' }
+			],
+			rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== \'\', \'redBg\': row.getProperty(\'red\') !== \'\'}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
+							'<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
+								'&nbsp;' +
+							'</div>' +
+							'<div ng-cell></div>' +
+						 '</div>'
 		};
 	}
 )
@@ -114,14 +137,6 @@ angular.module
 		$rootScope.breadcrumbItems = ['Home', 'Labs', 'Create'];
 		
 		$scope.metaData = yii['Lab'];
-		
-		$scope.adrrTimepickerOptions =
-		{
-			template: '<table class="col-xs-12"><tr>' +
-						  '<td><input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
-						  '<td><input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
-					  '</tr></table>'
-		};
 		
 		$q.all([Restangular.all('settings/shiftType').getList(), Restangular.all('settings/supplier').getList(), Restangular.all('settings/concreteType').getList(), Restangular.all('eng/labPlant').getList(), Restangular.all('eng/labTruck').getList()]).then
 		(
@@ -171,6 +186,60 @@ angular.module
 		
 		$scope.model = Restangular.all('eng/lab');
 		
+		$scope.validateTime = function ()
+		{
+			var overlap = 0;
+			
+			var shiftType = null;
+			
+			if (!angular.isUndefined($scope.shiftId) && $scope.shiftId !== '')
+			{
+				shiftType = $scope.getItemById($scope.shiftTypes, $scope.shiftId);
+				
+				overlap = parseInt(shiftType.overlap, 10);
+			}
+			
+			if (!angular.isUndefined($scope.deptTime) && !angular.isUndefined($scope.arrivTime))
+			{
+				if (overlap)
+				{
+					if ($scope.deptTime > $scope.arrivTime)
+					{
+						return $scope.deptTime > shiftType.end_time && $scope.arrivTime < shiftType.start_time
+					}
+					
+					return true;
+				}
+				else
+				{
+					return $scope.deptTime < $scope.arrivTime;
+				}
+			}
+			
+			return false;
+		}
+		
+		$scope.rest = function ()
+		{
+			$scope.date		   = null;
+			$scope.shiftId	   = '';
+			$scope.supplierId  = '';
+			$scope.concTypeId  = '';
+			$scope.plant	   = '';
+			$scope.truck	   = '';
+			$scope.ticket	   = '';
+			$scope.deptTime	   = '';
+			$scope.arrivTime   = '';
+			$scope.truckLoad   = '';
+			$scope.temp		   = '';
+			$scope.slump	   = '';
+			$scope.flow		   = '';
+			$scope.red		   = '';
+			$scope.yellow	   = '';
+			$scope.comment	   = '';
+			$scope.accepted	   = '';
+		}
+		
 		$scope.submit = function ()
 		{
 			$scope.model.post
@@ -182,8 +251,8 @@ angular.module
 				plant:		  $scope.plant,
 				truck:		  $scope.truck,
 				ticket:		  $scope.ticket,
-				dept_time:	  $scope.deptTime,
-				arriv_time:	  $scope.arrivTime,
+				dept_time:	  $scope.date + ' ' + $scope.deptTime,
+				arriv_time:	  $scope.date + ' ' + $scope.arrivTime,
 				truck_load:	  $scope.truckLoad,
 				temp:		  $scope.temp,
 				slump:		  $scope.slump,
@@ -195,7 +264,7 @@ angular.module
 			(
 				function (data)
 				{
-					if ($scope.comment !== '')
+					if (!angular.isUndefined($scope.comment) && $scope.comment !== '')
 					{
 						data.all('comments').post
 						({
@@ -205,23 +274,7 @@ angular.module
 						(
 							function ()
 							{
-								$scope.date		   = null;
-								$scope.shiftId	   = '';
-								$scope.supplierId  = '';
-								$scope.concTypeId  = '';
-								$scope.plant	   = '';
-								$scope.truck	   = '';
-								$scope.ticket	   = '';
-								$scope.deptTime	   = '';
-								$scope.arrivTime   = '';
-								$scope.truckLoad   = '';
-								$scope.temp		   = '';
-								$scope.slump	   = '';
-								$scope.flow		   = '';
-								$scope.red		   = '';
-								$scope.yellow	   = '';
-								$scope.comment	   = '';
-								$scope.accepted	   = '';
+								$scope.rest();
 								
 								$rootScope.showAlert = true;
 								$rootScope.alert = true;
@@ -236,6 +289,8 @@ angular.module
 					}
 					else
 					{
+						$scope.rest();
+						
 						$rootScope.showAlert = true;
 						$rootScope.alert = true;
 					}

@@ -46,6 +46,74 @@ angular.module
 
 .directive
 (
+	'adrrTimepicker', function ($compile)
+	{
+		return {
+			restrict: 'E',
+			
+			require: 'ngModel',
+			
+			scope:
+			{
+				ngModel: '=',
+				adrrOptions: '&'
+			},
+			
+			template: '<table class="col-xs-12"><tr>' +
+						  '<td><input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
+						  '<td><input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
+					  '</tr></table>',
+			
+			link: function (scope, element, attrs, ctrl)
+			{
+				scope.$watch
+				(
+					'ngModel', function (newVal, oldVal)
+					{
+						if (!angular.isUndefined(newVal))
+						{
+							var timeArr = newVal.split(':');
+							
+							scope.hour = timeArr[0];
+							
+							scope.min = timeArr[1];
+						}
+					}, true
+				);
+				
+				scope.formatTime = function ()
+				{
+					if (!angular.isUndefined(scope.hour) && scope.hour !== null && scope.hour !== '' && !angular.isUndefined(scope.min) && scope.min !== null && scope.min !== '')
+					{
+						var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
+							time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
+						
+						ctrl.$setViewValue (time);
+						
+						scope.ngModel = time;
+					}
+				};
+				
+				if (!angular.isUndefined(attrs.adrrOptions))
+				{
+					scope.$watch
+					(
+						'adrrOptions()', function (newVal)
+						{
+							if (!angular.isUndefined(newVal.template))
+							{
+								element.html($compile(newVal.template)(scope));
+							}
+						}
+					);
+				}
+			}
+		}
+	}
+)
+
+.directive
+(
 	'adrrSsNgGrid', function ($http, $q)
 	{
 		return {

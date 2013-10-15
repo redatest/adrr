@@ -277,18 +277,23 @@ angular.module
 			
 			scope: false,
 			
-			link: function (scope, element, attrs, ngModel)
+			link: function (scope, element, attrs, ctrl)
 			{
-				ngModel.$render = function ()
+				ctrl.$render = function ()
 				{
-					check (ngModel.$modelValue);
+					check (ctrl.$modelValue);
 				};
 				
 				element.on
 				(
 					'keyup change blur', function (evt)
 					{
-						scope.$apply (check(element.val()));
+						check (element.val());
+						
+						if (!scope.$$phase)
+						{
+							scope.$apply();
+						}
 					}
 				);
 				
@@ -341,123 +346,123 @@ angular.module
 						}
 					}
 					
-					element.val(val);
+					ctrl.$setViewValue (val);
 					
-					ngModel.$setViewValue(val);
+					element.val (val);
 				}
 			}
 		};
 	}
 )
 
-.directive
-(
-	'adrrTimepicker', function ($compile)
-	{
-		return {
-			restrict: 'E',
+// .directive
+// (
+	// 'adrrTimepicker', function ($compile)
+	// {
+		// return {
+			// restrict: 'E',
 			
-			require: 'ngModel',
+			// require: 'ngModel',
 			
-			scope:
-			{
-				ngModel: '=',
-				adrrOptions: '&'
-			},
+			// scope:
+			// {
+				// ngModel: '=',
+				// adrrOptions: '&'
+			// },
 			
-			template: '<div class="well well-small">' +
-						'<table class="col-xs-12">' +
-							'<tr>' +
-								'<td class="text-center"><button class="btn btn-default" ng-click="addHour()" ng-disabled="hour > 22"><span class="glyphicon glyphicon-chevron-up"></span></button></td>' +
-								'<td class="text-center"><button class="btn btn-default" ng-click="addMin()" ng-disabled="min > 58"><span class="glyphicon glyphicon-chevron-up"></span></button></td>' +
-							'</tr>' +
-							'<tr>' +
-								'<td>' +
-									'<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" length="2" class="form-control text-center" />' +
-								'</td>' +
-								'<td>' +
-									'<input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" length="2" class="form-control text-center" />' +
-								'</td>' +
-							'</tr>' +
-							'<tr>' +
-								'<td class="text-center"><button class="btn btn-default" ng-click="minHour()" ng-disabled="hour < 1"><span class="glyphicon glyphicon-chevron-down"></span></button></td>' +
-								'<td class="text-center"><button class="btn btn-default" ng-click="minMin()" ng-disabled="min < 1"><span class="glyphicon glyphicon-chevron-down"></span></button></td>' +
-							'</tr>' +
-						'</table>' +
-					  '</div>',
+			// template: '<div class="well well-small">' +
+						// '<table class="col-xs-12">' +
+							// '<tr>' +
+								// '<td class="text-center"><button class="btn btn-default" ng-click="addHour()" ng-disabled="hour > 22"><span class="glyphicon glyphicon-chevron-up"></span></button></td>' +
+								// '<td class="text-center"><button class="btn btn-default" ng-click="addMin()" ng-disabled="min > 58"><span class="glyphicon glyphicon-chevron-up"></span></button></td>' +
+							// '</tr>' +
+							// '<tr>' +
+								// '<td>' +
+									// '<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" length="2" class="form-control text-center" />' +
+								// '</td>' +
+								// '<td>' +
+									// '<input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" length="2" class="form-control text-center" />' +
+								// '</td>' +
+							// '</tr>' +
+							// '<tr>' +
+								// '<td class="text-center"><button class="btn btn-default" ng-click="minHour()" ng-disabled="hour < 1"><span class="glyphicon glyphicon-chevron-down"></span></button></td>' +
+								// '<td class="text-center"><button class="btn btn-default" ng-click="minMin()" ng-disabled="min < 1"><span class="glyphicon glyphicon-chevron-down"></span></button></td>' +
+							// '</tr>' +
+						// '</table>' +
+					  // '</div>',
 			
-			controller: function ($scope, $element, $attrs)
-			{
-				$scope.addHour = function ()
-				{
-					$scope.hour++;
+			// controller: function ($scope, $element, $attrs)
+			// {
+				// $scope.addHour = function ()
+				// {
+					// $scope.hour++;
 					
-					$scope.formatTime();
-				}
+					// $scope.formatTime();
+				// }
 				
-				$scope.addMin = function ()
-				{
-					$scope.min++;
+				// $scope.addMin = function ()
+				// {
+					// $scope.min++;
 					
-					$scope.formatTime();
-				}
+					// $scope.formatTime();
+				// }
 				
-				$scope.minHour = function ()
-				{
-					$scope.hour--;
+				// $scope.minHour = function ()
+				// {
+					// $scope.hour--;
 					
-					$scope.formatTime();
-				}
+					// $scope.formatTime();
+				// }
 				
-				$scope.minMin = function ()
-				{
-					$scope.min--;
+				// $scope.minMin = function ()
+				// {
+					// $scope.min--;
 					
-					$scope.formatTime();
-				}
-			},
+					// $scope.formatTime();
+				// }
+			// },
 			
-			link: function (scope, element, attrs, ctrl)
-			{
-				scope.$watch
-				(
-					'ngModel', function (newVal, oldVal)
-					{
-						if (!angular.isUndefined(newVal))
-						{
-							var timeArr = newVal.split(':');
+			// link: function (scope, element, attrs, ctrl)
+			// {
+				// scope.$watch
+				// (
+					// 'ngModel', function (newVal, oldVal)
+					// {
+						// if (!angular.isUndefined(newVal))
+						// {
+							// var timeArr = newVal.split(':');
 							
-							scope.hour = timeArr[0];
+							// scope.hour = timeArr[0];
 							
-							scope.min = timeArr[1];
-						}
-					}, true
-				);
+							// scope.min = timeArr[1];
+						// }
+					// }, true
+				// );
 				
-				scope.formatTime = function ()
-				{
-					var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
-						time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
+				// scope.formatTime = function ()
+				// {
+					// var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
+						// time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
 					
-					ctrl.$setViewValue (time);
+					// ctrl.$setViewValue (time);
 					
-					scope.ngModel = time;
-				};
+					// scope.ngModel = time;
+				// };
 				
-				if (!angular.isUndefined(attrs.adrrOptions))
-				{
-					scope.$watch
-					(
-						'adrrOptions()', function (newVal)
-						{
-							if (!angular.isUndefined(newVal.template))
-							{
-								element.html($compile(newVal.template)(scope));
-							}
-						}
-					);
-				}
-			}
-		}
-	}
-);
+				// if (!angular.isUndefined(attrs.adrrOptions))
+				// {
+					// scope.$watch
+					// (
+						// 'adrrOptions()', function (newVal)
+						// {
+							// if (!angular.isUndefined(newVal.template))
+							// {
+								// element.html($compile(newVal.template)(scope));
+							// }
+						// }
+					// );
+				// }
+			// }
+		// }
+	// }
+// );

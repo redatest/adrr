@@ -6,14 +6,14 @@
 			return '{{shift_list}}';
 		}
 		
-		public function rules()
-		{
-			return array
-			(
-				array('list, date, shift_id', 'required'),
-				array('time, shift_id, status', 'numerical', 'integerOnly' => true)
-			);
-		}
+		// public function rules()
+		// {
+			// return array
+			// (
+				// array('list, date, shift_id', 'required'),
+				// array('time, shift_id, status', 'numerical', 'integerOnly' => true)
+			// );
+		// }
 		
 		public function relations()
 		{

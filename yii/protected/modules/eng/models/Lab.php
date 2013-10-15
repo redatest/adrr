@@ -6,15 +6,15 @@
 			return '{{lab}}';
 		}
 		
-		public function rules()
-		{
-			return array
-			(
-				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp, returned, approved, archived', 'required'),
-				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted, returned, approved, archived', 'numerical', 'integerOnly' => true),
-				array('ticket', 'length', 'max' => 255),
-			);
-		}
+		// public function rules()
+		// {
+			// return array
+			// (
+				// array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp, returned, approved, archived', 'required'),
+				// array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted, returned, approved, archived', 'numerical', 'integerOnly' => true),
+				// array('ticket', 'length', 'max' => 255),
+			// );
+		// }
 		
 		public function relations()
 		{
@@ -29,6 +29,7 @@
 			return array
 			(
 				'id'		   => 'ID',
+				'user_id'	   => 'User ID',
 				'date'		   => 'Date',
 				'shift_id'	   => 'Shift',
 				'supplier_id'  => 'Supplier',
@@ -36,8 +37,8 @@
 				'plant'		   => 'Plant',
 				'truck'		   => 'Truck',
 				'ticket'	   => 'Ticket',
-				'dept_time'	   => 'Dept Time',
-				'arriv_time'   => 'Arriv Time',
+				'dept_time'	   => 'Departure Time',
+				'arriv_time'   => 'Arrival Time',
 				'truck_load'   => 'Truck Load',
 				'temp'		   => 'Temperature',
 				'slump'		   => 'Slump',
@@ -68,6 +69,8 @@
 				date_default_timezone_set('Asia/Riyadh');
 			
 				$this->create_time = date('Y:m:d H:i:s');
+				
+				$this->user_id = Yii::app()->user->id;
 			}
 			
 			return true;
