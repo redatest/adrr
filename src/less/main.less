@@ -1,4 +1,5 @@
 @import '../../vendor/bootstrap/less/variables.less';
+@import 'login.less';
 
 /* variables */
 	@sidenav_border: 1px solid #cccccc;
@@ -9,33 +10,28 @@ html, body
 	height: 100%;
 }
 
-/* login */
-	.form-signin
+/* Angular Grid */
+	.redBg
 	{
-		margin: 0 auto;
-		max-width: 330px;
-		padding: 15px;
+		background-color: #FFBFBF !important;
+		
+		border-top	 : 1px solid #eaeaea;
+		border-bottom: 1px solid #eaeaea;
 	}
-
-	.form-signin .btn
+	
+	.yellowBg
 	{
-		margin-top: 15px;
+		background-color: #FFFFBF;
+		
+		border-top	 : 1px solid #eaeaea;
+		border-bottom: 1px solid #eaeaea;
 	}
-
-	.bs-callout-danger
+	
+	.ngRow.selected .redBg, .ngRow.selected .yellowBg
 	{
-		background-color: #FCF2F2;
-		border-color: #DFB5B4;
-	}
-
-	.bs-callout
-	{
-		margin: 20px 0;
-		padding: 15px 30px 15px 15px;
+		background-color: #C9DDE1 !important;
 	}
 /* End */
-
-
 
 /* top nav */
 	#topnav
@@ -162,10 +158,16 @@ html, body
 	padding: 0px;
 	border-width: 0px;
 }
+
 .select2-container .select2-choice
 {
 	height: 34px;
 	line-height: 34px;
+}
+
+.select2-search
+{
+	display: none;
 }
 /* End */
 

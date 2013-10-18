@@ -10,10 +10,9 @@
 		{
 			return array
 			(
-				array('name', 'required'),
-				array('state', 'numerical', 'integerOnly' => true),
-				array('name', 'length', 'max' => 255),
-				array('id, name, state, description', 'safe', 'on' => 'search'),
+				array('name, very_frequent', 'required'),
+				array('state, very_frequent', 'numerical', 'integerOnly' => true),
+				array('name', 'length', 'max' => 255)
 			);
 		}
 		
@@ -26,10 +25,11 @@
 		{
 			return array
 			(
-				'id' => 'ID',
-				'name' => 'Name',
-				'state' => 'Active',
-				'description' => 'Description',
+				'id'			=> 'ID',
+				'name'			=> 'Name',
+				'state'			=> 'Active',
+				'very_frequent' => 'Very Frequent',
+				'description'	=> 'Description',
 			);
 		}
 		
@@ -40,18 +40,6 @@
 			unset($map['cols']['state']);
 			
 			return $map;
-		}
-		
-		public function search()
-		{
-			$criteria = new CDbCriteria;
-
-			$criteria->compare('id', $this->id);
-			$criteria->compare('name', $this->name, true);
-			$criteria->compare('state', $this->state);
-			$criteria->compare('description', $this->description, true);
-
-			return new CActiveDataProvider($this, array('criteria' => $criteria));
 		}
 		
 		public static function model($className = __CLASS__)

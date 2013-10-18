@@ -8,7 +8,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-
+				
 				<a class="navbar-brand" href="#/dashboard">C.C.M</a>
 			</div>
 
@@ -17,25 +17,18 @@
 					<li ng-class="{'active': state.indexOf('wrapper.dashboard') > -1}"><a href="#/dashboard">Dashboard</a></li>
 					<li ng-class="{'active': state.indexOf('wrapper.eng.lab') > -1}"><a href="#/labs">Labs</a></li>
 				</ul>
-
+				
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#/logout">{{userName}} (Sign out)</a></li>
 				</ul>
 			</div>
 		</any>
 	</ng-switch>
-
+	
 	<ng-switch on="isSenior">
 		<any ng-switch-when="1">
 			<a class="navbar-brand" href="#/dashboard">C.C.M</a>
-			<div class="navbar-header" >
-				<button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
+			
 			<p class="navbar-text pull-right"><a href="#/logout" class="navbar-link">{{userName}} (Sign out)</a></p>
 		</any>
 	</ng-switch>
@@ -44,19 +37,28 @@
 <ng-switch on="isSenior">
 	<div ng-switch-when="1" id="sidenav" class="col-sm-3 col-lg-2">
 		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			
 			<div class="collapse navbar-collapse navbar-ex8-collapse">
 				<ul class="nav nav-pills nav-stacked">
 					<li ng-class="{active: state === 'wrapper.dashboard'}">
 						<a href="#/dashboard">Dashboard</a>
 					</li>
-
+					
 					<li ng-class="{active: state === 'wrapper.eng.lab'}">
 						<a href="#/labs">Labs</a>
 					</li>
-
+					
 					<li class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
 						<a onclick="return false;" class="accordion-toggle" ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse" href="#collapseOne">Settings</a>
-
+						
 						<ul id="collapseOne" class="nav nav-pills nav-stacked collapse" ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
 							<li ng-class="{active: state.indexOf('wrapper.settings.ir') > -1}">
 								<a href="#/settings/ir/create">IR</a>
@@ -97,7 +99,7 @@
 	<ol class="breadcrumb">
 		<li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">{{item}}</li>
 	</ol>
-
+	
 	<!--<div class="page-header hidden-xs">
 		<h1>{{pageHeader}}</h1>
 	</div>-->
@@ -106,7 +108,7 @@
 
 <ng-switch on="isSenior">
 	<div ng-switch-when="1" id="sidenavBg" class="col-sm-3 col-lg-2 hidden-xs">
-
+		
 	</div>
 </ng-switch>
 
@@ -117,11 +119,11 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">{{modalTitle}}</h4>
 			</div>
-
+			
 			<div class="modal-body">
 				{{modalMessage}}
 			</div>
-
+			
 			<div class="modal-footer">
 				<button ng-click="modalCloseFunc()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button ng-click="modalFunc()" type="button" class="btn {{modalBtnClass}}" data-dismiss="modal">Ok</button>

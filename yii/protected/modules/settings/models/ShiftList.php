@@ -6,15 +6,14 @@
 			return '{{shift_list}}';
 		}
 		
-		public function rules()
-		{
-			return array
-			(
-				array('list, date, shift_id', 'required'),
-				array('time, shift_id, status', 'numerical', 'integerOnly' => true),
-				array('id, list, date, time, shift_id, status', 'safe', 'on' => 'search'),
-			);
-		}
+		// public function rules()
+		// {
+			// return array
+			// (
+				// array('list, date, shift_id', 'required'),
+				// array('time, shift_id, status', 'numerical', 'integerOnly' => true)
+			// );
+		// }
 		
 		public function relations()
 		{
@@ -35,27 +34,13 @@
 		{
 			return array
 			(
-				'id' => 'ID',
-				'list' => 'List',
-				'date' => 'Date',
-				'time' => 'Time',
+				'id'	   => 'ID',
+				'list'	   => 'List',
+				'date'	   => 'Date',
+				'time'	   => 'Time',
 				'shift_id' => 'Shift',
-				'status' => 'Status',
+				'status'   => 'Status',
 			);
-		}
-		
-		public function search()
-		{
-			$criteria = new CDbCriteria;
-
-			$criteria->compare('id', $this->id);
-			$criteria->compare('list', $this->list,true);
-			$criteria->compare('date', $this->date,true);
-			$criteria->compare('time', $this->time);
-			$criteria->compare('shift_id', $this->shift_id);
-			$criteria->compare('status', $this->status);
-
-			return new CActiveDataProvider($this, array('criteria' => $criteria));
 		}
 		
 		public static function model($className = __CLASS__)

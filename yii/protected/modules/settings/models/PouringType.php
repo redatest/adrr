@@ -20,8 +20,7 @@
 			(
 				array('name, v_r, priority', 'required'),
 				array('state, very_frequent', 'numerical', 'integerOnly' => true),
-				array('name', 'length', 'max' => 255),
-				array('id, name, very_frequent, state, v_r, priority', 'safe', 'on' => 'search'),
+				array('name', 'length', 'max' => 255)
 			);
 		}
 		
@@ -50,6 +49,7 @@
 			$map = parent::getMap();
 			
 			unset($map['cols']['state']);
+			
 			$map['cols']['v_r']['values'] = $this->vrAlias;
 			$map['cols']['priority']['values'] = $this->priorityAlias;
 			
@@ -65,27 +65,13 @@
 		{
 			return array
 			(
-				'id' => 'ID',
-				'name' => 'Name',
+				'id'			=> 'ID',
+				'name'			=> 'Name',
 				'very_frequent' => 'Very Frequent',
-				'state' => 'Active',
-				'v_r' => 'V/R',
-				'priority' => 'Priority'
+				'state'			=> 'Active',
+				'v_r'			=> 'V/R',
+				'priority'		=> 'Priority'
 			);
-		}
-		
-		public function search()
-		{
-			$criteria = new CDbCriteria;
-
-			$criteria->compare('id', $this->id);
-			$criteria->compare('name', $this->name, true);
-			$criteria->compare('very_frequent', $this->very_frequent);
-			$criteria->compare('state', $this->state);
-			$criteria->compare('v_r', $this->v_r, true);
-			$criteria->compare('priority', $this->priority, true);
-
-			return new CActiveDataProvider($this, array('criteria' => $criteria));
 		}
 		
 		public static function model($className = __CLASS__)

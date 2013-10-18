@@ -6,17 +6,15 @@
 			return '{{lab}}';
 		}
 		
-		public function rules()
-		{
-			return array
-			(
-				array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp', 'required'),
-				array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted', 'numerical', 'integerOnly' => true),
-				array('ticket', 'length', 'max' => 255),
-				
-				array('id, date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, truck_load, temp, slump, flow, accepted', 'safe', 'on' => 'search'),
-			);
-		}
+		// public function rules()
+		// {
+			// return array
+			// (
+				// array('date, shift_id, supplier_id, conc_type_id, plant, truck, ticket, dept_time, arriv_time, temp, returned, approved, archived', 'required'),
+				// array('shift_id, supplier_id, conc_type_id, plant, truck, truck_load, temp, slump, flow, accepted, returned, approved, archived', 'numerical', 'integerOnly' => true),
+				// array('ticket', 'length', 'max' => 255),
+			// );
+		// }
 		
 		public function relations()
 		{
@@ -31,6 +29,7 @@
 			return array
 			(
 				'id'		   => 'ID',
+				'user_id'	   => 'User ID',
 				'date'		   => 'Date',
 				'shift_id'	   => 'Shift',
 				'supplier_id'  => 'Supplier',
@@ -38,37 +37,44 @@
 				'plant'		   => 'Plant',
 				'truck'		   => 'Truck',
 				'ticket'	   => 'Ticket',
-				'dept_time'	   => 'Dept Time',
-				'arriv_time'   => 'Arriv Time',
+				'dept_time'	   => 'Departure Time',
+				'arriv_time'   => 'Arrival Time',
 				'truck_load'   => 'Truck Load',
 				'temp'		   => 'Temperature',
 				'slump'		   => 'Slump',
 				'flow'		   => 'Flow',
 				'accepted'	   => 'Accepted',
 				'red'		   => 'Red Alert',
-				'yellow'	   => 'Yellow Alert'
+				'yellow'	   => 'Yellow Alert',
+				'create_time'  => 'Create Time',
+				'returned'	   => 'Returend',
+				'approved'	   => 'Approved',
+				'archived'	   => 'Archived'
 			);
 		}
 		
-		// public function search()
-		// {
-			// $criteria = new CDbCriteria;
-
-			// $criteria->compare('id',		   $this->id);
-			// $criteria->compare('date',		   $this->date,		  true);
-			// $criteria->compare('shift_id',	   $this->shift_id);
-			// $criteria->compare('supplier_id',  $this->supplier_id);
-			// $criteria->compare('conc_type_id', $this->conc_type_id);
-			// $criteria->compare('plant',		   $this->plant);
-			// $criteria->compare('truck',		   $this->truck);
-			// $criteria->compare('ticket',	   $this->ticket,	  true);
-			// $criteria->compare('dept_time',	   $this->dept_time,  true);
-			// $criteria->compare('arriv_time',   $this->arriv_time, true);
-			// $criteria->compare('truck_load',   $this->truck_load);
-			// $criteria->compare('accepted',	   $this->accepted);
-
-			// return new CActiveDataProvider($this, array('criteria' => $criteria));
-		// }
+		public function getMap()
+		{
+			$map = parent::getMap();
+			
+			unset($map['cols']['create_time']);
+			
+			return $map;
+		}
+		
+		protected function beforeSave()
+		{
+			if ($this->isNewRecord)
+			{
+				date_default_timezone_set('Asia/Riyadh');
+			
+				$this->create_time = date('Y:m:d H:i:s');
+				
+				$this->user_id = Yii::app()->user->id;
+			}
+			
+			return true;
+		}
 		
 		public static function model($className = __CLASS__)
 		{
