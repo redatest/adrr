@@ -12,6 +12,7 @@
 		"angular-ui-router": "~0.2.0",
 		"angular-ui-utils": "~0.0.4",
 		"angular-ui-date": "~0.0.3",
-		"angular-ui-select2": "~0.0.2"
+		"angular-ui-select2": "~0.0.2",
+		"angular-backstretch": "~"
 	}
 }

@@ -46,7 +46,6 @@ angular.module
 	'LoginCtrl', function LoginCtrl ($scope, adrrAuth, $rootScope)
 	{
 		var beforeLoginUrl = String(window.location).split('/#/');
-		
 		$scope.login = function ()
 		{
 			adrrAuth.check($scope.username, $scope.password, beforeLoginUrl[1]).then

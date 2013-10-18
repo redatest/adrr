@@ -1,6 +1,10 @@
 <?php
 	class ArModel extends CActiveRecord
 	{
+
+		public static function getNotifications(){
+			echo 'mmmmmmmmmmmmmmmmm';
+		}
 		public function getMap()
 		{
 			$columns = $this->metaData->columns;

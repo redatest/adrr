@@ -14,6 +14,7 @@ module.exports =
 	{
 		js:
 		[
+
 			'vendor/lodash/lodash.js',
 
 			'vendor/jquery/jquery.min.js',
@@ -32,7 +33,8 @@ module.exports =
 			'vendor/angular-ui-date/src/date.js',
 			'vendor/angular-ui-select2/src/select2.js',
 
-			'vendor/restangular/dist/restangular.js'
+			'vendor/restangular/dist/restangular.js',
+		    'vendor/backstreach/backstreach.min.js'
 		],
 		
 		css:

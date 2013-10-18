@@ -69,7 +69,15 @@ angular.module
 					  '</tr></table>'
 		};
 		
-		$q.all([Restangular.all('settings/shiftType').getList(), Restangular.all('settings/supplier').getList(), Restangular.all('settings/concreteType').getList(), Restangular.all('eng/labPlant').getList(), Restangular.all('eng/labTruck').getList()]).then
+		$q.all(
+				[
+					Restangular.all('settings/shiftType').getList(),
+					Restangular.all('settings/supplier').getList(),
+					Restangular.all('settings/concreteType').getList(),
+					Restangular.all('eng/labPlant').getList(),
+					Restangular.all('eng/labTruck').getList()
+				]
+			).then
 		(
 			function (dataArr)
 			{
