@@ -16,7 +16,8 @@
 			'application.modules.user.models.*',
 			'application.modules.user.components.*',
 			'application.modules.eng.models.*',
-			'application.modules.settings.models.*'
+			'application.modules.settings.models.*',
+			'application.modules.notification.models.*'
 		),
 
 		'modules' => array
@@ -44,7 +45,9 @@
 			
 			'settings',
 			
-			'eng'
+			'eng',
+
+            'notification'
 		),
 		'components' => array
 		(
