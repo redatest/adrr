@@ -65,8 +65,8 @@ class WebUser extends CWebUser
     public function isAdmin() {
         return Yii::app()->getModule('user')->isAdmin();
     }
-	
-	public function getIsSenior()
+
+    public function getIsSenior ()
 	{
 		return Yii::app()->getModule('user')->isSenior();
 	}
@@ -75,4 +75,32 @@ class WebUser extends CWebUser
 	{
 		return Yii::app()->getModule('user')->isEng();
 	}
+
+    public function getUsersByRole ($role)
+    {
+        $criteria = new CDbCriteria;
+        $criteria->select = 'user_id';
+
+        switch ($role)
+        {
+            case 'senior':
+                $criteria->condition = 'senior = 1';
+            break;
+
+            case 'eng':
+                $criteria->condition = 'eng = 1';
+            break;
+        }
+
+        $users = Profile::model()->findAll ($criteria);
+
+        $ids = array ();
+
+        foreach ($users as $user)
+        {
+            $ids[] = intval($user->attributes['user_id']);
+        }
+
+        return $ids;
+    }
 }
