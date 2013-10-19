@@ -34,7 +34,7 @@ module.exports =
 			'vendor/angular-ui-select2/src/select2.js',
 
 			'vendor/restangular/dist/restangular.js',
-		    'vendor/backstreach/backstreach.min.js'
+		    'vendor/backstretch/backstretch.min.js'
 		],
 		
 		css:
