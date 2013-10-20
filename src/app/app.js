@@ -1,4 +1,4 @@
-angular.module
+var adrrApp = angular.module
 (
 	'adrrApp',
 	[
