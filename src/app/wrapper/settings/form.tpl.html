@@ -1,0 +1,67 @@
+<!--<div class="page-header position-relative">
+	<h1>
+		{{headTitle}}
+	</h1>
+</div>-->
+
+<form class="form-horizontal" role="form" name="form" novalidate>
+	<div class="form-group" ng-class="{'has-error': subForm.$invalid}" ng-repeat="(key, attr) in metaData.cols | keepOriginal" ng-form="subForm">
+		<label ng-hide="attr.type === 'integer' && attr.size === 1" class="col-lg-4 control-label" for="{{attr.name}}">{{attr.label}}</label>
+
+		<ng-switch on="attr.type">
+			
+			<blank ng-switch-when="string">
+				<ng-switch on="attr.dbType">
+					<div class="col-lg-8" ng-switch-when="text">
+						<textarea class="form-control" ng-model="formData[attr.name]" ng-required="!attr.allowNull"></textarea>
+					</div>
+					<div class="col-lg-8" ng-switch-when="date">
+						<input ui-date ng-model="formData[attr.name]" class="form-control" ng-required="!attr.allowNull" />
+					</div>
+					<div class="col-lg-8" ng-switch-when="time"><adrr-timepicker required ng-model="arrivTime"></adrr-timepicker></div>
+					<div class="col-lg-8" ng-switch-default>
+						<input class="form-control" ng-model="formData[attr.name]" type="text" ng-required="!attr.allowNull" />
+					</div>
+				</ng-switch>
+			</blank>
+
+			<blank ng-switch-when="integer">
+				<ng-switch on="attr.size">
+
+					<div class="col-lg-offset-4 col-lg-8" ng-switch-when="1">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="formData[attr.name]" ng-checked="formData[attr.name]" /> {{attr.label}}
+							</label>
+						</div>
+					</div>
+
+					<div class="col-lg-8" ng-switch-default>
+						<input class="form-control" ng-model="formData[attr.name]" type="number" ng-maxlength="{{attr.size}}" ng-required="!attr.allowNull" />
+					</div>
+
+				</ng-switch>
+			</blank>
+
+		</ng-switch>
+	</div>
+
+	<!--<div class="form-group">
+		<div class="col-lg-offset-4 col-lg-8">
+			<button class="btn btn-primary" ng-click="submit(formData)" type="submit" ng-disabled="form.$invalid">
+				<just_text ng-show="isCreate">Create</just_text>
+				<just_text ng-hide="isCreate">Update</just_text>
+			</button>
+
+			<ng-switch on="isCreate">
+				<button class="btn btn-warning" type="reset" ng-click="rest()" ng-switch-when="true">
+					Reset
+				</button>
+
+				<button class="btn btn-danger" ng-click="deselectItem()" type="cancel" ng-switch-default>
+					Cancel
+				</button>
+			</ng-switch>
+		</div>
+	</div>-->
+</form>

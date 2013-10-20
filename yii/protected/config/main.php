@@ -12,12 +12,15 @@
 		'import' => array
 		(
 			'application.models.*',
+
 			'application.components.*',
+			'application.components.AdrrNotificationPump.*',
+			'application.components.AdrrNotificationPump.models.*',
+
 			'application.modules.user.models.*',
 			'application.modules.user.components.*',
 			'application.modules.eng.models.*',
-			'application.modules.settings.models.*',
-			'application.modules.notification.models.*'
+			'application.modules.settings.models.*'
 		),
 
 		'modules' => array

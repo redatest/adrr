@@ -1,0 +1,27 @@
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><any ng-show="isCreate">Create </any><any ng-hide="isCreate">Update </any>Concrete Type</h4>
+			</div>
+			
+			<div class="modal-body" ui-view></div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button class="btn btn-warning" type="reset" ng-click="rest()" ng-show="isCreate">
+					Reset
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="submit(formData)" ng-disabled="irForm.$invalid || volumeForm.$invalid || zoneForm.$invalid || areaForm.$invalid || (pt.length < 1)" data-dismiss="modal">
+					<just_text ng-show="isCreate">Create</just_text>
+					<just_text ng-hide="isCreate">Update</just_text>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="gridStyle col-sm-12" ng-grid="gridOptions"></div>
+
+<a data-toggle="modal" href="#formModal" onclick="return false;" class="btn btn-primary cBtn">Create</a>
