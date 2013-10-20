@@ -11,14 +11,17 @@
             return array
             (
                 array ('message, link, target, model, record_id, type', 'required'),
-                array ('record_id, one_response, unregistered', 'numerical', 'integerOnly' => true),
+                array ('record_id, one_response, unregistered, read', 'numerical', 'integerOnly' => true),
                 array ('model, type', 'length', 'max' => 255),
             );
         }
 
         public function relations ()
         {
-            return array ();
+            return array
+            (
+                'unread' => array (self::HAS_ONE, 'Notification', 'message_id', 'on' => 'unread.read = 0')
+            );
         }
 
         public function attributeLabels ()
@@ -34,6 +37,7 @@
                 'type' => 'Type',
                 'one_response' => 'One Response',
                 'unregistered' => 'Unregistered',
+                'read' => 'Read'
             );
         }
 

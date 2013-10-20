@@ -3,7 +3,8 @@
     {
         public function actionIndex ()
         {
-            self::unregister ('Lab', 20);
+//            self::register('fucklinks', 'here is the message', array('ids'=>array(1, 4, 900)), 'Lab', 600, 'Yellow', 1);
+            self::markAsRead('Lab', 10, 'Yellow');
         }
 
         public static function unregister ($model, $recordId)
@@ -22,9 +23,40 @@
             }
         }
 
+        public static function markAsRead ($model, $recordId, $type = null)
+        {
+            $cond = array('model' => $model, 'record_id' => $recordId, 'unregistered' => 0);
+
+            if (isset($type)) $cond['type'] = $type;
+
+            $nms = NotificationMessage::model()->findAllByAttributes($cond);
+
+            if ($nms !== null)
+            {
+                foreach ($nms as $nm)
+                {
+                    if ($nm->one_response)
+                    {
+                        $nm->read = 1;
+                        $nm->save();
+                    }
+                    else
+                    {
+                        $n = $nm->unread;
+                        $n->read = 1;
+                        $n->save();
+                    }
+                }
+            }
+        }
+
         public static function getNotifications ()
         {
-            return Notification::model()->findAll();
+            $criteria = new CDbCriteria();
+            $criteria->join = 'INNER JOIN tbl_notification_message as nm on nm.id = t.message_id';
+            $criteria->addCondition('t.read = 0 AND nm.unregistered = 0 AND nm.read = 0');
+
+            return Notification::model ()->findAll ($criteria);
         }
 
         public static function register ($link, $message, $target, $model, $recordId, $type, $oneResponse)
@@ -58,7 +90,7 @@
             $notMes->model        = $model;
             $notMes->record_id    = $recordId;
             $notMes->type         = $type;
-            $notMes->one_response = $oneResponse;
+            $notMes->one_response = intval($oneResponse);
             $notMes->target       = CJSON::encode ($target);
 
             try
