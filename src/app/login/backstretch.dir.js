@@ -1,4 +1,4 @@
-adrrApp.directive(
+adrrLogin.directive(
 	'backstretch',
     function(){
 	    return {
