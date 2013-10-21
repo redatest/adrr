@@ -199,26 +199,26 @@ angular.module
 	{
 		return {
 			restrict: 'E',
-			
+
 			require: 'ngModel',
-			
+
 			scope:
 			{
 				ngModel: '=',
 				adrrData: '&'
 			},
-			
-			template: '<div>' + 
+
+			template: '<div>' +
 						'<button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button>' +
 					  '</div>' +
 					  '<select class="form-control s2w"><option value="">Select...</option><option ng-repeat="item in adrrData()" value="{{item.id}}" ng-selected="item.id == ngModel">{{item.name}}</option></select>',
-			
+
 			link: function (scope, element, attrs, ctrl)
 			{
 				var data = [];
-				
+
 				var $select = element.find('.s2w');
-				
+
 				scope.$watch
 				(
 					'adrrData()', function (newVal)
@@ -239,31 +239,31 @@ angular.module
 						);
 					}
 				);
-				
+
 				scope.programmaticallySelect = function (id)
 				{
 					scope.ngModel = id;
 				}
-				
+
 				$select.on
 				(
 					'change', function (evt)
 					{
 						scope.ngModel = $select.val();
-						
+
 						if (!scope.$$phase)
 						{
 							scope.$apply();
 						}
 					}
 				);
-				
+
 				scope.$watch
 				(
 					'ngModel', function (newVal)
 					{
 						ctrl.$setViewValue (newVal);
-						
+
 						$select.val (newVal);
 					}, true
 				);
@@ -278,11 +278,11 @@ angular.module
 	{
 		return {
 			restrict: 'A',
-			
+
 			scope: false,
-			
+
 			require: 'ngModel',
-			
+
 			link: function (scope, element, attrs, ctrl)
 			{
 				element.on
@@ -290,19 +290,19 @@ angular.module
 					'click', function (evt)
 					{
 						var input = $(evt.target).children('input');
-						
+
 						scope.$apply(ctrl.$setViewValue(input.val()));
 					}
 				);
-				
+
 				ctrl.$render = function ()
 				{
 					var da = element.find('input[value=' + ctrl.$viewValue + ']');
-					
+
 					if (!angular.isUndefined(da))
 					{
 						element.children().removeClass("active");
-						
+
 						da.parent().addClass('active');
 					}
 				}
@@ -317,61 +317,61 @@ angular.module
 	{
 		return {
 			restrict: 'A',
-			
+
 			require: 'ngModel',
-			
+
 			scope: false,
-			
+
 			link: function (scope, element, attrs, ctrl)
 			{
 				ctrl.$render = function ()
 				{
 					check (ctrl.$modelValue);
 				};
-				
+
 				element.on
 				(
 					'keyup change blur', function (evt)
 					{
 						check (element.val());
-						
+
 						if (!scope.$$phase)
 						{
 							scope.$apply();
 						}
 					}
 				);
-				
+
 				function check (val)
 				{
 					if (val !== '' && val !== '-' && !angular.isUndefined(val))
 					{
 						val = parseInt(val, 10);
-						
+
 						if (!angular.isUndefined(attrs.min))
 						{
 							var minVal = parseInt(attrs.min, 10);
-							
+
 							if (val < minVal) val = minVal;
 						}
-						
+
 						if (!angular.isUndefined(attrs.max))
 						{
 							var maxVal = parseInt(attrs.max, 10);
-							
+
 							if (val > maxVal) val = maxVal;
 						}
-						
+
 						val = isNaN(val) ? (angular.isUndefined(attrs.value) ? attrs.min : attrs.value) : val;
-						
+
 						if (!angular.isUndefined(attrs.length))
 						{
 							var valStr = val.toString();
-							
+
 							var isMin = valStr.charAt(0) === '-';
-							
+
 							var valLength = parseInt(attrs.length, 10) - valStr.length - (isMin ? 1 : 0);
-							
+
 							if (isMin)
 							{
 								for (var i = 0; i < valLength; i++)
@@ -386,13 +386,13 @@ angular.module
 									valStr = '0' + valStr;
 								}
 							}
-							
+
 							val = valStr;
 						}
 					}
-					
+
 					ctrl.$setViewValue (val);
-					
+
 					element.val (val);
 				}
 			}

@@ -46,44 +46,42 @@ var adrrApp = angular.module
 
 .factory
 (
-    'adrrDataGetter', function ($http)
-    {
-        var targets = [];
+   'adrrDataGetter', function ($http)
+   {
+       var targets = [];
 
-        var timers  = [];
+       var timers  = [];
 
-        function getData (sourceUrl, scope, target, method, args)
-        {
-            $http
-            ({
-                method: (method !== undefined ? method : 'GET'),
-                url: sourceUrl,
-                data: (args !== undefined ? args : null)
-            }).success
-            (
-                function (data)
-                {
-                    scope[target] = angular.copy(data);
-                }
-            );
-        }
+       function getData (sourceUrl, target, method, args)
+       {
+           $http
+           ({
+               method: (method !== undefined ? method : 'GET'),
+               url: sourceUrl,
+               data: (args !== undefined ? args : null)
+           })
+           .success (data)
+           {
+               // target
+           }
+       }
 
-        function set (sourceUrl, scope, target, time, method, args)
-        {
-            if (time !== undefined)
-            {
-                var timer = setInterval (getData, time, sourceUrl, scope, target, method, args);
+       function set (sourceUrl, target, time, method, args)
+       {
+           if (time !== undefined)
+           {
+               var timer = setInterval (getData, time, sourceUrl, target, method, args);
 
-                timers.push (timer);
+               timers.push (timer);
 
-                targets.push (target);
-            }
-        }
+               targets.push (target);
+           }
+       }
 
-        return {
-            set: set
-        }
-    }
+       return {
+           set: set
+       }
+   }
 )
 
 .config
@@ -116,7 +114,7 @@ var adrrApp = angular.module
 
 .controller
 (
-	'AdrrAppCtrl', function AdrrAppCtrl ($scope, $state, $rootScope, adrrDataGetter)
+	'AdrrAppCtrl', function AdrrAppCtrl ($scope, $state, $rootScope)
 	{
 		$scope.state = $state.current.name;
 
