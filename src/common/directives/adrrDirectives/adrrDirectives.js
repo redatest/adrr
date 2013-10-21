@@ -2,119 +2,164 @@ angular.module
 (
 	'adrrDirectives',
 	[
-		'ui.select2',
+		'ui.select2'
 	]
 )
 
-// .directive
-// (
-	// 'adrrSelect2Wrapper', function ()
-	// {
-		// return {
-			// restrict: 'E',
-			
-			// require: 'ngModel',
-			
-			// scope:
-			// {
-				// ngModel: '=',
-				// adrrData: '&'
-			// },
-			
-			// template: '<div><button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button></div><div class="s2w"></div>',
-			
-			// link: function (scope, element, attrs, ctrl)
-			// {
-				// var data = [];
-				
-				// var $div = element.find('.s2w');
-				
-				// function format (item)
-				// {
-					// return item.name;
-				// }
-				
-				// scope.programmaticallySelect = function (id)
-				// {
-					// ctrl.$setViewValue(id);
-					
-					// scope.ngModel = id;
-					
-					// if (!angular.isUndefined(id))
-					// {
-						// $div.select2('val', id.toString() );
-					// }
-				// };
-				
-				// scope.$watch
-				// (
-					// 'adrrData()', function (newVal)
-					// {
-						// data = newVal;
-						
-						// $div.select2
-						// ({
-							// data:
-							// {
-								// results: data,
-								// text: 'name'
-							// },
-							
-							// width: '100%',
-							
-							// formatSelection: format,
-							
-							// formatResult: format,
-							
-							// allowClear: true,
-							
-							// placeholder: 'Select...'
-						// });
-						
-						// scope.frequents = _.filter
-						// (
-							// scope.adrrData(), function (item)
-							// {
-								// if (attrs.frequentProp)
-								// {
-									// return item[attrs.frequentProp];
-								// }
-								// else
-								// {
-									// return item.mostFrequent;
-								// }
-							// }
-						// );
-						
-					// }, true
-				// );
-				
-				// scope.$watch
-				// (
-					// 'ngModel', function (newVal)
-					// {
-						// scope.programmaticallySelect(newVal);
-						
-					// }, true
-				// );
-				
-				// $div.on
-				// (
-					// 'change', function (evt)
-					// {
-						// scope.$apply
-						// (
-							// function ()
-							// {
-								// scope.ngModel = evt.val;
-							// }
-						// )
-					// }
-				// )
-			// }
-		// }
-	// }
-// )
+.directive
+(
+    'adrrTimepicker', function ($compile)
+    {
+        return {
+            restrict: 'E',
+
+            require: 'ngModel',
+
+            scope:
+            {
+                ngModel: '=',
+                adrrOptions: '&'
+            },
+
+            template: '<table class="col-xs-12"><tr>' +
+                '<td><input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
+                '<td><input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
+                '</tr></table>',
+
+            link: function (scope, element, attrs, ctrl)
+            {
+                scope.$watch
+                (
+                    'ngModel', function (newVal, oldVal)
+                    {
+                        if (!angular.isUndefined(newVal))
+                        {
+                            var timeArr = newVal.split(':');
+
+                            scope.hour = timeArr[0];
+
+                            scope.min = timeArr[1];
+                        }
+                    }, true
+                );
+
+                scope.formatTime = function ()
+                {
+                    if (!angular.isUndefined(scope.hour) && scope.hour !== null && scope.hour !== '' && !angular.isUndefined(scope.min) && scope.min !== null && scope.min !== '')
+                    {
+                        var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
+                        time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
+
+                        ctrl.$setViewValue (time);
+
+                        scope.ngModel = time;
+                    }
+                };
+
+                if (!angular.isUndefined(attrs.adrrOptions))
+                {
+                    scope.$watch
+                    (
+                        'adrrOptions()', function (newVal)
+                        {
+                            if (!angular.isUndefined(newVal.template))
+                            {
+                                element.html($compile(newVal.template)(scope));
+                            }
+                        }
+                    );
+                }
+            }
+        }
+    }
+)
+
+.directive
+(
+    'adrrSsNgGrid', function ($http, $q)
+    {
+        return {
+            restrict: 'A',
+
+            scope: true,
+
+            require: '?ngGrid',
+
+            link: function (scope, element, attrs)
+            {
+                var parent = scope.$parent;
+
+                var gridOptions = parent[attrs.ngGrid];
+
+                function loadData (pageSize, page)
+                {
+                    var deferred = $q.defer();
+
+                    var offset = (page - 1) * pageSize;
+
+                    $http.get(gridOptions.dataSource, { params: { offset: offset, limit: pageSize } } ).success
+                    (
+                        function (data)
+                        {
+                            deferred.resolve(data);
+                        }
+                    );
+
+                    return deferred.promise;
+                }
+
+                scope.getPagedDataAsync = function (pageSize, page)
+                {
+                    loadData(pageSize, page).then
+                    (
+                        function (data)
+                        {
+                            parent[gridOptions.data] = angular.isArray(data) ? data : [];
+                        }
+                    );
+                };
+
+                function updateData ()
+                {
+                    $http.get (gridOptions.numRowsUrl).success
+                    (
+                        function (data)
+                        {
+                            parent[gridOptions.totalServerItems] = parseInt(data.numRows, 10);
+
+                            scope.getPagedDataAsync(parent[gridOptions.adrrPagingOptions].pageSize, parent[gridOptions.adrrPagingOptions].currentPage);
+                        }
+                    );
+                }
+
+                updateData();
+
+                scope.$watch
+                (
+                    gridOptions.adrrPagingOptions, function (newVal, oldVal)
+                    {
+                        if (newVal !== oldVal)
+                        {
+                            var ops = parseInt(oldVal.pageSize, 10);
+                            var nps = parseInt(newVal.pageSize, 10);
+
+                            var mxp = Math.ceil(parent[gridOptions.totalServerItems] / nps);
+
+                            if (nps !== ops && mxp < newVal.currentPage)
+                            {
+                                parent[gridOptions.adrrPagingOptions].currentPage = mxp;
+                            }
+                            else
+                            {
+                                scope.getPagedDataAsync(newVal.pageSize, newVal.currentPage);
+                            }
+                        }
+                    }, true
+                );
+            }
+        }
+    }
+)
 
 // .directive
 // (
@@ -353,116 +398,4 @@ angular.module
 			}
 		};
 	}
-)
-
-// .directive
-// (
-	// 'adrrTimepicker', function ($compile)
-	// {
-		// return {
-			// restrict: 'E',
-			
-			// require: 'ngModel',
-			
-			// scope:
-			// {
-				// ngModel: '=',
-				// adrrOptions: '&'
-			// },
-			
-			// template: '<div class="well well-small">' +
-						// '<table class="col-xs-12">' +
-							// '<tr>' +
-								// '<td class="text-center"><button class="btn btn-default" ng-click="addHour()" ng-disabled="hour > 22"><span class="glyphicon glyphicon-chevron-up"></span></button></td>' +
-								// '<td class="text-center"><button class="btn btn-default" ng-click="addMin()" ng-disabled="min > 58"><span class="glyphicon glyphicon-chevron-up"></span></button></td>' +
-							// '</tr>' +
-							// '<tr>' +
-								// '<td>' +
-									// '<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" length="2" class="form-control text-center" />' +
-								// '</td>' +
-								// '<td>' +
-									// '<input ng-model="min" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" length="2" class="form-control text-center" />' +
-								// '</td>' +
-							// '</tr>' +
-							// '<tr>' +
-								// '<td class="text-center"><button class="btn btn-default" ng-click="minHour()" ng-disabled="hour < 1"><span class="glyphicon glyphicon-chevron-down"></span></button></td>' +
-								// '<td class="text-center"><button class="btn btn-default" ng-click="minMin()" ng-disabled="min < 1"><span class="glyphicon glyphicon-chevron-down"></span></button></td>' +
-							// '</tr>' +
-						// '</table>' +
-					  // '</div>',
-			
-			// controller: function ($scope, $element, $attrs)
-			// {
-				// $scope.addHour = function ()
-				// {
-					// $scope.hour++;
-					
-					// $scope.formatTime();
-				// }
-				
-				// $scope.addMin = function ()
-				// {
-					// $scope.min++;
-					
-					// $scope.formatTime();
-				// }
-				
-				// $scope.minHour = function ()
-				// {
-					// $scope.hour--;
-					
-					// $scope.formatTime();
-				// }
-				
-				// $scope.minMin = function ()
-				// {
-					// $scope.min--;
-					
-					// $scope.formatTime();
-				// }
-			// },
-			
-			// link: function (scope, element, attrs, ctrl)
-			// {
-				// scope.$watch
-				// (
-					// 'ngModel', function (newVal, oldVal)
-					// {
-						// if (!angular.isUndefined(newVal))
-						// {
-							// var timeArr = newVal.split(':');
-							
-							// scope.hour = timeArr[0];
-							
-							// scope.min = timeArr[1];
-						// }
-					// }, true
-				// );
-				
-				// scope.formatTime = function ()
-				// {
-					// var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
-						// time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
-					
-					// ctrl.$setViewValue (time);
-					
-					// scope.ngModel = time;
-				// };
-				
-				// if (!angular.isUndefined(attrs.adrrOptions))
-				// {
-					// scope.$watch
-					// (
-						// 'adrrOptions()', function (newVal)
-						// {
-							// if (!angular.isUndefined(newVal.template))
-							// {
-								// element.html($compile(newVal.template)(scope));
-							// }
-						// }
-					// );
-				// }
-			// }
-		// }
-	// }
-// );
+);

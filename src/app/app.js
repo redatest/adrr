@@ -38,165 +38,52 @@ angular.module
 					i++;
 				}
 			);
-			
+
 			return sorted;
 		}
 	}
 )
 
-.directive
+.factory
 (
-	'adrrTimepicker', function ($compile)
-	{
-		return {
-			restrict: 'E',
-			
-			require: 'ngModel',
-			
-			scope:
-			{
-				ngModel: '=',
-				adrrOptions: '&'
-			},
-			
-			template: '<table class="col-xs-12"><tr>' +
-						  '<td><input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
-						  '<td><input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
-					  '</tr></table>',
-			
-			link: function (scope, element, attrs, ctrl)
-			{
-				scope.$watch
-				(
-					'ngModel', function (newVal, oldVal)
-					{
-						if (!angular.isUndefined(newVal))
-						{
-							var timeArr = newVal.split(':');
-							
-							scope.hour = timeArr[0];
-							
-							scope.min = timeArr[1];
-						}
-					}, true
-				);
-				
-				scope.formatTime = function ()
-				{
-					if (!angular.isUndefined(scope.hour) && scope.hour !== null && scope.hour !== '' && !angular.isUndefined(scope.min) && scope.min !== null && scope.min !== '')
-					{
-						var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
-							time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
-						
-						ctrl.$setViewValue (time);
-						
-						scope.ngModel = time;
-					}
-				};
-				
-				if (!angular.isUndefined(attrs.adrrOptions))
-				{
-					scope.$watch
-					(
-						'adrrOptions()', function (newVal)
-						{
-							if (!angular.isUndefined(newVal.template))
-							{
-								element.html($compile(newVal.template)(scope));
-							}
-						}
-					);
-				}
-			}
-		}
-	}
-)
+    'adrrDataGetter', function ($http)
+    {
+        var targets = [];
 
-.directive
-(
-	'adrrSsNgGrid', function ($http, $q)
-	{
-		return {
-			restrict: 'A',
-			
-			scope: true,
-			
-			require: '?ngGrid',
-			
-			link: function (scope, element, attrs)
-			{
-				var parent = scope.$parent;
-				
-				var gridOptions = parent[attrs.ngGrid];
-				
-				function loadData (pageSize, page)
-				{
-					var deferred = $q.defer();
-					
-					var offset = (page - 1) * pageSize;
-					
-					$http.get(gridOptions.dataSource, { params: { offset: offset, limit: pageSize } } ).success
-					(
-						function (data)
-						{
-							deferred.resolve(data);
-						}
-					);
-					
-					return deferred.promise;
-				}
-				
-				scope.getPagedDataAsync = function (pageSize, page)
-				{
-					loadData(pageSize, page).then
-					(
-						function (data)
-						{
-							parent[gridOptions.data] = angular.isArray(data) ? data : [];
-						}
-					);
-				};
-				
-				function updateData ()
-				{
-					$http.get (gridOptions.numRowsUrl).success
-					(
-						function (data)
-						{
-							parent[gridOptions.totalServerItems] = parseInt(data.numRows, 10);
-							
-							scope.getPagedDataAsync(parent[gridOptions.adrrPagingOptions].pageSize, parent[gridOptions.adrrPagingOptions].currentPage);
-						}
-					);
-				}
-				
-				updateData();
-				
-				scope.$watch
-				(
-					gridOptions.adrrPagingOptions, function (newVal, oldVal)
-					{
-						if (newVal !== oldVal)
-						{
-							var ops = parseInt(oldVal.pageSize, 10);
-							var nps = parseInt(newVal.pageSize, 10);
-							
-							var mxp = Math.ceil(parent[gridOptions.totalServerItems] / nps);
-							
-							if (nps !== ops && mxp < newVal.currentPage)
-							{
-								parent[gridOptions.adrrPagingOptions].currentPage = mxp;
-							}
-							else
-							{
-								scope.getPagedDataAsync(newVal.pageSize, newVal.currentPage);
-							}
-						}
-					}, true
-				);
-			}
-		}
-	}
+        var timers  = [];
+
+        function getData (sourceUrl, scope, target, method, args)
+        {
+            $http
+            ({
+                method: (method !== undefined ? method : 'GET'),
+                url: sourceUrl,
+                data: (args !== undefined ? args : null)
+            }).success
+            (
+                function (data)
+                {
+                    scope[target] = angular.copy(data);
+                }
+            );
+        }
+
+        function set (sourceUrl, scope, target, time, method, args)
+        {
+            if (time !== undefined)
+            {
+                var timer = setInterval (getData, time, sourceUrl, scope, target, method, args);
+
+                timers.push (timer);
+
+                targets.push (target);
+            }
+        }
+
+        return {
+            set: set
+        }
+    }
 )
 
 .config
@@ -229,18 +116,18 @@ angular.module
 
 .controller
 (
-	'AdrrAppCtrl', function AdrrAppCtrl ($scope, $state, $rootScope)
+	'AdrrAppCtrl', function AdrrAppCtrl ($scope, $state, $rootScope, adrrDataGetter)
 	{
 		$scope.state = $state.current.name;
-		
+
 		$scope.$on
 		(
 			'$stateChangeStart', function (a, b)
 			{
 				$scope.state = b.name;
-				
+
 				$rootScope.pageTitle = b.title;
-				
+
 				$rootScope.showAlert = false;
 			}
 		);

@@ -513,17 +513,17 @@ angular.module
 		$scope.totalServerItems = 0;
 		$scope.selectedItemIndex = 0;
 		$scope.pagingOptions = { pageSizes: [10, 20, 30], pageSize: 10, currentPage: 1 };
-		
+
 		$(document).on
 		(
 			'hide.bs.modal', '#formModal, #myModal', function ()
 			{
 				$scope.deselectItem();
-				
+
 				$scope.$apply();
 			}
 		);
-		
+
 		$scope.onSelectRow = function (rowItem)
 		{
 			if (rowItem.config.selectedItems.length)
@@ -745,7 +745,7 @@ angular.module
 				$scope.rest();
 
 				$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize);
-			}, true
+			}
 		);
 
 		$scope.submit = function (data)
@@ -770,13 +770,13 @@ angular.module
 					function ()
 					{
 						$scope.rest();
-						
+
 						$rootScope.showAlert = true;
 						$rootScope.alert = true;
-						
+
 						$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems + 1);
 					},
-					
+
 					function ()
 					{
 						$rootScope.showAlert = true;
@@ -810,13 +810,13 @@ angular.module
 					function (rest)
 					{
 						angular.copy(item, $scope.gridData[$scope.selectedItem]);
-						
+
 						$rootScope.showAlert = true;
 						$rootScope.alert = true;
-						
+
 						$scope.deselectItem();
 					},
-					
+
 					function ()
 					{
 						$rootScope.showAlert = true;
@@ -841,12 +841,12 @@ angular.module
 	'PouringTypeCtrl', function PouringTypeCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Pouring Types';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Pouring Types'];
-		
+
 		$scope.$parent.className = 'PouringType';
 		$scope.$parent.route = '/settings/pouring-type';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/PouringType'));
+		$scope.$parent.model = Restangular.all('settings/PouringType');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
@@ -865,12 +865,12 @@ angular.module
 	'ZoneCtrl', function ZoneCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Zones';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Zones'];
-		
+
 		$scope.$parent.className = 'Zone';
 		$scope.$parent.route = '/settings/zone';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/zone'));
+		$scope.$parent.model = Restangular.all('settings/zone');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
@@ -889,9 +889,9 @@ angular.module
 	'SupplierCtrl', function SupplierCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Suppliers';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Suppliers'];
-		
+
 		$scope.$parent.className = 'Supplier';
 		$scope.$parent.route = '/settings/supplier';
 		$scope.$parent.model = angular.copy(Restangular.all('settings/supplier'));
@@ -913,12 +913,12 @@ angular.module
 	'PumpCtrl', function PumpCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Pumps';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Pumps'];
-		
+
 		$scope.$parent.className = 'Pump';
 		$scope.$parent.route = '/settings/pump';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/pump'));
+		$scope.$parent.model = Restangular.all('settings/pump');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
@@ -937,14 +937,14 @@ angular.module
 	'ConcreteTypeCtrl', function ConcreteTypeCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Concrete Types';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Concrete Types'];
-		
+
 		// $scope.$parent.isAutoColumns = false;
 
 		$scope.$parent.className = 'ConcreteType';
 		$scope.$parent.route = '/settings/concrete-type';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/concreteType'));
+		$scope.$parent.model = Restangular.all('settings/concreteType');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 
@@ -966,7 +966,7 @@ angular.module
 		// { field: 'category', displayName: 'Category' },
 		// { field: '', cellTemplate: '<a style="line-height: 32px; margin-left: 5px;" class="red" ng-click="deleteItem(row)">delete</i></a>' }
 		// ];
-		
+
 		$rootScope.modalMessage = 'Raeef';
 	}
 )
@@ -984,12 +984,12 @@ angular.module
 	'ShiftTypeCtrl', function ShiftTypeCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Shift Types';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Shift Types'];
-		
+
 		$scope.$parent.className = 'ShiftType';
 		$scope.$parent.route = '/settings/shift-type';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftType'));
+		$scope.$parent.model = Restangular.all('settings/shiftType');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
@@ -1008,15 +1008,15 @@ angular.module
 	'ShiftListCtrl', function ShiftListCtrl ($rootScope, $scope, Restangular, $http)
 	{
 		$rootScope.pageHeader = 'Shift Lists';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Shift Lists'];
-		
+
 		$scope.$parent.className = 'ShiftList';
 		$scope.$parent.route = '/settings/shift-list';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/shiftList'));
+		$scope.$parent.model = Restangular.all('settings/shiftList');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
-		
+
 		Restangular.all('settings/shiftType').getList().then
 		(
 			function (data)
@@ -1024,24 +1024,24 @@ angular.module
 				$scope.shiftTypes = angular.isArray(data) ? data : [];
 			}
 		);
-		
+
 		$scope.listChangeHandler = function ()
 		{
 			var list = $scope.formData['list'];
-			
+
 			if (!angular.isUndefined(list))
 			{
 				list = list.replace (/[^0-9,]+/g, '');
 				list = list.replace (/,,+/g, ',');
-				
+
 				if (list[0] === ',') list = list.slice(1, list.length);
-				
+
 				var listLength = list.length - 1;
-				
+
 				$scope.formData['list'] = list;
-				
+
 				if (list[listLength] === ',') list = list.slice(0, listLength);
-				
+
 				if (list !== '')
 				{
 					$http
@@ -1071,12 +1071,12 @@ angular.module
 	'ProjectCtrl', function ProjectCtrl ($rootScope, $scope, Restangular)
 	{
 		$rootScope.pageHeader = 'Projects';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'Projects'];
-		
+
 		$scope.$parent.className = 'Project';
 		$scope.$parent.route = '/settings/project';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/project'));
+		$scope.$parent.model = Restangular.all('settings/project');
 
 		$scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
 	}
@@ -1087,12 +1087,12 @@ angular.module
 	'IrCtrl', function IrCtrl ($rootScope, $scope, Restangular, $q)
 	{
 		$rootScope.pageHeader = 'IRs';
-		
+
 		$rootScope.breadcrumbItems = ['Home', 'Settings', 'IRs'];
-		
+
 		$scope.$parent.className = 'Ir';
 		$scope.$parent.route = '/settings/ir';
-		$scope.$parent.model = angular.copy(Restangular.all('settings/ir'));
+		$scope.$parent.model = Restangular.all('settings/ir');
 
 		$scope.al = [];
 		$scope.pt = [];
@@ -1322,15 +1322,15 @@ angular.module
 							{
 								$scope.al = [];
 								$scope.pt = [];
-								
+
 								$scope.rest();
-								
+
 								$rootScope.showAlert = true;
 								$rootScope.alert = true;
-								
+
 								$scope.updateTotalServerItems($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.totalServerItems + 1);
 							},
-							
+
 							function ()
 							{
 								$rootScope.showAlert = true;
