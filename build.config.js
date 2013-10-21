@@ -32,7 +32,8 @@ module.exports =
 			'vendor/angular-ui-date/src/date.js',
 			'vendor/angular-ui-select2/src/select2.js',
 
-			'vendor/restangular/dist/restangular.js'
+			'vendor/restangular/dist/restangular.js',
+		    'vendor/jquery-backstretch/jquery.backstretch.min.js'
 		],
 		
 		css:

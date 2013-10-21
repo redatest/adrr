@@ -1,4 +1,4 @@
-angular.module
+var adrrLogin = angular.module
 (
 	'adrrApp.login', []
 )
