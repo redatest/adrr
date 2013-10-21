@@ -52,7 +52,7 @@ var adrrApp = angular.module
 
        var timers  = [];
 
-       function getData (sourceUrl, target, method, args)
+       function getData (sourceUrl, scope, target, method, args)
        {
            $http
            ({
@@ -60,23 +60,31 @@ var adrrApp = angular.module
                url: sourceUrl,
                data: (args !== undefined ? args : null)
            })
-           .success (data)
-           {
-               // target
-           }
+           .success
+           (
+               function (data)
+               {
+                   scope[target] = data;
+               }
+           )
        }
 
-       function set (sourceUrl, target, time, method, args)
+       function set (sourceUrl, scope, target, time, method, args)
        {
            if (time !== undefined)
            {
-               var timer = setInterval (getData, time, sourceUrl, target, method, args);
+               var timer = setInterval (getData, time, sourceUrl, scope, target, method, args);
 
                timers.push (timer);
 
-               targets.push (target);
+               targets.push (scope[target]);
            }
        }
+
+//       function unset (scope, target)
+//       {
+//           var targetsLength =
+//       }
 
        return {
            set: set
