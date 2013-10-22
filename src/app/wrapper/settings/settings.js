@@ -779,7 +779,7 @@ angular.module('adrrApp.wrapper.settings', [], null)
 
         $scope.$parent.className = 'Supplier';
         $scope.$parent.route = '/settings/supplier';
-        $scope.$parent.model = angular.copy(Restangular.all('settings/supplier'));
+        $scope.$parent.model = Restangular.all('settings/supplier');
 
         $scope.gridOptions.afterSelectionChange = $scope.$parent.onSelectRow;
     }
