@@ -21,6 +21,29 @@ var adrrApp = angular.module
         null
     )
 
+    .filter
+(
+    'keepOriginal', function () {
+
+        return function (items) {
+
+            var sorted = {};
+
+            var i = 0;
+
+            angular.forEach
+            (
+                items, function (val) {
+                    sorted[i] = val;
+
+                    i++;
+                }
+            );
+
+            return sorted;
+        }
+    }
+)
 
     .config
 (
