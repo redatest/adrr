@@ -1,92 +1,69 @@
 var adrrApp = angular.module
-	(
-		'adrrApp',
-		[
-			'templates-app',
-			'templates-common',
-			'ngGrid',
-			'ui.router',
-			'ui.bootstrap',
-			'restangular',
-			'ui.date',
-			'adrrDirectives',
-			'adrrAuth',
-			'adrrDataGetter',
-			'adrrApp.login',
-			'adrrApp.wrapper',
-			'adrrApp.wrapper.dashboard',
-			'adrrApp.wrapper.settings',
-			'adrrApp.wrapper.eng'
-		],
-		null
-	)
+    (
+        'adrrApp',
+        [
+            'templates-app',
+            'templates-common',
+            'ngGrid',
+            'ui.router',
+            'ui.bootstrap',
+            'restangular',
+            'ui.date',
+            'adrrDirectives',
+            'adrrAuth',
+            'adrrDataGetter',
+            'adrrApp.login',
+            'adrrApp.wrapper',
+            'adrrApp.wrapper.dashboard',
+            'adrrApp.wrapper.settings',
+            'adrrApp.wrapper.eng'
+        ],
+        null
+    )
 
-	.filter
+
+    .config
 (
-	'keepOriginal', function () {
+    function adrrAppConfig($stateProvider, $urlRouterProvider, RestangularProvider) {
 
-		return function (items) {
+        $urlRouterProvider.otherwise(appConfig.loginRoute);
 
-			var sorted = {};
-
-			var i = 0;
-
-			angular.forEach
-			(
-				items, function (val) {
-					sorted[i] = val;
-
-					i++;
-				}
-			);
-
-			return sorted;
-		}
-	}
+        RestangularProvider.setBaseUrl(appConfig.restfulApiBaseUrl + '/api');
+        RestangularProvider.setMethodOverriders(["put"]);
+    }
 )
 
-	.config
+    .run
 (
-	function adrrAppConfig($stateProvider, $urlRouterProvider, RestangularProvider) {
+    function run(adrrAuth, $rootScope) {
 
-		$urlRouterProvider.otherwise(appConfig.loginRoute);
-
-		RestangularProvider.setBaseUrl(appConfig.restfulApiBaseUrl + '/api');
-		RestangularProvider.setMethodOverriders(["put"]);
-	}
+        adrrAuth.check().then
+        (
+            function (data) {
+                $rootScope.isSenior = data.isSenior;
+                $rootScope.isEng = data.isEng;
+                $rootScope.userName = data.name;
+                $rootScope.userID = data.id;
+            }
+        );
+    }
 )
 
-	.run
+    .controller
 (
-	function run(adrrAuth, $rootScope) {
+    'AdrrAppCtrl', function AdrrAppCtrl($scope, $state, $rootScope) {
 
-		adrrAuth.check().then
-		(
-			function (data) {
-				$rootScope.isSenior = data.isSenior;
-				$rootScope.isEng = data.isEng;
-				$rootScope.userName = data.name;
-				$rootScope.userID = data.id;
-			}
-		);
-	}
-)
+        $scope.state = $state.current.name;
 
-	.controller
-(
-	'AdrrAppCtrl', function AdrrAppCtrl($scope, $state, $rootScope) {
+        $scope.$on
+        (
+            '$stateChangeStart', function (a, b) {
+                $scope.state = b['name'];
 
-		$scope.state = $state.current.name;
+                $rootScope.pageTitle = b['title'];
 
-		$scope.$on
-		(
-			'$stateChangeStart', function (a, b) {
-				$scope.state = b['name'];
-
-				$rootScope.pageTitle = b['title'];
-
-				$rootScope.showAlert = false;
-			}
-		);
-	}
+                $rootScope.showAlert = false;
+            }
+        );
+    }
 );
