@@ -511,7 +511,7 @@ angular.module
 		$scope.formData = {};
 		$scope.columnDefs = [];
 		$scope.totalServerItems = 0;
-		$scope.selectedItemIndex = 0;
+		$scope.selectedItem = 0;
 		$scope.pagingOptions = { pageSizes: [10, 20, 30], pageSize: 10, currentPage: 1 };
 
 		$(document).on
@@ -690,7 +690,7 @@ angular.module
 
 		$scope.deleteItem = function ()
 		{
-			$scope.gridData[$scope.selectedItemIndex].options().then
+			$scope.gridData[$scope.selectedItem].options().then
 			(
 				function ()
 				{
@@ -710,7 +710,7 @@ angular.module
 				$scope.formData = {};
 				$scope.columnDefs = [];
 				$scope.totalServerItems = 0;
-				$scope.selectedItemIndex = 0;
+				$scope.selectedItem = 0;
 
 				$scope.metaData = yii[$scope.className];
 
