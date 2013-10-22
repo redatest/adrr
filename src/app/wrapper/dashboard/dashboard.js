@@ -1,31 +1,26 @@
-angular.module
+angular.module('adrrApp.wrapper.dashboard', [], null)
+
+    .config
 (
-	'adrrApp.wrapper.dashboard', []
+    function config($stateProvider) {
+        $stateProvider.state
+        (
+            'wrapper.dashboard',
+            {
+                url: '^/dashboard',
+                title: 'Dashboard',
+                controller: 'DashboardCtrl',
+                templateUrl: 'wrapper/dashboard/dashboard.tpl.html'
+            }
+        );
+    }
 )
 
-.config
+    .controller
 (
-	function config ($stateProvider)
-	{
-		$stateProvider.state
-		(
-			'wrapper.dashboard',
-			{
-				url: '^/dashboard',
-				title: 'Dashboard',
-				controller: 'DashboardCtrl',
-				templateUrl: 'wrapper/dashboard/dashboard.tpl.html'
-			}
-		);
-	}
-)
+    'DashboardCtrl', function DashboardCtrl($rootScope) {
+        $rootScope.pageHeader = 'Dashboard';
 
-.controller
-(
-	'DashboardCtrl', function DashboardCtrl ($rootScope, $scope)
-	{
-		$rootScope.pageHeader = 'Dashboard';
-		
-		$rootScope.breadcrumbItems = ['Dashboard'];
-	}
+        $rootScope.breadcrumbItems = ['Dashboard'];
+    }
 );

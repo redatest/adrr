@@ -1,11 +1,13 @@
 angular.module('adrrDataGetter', [], null).factory
 (
     'adrrDataGetter', function ($http) {
+
         var targets = [];
 
         var timers = [];
 
         var getData = function (sourceUrl, target, method, args) {
+
             $http
             ({
                 method: (method !== undefined ? method : 'GET'),
@@ -20,9 +22,8 @@ angular.module('adrrDataGetter', [], null).factory
                         var dataLength = data.length;
 
                         for (var i = 0; i < dataLength; i++) {
-                            var obj = _.find(targets[targetIndex], data[i]);
 
-                            if (typeof obj === 'undefined') {
+                            if (_.indexOf(targets[targetIndex], data[i], 0) !== -1) {
                                 targets[targetIndex].push(data[i]);
                             }
                         }
@@ -30,9 +31,8 @@ angular.module('adrrDataGetter', [], null).factory
                         dataLength = targets[targetIndex].length;
 
                         for (i = 0; i < dataLength; i++) {
-                            var obj = _.find(data, targets[targetIndex][i]);
 
-                            if (typeof obj === 'undefined') {
+                            if (_.indexOf(data, targets[targetIndex][i], 0) !== -1) {
                                 targets[targetIndex].splice(i, 1);
                             }
                         }
@@ -42,6 +42,7 @@ angular.module('adrrDataGetter', [], null).factory
         };
 
         var set = function (sourceUrl, target, time, method, args) {
+
             if (time !== undefined) {
                 var timer = window.setInterval(getData.bind(sourceUrl, target, method, args), time);
 
@@ -52,6 +53,7 @@ angular.module('adrrDataGetter', [], null).factory
         };
 
         var unset = function (target) {
+
             var targetIndex = _.indexOf(targets, target, 0);
 
             window.clearInterval(timers[targetIndex]);
@@ -60,6 +62,7 @@ angular.module('adrrDataGetter', [], null).factory
         };
 
         return {
+
             set: set,
             unset: unset
         }

@@ -24,7 +24,9 @@ var adrrApp = angular.module
     .filter
 (
     'keepOriginal', function () {
+
         return function (items) {
+
             var sorted = {};
 
             var i = 0;
@@ -46,6 +48,7 @@ var adrrApp = angular.module
     .config
 (
     function adrrAppConfig($stateProvider, $urlRouterProvider, RestangularProvider) {
+
         $urlRouterProvider.otherwise(appConfig.loginRoute);
 
         RestangularProvider.setBaseUrl(appConfig.restfulApiBaseUrl + '/api');
@@ -56,6 +59,7 @@ var adrrApp = angular.module
     .run
 (
     function run(adrrAuth, $rootScope) {
+
         adrrAuth.check().then
         (
             function (data) {
@@ -71,14 +75,15 @@ var adrrApp = angular.module
     .controller
 (
     'AdrrAppCtrl', function AdrrAppCtrl($scope, $state, $rootScope) {
+
         $scope.state = $state.current.name;
 
         $scope.$on
         (
             '$stateChangeStart', function (a, b) {
-                $scope.state = b.name;
+                $scope.state = b['name'];
 
-                $rootScope.pageTitle = b.title;
+                $rootScope.pageTitle = b['title'];
 
                 $rootScope.showAlert = false;
             }
