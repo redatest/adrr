@@ -1,4 +1,4 @@
-angular.module('adrrAuth', []).factory
+angular.module('adrrAuth', [], null).factory
 (
     'adrrAuth', function ($state, $http, $rootScope, $q) {
         $rootScope.wrongCredentials = false;
@@ -17,10 +17,10 @@ angular.module('adrrAuth', []).factory
             })
                 .success
             (
-                function (data, status, headers) {
+                function (data) {
                     deferred.resolve(data);
 
-                    if (data.logged === true) {
+                    if (data['logged'] === true) {
                         if ($state.current.name == 'login') {
                             if (!angular.isUndefined(oldUrl) && oldUrl !== 'login' && oldUrl !== 'logout') {
                                 window.location.href = '#/' + oldUrl;
@@ -49,7 +49,7 @@ angular.module('adrrAuth', []).factory
             );
 
             return deferred.promise;
-        }
+        };
 
         function logout() {
             $http
@@ -59,7 +59,7 @@ angular.module('adrrAuth', []).factory
             })
                 .success
             (
-                function (data, status, headers) {
+                function () {
                     $state.transitionTo(adrrAuthConfig.loginState);
                 }
             );

@@ -1,4 +1,4 @@
-angular.module('adrrDataGetter', []).factory
+angular.module('adrrDataGetter', [], null).factory
 (
     'adrrDataGetter', function ($http) {
         var targets = [];
@@ -14,7 +14,7 @@ angular.module('adrrDataGetter', []).factory
             }).success
             (
                 function (data) {
-                    var targetIndex = _.indexOf(targets, target);
+                    var targetIndex = _.indexOf(targets, target, 0);
 
                     if (angular.isArray(data)) {
                         var dataLength = data.length;
@@ -22,7 +22,7 @@ angular.module('adrrDataGetter', []).factory
                         for (var i = 0; i < dataLength; i++) {
                             var obj = _.find(targets[targetIndex], data[i]);
 
-                            if (obj === undefined) {
+                            if (typeof obj === 'undefined') {
                                 targets[targetIndex].push(data[i]);
                             }
                         }
@@ -32,34 +32,32 @@ angular.module('adrrDataGetter', []).factory
                         for (i = 0; i < dataLength; i++) {
                             var obj = _.find(data, targets[targetIndex][i]);
 
-                            if (obj === undefined) {
+                            if (typeof obj === 'undefined') {
                                 targets[targetIndex].splice(i, 1);
                             }
                         }
                     }
                 }
             )
-        }
+        };
 
         var set = function (sourceUrl, target, time, method, args) {
             if (time !== undefined) {
-                var timer = setInterval(getData, time, sourceUrl, target, method, args);
+                var timer = window.setInterval(getData.bind(sourceUrl, target, method, args), time);
 
                 timers.push(timer);
 
                 targets.push(target);
             }
-        }
+        };
 
         var unset = function (target) {
-            var targetIndex = _.indexOf(targets, target);
+            var targetIndex = _.indexOf(targets, target, 0);
 
-            clearInterval(timers[targetIndex]);
+            window.clearInterval(timers[targetIndex]);
 
             targets.splice(targetIndex, 1);
-        }
-
-        // ------------------------------------------------------------------------
+        };
 
         return {
             set: set,

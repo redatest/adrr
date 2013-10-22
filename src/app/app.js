@@ -17,7 +17,8 @@ var adrrApp = angular.module
             'adrrApp.wrapper.dashboard',
             'adrrApp.wrapper.settings',
             'adrrApp.wrapper.eng'
-        ]
+        ],
+        null
     )
 
     .filter
