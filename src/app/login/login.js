@@ -3,22 +3,6 @@ var adrrLogin = angular.module
 	'adrrApp.login', []
 )
 
-.directive
-(
-	'backstretch',
-	
-    function()
-	{
-	    return {
-		    restrict: 'A',
-			
-		    link: function (scope, element, attr)
-			{
-			    element.backstretch ([attr.bg1,attr.bg2,attr.bg3], {duration: 3000, fade: 750} );
-		    }
-	    };
-    }
-)
 .config
 (
 	function config	($stateProvider)
@@ -84,5 +68,24 @@ var adrrLogin = angular.module
 	'LogoutCtrl', function LogoutCtrl (adrrAuth)
 	{
 		adrrAuth.logout();
+	}
+);
+
+adrrLogin.directive(
+	'backstretch',
+	function(){
+		return {
+			restrict: 'A',
+			link: function (scope, element, attr) {
+				element.backstretch([attr.bg1,attr.bg2
+					                    ,attr.bg3
+					                    ,attr.bg4
+					                    ,attr.bg5
+					                    ,attr.bg6
+					                    ,attr.bg7
+					                    ,attr.bg8
+				                    ], {duration: 5000, fade: 750});
+			}
+		};
 	}
 );
