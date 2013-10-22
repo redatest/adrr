@@ -54,6 +54,6 @@ angular.module('adrrApp.wrapper', [], null)
             $rootScope.modalBtnClass = btnClass;
             $rootScope.modalFunc = func;
             $rootScope.modalCloseFunc = closeFunc;
-        }
+        };
     }
 );

@@ -10,6 +10,7 @@ var adrrApp = angular.module
             'restangular',
             'ui.date',
             'adrrDirectives',
+            'adrrDirectives.notifications',
             'adrrAuth',
             'adrrDataGetter',
             'adrrApp.login',
@@ -81,6 +82,7 @@ var adrrApp = angular.module
         $scope.$on
         (
             '$stateChangeStart', function (a, b) {
+
                 $scope.state = b['name'];
 
                 $rootScope.pageTitle = b['title'];
@@ -88,5 +90,11 @@ var adrrApp = angular.module
                 $rootScope.showAlert = false;
             }
         );
+
+        $scope.notsOpts = {
+
+            sourceUrl: 'http://localhost/alaa/ccm/yii/api/settings/zone'
+
+        };
     }
 );

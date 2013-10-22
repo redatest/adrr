@@ -1,74 +1,105 @@
 var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 (
-	'adrrDataGetter', function ($http) {
+    'adrrDataGetter', function ($http) {
 
-		var targets = [];
+        var targets = [];
 
-		var timers = [];
+        var timers = [];
 
-		//getData is the function that actually fetches data. It is used by function set.
-		//  sourceUrl: the url to the requested data source
-		//  target: is an array object. It has to be initialized as an empty array before calling getData.
-		//  method: post or get.
-		//  args: any additional paramitures to be passed with the request.
-		var getData = function (sourceUrl, target, method, args) {
+        var lookup = [];
 
-			$http
-			({
-				 method: (method !== undefined ? method : 'GET'),
-				 url: sourceUrl,
-				 data: (args !== undefined ? args : null)
-			 }).success
-			(
-				function (data) {
-					var targetIndex = _.indexOf(targets, target, 0);
+        var truckers = [];
 
-					if (angular.isArray(data)) {
-						var dataLength = data.length;
+        //  getData is the function that actually fetches data. It is used by function set.
+        //  sourceUrl: the url to the requested data source
+        //  target: is an array object. It has to be initialized as an empty array before calling getData.
+        //  method: post or get.
+        //  args: any additional paramitures to be passed with the request.
+        var getData = function (sourceUrl, target, updateTrucker, method, args) {
 
-						for (var i = 0; i < dataLength; i++) {
+            var index = _.indexOf(targets, target, 0);
 
-							if (_.indexOf(targets[targetIndex], data[i], 0) !== -1) {
-								targets[targetIndex].push(data[i]);
-							}
-						}
+            $http
+            ({
+                method: method !== undefined ? method : 'GET',
+                url: sourceUrl,
+                data: args !== undefined ? $.param(args) : null
+            })
+                .success
+            (
+                function (data) {
 
-						dataLength = targets[targetIndex].length;
+                    truckers[index] = true;
 
-						for (i = 0; i < dataLength; i++) {
+                    if (angular.isArray(data)) {
 
-							if (_.indexOf(data, targets[targetIndex][i], 0) !== -1) {
-								targets[targetIndex].splice(i, 1);
-							}
-						}
-					}
-				}
-			)
-		};
+                        var dataLength = data.length;
 
-		var set = function (sourceUrl, target, time, method, args) {
+                        for (var i = 0; i < dataLength; i++) {
 
-			if (time !== undefined) {
-				var timer = window.setInterval(getData.bind(sourceUrl, target, method, args), time);
+                            var itemId = parseInt(data[i]['id'], 10);
 
-				timers.push(timer);
+                            if (typeof lookup[index][itemId] === 'undefined' || lookup[index][itemId] === null) {
 
-				targets.push(target);
-			}
-		};
+                                lookup[index][itemId] = target.length;
 
-		var unset = function (target) {
+                            }
 
-			var targetIndex = _.indexOf(targets, target, 0);
+                            target[lookup[index][itemId]] = data[i];
+                        }
 
-			window.clearInterval(timers[targetIndex]);
+                    }
+                }
+            )
+        };
 
-			targets.splice(targetIndex, 1);
-		};
+        var set = function (sourceUrl, target, time, updateTrucker, method, args) {
 
-		return {
-			set: set,
-			unset: unset
-		}
-	}
+            if (typeof time !== 'undefined') {
+
+                targets.push(target);
+
+                lookup.push([]);
+
+                truckers.push(false);
+
+                if (typeof updateTrucker !== 'undefined') {
+
+                    args = typeof args === 'undefined' ? {} : args;
+
+                    args['updateTrucker'] = updateTrucker;
+
+                    args['trucker'] = truckers[timers.length];
+                }
+
+                //noinspection JSCheckFunctionSignatures
+                var timer = window.setInterval(getData, time, sourceUrl, target, updateTrucker, method, args);
+
+                timers.push(timer);
+            }
+        };
+
+        var unset = function (target) {
+
+            var targetIndex = _.indexOf(targets, target, 0);
+
+            window.clearInterval(timers[targetIndex]);
+
+            timers.splice(targetIndex, 1);
+
+            targets.splice(targetIndex, 1);
+
+            lookup.splice(targetIndex, 1);
+
+            truckers.splice(targetIndex, 1);
+        };
+
+        return {
+
+            set: set,
+
+            unset: unset
+
+        }
+    }
 );

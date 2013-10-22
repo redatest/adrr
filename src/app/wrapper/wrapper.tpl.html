@@ -1,5 +1,5 @@
 <nav id="topnav" class="navbar navbar-default navbar-static-top" role="navigation">
-	
+
     <a class="navbar-brand" href="#/dashboard">C.C.M</a>
 
     <p class="navbar-text pull-right"><a href="#/logout" class="navbar-link">{{userName}} (Sign out)</a></p>
@@ -13,31 +13,34 @@
 </nav>
 
 <ng-switch on="isSenior">
-	<div id="sidenav" class="col-sm-3 col-lg-2">
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="navbar-header">
-				<button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			
-			<div class="collapse navbar-collapse navbar-ex8-collapse">
-				<ul class="nav nav-pills nav-stacked">
-					<li ng-class="{active: state === 'wrapper.dashboard'}">
-						<a href="#/dashboard">Dashboard</a>
-					</li>
-					
-					<li ng-class="{active: state === 'wrapper.eng.lab'}">
-						<a href="#/labs">Labs</a>
-					</li>
+    <div id="sidenav" class="col-sm-3 col-lg-2">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-ex8-collapse">
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-class="{active: state === 'wrapper.dashboard'}">
+                        <a href="#/dashboard">Dashboard</a>
+                    </li>
+
+                    <li ng-class="{active: state === 'wrapper.eng.lab'}">
+                        <a href="#/labs">Labs</a>
+                    </li>
 
                     <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
-                        <a onclick="return false;" class="accordion-toggle" ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse" href="#collapseOne">Settings</a>
+                        <a onclick="return false;" class="accordion-toggle"
+                           ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse"
+                           href="#collapseOne">Settings</a>
 
-                        <ul id="collapseOne" class="nav nav-pills nav-stacked collapse" ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
+                        <ul id="collapseOne" class="nav nav-pills nav-stacked collapse"
+                            ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.settings.ir') > -1}">
                                 <a href="#/settings/ir/create">IR</a>
                             </li>
@@ -67,43 +70,45 @@
                             </li>
                         </ul>
                     </li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </ng-switch>
-
+<adrr-notifications adrr-options="notsOpts"></adrr-notifications>
 <div id="maincont" class="col-sm-9 col-lg-10">
-	<ol class="breadcrumb">
-		<li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">{{item}}</li>
-	</ol>
-	
-	<!--<div class="page-header hidden-xs">
-		<h1>{{pageHeader}}</h1>
-	</div>-->
-	<view ui-view></view>
+    <ol class="breadcrumb">
+        <li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">{{item}}</li>
+    </ol>
+
+    <!--<div class="page-header hidden-xs">
+        <h1>{{pageHeader}}</h1>
+    </div>-->
+    <view ui-view></view>
 </div>
 
 <div id="sidenavBg" class="col-sm-3 col-lg-2 hidden-xs">
-	
+
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">{{modalTitle}}</h4>
-			</div>
-			
-			<div class="modal-body">
-				{{modalMessage}}
-			</div>
-			
-			<div class="modal-footer">
-				<button ng-click="modalCloseFunc()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button ng-click="modalFunc()" type="button" class="btn {{modalBtnClass}}" data-dismiss="modal">Ok</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{modalTitle}}</h4>
+            </div>
+
+            <div class="modal-body">
+                {{modalMessage}}
+            </div>
+
+            <div class="modal-footer">
+                <button ng-click="modalCloseFunc()" type="button" class="btn btn-default" data-dismiss="modal">Close
+                </button>
+                <button ng-click="modalFunc()" type="button" class="btn {{modalBtnClass}}" data-dismiss="modal">Ok
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
