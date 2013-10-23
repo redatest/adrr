@@ -19,31 +19,26 @@ class AdrrNotificationPump extends CComponent
         }
     }
 
-    public static function markAsRead($model, $recordId, $type = null)
+    public static function markAsRead($id)
     {
-        $cond = array('model' => $model, 'record_id' => $recordId, 'unregistered' => 0);
+        $arrts = array('id' => $id, 'unregistered' => 0);
 
-        if (isset($type)) $cond['type'] = $type;
+        $n = Notification::model()->findByAttributes($arrts);
 
-        $nms = NotificationMessage::model()->findAllByAttributes($cond);
+        $nm = $n->message;
 
-        if ($nms !== null) {
+        if ($nm->one_response) {
 
-            foreach ($nms as $nm) {
+            $nm->read = 1;
 
-                if ($nm->one_response) {
+            $nm->save();
 
-                    $nm->read = 1;
-                    $nm->save();
+        } else {
 
-                } else {
+            $n->read = 1;
 
-                    $n = $nm->unread;
-                    $n->read = 1;
-                    $n->save();
+            $n->save();
 
-                }
-            }
         }
     }
 
