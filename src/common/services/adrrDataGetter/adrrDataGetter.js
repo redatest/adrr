@@ -19,6 +19,12 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
             var index = _.indexOf(targets, target, 0);
 
+            if (truckers[index] !== null) {
+
+                args['trucker'] = truckers[index];
+
+            }
+
             $http
             ({
                 method: method !== undefined ? method : 'GET',
@@ -29,13 +35,15 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
             (
                 function (data) {
 
-                    truckers[index] = true;
-
                     if (angular.isArray(data)) {
 
                         var dataLength = data.length;
 
+                        var newest = dataLength > 0 ? data[0][updateTrucker] : null;
+
                         for (var i = 0; i < dataLength; i++) {
+
+                            newest = data[i][updateTrucker] > newest ? data[i][updateTrucker] : newest;
 
                             var itemId = parseInt(data[i]['id'], 10);
 
@@ -48,6 +56,7 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
                             target[lookup[index][itemId]] = data[i];
                         }
 
+                        truckers[index] = newest;
                     }
                 }
             )
@@ -61,16 +70,16 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
                 lookup.push([]);
 
-                truckers.push(false);
+                truckers.push(null);
 
-                if (typeof updateTrucker !== 'undefined') {
+                args = typeof args === 'undefined' ? {} : args;
 
-                    args = typeof args === 'undefined' ? {} : args;
+                if (typeof updateTrucker !== 'undefined' && updateTrucker !== null) {
 
                     args['updateTrucker'] = updateTrucker;
-
-                    args['trucker'] = truckers[timers.length];
                 }
+
+                getData(sourceUrl, target, updateTrucker, method, args);
 
                 //noinspection JSCheckFunctionSignatures
                 var timer = window.setInterval(getData, time, sourceUrl, target, updateTrucker, method, args);
@@ -81,17 +90,18 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
         var unset = function (target) {
 
-            var targetIndex = _.indexOf(targets, target, 0);
+            var index = _.indexOf(targets, target, 0);
 
-            window.clearInterval(timers[targetIndex]);
+            if (index !== -1) {
 
-            timers.splice(targetIndex, 1);
+                window.clearInterval(timers[index]);
 
-            targets.splice(targetIndex, 1);
+                timers.splice(index, 1);
 
-            lookup.splice(targetIndex, 1);
+                targets.splice(index, 1);
 
-            truckers.splice(targetIndex, 1);
+                lookup.splice(index, 1);
+            }
         };
 
         return {

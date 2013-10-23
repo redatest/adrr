@@ -93,8 +93,23 @@ var adrrApp = angular.module
 
         $scope.notsOpts = {
 
-            sourceUrl: 'http://localhost/alaa/ccm/yii/api/settings/zone'
+            template: '<ul><li ng-repeat="item in items">{{item.name}}</li></div>',
+
+            sourceUrl: 'http://localhost/alaa/ccm/yii/api/settings/zone',
+
+            time: 3000
 
         };
+
+
+//        setTimeout
+//        (
+//            function ()
+//            {
+//                $scope.notsOpts['sourceUrl'] = 'http://localhost/alaa/ccm/yii/api/settings/supplier';
+//
+//                $scope.$apply();
+//            }, 3000
+//        )
     }
 );

@@ -2,7 +2,7 @@ angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
 
     .directive
 (
-    'adrrNotifications', function ($compile) {
+    'adrrNotifications', function ($compile, adrrDataGetter) {
 
         return {
 
@@ -14,27 +14,19 @@ angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
 
             link: function (scope, element) {
 
-                scope.$watch
-                (
-                    'adrrOptions', function (newVal, oldVal) {
+                scope.items = [];
 
-                        if (typeof newVal['template'] !== 'undefined') {
+                if (typeof scope.adrrOptions.template !== 'undefined') {
 
-                            element.html($compile(newVal['template'])(scope));
+                    element.html($compile(scope.adrrOptions.template)(scope));
 
-                        }
+                }
 
-                        if (typeof newVal['target'] !== 'undefined') {
+                if (typeof scope.adrrOptions.time !== 'undefined' && typeof scope.adrrOptions.sourceUrl !== 'undefined') {
 
-                            if (typeof oldVal['target'] !== 'undefined') {
+                    adrrDataGetter.set(scope.adrrOptions.sourceUrl, scope.items, parseInt(scope.adrrOptions.time, 10));
 
-                                console.log(newVal['target']);
-
-                            }
-                        }
-                    }
-                )
-
+                }
             }
         }
     }
