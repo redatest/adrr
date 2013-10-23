@@ -93,11 +93,13 @@ var adrrApp = angular.module
 
         $scope.notsOpts = {
 
-            template: '<ul><li ng-repeat="item in items">{{item.name}}</li></div>',
+            template: '<ul><li ng-repeat="item in items">{{item}}</li></div>',
 
-            sourceUrl: 'http://localhost/alaa/ccm/yii/api/settings/zone',
+            sourceUrl: 'http://localhost/alaa/ccm/yii/notifications',
 
-            time: 3000
+            time: 3000,
+
+            updateTrucker: 'id'
 
         };
 

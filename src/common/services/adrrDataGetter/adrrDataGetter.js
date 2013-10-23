@@ -29,7 +29,9 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
             ({
                 method: method !== undefined ? method : 'GET',
                 url: sourceUrl,
-                data: args !== undefined ? $.param(args) : null
+                params: method !== 'POST' ? (typeof args !== 'undefined' ? args : null) : null,
+                data: method === 'POST' ? (typeof args !== 'undefined' ? $.param(args) : null) : null,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
             })
                 .success
             (

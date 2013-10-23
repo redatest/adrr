@@ -22,9 +22,9 @@ angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
 
                 }
 
-                if (typeof scope.adrrOptions.time !== 'undefined' && typeof scope.adrrOptions.sourceUrl !== 'undefined') {
+                if (typeof scope.adrrOptions.time !== 'undefined' && typeof scope.adrrOptions.sourceUrl !== 'undefined' && typeof scope.adrrOptions.updateTrucker !== 'undefined') {
 
-                    adrrDataGetter.set(scope.adrrOptions.sourceUrl, scope.items, parseInt(scope.adrrOptions.time, 10));
+                    adrrDataGetter.set(scope.adrrOptions.sourceUrl, scope.items, parseInt(scope.adrrOptions.time, 10), scope.adrrOptions.updateTrucker);
 
                 }
             }
