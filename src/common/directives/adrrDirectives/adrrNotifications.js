@@ -1,4 +1,4 @@
-angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
+var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
 
     .directive
 (
@@ -6,11 +6,11 @@ angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
 
         return {
 
-            restrict: 'E',
+            restrict: 'AE',
 
             scope: { adrrOptions: '=' },
 
-            template: '<ul><li>item</li></ul>',
+            template: '<ul class="list-group"><li class="list-group-item" ng-repeat="item in items">{{item.message}}</li></ul>',
 
             link: function (scope, element) {
 

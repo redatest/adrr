@@ -10,6 +10,7 @@ var adrrApp = angular.module
             'restangular',
             'ui.date',
             'adrrDirectives',
+            'adrrDirectives.jslimscroll',
             'adrrDirectives.notifications',
             'adrrAuth',
             'adrrDataGetter',
@@ -90,28 +91,5 @@ var adrrApp = angular.module
                 $rootScope.showAlert = false;
             }
         );
-
-        $scope.notsOpts = {
-
-            template: '<ul><li ng-repeat="item in items">{{item}}</li></div>',
-
-            sourceUrl: 'http://localhost/alaa/ccm/yii/notifications',
-
-            time: 3000,
-
-            updateTrucker: 'id'
-
-        };
-
-
-//        setTimeout
-//        (
-//            function ()
-//            {
-//                $scope.notsOpts['sourceUrl'] = 'http://localhost/alaa/ccm/yii/api/settings/supplier';
-//
-//                $scope.$apply();
-//            }, 3000
-//        )
     }
 );

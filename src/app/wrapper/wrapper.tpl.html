@@ -2,7 +2,20 @@
 
     <a class="navbar-brand" href="#/dashboard">C.C.M</a>
 
-    <p class="navbar-text pull-right"><a href="#/logout" class="navbar-link">{{userName}} (Sign out)</a></p>
+    <p class="navbar-text pull-right hidden-xs"><a data-toggle="modal" href="#logoutModal" onclick="return false;"
+                                                   class="navbar-link">{{userName}} (Sign out)</a></p>
+
+    <a data-toggle="modal" href="#logoutModal" onclick="return false;" class="topnavlink visible-xs pull-right"><span
+            class="glyphicon glyphicon-remove-circle"></span></a>
+
+    <div class="dropdown pull-right">
+        <a class="topnavlink" data-toggle="dropdown" href="#" onclick="return false;">
+            <span class="glyphicon glyphicon-refresh"></span>
+        </a>
+
+        <div adrr-notifications class="dropdown-menu" role="menu" aria-labelledby="dLabel"
+             adrr-options="notsOpts"></div>
+    </div>
 
     <button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
         <span class="sr-only">Toggle navigation</span>
@@ -15,15 +28,6 @@
 <ng-switch on="isSenior">
     <div id="sidenav" class="col-sm-3 col-lg-2">
         <nav class="navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-                <button class="navbar-toggle" data-target=".navbar-ex8-collapse" data-toggle="collapse" type="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
             <div class="collapse navbar-collapse navbar-ex8-collapse">
                 <ul class="nav nav-pills nav-stacked">
                     <li ng-class="{active: state === 'wrapper.dashboard'}">
@@ -75,7 +79,7 @@
         </nav>
     </div>
 </ng-switch>
-<adrr-notifications adrr-options="notsOpts"></adrr-notifications>
+
 <div id="maincont" class="col-sm-9 col-lg-10">
     <ol class="breadcrumb">
         <li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">{{item}}</li>
@@ -108,6 +112,20 @@
                 </button>
                 <button ng-click="modalFunc()" type="button" class="btn {{modalBtnClass}}" data-dismiss="modal">Ok
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Sure to logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" ng-click="logout()" class="btn btn-primary" data-dismiss="modal">Logout</button>
             </div>
         </div>
     </div>

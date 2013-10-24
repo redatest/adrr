@@ -51,6 +51,28 @@ html, body {
   color: #FFF;
 }
 
+#topnav .topnavlink {
+  color: #FFFFFF;
+
+  line-height: 50px;
+
+  background: #5496cf;
+
+  width: 50px;
+
+  text-align: center;
+
+  display: block;
+
+  margin-left: 2px;
+}
+
+#topnav .dropdown-menu {
+  width: 240px;
+
+  right: -50px;
+}
+
 /* End */
 
 /* side nav */
@@ -182,6 +204,30 @@ html, body {
 
 /* End */
 
+/* Notifications */
+
+/*.adrrnots
+{
+
+}
+
+.adrrnots > a
+{
+  color: #FFFFFF;
+
+  line-height: 50px;
+
+  background: #5496cf;
+
+  width: 50px;
+
+  text-align: center;
+
+  display: block;
+}*/
+
+/* End */
+
 @media (min-width: @screen-sm) {
   body {
     padding-top: 0px;
@@ -199,10 +245,17 @@ html, body {
 }
 
 @media (max-width: @screen-sm) {
+
   #sidenav {
+
     margin: -50px 0 0 0;
 
     z-index: 0;
+
+  }
+
+  #sidenav .navbar-collapse {
+    margin-top: 50px;
   }
 
   #sidenav nav .navbar-header {

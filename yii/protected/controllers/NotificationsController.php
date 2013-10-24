@@ -16,7 +16,7 @@ class NotificationsController extends CController
 
     public function actionRegisterNotification()
     {
-        AdrrNotificationPump::register('wow', 'fuck you', array('roles' => array('senior')), 'pouring', 2, 'red', true);
+        AdrrNotificationPump::register('wow', 'lab', array('roles' => array('senior')), 'pouring', 2, 'red', true);
     }
 
 }

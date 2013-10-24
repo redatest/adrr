@@ -19,8 +19,10 @@ angular.module('adrrApp.wrapper.dashboard', [], null)
     .controller
 (
     'DashboardCtrl', function DashboardCtrl($rootScope) {
+
         $rootScope.pageHeader = 'Dashboard';
 
         $rootScope.breadcrumbItems = ['Dashboard'];
+
     }
 );

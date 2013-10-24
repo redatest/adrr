@@ -47,7 +47,8 @@ angular.module('adrrApp.wrapper', [], null)
 
     .controller
 (
-    'WrapperCtrl', function ($scope, $rootScope) {
+    'WrapperCtrl', function ($scope, $rootScope, adrrAuth) {
+
         $rootScope.configModal = function (title, message, btnClass, func, closeFunc) {
             $rootScope.modalTitle = title;
             $rootScope.modalMessage = message;
@@ -55,5 +56,32 @@ angular.module('adrrApp.wrapper', [], null)
             $rootScope.modalFunc = func;
             $rootScope.modalCloseFunc = closeFunc;
         };
+
+        $scope.notsOpts = {
+
+            template: '<ul class="list-group" adrr-jslimscroll><li class="list-group-item" ng-repeat="item in items">{{item.message}}</li></ul>',
+
+            sourceUrl: 'http://localhost/alaa/ccm/yii/notifications',
+
+            time: 3000,
+
+            updateTrucker: 'id'
+
+        };
+
+        $scope.logout = function () {
+
+            $("#logoutModal").on
+            (
+                'hidden.bs.modal', function () {
+                    adrrAuth.logout();
+
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }
+            )
+
+        }
     }
 );
