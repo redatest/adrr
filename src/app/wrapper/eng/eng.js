@@ -105,7 +105,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 { field: 'flow', displayName: 'Flow' },
                 { field: 'accepted', displayName: 'Accepted' }
             ],
-            rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== \'\', \'redBg\': row.getProperty(\'red\') !== \'\'}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
+            rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
                 '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
                 '&nbsp;' +
                 '</div>' +
@@ -230,8 +230,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 temp: $scope.temp,
                 slump: $scope.slump,
                 flow: $scope.flow,
-                red: $scope.red,
-                yellow: $scope.yellow,
+                red: $scope.red !== '' ? $scope.red : null,
+                yellow: $scope.yellow !== '' ? $scope.yellow : null,
                 accepted: $scope.accepted
             }).then
             (

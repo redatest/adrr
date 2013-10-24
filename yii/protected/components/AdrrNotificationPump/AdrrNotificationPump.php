@@ -67,7 +67,9 @@ class AdrrNotificationPump extends CComponent
         }
 
         if (isset ($target['ids'])) {
+
             $usersIds = array_merge($usersIds, $target['ids']);
+
         }
 
         $usersIds = array_unique($usersIds);
