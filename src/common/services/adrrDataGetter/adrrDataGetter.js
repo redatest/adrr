@@ -15,7 +15,7 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
         //  target: is an array object. It has to be initialized as an empty array before calling getData.
         //  method: post or get.
         //  args: any additional paramitures to be passed with the request.
-        var getData = function (sourceUrl, target, updateTrucker, method, args) {
+        var getData = function (sourceUrl, target, time, updateTrucker, method, args) {
 
             var index = _.indexOf(targets, target, 0);
 
@@ -60,6 +60,15 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
                         truckers[index] = newest;
                     }
+
+                    setTimeout
+                    (
+                        function () {
+
+                            getData(sourceUrl, target, time, updateTrucker, method, args);
+
+                        }, time
+                    );
                 }
             )
         };
@@ -81,12 +90,18 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
                     args['updateTrucker'] = updateTrucker;
                 }
 
-                getData(sourceUrl, target, updateTrucker, method, args);
+                getData(sourceUrl, target, time, updateTrucker, method, args);
 
-                //noinspection JSCheckFunctionSignatures
-                var timer = window.setInterval(getData, time, sourceUrl, target, updateTrucker, method, args);
+                timers.push(time);
 
-                timers.push(timer);
+                setTimeout
+                (
+                    function () {
+
+                        getData(sourceUrl, target, time, updateTrucker, method, args);
+
+                    }, time
+                );
             }
         };
 
@@ -106,12 +121,24 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
             }
         };
 
+        var updateTime = function (target, time) {
+
+            var index = _.indexOf(targets, target, 0);
+
+            if (index !== -1) {
+
+                timers[index] = time;
+            }
+        };
+
         return {
 
             set: set,
 
-            unset: unset
+            unset: unset,
 
-        }
+            updateTime: updateTime
+
+        };
     }
 );

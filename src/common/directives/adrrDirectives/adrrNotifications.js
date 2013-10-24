@@ -8,25 +8,48 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
 
             restrict: 'AE',
 
-            scope: { adrrOptions: '=' },
+            scope: true,
 
             template: '<ul class="list-group"><li class="list-group-item" ng-repeat="item in items">{{item.message}}</li></ul>',
 
-            link: function (scope, element) {
+            link: function (scope, element, attrs) {
+
+                var isFirst = true;
 
                 scope.items = [];
 
-                if (typeof scope.adrrOptions.template !== 'undefined') {
+//                adrrDataGetter.set(attrs.adrrOptions.sourceUrl, scope.items, parseInt(attrs.adrrOptions.time, 10), attrs.adrrOptions.updateTrucker);
 
-                    element.html($compile(scope.adrrOptions.template)(scope));
+                scope.$watch
+                (
+                    attrs.adrrOptions, function (newVal, oldVal) {
 
-                }
+                        if (newVal.template !== oldVal.template || isFirst) {
 
-                if (typeof scope.adrrOptions.time !== 'undefined' && typeof scope.adrrOptions.sourceUrl !== 'undefined' && typeof scope.adrrOptions.updateTrucker !== 'undefined') {
+                            element.html($compile(newVal.template)(scope));
 
-                    adrrDataGetter.set(scope.adrrOptions.sourceUrl, scope.items, parseInt(scope.adrrOptions.time, 10), scope.adrrOptions.updateTrucker);
+                        }
 
-                }
+                        if (newVal.time !== oldVal.time || isFirst) {
+
+                            adrrDataGetter.set(newVal.sourceUrl, scope.items, parseInt(newVal.time, 10), newVal.updateTrucker);
+
+                        }
+                        else if (newVal.time !== oldVal.time) {
+
+                            adrrDataGetter.updateTime(scope.items, newVal.time);
+
+                        }
+
+                        isFirst = false;
+                    }
+                );
+//
+//                if (typeof scope.adrrOptions.time !== 'undefined' && typeof scope.adrrOptions.sourceUrl !== 'undefined' && typeof scope.adrrOptions.updateTrucker !== 'undefined') {
+//
+//
+//
+//                }
             }
         }
     }

@@ -59,7 +59,7 @@ angular.module('adrrApp.wrapper', [], null)
 
         $scope.notsOpts = {
 
-            template: '<ul class="list-group" adrr-jslimscroll><li class="list-group-item" ng-class="{\'yellowBg\': item.type === \'yellow\', \'redBg\': item.type === \'red\'}" ng-repeat="item in items">{{item.message}}<input type="checkbox" /></li></ul>',
+            template: '<ul class="list-group" adrr-jslimscroll><li class="list-group-item" ng-class="{\'yellowBg\': item.type === \'yellow\', \'redBg\': item.type === \'red\'}" ng-repeat="item in items">{{item.message}}<input type="checkbox" class="pull-right" ng-click="itemCheck()" /></li></ul>',
 
             sourceUrl: 'http://localhost/alaa/ccm/yii/notifications',
 
@@ -82,6 +82,10 @@ angular.module('adrrApp.wrapper', [], null)
                 }
             )
 
+        };
+
+        $scope.itemCheck = function () {
+            console.log('da');
         }
     }
 );
