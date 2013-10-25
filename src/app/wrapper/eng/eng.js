@@ -70,50 +70,57 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $rootScope.breadcrumbItems = ['Home', 'Labs'];
         // ------------------------------------------------
 
-        $scope.pagingOptions =
-        {
-            pageSizes: [10, 20, 30],
+        if ($scope.isEng) {
 
-            pageSize: 10,
+            $scope.pagingOptions =
+            {
+                pageSizes: [10, 20, 30],
 
-            currentPage: 1
-        };
+                pageSize: 10,
 
-        $scope.gridOptions =
-        {
-            data: 'motherFucker',
-            enablePaging: true,
-            showFooter: true,
-            totalServerItems: 'totalServerItems',
-            pagingOptions: $scope.pagingOptions,
-            adrrPagingOptions: 'pagingOptions',
-            numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
-            dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
-            multiSelect: false,
-            plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
-            columnDefs: [
-                { field: 'date', displayName: 'Date' },
-                { field: 'shift_id', displayName: 'Shift' },
-                { field: 'supplier_id', displayName: 'Supplier' },
-                { field: 'conc_type_id', displayName: 'concrete Type' },
-                { field: 'plant', displayName: 'Plant' },
-                { field: 'truck', displayName: 'Truck' },
-                { field: 'ticket', displayName: 'Ticket' },
-                { field: 'dept_time', displayName: 'Departure Time' },
-                { field: 'arriv_time', displayName: 'Arrival Time' },
-                { field: 'truck_load', displayName: 'Truck Load' },
-                { field: 'temp', displayName: 'Temperature' },
-                { field: 'slump', displayName: 'Slump' },
-                { field: 'flow', displayName: 'Flow' },
-                { field: 'accepted', displayName: 'Accepted' }
-            ],
-            rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
-                '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
-                '&nbsp;' +
-                '</div>' +
-                '<div ng-cell></div>' +
-                '</div>'
-        };
+                currentPage: 1
+            };
+
+            $scope.gridOptions =
+            {
+                data: 'motherFucker',
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                adrrPagingOptions: 'pagingOptions',
+                numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
+                dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
+                multiSelect: false,
+                plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
+                columnDefs: [
+                    { field: 'date', displayName: 'Date' },
+                    { field: 'shift_id', displayName: 'Shift' },
+                    { field: 'supplier_id', displayName: 'Supplier' },
+                    { field: 'conc_type_id', displayName: 'concrete Type' },
+                    { field: 'plant', displayName: 'Plant' },
+                    { field: 'truck', displayName: 'Truck' },
+                    { field: 'ticket', displayName: 'Ticket' },
+                    { field: 'dept_time', displayName: 'Departure Time' },
+                    { field: 'arriv_time', displayName: 'Arrival Time' },
+                    { field: 'truck_load', displayName: 'Truck Load' },
+                    { field: 'temp', displayName: 'Temperature' },
+                    { field: 'slump', displayName: 'Slump' },
+                    { field: 'flow', displayName: 'Flow' },
+                    { field: 'accepted', displayName: 'Accepted' }
+                ],
+                rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
+                    '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
+                    '&nbsp;' +
+                    '</div>' +
+                    '<div ng-cell></div>' +
+                    '</div>'
+            };
+
+        }
+        else {
+
+        }
     }
 )
 

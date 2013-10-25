@@ -1,3 +1,7 @@
-<div class="gridStyle col-sm-12" ng-grid="gridOptions" adrr-ss-ng-grid></div>
+<ng-switch on="isSenior">
+    <blank ng-switch-when="0">
+        <div class="gridStyle col-sm-12" ng-grid="gridOptions" adrr-ss-ng-grid></div>
 
-<a class="btn btn-primary" href="#/labs/create">Create</a>
+        <a class="btn btn-primary" href="#/labs/create">Create</a>
+    </blank>
+</ng-switch>

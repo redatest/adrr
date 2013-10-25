@@ -6,6 +6,8 @@
  * @property mixed red
  * @property mixed id
  * @property mixed yellow
+ * @property mixed isNewRecord
+ * @property mixed update
  */
 class Lab extends ArModel
 {
@@ -47,7 +49,8 @@ class Lab extends ArModel
             'create_time' => 'Create Time',
             'returned' => 'Returend',
             'approved' => 'Approved',
-            'archived' => 'Archived'
+            'archived' => 'Archived',
+            'update' => 'Update'
         );
     }
 
@@ -72,6 +75,15 @@ class Lab extends ArModel
         }
 
         return true;
+    }
+
+    public function save($runValidation = true, $attributes = null)
+    {
+        date_default_timezone_set('Asia/Riyadh');
+
+        $this->update = date('Y:m:d H:i:s');
+
+        return parent::save($runValidation, $attributes);
     }
 
     protected function afterSave()
