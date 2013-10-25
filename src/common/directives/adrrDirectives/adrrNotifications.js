@@ -18,8 +18,6 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
 
                 scope.items = [];
 
-//                adrrDataGetter.set(attrs.adrrOptions.sourceUrl, scope.items, parseInt(attrs.adrrOptions.time, 10), attrs.adrrOptions.updateTrucker);
-
                 scope.$watch
                 (
                     attrs.adrrOptions, function (newVal, oldVal) {
@@ -44,12 +42,6 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
                         isFirst = false;
                     }
                 );
-//
-//                if (typeof scope.adrrOptions.time !== 'undefined' && typeof scope.adrrOptions.sourceUrl !== 'undefined' && typeof scope.adrrOptions.updateTrucker !== 'undefined') {
-//
-//
-//
-//                }
             }
         }
     }

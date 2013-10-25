@@ -14,6 +14,15 @@ class NotificationsController extends CController
         echo CJSON::encode($nots);
     }
 
+    public function actionMarkAsRead()
+    {
+        if (isset($_GET['id'])) {
+
+            AdrrNotificationPump::markAsRead($_GET['id']);
+
+        }
+    }
+
     public function actionRegisterNotification()
     {
 //        AdrrNotificationPump::register('wow', 'lab', array('roles' => array('senior')), 'pouring', 2, 'red', true);

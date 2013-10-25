@@ -21,9 +21,11 @@ class AdrrNotificationPump extends CComponent
 
     public static function markAsRead($id)
     {
-        $arrts = array('id' => $id, 'unregistered' => 0);
+        $criteria = new CDbCriteria();
+        $criteria->join = 'INNER JOIN tbl_notification_message nm ON nm.id = t.message_id AND nm.unregistered = 0';
+        $criteria->addCondition('t.id=' . $id);
 
-        $n = Notification::model()->findByAttributes($arrts);
+        $n = Notification::model()->find($criteria);
 
         $nm = $n->message;
 

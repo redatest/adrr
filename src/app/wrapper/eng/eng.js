@@ -73,7 +73,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.pagingOptions =
         {
             pageSizes: [10, 20, 30],
+
             pageSize: 10,
+
             currentPage: 1
         };
 
@@ -118,13 +120,23 @@ angular.module('adrrApp.wrapper.eng', [], null)
     .controller
 (
     'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $q) {
+
         $rootScope.pageHeader = 'Labs';
 
         $rootScope.breadcrumbItems = ['Home', 'Labs', 'Create'];
 
         $scope.metaData = yii['Lab'];
 
-        $q.all([Restangular.all('settings/shiftType').getList(), Restangular.all('settings/supplier').getList(), Restangular.all('settings/concreteType').getList(), Restangular.all('eng/labPlant').getList(), Restangular.all('eng/labTruck').getList()]).then
+        $q.all
+            (
+                [
+                    Restangular.all('settings/shiftType').getList(),
+                    Restangular.all('settings/supplier').getList(),
+                    Restangular.all('settings/concreteType').getList(),
+                    Restangular.all('eng/labPlant').getList(),
+                    Restangular.all('eng/labTruck').getList()
+                ]
+            ).then
         (
             function (dataArr) {
                 $scope.plants = angular.isArray(dataArr[3]) ? dataArr[3] : [];

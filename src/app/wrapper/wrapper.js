@@ -47,7 +47,7 @@ angular.module('adrrApp.wrapper', [], null)
 
     .controller
 (
-    'WrapperCtrl', function ($scope, $rootScope, adrrAuth) {
+    'WrapperCtrl', function ($scope, $rootScope, adrrAuth, $http) {
 
         $rootScope.configModal = function (title, message, btnClass, func, closeFunc) {
             $rootScope.modalTitle = title;
@@ -59,9 +59,14 @@ angular.module('adrrApp.wrapper', [], null)
 
         $scope.notsOpts = {
 
-            template: '<ul class="list-group" adrr-jslimscroll><li class="list-group-item" ng-class="{\'yellowBg\': item.type === \'yellow\', \'redBg\': item.type === \'red\'}" ng-repeat="item in items">{{item.message}}<input type="checkbox" class="pull-right" ng-click="itemCheck()" /></li></ul>',
+            template: '<ul class="list-group" adrr-jslimscroll>' +
+                '<li class="list-group-item" ng-class="{\'yellowBg\': item.type === \'yellow\', \'redBg\': item.type === \'red\'}" ng-repeat="(i, item) in items">' +
+                '{{item.message}}' +
+                '<input type="checkbox" ng-model="item.checked" class="pull-right" ng-click="itemCheck(items, item)" />' +
+                '</li>' +
+                '</ul>',
 
-            sourceUrl: 'http://localhost/alaa/ccm/yii/notifications',
+            sourceUrl: '../yii/notifications',
 
             time: 3000,
 
@@ -84,8 +89,44 @@ angular.module('adrrApp.wrapper', [], null)
 
         };
 
-        $scope.itemCheck = function () {
-            console.log('da');
+        $scope.itemCheck = function (items, item) {
+
+            setTimeout
+            (
+                function () {
+
+                    var index = _.indexOf(items, item);
+
+                    if (items[index].checked || typeof items[index].checked === 'undefined') {
+
+                        $http.get
+                        (
+                            '../yii/notifications/markAsRead',
+                            {
+                                params: {
+
+                                    id: items[index].id
+
+                                }
+                            }
+                        ).success
+                        (
+                            function () {
+
+                                delete items.splice(index, 1);
+
+                                if (!$scope.$$phase) {
+
+                                    $scope.$apply();
+
+                                }
+                            }
+                        );
+                    }
+
+                }, 2000
+            )
+
         }
     }
 );
