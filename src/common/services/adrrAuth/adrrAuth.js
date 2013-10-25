@@ -1,9 +1,11 @@
 angular.module('adrrAuth', [], null).factory
 (
     'adrrAuth', function ($state, $http, $rootScope, $q) {
+
         $rootScope.wrongCredentials = false;
 
         var check = function (username, password, oldUrl) {
+
             var credentials = (!angular.isUndefined(username) && !angular.isUndefined(password)) ? $.param({ username: username, password: password }) : null;
 
             var deferred = $q.defer();
@@ -52,6 +54,7 @@ angular.module('adrrAuth', [], null).factory
         };
 
         function logout() {
+
             $http
             ({
                 method: 'POST',

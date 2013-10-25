@@ -11,17 +11,17 @@ html, body {
 
 /* Angular Grid */
 .redBg {
-  background-color: #FFBFBF !important;
+  background-color: #f2dede !important;
 
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
+/*border-top: 1px solid #eaeaea;
+border-bottom: 1px solid #eaeaea;*/
 }
 
 .yellowBg {
-  background-color: #FFFFBF;
+  background-color: #fcf8e3;
 
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
+/*border-top: 1px solid #eaeaea;
+border-bottom: 1px solid #eaeaea;*/
 }
 
 .ngRow.selected .redBg, .ngRow.selected .yellowBg {
@@ -49,6 +49,28 @@ html, body {
 
 .navbar-default .navbar-nav > li > a {
   color: #FFF;
+}
+
+#topnav .topnavlink {
+  color: #FFFFFF;
+
+  line-height: 50px;
+
+  background: #5496cf;
+
+  width: 40px;
+
+  text-align: center;
+
+  display: block;
+
+  margin-left: 2px;
+}
+
+#topnav .dropdown-menu {
+  width: 240px;
+
+  right: -45px;
 }
 
 /* End */
@@ -199,10 +221,17 @@ html, body {
 }
 
 @media (max-width: @screen-sm) {
+
   #sidenav {
+
     margin: -50px 0 0 0;
 
     z-index: 0;
+
+  }
+
+  #sidenav .navbar-collapse {
+    margin-top: 50px;
   }
 
   #sidenav nav .navbar-header {
@@ -212,4 +241,14 @@ html, body {
   .form-control {
     height: 40px;
   }
+}
+
+@media (max-width: @screen-xs) {
+
+  #topnav .navbar-brand {
+
+    padding: 15px 10px;
+
+  }
+
 }

@@ -63,68 +63,92 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabCtrl', function ($rootScope, $scope) {
+    'LabCtrl', function ($rootScope, $scope, yii, adrrDataGetter) {
         // ------------------------------------------------
         $rootScope.pageHeader = 'Labs';
 
         $rootScope.breadcrumbItems = ['Home', 'Labs'];
         // ------------------------------------------------
 
-        $scope.pagingOptions =
-        {
-            pageSizes: [10, 20, 30],
-            pageSize: 10,
-            currentPage: 1
-        };
+        $scope.metaData = yii['Lab'].cols;
 
-        $scope.gridOptions =
-        {
-            data: 'motherFucker',
-            enablePaging: true,
-            showFooter: true,
-            totalServerItems: 'totalServerItems',
-            pagingOptions: $scope.pagingOptions,
-            adrrPagingOptions: 'pagingOptions',
-            numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
-            dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
-            multiSelect: false,
-            plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
-            columnDefs: [
-                { field: 'date', displayName: 'Date' },
-                { field: 'shift_id', displayName: 'Shift' },
-                { field: 'supplier_id', displayName: 'Supplier' },
-                { field: 'conc_type_id', displayName: 'concrete Type' },
-                { field: 'plant', displayName: 'Plant' },
-                { field: 'truck', displayName: 'Truck' },
-                { field: 'ticket', displayName: 'Ticket' },
-                { field: 'dept_time', displayName: 'Departure Time' },
-                { field: 'arriv_time', displayName: 'Arrival Time' },
-                { field: 'truck_load', displayName: 'Truck Load' },
-                { field: 'temp', displayName: 'Temperature' },
-                { field: 'slump', displayName: 'Slump' },
-                { field: 'flow', displayName: 'Flow' },
-                { field: 'accepted', displayName: 'Accepted' }
-            ],
-            rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== \'\', \'redBg\': row.getProperty(\'red\') !== \'\'}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
-                '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
-                '&nbsp;' +
-                '</div>' +
-                '<div ng-cell></div>' +
-                '</div>'
-        };
+        if (parseInt($scope.isEng, 10)) {
+
+            $scope.pagingOptions =
+            {
+                pageSizes: [10, 20, 30],
+
+                pageSize: 10,
+
+                currentPage: 1
+            };
+
+            $scope.gridOptions =
+            {
+                data: 'motherFucker',
+                enablePaging: true,
+                showFooter: true,
+                totalServerItems: 'totalServerItems',
+                pagingOptions: $scope.pagingOptions,
+                adrrPagingOptions: 'pagingOptions',
+                numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
+                dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
+                multiSelect: false,
+                plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
+                columnDefs: [
+                    { field: 'date', displayName: 'Date' },
+                    { field: 'shift_id', displayName: 'Shift' },
+                    { field: 'supplier_id', displayName: 'Supplier' },
+                    { field: 'conc_type_id', displayName: 'concrete Type' },
+                    { field: 'plant', displayName: 'Plant' },
+                    { field: 'truck', displayName: 'Truck' },
+                    { field: 'ticket', displayName: 'Ticket' },
+                    { field: 'dept_time', displayName: 'Departure Time' },
+                    { field: 'arriv_time', displayName: 'Arrival Time' },
+                    { field: 'truck_load', displayName: 'Truck Load' },
+                    { field: 'temp', displayName: 'Temperature' },
+                    { field: 'slump', displayName: 'Slump' },
+                    { field: 'flow', displayName: 'Flow' },
+                    { field: 'accepted', displayName: 'Accepted' }
+                ],
+                rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
+                    '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
+                    '&nbsp;' +
+                    '</div>' +
+                    '<div ng-cell></div>' +
+                    '</div>'
+            };
+
+        } else {
+
+            $scope.records = [];
+
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
+
+        }
     }
 )
 
     .controller
 (
     'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $q) {
+
         $rootScope.pageHeader = 'Labs';
 
         $rootScope.breadcrumbItems = ['Home', 'Labs', 'Create'];
 
         $scope.metaData = yii['Lab'];
 
-        $q.all([Restangular.all('settings/shiftType').getList(), Restangular.all('settings/supplier').getList(), Restangular.all('settings/concreteType').getList(), Restangular.all('eng/labPlant').getList(), Restangular.all('eng/labTruck').getList()]).then
+        $q.all
+            (
+                [
+                    Restangular.all('settings/shiftType').getList(),
+                    Restangular.all('settings/supplier').getList(),
+                    Restangular.all('settings/concreteType').getList(),
+                    Restangular.all('eng/labPlant').getList(),
+                    Restangular.all('eng/labTruck').getList()
+                ]
+            ).then
         (
             function (dataArr) {
                 $scope.plants = angular.isArray(dataArr[3]) ? dataArr[3] : [];
@@ -230,8 +254,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 temp: $scope.temp,
                 slump: $scope.slump,
                 flow: $scope.flow,
-                red: $scope.red,
-                yellow: $scope.yellow,
+                red: $scope.red !== '' ? $scope.red : null,
+                yellow: $scope.yellow !== '' ? $scope.yellow : null,
                 accepted: $scope.accepted
             }).then
             (

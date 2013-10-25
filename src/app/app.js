@@ -10,6 +10,10 @@ var adrrApp = angular.module
             'restangular',
             'ui.date',
             'adrrDirectives',
+            'adrrDirectives.numRange',
+            'adrrDirectives.ssNgGrid',
+            'adrrDirectives.jslimscroll',
+            'adrrDirectives.notifications',
             'adrrAuth',
             'adrrDataGetter',
             'adrrApp.login',
@@ -81,6 +85,7 @@ var adrrApp = angular.module
         $scope.$on
         (
             '$stateChangeStart', function (a, b) {
+
                 $scope.state = b['name'];
 
                 $rootScope.pageTitle = b['title'];

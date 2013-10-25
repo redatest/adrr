@@ -1,73 +1,135 @@
 var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 (
-	'adrrDataGetter', function ($http) {
+    'adrrDataGetter', function ($http) {
 
-		var targets = [];
+        var targets = [];
 
-		var timers = [];
+        var timers = [];
 
-		//getData is the function that actually fetches data. It is used by function set.
-		//  sourceUrl: the url to the requested data source
-		//  target: is an array object. It has to be initialized as an empty array before calling getData.
-		//  method: post or get.
-		//  args: any additional paramitures to be passed with the request.
-		var getData = function (sourceUrl, target, method, args) {
+        var lookup = [];
 
-			$http
-			({
-				 method: (method !== undefined ? method : 'GET'),
-				 url: sourceUrl,
-				 data: (args !== undefined ? args : null)
-			 }).success
-			(
-				function (data) {
-					var targetIndex = _.indexOf(targets, target, 0);
+        var truckers = [];
 
-					if (angular.isArray(data)) {
-						var dataLength = data.length;
+        //  getData is the function that actually fetches data. It is used by function set.
+        //  sourceUrl: the url to the requested data source
+        //  target: is an array object. It has to be initialized as an empty array before calling getData.
+        //  method: post or get.
+        //  args: any additional paramitures to be passed with the request.
+        var getData = function (sourceUrl, target, time, updateTrucker, method, args) {
 
-						for (var i = 0; i < dataLength; i++) {
+            var index = _.indexOf(targets, target, 0);
 
-							if (_.indexOf(targets[targetIndex], data[i], 0) !== -1) {
-								targets[targetIndex].push(data[i]);
-							}
-						}
+            if (truckers[index] !== null) {
 
-						dataLength = targets[targetIndex].length;
+                args['trucker'] = truckers[index];
 
-						for (i = 0; i < dataLength; i++) {
+            }
 
-							if (_.indexOf(data, targets[targetIndex][i], 0) !== -1) {
-								targets[targetIndex].splice(i, 1);
-							}
-						}
-					}
-				}
-			)
-		};
+            $http
+            ({
+                method: method !== undefined ? method : 'GET',
+                url: sourceUrl,
+                params: method !== 'POST' ? (typeof args !== 'undefined' ? args : null) : null,
+                data: method === 'POST' ? (typeof args !== 'undefined' ? $.param(args) : null) : null,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+            })
+                .success
+            (
+                function (data) {
 
-		var set = function (sourceUrl, target, time, method, args) {
+                    if (angular.isArray(data)) {
 
-			if (time !== undefined) {
-				var timer = window.setInterval(getData.bind(sourceUrl, target, method, args), time);
-				timers.push(timer);
+                        var dataLength = data.length;
 
-				targets.push(target);
-			}
-		};
+                        var newest = dataLength > 0 ? data[0][updateTrucker] : null;
 
-		var unset = function (target) {
+                        for (var i = 0; i < dataLength; i++) {
 
-			var targetIndex = _.indexOf(targets, target, 0);
+                            newest = data[i][updateTrucker] > newest ? data[i][updateTrucker] : newest;
 
-			window.clearInterval(timers[targetIndex]);
+                            var itemId = parseInt(data[i]['id'], 10);
 
-			targets.splice(targetIndex, 1);
-		};
+                            if (typeof lookup[index][itemId] === 'undefined' || lookup[index][itemId] === null) {
 
-		return {
-			set: set,
-			unset: unset
-		}
-	}
+                                lookup[index][itemId] = target.length;
+
+                            }
+
+                            target[lookup[index][itemId]] = data[i];
+                        }
+
+                        truckers[index] = newest;
+                    }
+
+                    setTimeout
+                    (
+                        function () {
+
+                            getData(sourceUrl, target, time, updateTrucker, method, args);
+
+                        }, time
+                    );
+                }
+            )
+        };
+
+        var set = function (sourceUrl, target, time, updateTrucker, method, args) {
+
+            if (typeof time !== 'undefined') {
+
+                targets.push(target);
+
+                lookup.push([]);
+
+                truckers.push(null);
+
+                args = typeof args === 'undefined' ? {} : args;
+
+                if (typeof updateTrucker !== 'undefined' && updateTrucker !== null) {
+
+                    args['updateTrucker'] = updateTrucker;
+                }
+
+                getData(sourceUrl, target, time, updateTrucker, method, args);
+
+                timers.push(time);
+            }
+        };
+
+        var unset = function (target) {
+
+            var index = _.indexOf(targets, target, 0);
+
+            if (index !== -1) {
+
+                window.clearInterval(timers[index]);
+
+                timers.splice(index, 1);
+
+                targets.splice(index, 1);
+
+                lookup.splice(index, 1);
+            }
+        };
+
+        var updateTime = function (target, time) {
+
+            var index = _.indexOf(targets, target, 0);
+
+            if (index !== -1) {
+
+                timers[index] = time;
+            }
+        };
+
+        return {
+
+            set: set,
+
+            unset: unset,
+
+            updateTime: updateTime
+
+        };
+    }
 );

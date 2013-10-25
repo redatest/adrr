@@ -1,4 +1,4 @@
-angular.module('adrrDirectives', ['ui.select2'], null)
+var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
 
     .directive
 (
@@ -60,81 +60,6 @@ angular.module('adrrDirectives', ['ui.select2'], null)
                         }
                     );
                 }
-            }
-        }
-    }
-)
-
-    .directive
-(
-    'adrrSsNgGrid', function ($http, $q) {
-        return {
-            restrict: 'A',
-
-            scope: true,
-
-            require: '?ngGrid',
-
-            link: function (scope, element, attrs) {
-                var parent = scope.$parent;
-
-                var gridOptions = parent[attrs.ngGrid];
-
-                function loadData(pageSize, page) {
-                    var deferred = $q.defer();
-
-                    var offset = (page - 1) * pageSize;
-
-                    $http.get(gridOptions.dataSource, { params: { offset: offset, limit: pageSize } }).success
-                    (
-                        function (data) {
-                            deferred.resolve(data);
-                        }
-                    );
-
-                    return deferred.promise;
-                }
-
-                scope.getPagedDataAsync = function (pageSize, page) {
-                    loadData(pageSize, page).then
-                    (
-                        function (data) {
-                            parent[gridOptions.data] = angular.isArray(data) ? data : [];
-                        }
-                    );
-                };
-
-                function updateData() {
-                    $http.get(gridOptions.numRowsUrl).success
-                    (
-                        function (data) {
-                            parent[gridOptions.totalServerItems] = parseInt(data['numRows'], 10);
-
-                            scope.getPagedDataAsync(parent[gridOptions.adrrPagingOptions].pageSize, parent[gridOptions.adrrPagingOptions].currentPage);
-                        }
-                    );
-                }
-
-                updateData();
-
-                scope.$watch
-                (
-                    gridOptions.adrrPagingOptions, function (newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            var ops = parseInt(oldVal.pageSize, 10);
-                            var nps = parseInt(newVal.pageSize, 10);
-
-                            var mxp = Math.ceil(parent[gridOptions.totalServerItems] / nps);
-
-                            if (nps !== ops && mxp < newVal.currentPage) {
-                                parent[gridOptions.adrrPagingOptions].currentPage = mxp;
-                            }
-                            else {
-                                scope.getPagedDataAsync(newVal.pageSize, newVal.currentPage);
-                            }
-                        }
-                    }, true
-                );
             }
         }
     }
@@ -271,81 +196,5 @@ angular.module('adrrDirectives', ['ui.select2'], null)
                 }
             }
         }
-    }
-)
-
-    .directive
-(
-    'adrrNumRange', function () {
-        return {
-            restrict: 'A',
-
-            require: 'ngModel',
-
-            scope: false,
-
-            link: function (scope, element, attrs, ctrl) {
-                ctrl.$render = function () {
-                    check(ctrl.$modelValue);
-                };
-
-                element.on
-                (
-                    'keyup change blur', function () {
-
-                        check(element.val());
-
-                        if (!scope.$$phase) {
-                            scope.$apply();
-                        }
-                    }
-                );
-
-                function check(val) {
-                    if (val !== '' && val !== '-' && !angular.isUndefined(val)) {
-                        val = parseInt(val, 10);
-
-                        if (!angular.isUndefined(attrs.min)) {
-                            var minVal = parseInt(attrs.min, 10);
-
-                            if (val < minVal) val = minVal;
-                        }
-
-                        if (!angular.isUndefined(attrs.max)) {
-                            var maxVal = parseInt(attrs.max, 10);
-
-                            if (val > maxVal) val = maxVal;
-                        }
-
-                        val = isNaN(val) ? (angular.isUndefined(attrs.value) ? attrs.min : attrs.value) : val;
-
-                        if (!angular.isUndefined(attrs.length)) {
-                            var valStr = val.toString();
-
-                            var isMin = valStr.charAt(0) === '-';
-
-                            var valLength = parseInt(attrs.length, 10) - valStr.length - (isMin ? 1 : 0);
-
-                            if (isMin) {
-                                for (var i = 0; i < valLength; i++) {
-                                    valStr = valStr.substr(0, 1) + '0' + valStr.substr(1);
-                                }
-                            }
-                            else {
-                                for (i = 0; i < valLength; i++) {
-                                    valStr = '0' + valStr;
-                                }
-                            }
-
-                            val = valStr;
-                        }
-                    }
-
-                    ctrl.$setViewValue(val);
-
-                    element.val(val);
-                }
-            }
-        };
     }
 );
