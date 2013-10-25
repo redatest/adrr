@@ -63,14 +63,16 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabCtrl', function ($rootScope, $scope) {
+    'LabCtrl', function ($rootScope, $scope, yii, adrrDataGetter) {
         // ------------------------------------------------
         $rootScope.pageHeader = 'Labs';
 
         $rootScope.breadcrumbItems = ['Home', 'Labs'];
         // ------------------------------------------------
 
-        if ($scope.isEng) {
+        $scope.metaData = yii['Lab'].cols;
+
+        if (parseInt($scope.isEng, 10)) {
 
             $scope.pagingOptions =
             {
@@ -117,9 +119,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     '</div>'
             };
 
-        }
-        else {
+        } else {
 
+            $scope.records = [];
+
+            adrrDataGetter.set('../yii/api/eng/lab/unarchived', $scope.records, 5000, 'update');
 
         }
     }

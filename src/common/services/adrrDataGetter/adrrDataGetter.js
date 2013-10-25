@@ -93,15 +93,6 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
                 getData(sourceUrl, target, time, updateTrucker, method, args);
 
                 timers.push(time);
-
-                setTimeout
-                (
-                    function () {
-
-                        getData(sourceUrl, target, time, updateTrucker, method, args);
-
-                    }, time
-                );
             }
         };
 

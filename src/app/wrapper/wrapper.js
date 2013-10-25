@@ -68,7 +68,7 @@ angular.module('adrrApp.wrapper', [], null)
 
             sourceUrl: '../yii/notifications',
 
-            time: 3000,
+            time: 5000,
 
             updateTrucker: 'id'
 
@@ -95,7 +95,7 @@ angular.module('adrrApp.wrapper', [], null)
             (
                 function () {
 
-                    var index = _.indexOf(items, item);
+                    var index = _.indexOf(items, item, 0);
 
                     if (items[index].checked || typeof items[index].checked === 'undefined') {
 

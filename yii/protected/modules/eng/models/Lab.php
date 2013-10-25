@@ -59,6 +59,8 @@ class Lab extends ArModel
         $map = parent::getMap();
 
         unset($map['cols']['create_time']);
+        unset($map['cols']['update']);
+        unset($map['cols']['user_id']);
 
         return $map;
     }
