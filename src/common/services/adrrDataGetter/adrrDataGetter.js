@@ -50,7 +50,6 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
 			if (time !== undefined) {
 				var timer = window.setInterval(getData.bind(sourceUrl, target, method, args), time);
-
 				timers.push(timer);
 
 				targets.push(target);
