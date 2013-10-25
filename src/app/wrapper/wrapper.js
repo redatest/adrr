@@ -101,7 +101,7 @@ angular.module('adrrApp.wrapper', [], null)
 
                         $http.get
                         (
-                            '../yii/notifications/markAsRead',
+                            appConfig.yiiUrl + '/notifications/markAsRead',
                             {
                                 params: {
 

@@ -123,7 +123,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.records = [];
 
-            adrrDataGetter.set('../yii/api/eng/lab/unarchived', $scope.records, 5000, 'update');
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
 
         }
     }
