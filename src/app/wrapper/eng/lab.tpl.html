@@ -37,8 +37,8 @@
                 <td>{{record['plant']}}</td>
                 <td>{{record['truck']}}</td>
                 <td>{{record['ticket']}}</td>
-                <td>{{record['dept_time']}}</td>
-                <td>{{record['arriv_time']}}</td>
+                <td>{{record['dept_time'].replace(':00', '')}}</td>
+                <td>{{record['arriv_time'].replace(':00', '')}}</td>
                 <td>{{record['truck_load']}}</td>
                 <td>{{record['temp']}}</td>
                 <td>{{record['slump']}}</td>
