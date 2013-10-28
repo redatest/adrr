@@ -54,7 +54,7 @@ class Lab extends ArModel
         );
     }
 
-    public function getMap()
+    public function getMap($getList = false)
     {
         $map = parent::getMap();
 

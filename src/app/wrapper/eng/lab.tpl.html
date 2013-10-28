@@ -33,14 +33,14 @@
                 ng-class="{'danger': record.red !== null, 'warning': record.yellow !== null && record.red === null}">
                 <td>{{record['date']}}</td>
                 <td>{{record['user_id']}}</td>
-                <td>{{record['shift_id']}}</td>
-                <td>{{record['supplier_id']}}</td>
-                <td>{{record['conc_type_id']}}</td>
+                <td>{{yii['ShiftType']['list'][record['shift_id']].name}}</td>
+                <td>{{yii['Supplier']['list'][record['supplier_id']].name}}</td>
+                <td>{{yii['ConcreteType']['list'][record['conc_type_id']].name}}</td>
                 <td>{{record['plant']}}</td>
                 <td>{{record['truck']}}</td>
                 <td>{{record['ticket']}}</td>
-                <td>{{record['dept_time'].replace(':00', '')}}</td>
-                <td>{{record['arriv_time'].replace(':00', '')}}</td>
+                <td>{{record['dept_time'] | removeDateAndSeconds}}</td>
+                <td>{{record['arriv_time'] | removeDateAndSeconds}}</td>
                 <td>{{record['truck_load']}}</td>
                 <td>{{record['temp']}}</td>
                 <td>{{record['slump']}}</td>

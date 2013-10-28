@@ -88,6 +88,20 @@ angular.module('adrrApp.wrapper.eng', [], null)
     }
 )
 
+    .filter
+(
+    'removeDateAndSeconds', function () {
+
+        return function (str) {
+
+            var result = str.replace(/\d{4}-\d{2}-\d{2}/, '');
+
+            return result.replace(/:00$/, '');
+        }
+
+    }
+)
+
     .controller
 (
     'EngCtrl', function () {
@@ -104,6 +118,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $rootScope.breadcrumbItems = ['Home', 'Labs'];
         // ------------------------------------------------
 
+        $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
 
         if (parseInt($scope.isEng, 10)) {
@@ -137,8 +152,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     { field: 'plant', displayName: 'Plant' },
                     { field: 'truck', displayName: 'Truck' },
                     { field: 'ticket', displayName: 'Ticket' },
-                    { field: 'dept_time', displayName: 'Departure Time' },
-                    { field: 'arriv_time', displayName: 'Arrival Time' },
+                    { field: 'dept_time', displayName: 'Departure Time', cellFilter: 'removeDateAndSeconds' },
+                    { field: 'arriv_time', displayName: 'Arrival Time', cellFilter: 'removeDateAndSeconds' },
                     { field: 'truck_load', displayName: 'Truck Load' },
                     { field: 'temp', displayName: 'Temperature' },
                     { field: 'slump', displayName: 'Slump' },
