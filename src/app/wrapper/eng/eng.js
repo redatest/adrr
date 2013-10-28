@@ -50,6 +50,40 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     }
                 }
             }
+        )
+
+            .state
+        (
+            'wrapper.eng.pouring',
+            {
+                url: '^/pourings',
+
+                title: 'Pourings',
+
+                views: {
+                    '@wrapper.eng': {
+                        controller: 'PouringCtrl',
+                        templateUrl: 'wrapper/eng/pouring.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.pouring.create',
+            {
+                url: '^/pourings/create',
+
+                title: 'Create Pouring',
+
+                views: {
+                    '@wrapper.eng': {
+                        controller: 'PouringCreateCtrl',
+                        templateUrl: 'wrapper/eng/pouringForm.tpl.html'
+                    }
+                }
+            }
         );
     }
 )
@@ -132,10 +166,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
     .controller
 (
     'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $q) {
-
+        // -------------------------------------------------------------
         $rootScope.pageHeader = 'Labs';
 
         $rootScope.breadcrumbItems = ['Home', 'Labs', 'Create'];
+        // -------------------------------------------------------------
 
         $scope.metaData = yii['Lab'];
 
@@ -167,12 +202,17 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.yellow = '';
 
         $scope.getItemById = function (arr, id) {
+
             if (!angular.isUndefined(arr)) {
+
                 var arrLength = arr.length;
 
                 for (var i = 0; i < arrLength; i++) {
+
                     if (arr[i].id === id) {
+
                         return arr[i];
+
                     }
                 }
             }
@@ -183,7 +223,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.$watch
         (
             'supplierId', function (newVal) {
+
                 if (!angular.isUndefined(newVal) && newVal !== '') {
+
                     $scope.ticket = $scope.getItemById($scope.suppliers, newVal).prefix;
                 }
             }
@@ -192,6 +234,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.model = Restangular.all('eng/lab');
 
         $scope.validateTime = function () {
+
             var overlap = 0;
 
             var shiftType = null;
@@ -366,5 +409,27 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.setToday = function () {
             $scope.date = $.datepicker.formatDate('yy-mm-dd', new Date()).toString();
         };
+    }
+)
+
+    .controller
+(
+    'PouringCtrl', function ($rootScope) {
+        // -------------------------------------------------------------
+        $rootScope.pageHeader = 'Pourings';
+
+        $rootScope.breadcrumbItems = ['Home', 'Pourings'];
+        // -------------------------------------------------------------
+    }
+)
+
+    .controller
+(
+    'PouringCreateCtrl', function ($rootScope) {
+        // -------------------------------------------------------------
+        $rootScope.pageHeader = 'Pourings';
+
+        $rootScope.breadcrumbItems = ['Home', 'Pourings', 'Create'];
+        // -------------------------------------------------------------
     }
 );

@@ -66,7 +66,7 @@ angular.module('adrrApp.wrapper', [], null)
                 '</li>' +
                 '</ul>',
 
-            sourceUrl: '../yii/notifications',
+            sourceUrl: appConfig.yiiUrl + '/notifications',
 
             time: 5000,
 

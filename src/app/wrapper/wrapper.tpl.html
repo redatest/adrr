@@ -26,7 +26,7 @@
 </nav>
 
 <ng-switch on="isSenior">
-    <div id="sidenav" class="col-sm-3 col-lg-2">
+    <div id="sidenav" class="col-sm-2 col-lg-2">
         <nav class="navbar navbar-default" role="navigation">
             <div class="collapse navbar-collapse navbar-ex8-collapse">
                 <ul class="nav nav-pills nav-stacked">
@@ -34,8 +34,45 @@
                         <a href="#/dashboard">Dashboard</a>
                     </li>
 
-                    <li ng-class="{active: state === 'wrapper.eng.lab'}">
-                        <a href="#/labs">Labs</a>
+                    <li class="sub" ng-class="{active: state === 'wrapper.eng.lab'}">
+                        <a onclick="return false;" class="accordion-toggle"
+                           ng-class="{collapsed: state.indexOf('wrapper.eng.lab') === -1}" data-toggle="collapse"
+                           href="#collapseLab">Lab</a>
+
+                        <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
+                            ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
+                            <li ng-class="{active: state.indexOf('wrapper.eng.lab') > -1}">
+                                <a href="#/labs">Inbox</a>
+                            </li>
+                            <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
+                                <a href="#" onclick="return false;">Return</a>
+                            </li>
+                            <li ng-class="{active: state.indexOf('wrapper.eng.lab.archive') > -1}">
+                                <a href="#" onclick="return false;">Archive</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sub" ng-class="{active: state === 'wrapper.eng.pouring'}">
+                        <a onclick="return false;" class="accordion-toggle"
+                           ng-class="{collapsed: state.indexOf('wrapper.eng.pouring') === -1}" data-toggle="collapse"
+                           href="#collapsePouring">Pouring</a>
+
+                        <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
+                            ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
+                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
+                                <a href="#/pourings">Inbox</a>
+                            </li>
+                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
+                                <a href="#" onclick="return false;">Return</a>
+                            </li>
+                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.archive') > -1}">
+                                <a href="#" onclick="return false;">Archive</a>
+                            </li>
+                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}" ng-switch-when="0">
+                                <a href="#" onclick="return false;">Draft</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
@@ -91,7 +128,7 @@
     <view ui-view></view>
 </div>
 
-<div id="sidenavBg" class="col-sm-3 col-lg-2 hidden-xs">
+<div id="sidenavBg" class="col-sm-2 col-lg-2 hidden-xs">
 
 </div>
 

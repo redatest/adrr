@@ -1,0 +1,139 @@
+<div ng-show="showAlert" class="alert" ng-class="{ 'alert-success': alert, 'alert-danger': !alert }">
+    <any ng-show="alert">Successfully saved.</any>
+    <any ng-hide="alert">Something went wrong.</any>
+</div>
+
+<form role="form" name="mainForm" class="col-md-4 labForm" novalidate>
+    <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
+        <label class="control-label">Date</label>
+        <input ui-date="{dateFormat: 'yy-mm-dd'}" readonly="readonly" class="form-control" ng-model="date" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
+        <label class="control-label">Shift</label>
+        <select class="form-control" ng-model="shift_id" required></select>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ptForm.$invalid}" ng-form="ptForm">
+        <label class="control-label">Pouring Type</label>
+        <select class="form-control" ng-model="pouring_type_id" required></select>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
+        <label class="control-label">IR</label>
+        <input type="text" class="form-control" ng-model="ir" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': zoneForm.$invalid}" ng-form="zoneForm">
+        <label class="control-label">Zone</label>
+        <input type="text" class="form-control" ng-model="zone" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': areaForm.$invalid}" ng-form="areaForm">
+        <label class="control-label">Area</label>
+        <input type="text" class="form-control" ng-model="area" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': axisForm.$invalid}" ng-form="axisForm">
+        <label class="control-label">Axis</label>
+        <input type="text" class="form-control" ng-model="axis" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': levelForm.$invalid}" ng-form="levelForm">
+        <label class="control-label">Level</label>
+        <input type="text" class="form-control" ng-model="level" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': evForm.$invalid}" ng-form="evForm">
+        <label class="control-label">Estimated Vol (m)</label>
+        <input type="text" class="form-control" ng-model="ev" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
+        <label class="control-label">Ticket</label>
+        <input type="text" class="form-control" ng-model="ticket" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
+        <label class="control-label">Truck</label>
+        <input type="text" class="form-control" ng-model="truck" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': concForm.$invalid}" ng-form="concForm">
+        <label class="control-label">Concrete</label>
+        <select class="form-control" ng-model="conc_type_id" required></select>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': truckVolForm.$invalid}" ng-form="truckVolForm">
+        <label class="control-label">Truck Vol (m)</label>
+        <input type="text" class="form-control" ng-model="truckVol" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': pouredForm.$invalid}" ng-form="pouredForm">
+        <label class="control-label">Poured QTY</label>
+        <input type="text" class="form-control" ng-model="poured" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': deptForm.$invalid}" ng-form="deptForm">
+        <label class="control-label">Dept Time</label>
+
+        <adrr-timepicker required ng-model="deptTime"></adrr-timepicker>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
+        <label class="control-label">Slump B</label>
+        <input type="text" class="form-control" ng-model="slumpb" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
+        <label class="control-label">HRWR (ltr)</label>
+        <input type="text" class="form-control" ng-model="hrwr" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': waterForm.$invalid}" ng-form="waterForm">
+        <label class="control-label">Water (ltr)</label>
+        <input type="text" class="form-control" ng-model="water" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
+        <label class="control-label">Slump A</label>
+        <input type="text" class="form-control" ng-model="slumpa" required/>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': acptForm.$invalid}" ng-form="acptForm">
+        <label class="control-label">Accepted</label>
+        <select class="form-control" ng-model="acpt" required>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': pumpForm.$invalid}" ng-form="pumpForm">
+        <label class="control-label">Pump</label>
+        <select class="form-control" ng-model="pump_id" required></select>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': startForm.$invalid}" ng-form="startForm">
+        <label class="control-label">Start</label>
+
+        <adrr-timepicker required ng-model="start"></adrr-timepicker>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': endForm.$invalid}" ng-form="endForm">
+        <label class="control-label">End</label>
+
+        <adrr-timepicker required ng-model="end"></adrr-timepicker>
+    </div>
+
+    <div class="from-group">
+        <label class="control-label">Comment</label>
+
+        <textarea ng-model="comment" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Save and add</button>
+        <button class="btn btn-primary">Save and add same IR</button>
+        <button class="btn btn-primary">Save and back to list</button>
+    </div>
+</form>

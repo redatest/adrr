@@ -10,16 +10,17 @@
             <thead>
             <tr>
                 <th>Date</th>
+                <th>User</th>
                 <th>Shift</th>
                 <th>Supplier</th>
-                <th>Conc Type</th>
+                <th>Concrete</th>
                 <th>Plant</th>
                 <th>Truck</th>
                 <th>Ticket</th>
                 <th>Dept Time</th>
                 <th>Arrival Time</th>
                 <th>Truck Load</th>
-                <th>Temperature</th>
+                <th>Temp</th>
                 <th>Slump</th>
                 <th>Flow</th>
                 <th>Accepted</th>
@@ -31,6 +32,7 @@
             <tr ng-repeat="record in records"
                 ng-class="{'danger': record.red !== null, 'warning': record.yellow !== null && record.red === null}">
                 <td>{{record['date']}}</td>
+                <td>{{record['user_id']}}</td>
                 <td>{{record['shift_id']}}</td>
                 <td>{{record['supplier_id']}}</td>
                 <td>{{record['conc_type_id']}}</td>
