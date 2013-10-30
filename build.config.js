@@ -34,7 +34,7 @@ module.exports =
 
             'vendor/angular-strap/angular-strap.min.js',
 
-            'vendor/jQuery-slimScroll-master/jquery.slimscroll.js'
+            'vendor/jquery.slimScroll/jquery.slimscroll.min.js'
         ],
 
         css: [
