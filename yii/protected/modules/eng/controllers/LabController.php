@@ -34,15 +34,32 @@ class LabController extends RESTful
         $condition = 'archived = 0';
 
         if (isset($_GET['trucker'])) {
-//                var_dump($_GET['trucker']);die;
+
             $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
-//                var_dump($condition);die;
+
         }
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
         $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+    }
+
+    public function actionArchive()
+    {
+        if (isset($_GET['id'])) {
+
+            $model = $this->_model->findByPk($_GET['id']);
+
+            if ($model !== null) {
+
+                $model->archived = 1;
+
+                if ($model->save()) die;
+            }
+        }
+
+        throw new CHttpException(400, 'Couldn\'t archive this record');
     }
 }
 

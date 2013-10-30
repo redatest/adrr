@@ -90,6 +90,21 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .filter
 (
+    'fetchValue', function () {
+
+        return function (index, model, prop) {
+
+            prop = typeof prop === 'undefined' ? 'name' : prop;
+
+            return model['list'][index][prop];
+
+        };
+
+    }
+)
+
+    .filter
+(
     'removeDateAndSeconds', function () {
 
         return function (str) {
@@ -99,6 +114,17 @@ angular.module('adrrApp.wrapper.eng', [], null)
             return result.replace(/:00$/, '');
         }
 
+    }
+)
+    .filter
+(
+    'yesNo', function () {
+
+        return function (val) {
+
+            return val === '1' ? 'Yes' : 'No';
+
+        }
     }
 )
 
@@ -111,7 +137,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabCtrl', function ($rootScope, $scope, yii, adrrDataGetter) {
+    'LabCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
         // ------------------------------------------------
         $rootScope.pageHeader = 'Labs';
 
@@ -172,8 +198,115 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.records = [];
 
+//            $scope.selectedEntries = [];
+
             adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
 
+//            $scope.adrrGridOptions = {
+//                data: 'records',
+//
+//                columnDefs: [
+//
+//                    {
+//                        field: 'date',
+//                        displayName: 'Date'
+//                    },
+//                    {
+//                        field: 'user_id',
+//                        displayName: 'User'
+//                    },
+//                    {
+//                        field: 'shift_id',
+//                        displayName: 'Shift',
+//                        filters: 'fetchValue: yii["ShiftType"]'
+//                    },
+//                    {
+//                        field: 'supplier_id',
+//                        displayName: 'Supplier',
+//                        filters: 'fetchValue: yii["Supplier"]'
+//                    },
+//                    {
+//                        field: 'conc_type_id',
+//                        displayName: 'Concrete',
+//                        filters: 'fetchValue: yii["ConcreteType"]'
+//                    },
+//                    {
+//                        field: 'plant',
+//                        displayName: 'Plant'
+//                    },
+//                    {
+//                        field: 'truck',
+//                        displayName: 'Truck'
+//                    },
+//                    {
+//                        field: 'ticket',
+//                        displayName: 'Ticket'
+//                    },
+//                    {
+//                        field: 'dept_time',
+//                        displayName: 'Dept Time',
+//                        filters: 'removeDateAndSeconds'
+//                    },
+//                    {
+//                        field: 'arriv_time',
+//                        displayName: 'Arrival Time',
+//                        filters: 'removeDateAndSeconds'
+//                    },
+//                    {
+//                        field: 'temp',
+//                        displayName: 'Temp'
+//                    },
+//                    {
+//                        field: 'slump',
+//                        displayName: 'Slump'
+//                    },
+//                    {
+//                        field: 'flow',
+//                        displayName: 'Flow'
+//                    },
+//                    {
+//                        field: 'accepted',
+//                        displayName: 'Accepted'
+//                    }
+//                ],
+
+//                template: '<table class="table table-hover table-bordered">' +
+//                    '<thead>' +
+//                    '<tr id="headerCells">' +
+//                    '<th ng-show="multiSelect && showSelectionCheckbox">' +
+//                    '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
+//                    '</th>' +
+//                    '<th ng-repeat="col in cols">' +
+//                    '{{col.displayName}}' +
+//                    '</th>' +
+//                    '<th>' +
+//                    '</th>' +
+//                    '</tr>' +
+//                    '</thead>' +
+//                    '<tbody>' +
+//                    '<tr class="adrrGridRow" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}" ng-repeat="(i, row) in rows" ng-click="rowClickHandler(i)" adrr-grid-row>' +
+//                    '</tr>' +
+//                    '</tbody>' +
+//                    '</table>',
+
+//                rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows" ng-click="rowClickHandler(i)" adrr-grid-cell></tr>',
+
+//                showSelectionCheckbox: true,
+//
+//                selectedItems: $scope.selectedEntries
+//            }
+
+            $scope.archive = function (record) {
+
+                Restangular.one('eng/lab/archive').get({id: record.id}).then
+                (
+                    function (data) {
+
+                        $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
+
+                    }
+                )
+            }
         }
     }
 )

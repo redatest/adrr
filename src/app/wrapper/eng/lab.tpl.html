@@ -14,40 +14,40 @@
                 <th>Shift</th>
                 <th>Supplier</th>
                 <th>Concrete</th>
+                <th>Temp</th>
+                <th>Slump</th>
+                <th>Flow</th>
                 <th>Plant</th>
                 <th>Truck</th>
                 <th>Ticket</th>
                 <th>Dept Time</th>
                 <th>Arrival Time</th>
                 <th>Truck Load</th>
-                <th>Temp</th>
-                <th>Slump</th>
-                <th>Flow</th>
                 <th>Accepted</th>
                 <th></th>
             </tr>
             </thead>
 
             <tbody>
-            <tr ng-repeat="record in records"
+            <tr ng-repeat="record in records | orderBy:'update':true"
                 ng-class="{'danger': record.red !== null, 'warning': record.yellow !== null && record.red === null}">
                 <td>{{record['date']}}</td>
-                <td>{{record['user_id']}}</td>
-                <td>{{yii['ShiftType']['list'][record['shift_id']].name}}</td>
-                <td>{{yii['Supplier']['list'][record['supplier_id']].name}}</td>
-                <td>{{yii['ConcreteType']['list'][record['conc_type_id']].name}}</td>
+                <td>{{record['user_id'] | fetchValue:yii['User']:'username'}}</td>
+                <td>{{record['shift_id'] | fetchValue:yii['ShiftType']}}</td>
+                <td>{{record['supplier_id'] | fetchValue:yii['Supplier']}}</td>
+                <td>{{record['conc_type_id'] | fetchValue:yii['ConcreteType']}}</td>
+                <td>{{record['temp']}}</td>
+                <td>{{record['slump']}}</td>
+                <td>{{record['flow']}}</td>
                 <td>{{record['plant']}}</td>
                 <td>{{record['truck']}}</td>
                 <td>{{record['ticket']}}</td>
                 <td>{{record['dept_time'] | removeDateAndSeconds}}</td>
                 <td>{{record['arriv_time'] | removeDateAndSeconds}}</td>
                 <td>{{record['truck_load']}}</td>
-                <td>{{record['temp']}}</td>
-                <td>{{record['slump']}}</td>
-                <td>{{record['flow']}}</td>
-                <td>{{record['accepted']}}</td>
+                <td>{{record['accepted'] | yesNo}}</td>
                 <td>
-                    <button class="btn btn-default btn-xs">Archive</button>
+                    <button class="btn btn-default btn-xs" ng-click="archive(record)">Archive</button>
                     <button class="btn btn-default btn-xs">Comment</button>
                 </td>
             </tr>

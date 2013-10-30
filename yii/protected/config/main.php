@@ -50,6 +50,7 @@ return array
 
         'eng'
     ),
+
     'components' => array
     (
         'user' => array
@@ -80,7 +81,6 @@ return array
                 array('<module>/<controller>/createRelated', 'pattern' => 'api/<module\w+>/<controller:\w+>/<id:\d+>/<related:\w+>', 'verb' => 'POST'),
             ),
         ),
-
 
         'errorHandler' => array('errorAction' => 'site/error'),
 

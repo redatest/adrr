@@ -6,6 +6,8 @@ class MetaDataController extends CController
     {
         $models = array
         (
+            User::model(),
+
             Ir::model(),
             IrAl::model(),
             IrPt::model(),

@@ -24,6 +24,7 @@ angular.module('adrrApp.wrapper', [], null)
     .config
 (
     function config($stateProvider) {
+
         $stateProvider.state
         (
             'wrapper',

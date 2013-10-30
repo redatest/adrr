@@ -42,7 +42,10 @@
                         <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab') > -1}">
-                                <a href="#/labs">Inbox</a>
+                                <a href="#/labs">
+                                    <any ng-switch-when="1">Inbox</any>
+                                    <any ng-switch-when="0">Sent</any>
+                                </a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
                                 <a href="#" onclick="return false;">Return</a>

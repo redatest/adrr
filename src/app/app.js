@@ -10,6 +10,7 @@ var adrrApp = angular.module
             'restangular',
             'ui.date',
             'adrrDirectives',
+            'adrrDirectives.grid',
             'adrrDirectives.numRange',
             'adrrDirectives.ssNgGrid',
             'adrrDirectives.jslimscroll',

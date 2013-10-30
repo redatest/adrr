@@ -14,6 +14,9 @@ class ArModel extends CActiveRecord
         $map['cols'] = $columns;
 
         if ($getList) {
+
+            $map['list'] = array();
+
             $list = $this->findAll();
 
             foreach ($list as $item) {
