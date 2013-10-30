@@ -32,6 +32,8 @@ module.exports =
             'vendor/restangular/dist/restangular.js',
             'vendor/jquery-backstretch/jquery.backstretch.min.js',
 
+            'vendor/angular-strap/angular-strap.min.js',
+
             'vendor/jQuery-slimScroll-master/jquery.slimscroll.js'
         ],
 

@@ -4,6 +4,7 @@ class ArModel extends CActiveRecord
     public function getMap($getList = false)
     {
         $columns = $this->metaData->columns;
+
         $labels = $this->attributeLabels();
 
         foreach ($columns as $column => &$val) {

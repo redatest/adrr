@@ -1,1 +1,221 @@
-<a href="#/labs" class="btn btn-primary">Labs</a>
+<ng-switch on="isSenior">
+<a ng-switch-when="0" href="#/labs" class="btn btn-primary">Labs</a>
+
+<any ng-switch-when="1">
+<div class="col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">User on shift</div>
+        <div class="panel-body table-responsive">
+            <table class="table">
+                <tr class="active">
+                    <td>Name</td>
+                    <td>Shift 1</td>
+                    <td></td>
+                </tr>
+                <tr class="success">
+                    <td>Available</td>
+                    <td>20</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+                <tr class="danger">
+                    <td>Unavailable</td>
+                    <td>2</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+                <tr class="warning">
+                    <td>In vacation</td>
+                    <td>4</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Concrete statistics</div>
+        <div class="panel-body table-responsive">
+            <div class="btn-group" data-toggle="buttons" adrr-b3radio ng-model="conc">
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option11" value="1"> on shift
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option22" value="0"> on today
+                </label>
+            </div>
+
+            <table class="table" style="margin-top: 10px;" ng-show="conc == 1">
+                <tr class="success">
+                    <td>Normal range</td>
+                    <td>12</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="warning">
+                    <td>Acceptable range</td>
+                    <td>13</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="danger">
+                    <td>Out of range</td>
+                    <td>6</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td>Number of truck</td>
+                    <td>21</td>
+                    <td></td>
+                </tr>
+
+                <tr class="success">
+                    <td>Accepted</td>
+                    <td>16</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Returned</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Inbox</a></td>
+                </tr>
+            </table>
+
+            <table class="table" style="margin-top: 10px;" ng-show="conc == 0">
+                <tr class="success">
+                    <td>Normal range</td>
+                    <td>64</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="warning">
+                    <td>Acceptable range</td>
+                    <td>35</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="danger">
+                    <td>Out of range</td>
+                    <td>22</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td>Number of truck</td>
+                    <td>63</td>
+                    <td></td>
+                </tr>
+
+                <tr class="success">
+                    <td>Accepted</td>
+                    <td>58</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Returned</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Inbox</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Pouring statistics</div>
+        <div class="panel-body table-responsive">
+            <div class="btn-group" data-toggle="buttons" adrr-b3radio ng-model="pour">
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option1" value="1"> on shift
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" value="0"> on today
+                </label>
+            </div>
+
+            <table class="table" style="margin-top: 10px;" ng-show="pour == 1">
+                <tr class="active">
+                    <td>Number of truck</td>
+                    <td>21</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td>Number of pouring</td>
+                    <td>30</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="success">
+                    <td>Accepted</td>
+                    <td>30</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Returned</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Inbox</a></td>
+                </tr>
+            </table>
+
+            <table class="table" style="margin-top: 10px;" ng-show="pour == 0">
+                <tr class="active">
+                    <td>Number of truck</td>
+                    <td>59</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td>Number of pouring</td>
+                    <td>94</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="success">
+                    <td>Accepted</td>
+                    <td>83</td>
+                    <td><a href="#" onclick="return false;">view</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Returned</a></td>
+                </tr>
+
+                <tr class="active">
+                    <td></td>
+                    <td></td>
+                    <td><a href="#" onclick="return false;">Inbox</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</any>
+
+</ng-switch>

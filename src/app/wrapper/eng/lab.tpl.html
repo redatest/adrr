@@ -5,6 +5,7 @@
         <a class="btn btn-primary" href="#/labs/create">Create</a>
     </blank>
 
+    <!--<div class="table-responsive" adrr-grid="adrrGridOptions">-->
     <div class="table-responsive">
         <table ng-switch-when="1" class="table table-bordered table-hover table-striped">
             <thead>
@@ -48,7 +49,8 @@
                 <td>{{record['accepted'] | yesNo}}</td>
                 <td>
                     <button class="btn btn-default btn-xs" ng-click="archive(record)">Archive</button>
-                    <button class="btn btn-default btn-xs">Comment</button>
+                    <button class="btn btn-default btn-xs" adrr-popover="{content: '<button></button>'}">Comment
+                    </button>
                 </td>
             </tr>
             </tbody>

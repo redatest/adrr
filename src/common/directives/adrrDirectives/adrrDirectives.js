@@ -179,19 +179,24 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 element.on
                 (
                     'click', function (evt) {
+
                         var input = $(evt.target).children('input');
 
                         scope.$apply(ctrl.$setViewValue(input.val()));
+
                     }
                 );
 
                 ctrl.$render = function () {
+
                     var da = element.find('input[value=' + ctrl.$viewValue + ']');
 
                     if (!angular.isUndefined(da)) {
+
                         element.children().removeClass("active");
 
                         da.parent().addClass('active');
+
                     }
                 }
             }

@@ -186,6 +186,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     { field: 'flow', displayName: 'Flow' },
                     { field: 'accepted', displayName: 'Accepted' }
                 ],
+
                 rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
                     '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
                     '&nbsp;' +
@@ -198,115 +199,104 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.records = [];
 
-//            $scope.selectedEntries = [];
+            $scope.selectedEntries = [];
 
             adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
 
-//            $scope.adrrGridOptions = {
-//                data: 'records',
-//
-//                columnDefs: [
-//
-//                    {
-//                        field: 'date',
-//                        displayName: 'Date'
-//                    },
-//                    {
-//                        field: 'user_id',
-//                        displayName: 'User'
-//                    },
-//                    {
-//                        field: 'shift_id',
-//                        displayName: 'Shift',
-//                        filters: 'fetchValue: yii["ShiftType"]'
-//                    },
-//                    {
-//                        field: 'supplier_id',
-//                        displayName: 'Supplier',
-//                        filters: 'fetchValue: yii["Supplier"]'
-//                    },
-//                    {
-//                        field: 'conc_type_id',
-//                        displayName: 'Concrete',
-//                        filters: 'fetchValue: yii["ConcreteType"]'
-//                    },
-//                    {
-//                        field: 'plant',
-//                        displayName: 'Plant'
-//                    },
-//                    {
-//                        field: 'truck',
-//                        displayName: 'Truck'
-//                    },
-//                    {
-//                        field: 'ticket',
-//                        displayName: 'Ticket'
-//                    },
-//                    {
-//                        field: 'dept_time',
-//                        displayName: 'Dept Time',
-//                        filters: 'removeDateAndSeconds'
-//                    },
-//                    {
-//                        field: 'arriv_time',
-//                        displayName: 'Arrival Time',
-//                        filters: 'removeDateAndSeconds'
-//                    },
-//                    {
-//                        field: 'temp',
-//                        displayName: 'Temp'
-//                    },
-//                    {
-//                        field: 'slump',
-//                        displayName: 'Slump'
-//                    },
-//                    {
-//                        field: 'flow',
-//                        displayName: 'Flow'
-//                    },
-//                    {
-//                        field: 'accepted',
-//                        displayName: 'Accepted'
-//                    }
-//                ],
+            $scope.adrrGridOptions = {
+                data: 'records',
 
-//                template: '<table class="table table-hover table-bordered">' +
-//                    '<thead>' +
-//                    '<tr id="headerCells">' +
-//                    '<th ng-show="multiSelect && showSelectionCheckbox">' +
-//                    '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
-//                    '</th>' +
-//                    '<th ng-repeat="col in cols">' +
-//                    '{{col.displayName}}' +
-//                    '</th>' +
-//                    '<th>' +
-//                    '</th>' +
-//                    '</tr>' +
-//                    '</thead>' +
-//                    '<tbody>' +
-//                    '<tr class="adrrGridRow" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}" ng-repeat="(i, row) in rows" ng-click="rowClickHandler(i)" adrr-grid-row>' +
-//                    '</tr>' +
-//                    '</tbody>' +
-//                    '</table>',
+                columnDefs: [
 
-//                rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows" ng-click="rowClickHandler(i)" adrr-grid-cell></tr>',
+                    {
+                        field: 'date',
+                        displayName: 'Date'
+                    },
+                    {
+                        field: 'user_id',
+                        displayName: 'User',
+                        filters: 'fetchValue: yii["User"]:"username"'
+                    },
+                    {
+                        field: 'shift_id',
+                        displayName: 'Shift',
+                        filters: 'fetchValue: yii["ShiftType"]'
+                    },
+                    {
+                        field: 'supplier_id',
+                        displayName: 'Supplier',
+                        filters: 'fetchValue: yii["Supplier"]'
+                    },
+                    {
+                        field: 'conc_type_id',
+                        displayName: 'Concrete',
+                        filters: 'fetchValue: yii["ConcreteType"]'
+                    },
+                    {
+                        field: 'plant',
+                        displayName: 'Plant'
+                    },
+                    {
+                        field: 'truck',
+                        displayName: 'Truck'
+                    },
+                    {
+                        field: 'ticket',
+                        displayName: 'Ticket'
+                    },
+                    {
+                        field: 'dept_time',
+                        displayName: 'Dept Time',
+                        filters: 'removeDateAndSeconds'
+                    },
+                    {
+                        field: 'arriv_time',
+                        displayName: 'Arrival Time',
+                        filters: 'removeDateAndSeconds'
+                    },
+                    {
+                        field: 'temp',
+                        displayName: 'Temp'
+                    },
+                    {
+                        field: 'slump',
+                        displayName: 'Slump'
+                    },
+                    {
+                        field: 'flow',
+                        displayName: 'Flow'
+                    },
+                    {
+                        field: 'accepted',
+                        displayName: 'Accepted',
+                        filters: 'yesNo'
+                    }
+                ],
 
-//                showSelectionCheckbox: true,
-//
-//                selectedItems: $scope.selectedEntries
-//            }
+                rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}" ng-click="rowClickHandler(i)">' +
+                    '<td ng-show="multiSelect && showSelectionCheckbox">' +
+                    '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
+                    '</td>' +
+                    '<td ng-repeat="col in cols" adrr-grid-cell></td>' +
+                    '<td><button class="btn btn-default btn-xs">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                    '</tr>',
+
+                showSelectionCheckbox: true,
+
+                selectedItems: $scope.selectedEntries
+            }
 
             $scope.archive = function (record) {
 
                 Restangular.one('eng/lab/archive').get({id: record.id}).then
                 (
-                    function (data) {
+                    function () {
 
                         $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
 
                     }
                 )
-            }
+            };
         }
     }
 )

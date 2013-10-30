@@ -11,6 +11,7 @@ var adrrApp = angular.module
             'ui.date',
             'adrrDirectives',
             'adrrDirectives.grid',
+            'adrrDirectives.popover',
             'adrrDirectives.numRange',
             'adrrDirectives.ssNgGrid',
             'adrrDirectives.jslimscroll',
