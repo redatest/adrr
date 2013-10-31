@@ -2,7 +2,7 @@ var adrrPopover = angular.module('adrrDirectives.popover', [], null)
 
     .directive
 (
-    'adrrPopover', function () {
+    'adrrPopover', function ($compile) {
 
         return {
 
@@ -10,15 +10,19 @@ var adrrPopover = angular.module('adrrDirectives.popover', [], null)
 
             scope: false,
 
-            compile: function () {
-                return {
-                    pre: function (scope, element, attrs) {
+            link: function (scope, element, attrs) {
 
-                        var options = typeof attrs.adrrPopover !== 'undefined' && attrs.adrrPopover !== '' ? scope.$eval(attrs.adrrPopover) : {};
+                var options = typeof attrs.adrrPopover !== 'undefined' && attrs.adrrPopover !== '' ? scope[attrs.adrrPopover] : {};
 
-                        element.popover(options);
-                    }
-                };
+                if (typeof options.content !== 'undefined') {
+
+                    var newOptions = angular.copy(options);
+
+                    newOptions.content = $compile(options.content)(scope);
+
+                }
+
+                element.popover(newOptions);
             }
 
         }

@@ -203,6 +203,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
 
+            $scope.pOptions =
+            {
+                placement: 'left',
+                content: '<textarea class="form-control">{{row.id}}</textarea><button class="btn btn-primary btn-xs">Comment</button><button class="btn btn-danger btn-xs">Close</button>',
+                html: true
+            };
+
             $scope.adrrGridOptions = {
                 data: 'records',
 
@@ -278,13 +285,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                     '</td>' +
                     '<td ng-repeat="col in cols" adrr-grid-cell></td>' +
-                    '<td><button class="btn btn-default btn-xs">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                    '<td><button class="btn btn-default btn-xs" adrr-popover="pOptions">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
                     '</tr>',
 
                 showSelectionCheckbox: true,
 
                 selectedItems: $scope.selectedEntries
-            }
+            };
 
             $scope.archive = function (record) {
 
