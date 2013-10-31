@@ -58,3 +58,192 @@
     </div>
 
 </ng-switch>
+
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Comments</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="col-xs-6">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    <b>Date</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.date}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>User</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.user_id | fetchValue:yii['User']:'username'}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Shift</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.shift_id | fetchValue:yii['ShiftType']}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Supplier</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.supplier_id | fetchValue:yii['Supplier']}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Concrete</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.conc_type_id | fetchValue:yii['ConcreteType']}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Temp</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.temp}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Slump</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.slump !== null ? curRec.slump : 'unset'}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Flow</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.flow !== null ? curRec.flow : 'unset'}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Plant</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.plant}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Truck</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.truck}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Truck Load</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.truck_load}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Ticket</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.ticket}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Dept Time</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.dept_time | removeDateAndSeconds}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Arrival Time</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.arriv_time | removeDateAndSeconds}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <b>Accepted</b>
+                                </td>
+
+                                <td>
+                                    {{curRec.accepted | yesNo}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="panel panel-default" ng-repeat="(i, comment) in comments">
+                            <div class="panel-heading" ng-class="{'right': i % 2 !== 0}">
+                                {{comment.user_id |
+                                fetchValue:yii['User']:'username'}}<span>{{comment.date_time}}</span>
+                            </div>
+
+                            <div class="panel-body">
+                                {{comment.comment}}
+                            </div>
+                        </div>
+
+                        <textarea class="form-control" ng-model="commentText"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="submitComment()"
+                        ng-disabled="commentText === '' || commentText === undefined">Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -203,11 +203,45 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
 
-            $scope.pOptions =
-            {
-                placement: 'left',
-                content: '<textarea class="form-control">{{row.id}}</textarea><button class="btn btn-primary btn-xs">Comment</button><button class="btn btn-danger btn-xs">Close</button>',
-                html: true
+            $scope.archive = function (record) {
+
+                Restangular.one('eng/lab/archive').get({id: record.id}).then
+                (
+                    function () {
+
+                        $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
+
+                    }
+                )
+            };
+
+            $scope.loadComments = function (row) {
+
+                $scope.curRec = row;
+
+                $scope.comments = [];
+
+                Restangular.one('eng/lab', row.id).all('comments').getList().then
+                (
+
+                    function (data) {
+                        $scope.comments = data;
+
+                    }
+
+                )
+
+            };
+
+            $scope.submitComment = function () {
+
+                Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.userID, comment: $scope.commentText}).then
+                (
+                    function (data) {
+                        $scope.comments.push(data);
+                    }
+                )
+
             };
 
             $scope.adrrGridOptions = {
@@ -240,12 +274,28 @@ angular.module('adrrApp.wrapper.eng', [], null)
                         filters: 'fetchValue: yii["ConcreteType"]'
                     },
                     {
+                        field: 'temp',
+                        displayName: 'Temp'
+                    },
+                    {
+                        field: 'slump',
+                        displayName: 'Slump'
+                    },
+                    {
+                        field: 'flow',
+                        displayName: 'Flow'
+                    },
+                    {
                         field: 'plant',
                         displayName: 'Plant'
                     },
                     {
                         field: 'truck',
                         displayName: 'Truck'
+                    },
+                    {
+                        field: 'truck_load',
+                        displayName: 'Truck Load'
                     },
                     {
                         field: 'ticket',
@@ -262,47 +312,23 @@ angular.module('adrrApp.wrapper.eng', [], null)
                         filters: 'removeDateAndSeconds'
                     },
                     {
-                        field: 'temp',
-                        displayName: 'Temp'
-                    },
-                    {
-                        field: 'slump',
-                        displayName: 'Slump'
-                    },
-                    {
-                        field: 'flow',
-                        displayName: 'Flow'
-                    },
-                    {
                         field: 'accepted',
                         displayName: 'Accepted',
                         filters: 'yesNo'
                     }
                 ],
 
-                rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}" ng-click="rowClickHandler(i)">' +
-                    '<td ng-show="multiSelect && showSelectionCheckbox">' +
+                rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}">' +
+                    '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)"><td ng-show="multiSelect && showSelectionCheckbox">' +
                     '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                     '</td>' +
-                    '<td ng-repeat="col in cols" adrr-grid-cell></td>' +
-                    '<td><button class="btn btn-default btn-xs" adrr-popover="pOptions">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                    '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
+                    '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
                     '</tr>',
 
                 showSelectionCheckbox: true,
 
                 selectedItems: $scope.selectedEntries
-            };
-
-            $scope.archive = function (record) {
-
-                Restangular.one('eng/lab/archive').get({id: record.id}).then
-                (
-                    function () {
-
-                        $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
-
-                    }
-                )
             };
         }
     }
