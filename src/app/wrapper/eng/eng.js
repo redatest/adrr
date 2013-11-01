@@ -420,6 +420,16 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<td ng-show="isSenior === \'1\'"><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
                 '</tr>',
 
+            headerTemplate: '<tr id="headerCells">' +
+                '<th ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
+                '</th>' +
+                '<th ng-repeat="col in cols">' +
+                '{{col.displayName}}' +
+                '</th>' +
+                '<th ng-show="isSenior === \'1\'">Actions</th>' +
+                '</tr>',
+
             showSelectionCheckbox: true,
 
             multiSelect: ($rootScope.isSenior === '1'),
@@ -560,6 +570,16 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
                 '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">history</button></td>' +
+                '</tr>',
+
+            headerTemplate: '<tr id="headerCells">' +
+                '<th ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
+                '</th>' +
+                '<th ng-repeat="col in cols">' +
+                '{{col.displayName}}' +
+                '</th>' +
+                '<th>Comments</th>' +
                 '</tr>',
 
             multiSelect: true
@@ -740,6 +760,16 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
                 '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button ng-show="isSenior === \'1\'" class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '</tr>',
+
+            headerTemplate: '<tr id="headerCells">' +
+                '<th ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
+                '</th>' +
+                '<th ng-repeat="col in cols">' +
+                '{{col.displayName}}' +
+                '</th>' +
+                '<th>Actions</th>' +
                 '</tr>',
 
             showSelectionCheckbox: true,

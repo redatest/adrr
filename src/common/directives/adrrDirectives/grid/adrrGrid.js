@@ -25,7 +25,7 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
                         }
                     }
-                }
+                };
             }
         };
     }
@@ -57,7 +57,7 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
                         $(element).html($compile(template)(scope));
                     }
-                }
+                };
             }
         };
     }
@@ -66,7 +66,7 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
     .directive
 (
 
-    'adrrGrid', function ($compile, $templateCache) {
+    'adrrGrid', function ($compile) {
 
         return {
 
@@ -79,7 +79,7 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                     pre: function (scope, element, attrs) {
 
                         // Check if the directive used as element or attribute then define the options
-                        scope.options = typeof attrs.adrrGrid !== 'undefined' ? scope.$eval(attrs.adrrGrid) : scope.$eval(attrs.adrrOptions);
+                        scope.options = typeof attrs['adrrGrid'] !== 'undefined' ? scope.$eval(attrs['adrrGrid']) : scope.$eval(attrs['adrrOptions']);
 
                         // check selectedItems in options
                         scope.selectedItems = typeof scope.options.selectedItems !== 'undefined' ? scope.options.selectedItems : [];
@@ -95,14 +95,15 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
                         var template = typeof scope.options.template !== 'undefined' ? scope.options.template : '<table class="table table-hover table-bordered">' +
                             '<thead>' +
-                            '<tr id="headerCells">' +
+                            (typeof scope.options.headerTemplate !== 'undefined' ? scope.options.headerTemplate :
+                                '<tr id="headerCells">' +
                             '<th ng-show="multiSelect && showSelectionCheckbox">' +
                             '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
                             '</th>' +
                             '<th ng-repeat="col in cols">' +
                             '{{col.displayName}}' +
                             '</th>' +
-                            '</tr>' +
+                                    '</tr>') +
                             '</thead>' +
                             '<tbody adrr-grid-row>' +
 
@@ -111,7 +112,6 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
                         // check template and compile it
                         element.html($compile(template)(scope));
-
 
                         // watch any change of the data
                         scope.$parent.$watch
@@ -179,9 +179,9 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
                                 scope.selectedItems.splice(curIndex, 1);
 
-                                if (typeof scope.options.onAfterDeselectRow !== 'undefined') {
+                                if (typeof scope.options['onAfterDeselectRow'] !== 'undefined') {
 
-                                    scope.options.onAfterDeselectRow(scope.$parent.data[index]);
+                                    scope.options['onAfterDeselectRow'](scope.$parent.data[index]);
 
                                 }
 
@@ -199,15 +199,15 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
                                 scope.selectedItems.push(index);
 
-                                if (typeof scope.options.onAfterSelectRow !== 'undefined') {
+                                if (typeof scope.options['onAfterSelectRow'] !== 'undefined') {
 
-                                    scope.options.onAfterSelectRow(scope.$parent.data[index]);
+                                    scope.options['onAfterSelectRow'](scope.$parent.data[index]);
 
                                 }
                             }
                         };
                     }
-                }
+                };
             }
         };
     }
