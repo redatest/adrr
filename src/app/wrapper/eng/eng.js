@@ -3,6 +3,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
     .config
 (
     function config($stateProvider) {
+
         $stateProvider.state
         (
             'wrapper.eng',
@@ -22,14 +23,63 @@ angular.module('adrrApp.wrapper.eng', [], null)
         (
             'wrapper.eng.lab',
             {
-                url: '^/labs',
-
-                title: 'Labs',
+                abstract: true,
 
                 views: {
-                    "@wrapper.eng": {
+                    "@wrapper": {
                         controller: 'LabCtrl',
                         templateUrl: 'wrapper/eng/lab.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.lab.inbox',
+            {
+                url: '^/labs/inbox',
+
+                title: 'Inbox',
+
+                views: {
+                    "@wrapper.eng.lab": {
+                        controller: 'LabInboxCtrl',
+                        templateUrl: 'wrapper/eng/labInbox.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.lab.returned',
+            {
+                url: '^/labs/returned',
+
+                title: 'Archive',
+
+                views: {
+                    "@wrapper.eng.lab": {
+                        controller: 'LabReturnedCtrl',
+                        templateUrl: 'wrapper/eng/labReturned.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.lab.archive',
+            {
+                url: '^/labs/archive',
+
+                title: 'Archive',
+
+                views: {
+                    "@wrapper.eng.lab": {
+                        controller: 'LabArchiveCtrl',
+                        templateUrl: 'wrapper/eng/labArchive.tpl.html'
                     }
                 }
             }
@@ -44,7 +94,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 title: 'Create Lab',
 
                 views: {
-                    "@wrapper.eng": {
+                    "@wrapper.eng.lab": {
                         controller: 'LabCreateCtrl',
                         templateUrl: 'wrapper/eng/labForm.tpl.html'
                     }
@@ -94,10 +144,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         return function (index, model, prop) {
 
-            prop = typeof prop === 'undefined' ? 'name' : prop;
+            if (typeof index !== 'undefined') {
 
-            return model['list'][index][prop];
+                prop = typeof prop === 'undefined' ? 'name' : prop;
 
+                return model['list'][index][prop];
+            }
+
+            return '';
         };
 
     }
@@ -109,9 +163,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         return function (str) {
 
-            var result = str.replace(/\d{4}-\d{2}-\d{2}/, '');
+            if (typeof str !== 'undefined') {
 
-            return result.replace(/:00$/, '');
+                var result = str.replace(/\d{4}-\d{2}-\d{2}/, '');
+
+                return result.replace(/:00$/, '');
+            }
+
+            return '';
         }
 
     }
@@ -137,200 +196,565 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
+    'LabCtrl', function ($rootScope, $scope, Restangular, yii) {
+
+    }
+)
+
+    .controller
+(
+    'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
         // ------------------------------------------------
         $rootScope.pageHeader = 'Labs';
 
-        $rootScope.breadcrumbItems = ['Home', 'Labs'];
+        $rootScope.breadcrumbItems = ['Home', 'Concrete Field', 'Inbox'];
+        // ------------------------------------------------
+
+//        if (parseInt($scope.isEng, 10)) {
+//
+//            $scope.pagingOptions =
+//            {
+//                pageSizes: [10, 20, 30],
+//
+//                pageSize: 10,
+//
+//                currentPage: 1
+//            };
+//
+//            $scope.gridOptions =
+//            {
+//                data: 'motherFucker',
+//                enablePaging: true,
+//                showFooter: true,
+//                totalServerItems: 'totalServerItems',
+//                pagingOptions: $scope.pagingOptions,
+//                adrrPagingOptions: 'pagingOptions',
+//                numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
+//                dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
+//                multiSelect: false,
+//                plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
+//                columnDefs: [
+//                    { field: 'date', displayName: 'Date' },
+//                    { field: 'shift_id', displayName: 'Shift' },
+//                    { field: 'supplier_id', displayName: 'Supplier' },
+//                    { field: 'conc_type_id', displayName: 'concrete Type' },
+//                    { field: 'plant', displayName: 'Plant' },
+//                    { field: 'truck', displayName: 'Truck' },
+//                    { field: 'ticket', displayName: 'Ticket' },
+//                    { field: 'dept_time', displayName: 'Departure Time', cellFilter: 'removeDateAndSeconds' },
+//                    { field: 'arriv_time', displayName: 'Arrival Time', cellFilter: 'removeDateAndSeconds' },
+//                    { field: 'truck_load', displayName: 'Truck Load' },
+//                    { field: 'temp', displayName: 'Temperature' },
+//                    { field: 'slump', displayName: 'Slump' },
+//                    { field: 'flow', displayName: 'Flow' },
+//                    { field: 'accepted', displayName: 'Accepted' }
+//                ],
+//
+//                rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
+//                    '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
+//                    '&nbsp;' +
+//                    '</div>' +
+//                    '<div ng-cell></div>' +
+//                    '</div>'
+//            };
+//
+//        } else {
+
+        $scope.yii = yii;
+
+        $scope.metaData = yii['Lab'].cols;
+
+        $scope.records = [];
+
+        $scope.selectedEntries = [];
+
+        var columnDefs = [
+
+            {
+                field: 'date',
+                displayName: 'Date'
+            },
+            {
+                field: 'shift_id',
+                displayName: 'Shift',
+                filters: 'fetchValue: yii["ShiftType"]'
+            },
+            {
+                field: 'supplier_id',
+                displayName: 'Supplier',
+                filters: 'fetchValue: yii["Supplier"]'
+            },
+            {
+                field: 'conc_type_id',
+                displayName: 'Concrete',
+                filters: 'fetchValue: yii["ConcreteType"]'
+            },
+            {
+                field: 'temp',
+                displayName: 'Temp'
+            },
+            {
+                field: 'slump',
+                displayName: 'Slump'
+            },
+            {
+                field: 'flow',
+                displayName: 'Flow'
+            },
+            {
+                field: 'plant',
+                displayName: 'Plant'
+            },
+            {
+                field: 'truck',
+                displayName: 'Truck'
+            },
+            {
+                field: 'truck_load',
+                displayName: 'Truck Load'
+            },
+            {
+                field: 'ticket',
+                displayName: 'Ticket'
+            },
+            {
+                field: 'dept_time',
+                displayName: 'Dept Time',
+                filters: 'removeDateAndSeconds'
+            },
+            {
+                field: 'arriv_time',
+                displayName: 'Arrival Time',
+                filters: 'removeDateAndSeconds'
+            },
+            {
+                field: 'accepted',
+                displayName: 'Accepted',
+                filters: 'yesNo'
+            }
+        ];
+
+        if ($rootScope.isSenior === '1') {
+
+            columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
+
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records, 5000, 'update');
+
+        } else {
+
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records);
+
+        }
+
+        $scope.archive = function (record) {
+
+            Restangular.one('eng/lab/archive').get({id: record.id}).then
+            (
+                function () {
+
+                    $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
+
+                }
+            )
+        };
+
+        $scope.loadComments = function (row) {
+
+            $scope.curRec = row;
+
+            $scope.comments = [];
+
+            Restangular.one('eng/lab', row.id).all('comments').getList().then
+            (
+
+                function (data) {
+
+                    $scope.comments = data;
+
+                }
+
+            )
+
+        };
+
+        $scope.submitComment = function () {
+
+            Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.userID, comment: $scope.commentText}).then
+            (
+                function (data) {
+                    $scope.comments.push(data);
+
+                    $scope.commentText = '';
+
+                    Restangular.one('eng/lab/return').get({id: $scope.curRec.id}).then
+                    (
+                        function () {
+
+                            $scope.records.splice(_.indexOf($scope.records, $scope.curRec, 0), 1);
+
+                            $('#commentModal').modal('hide');
+
+                            if (!$scope.$$phase) {
+
+                                $scope.$apply();
+
+                            }
+                        }
+                    )
+                }
+            )
+
+        };
+
+        $scope.adrrGridOptions = {
+            data: 'records',
+
+            columnDefs: columnDefs,
+
+            rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}">' +
+                '<td ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
+                '</td>' +
+                '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)">' +
+                '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
+                '<td ng-show="isSenior === \'1\'"><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '</tr>',
+
+            showSelectionCheckbox: true,
+
+            multiSelect: ($rootScope.isSenior === '1'),
+
+            selectedItems: $scope.selectedEntries
+        };
+//        }
+
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataGetter.unset($scope.records);
+            }
+        )
+    }
+)
+
+    .controller
+(
+    'LabArchiveCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
+
+        // ------------------------------------------------
+        $rootScope.pageHeader = 'Archive';
+
+        $rootScope.breadcrumbItems = ['Home', 'Concrete Field', 'Archive'];
         // ------------------------------------------------
 
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
 
-        if (parseInt($scope.isEng, 10)) {
+        $scope.records = [];
 
-            $scope.pagingOptions =
+        var columnDefs = [
+
             {
-                pageSizes: [10, 20, 30],
-
-                pageSize: 10,
-
-                currentPage: 1
-            };
-
-            $scope.gridOptions =
+                field: 'date',
+                displayName: 'Date'
+            },
             {
-                data: 'motherFucker',
-                enablePaging: true,
-                showFooter: true,
-                totalServerItems: 'totalServerItems',
-                pagingOptions: $scope.pagingOptions,
-                adrrPagingOptions: 'pagingOptions',
-                numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
-                dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
-                multiSelect: false,
-                plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
-                columnDefs: [
-                    { field: 'date', displayName: 'Date' },
-                    { field: 'shift_id', displayName: 'Shift' },
-                    { field: 'supplier_id', displayName: 'Supplier' },
-                    { field: 'conc_type_id', displayName: 'concrete Type' },
-                    { field: 'plant', displayName: 'Plant' },
-                    { field: 'truck', displayName: 'Truck' },
-                    { field: 'ticket', displayName: 'Ticket' },
-                    { field: 'dept_time', displayName: 'Departure Time', cellFilter: 'removeDateAndSeconds' },
-                    { field: 'arriv_time', displayName: 'Arrival Time', cellFilter: 'removeDateAndSeconds' },
-                    { field: 'truck_load', displayName: 'Truck Load' },
-                    { field: 'temp', displayName: 'Temperature' },
-                    { field: 'slump', displayName: 'Slump' },
-                    { field: 'flow', displayName: 'Flow' },
-                    { field: 'accepted', displayName: 'Accepted' }
-                ],
+                field: 'shift_id',
+                displayName: 'Shift',
+                filters: 'fetchValue: yii["ShiftType"]'
+            },
+            {
+                field: 'supplier_id',
+                displayName: 'Supplier',
+                filters: 'fetchValue: yii["Supplier"]'
+            },
+            {
+                field: 'conc_type_id',
+                displayName: 'Concrete',
+                filters: 'fetchValue: yii["ConcreteType"]'
+            },
+            {
+                field: 'temp',
+                displayName: 'Temp'
+            },
+            {
+                field: 'slump',
+                displayName: 'Slump'
+            },
+            {
+                field: 'flow',
+                displayName: 'Flow'
+            },
+            {
+                field: 'plant',
+                displayName: 'Plant'
+            },
+            {
+                field: 'truck',
+                displayName: 'Truck'
+            },
+            {
+                field: 'truck_load',
+                displayName: 'Truck Load'
+            },
+            {
+                field: 'ticket',
+                displayName: 'Ticket'
+            },
+            {
+                field: 'dept_time',
+                displayName: 'Dept Time',
+                filters: 'removeDateAndSeconds'
+            },
+            {
+                field: 'arriv_time',
+                displayName: 'Arrival Time',
+                filters: 'removeDateAndSeconds'
+            },
+            {
+                field: 'accepted',
+                displayName: 'Accepted',
+                filters: 'yesNo'
+            }
+        ];
 
-                rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
-                    '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
-                    '&nbsp;' +
-                    '</div>' +
-                    '<div ng-cell></div>' +
-                    '</div>'
-            };
+        if ($rootScope.isSenior === '1') {
+
+            columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
+
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
 
         } else {
 
-            $scope.records = [];
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records);
 
-            $scope.selectedEntries = [];
-
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/unarchived', $scope.records, 5000, 'update');
-
-            $scope.archive = function (record) {
-
-                Restangular.one('eng/lab/archive').get({id: record.id}).then
-                (
-                    function () {
-
-                        $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
-
-                    }
-                )
-            };
-
-            $scope.loadComments = function (row) {
-
-                $scope.curRec = row;
-
-                $scope.comments = [];
-
-                Restangular.one('eng/lab', row.id).all('comments').getList().then
-                (
-
-                    function (data) {
-                        $scope.comments = data;
-
-                    }
-
-                )
-
-            };
-
-            $scope.submitComment = function () {
-
-                Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.userID, comment: $scope.commentText}).then
-                (
-                    function (data) {
-                        $scope.comments.push(data);
-                    }
-                )
-
-            };
-
-            $scope.adrrGridOptions = {
-                data: 'records',
-
-                columnDefs: [
-
-                    {
-                        field: 'date',
-                        displayName: 'Date'
-                    },
-                    {
-                        field: 'user_id',
-                        displayName: 'User',
-                        filters: 'fetchValue: yii["User"]:"username"'
-                    },
-                    {
-                        field: 'shift_id',
-                        displayName: 'Shift',
-                        filters: 'fetchValue: yii["ShiftType"]'
-                    },
-                    {
-                        field: 'supplier_id',
-                        displayName: 'Supplier',
-                        filters: 'fetchValue: yii["Supplier"]'
-                    },
-                    {
-                        field: 'conc_type_id',
-                        displayName: 'Concrete',
-                        filters: 'fetchValue: yii["ConcreteType"]'
-                    },
-                    {
-                        field: 'temp',
-                        displayName: 'Temp'
-                    },
-                    {
-                        field: 'slump',
-                        displayName: 'Slump'
-                    },
-                    {
-                        field: 'flow',
-                        displayName: 'Flow'
-                    },
-                    {
-                        field: 'plant',
-                        displayName: 'Plant'
-                    },
-                    {
-                        field: 'truck',
-                        displayName: 'Truck'
-                    },
-                    {
-                        field: 'truck_load',
-                        displayName: 'Truck Load'
-                    },
-                    {
-                        field: 'ticket',
-                        displayName: 'Ticket'
-                    },
-                    {
-                        field: 'dept_time',
-                        displayName: 'Dept Time',
-                        filters: 'removeDateAndSeconds'
-                    },
-                    {
-                        field: 'arriv_time',
-                        displayName: 'Arrival Time',
-                        filters: 'removeDateAndSeconds'
-                    },
-                    {
-                        field: 'accepted',
-                        displayName: 'Accepted',
-                        filters: 'yesNo'
-                    }
-                ],
-
-                rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}">' +
-                    '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)"><td ng-show="multiSelect && showSelectionCheckbox">' +
-                    '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
-                    '</td>' +
-                    '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                    '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
-                    '</tr>',
-
-                showSelectionCheckbox: true,
-
-                selectedItems: $scope.selectedEntries
-            };
         }
+
+        $scope.loadComments = function (row) {
+
+            $scope.curRec = row;
+
+            $scope.comments = [];
+
+            Restangular.one('eng/lab', row.id).all('comments').getList().then
+            (
+
+                function (data) {
+
+                    $scope.comments = data;
+
+                }
+
+            )
+
+        };
+
+        $scope.adrrGridOptions = {
+            data: 'records',
+
+            columnDefs: columnDefs,
+
+            rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}">' +
+                '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)"><td ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
+                '</td>' +
+                '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
+                '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">history</button></td>' +
+                '</tr>',
+
+            multiSelect: true
+        };
+
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataGetter.unset($scope.records);
+            }
+        )
+    }
+)
+
+    .controller
+(
+    'LabReturnedCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
+
+        // ------------------------------------------------
+        $rootScope.pageHeader = 'Archive';
+
+        $rootScope.breadcrumbItems = ['Home', 'Concrete Field', 'Returned'];
+        // ------------------------------------------------
+
+        $scope.yii = yii;
+        $scope.metaData = yii['Lab'].cols;
+
+        $scope.records = [];
+
+        $scope.selectedEntries = [];
+
+        var columnDefs = [
+
+            {
+                field: 'date',
+                displayName: 'Date'
+            },
+            {
+                field: 'shift_id',
+                displayName: 'Shift',
+                filters: 'fetchValue: yii["ShiftType"]'
+            },
+            {
+                field: 'supplier_id',
+                displayName: 'Supplier',
+                filters: 'fetchValue: yii["Supplier"]'
+            },
+            {
+                field: 'conc_type_id',
+                displayName: 'Concrete',
+                filters: 'fetchValue: yii["ConcreteType"]'
+            },
+            {
+                field: 'temp',
+                displayName: 'Temp'
+            },
+            {
+                field: 'slump',
+                displayName: 'Slump'
+            },
+            {
+                field: 'flow',
+                displayName: 'Flow'
+            },
+            {
+                field: 'plant',
+                displayName: 'Plant'
+            },
+            {
+                field: 'truck',
+                displayName: 'Truck'
+            },
+            {
+                field: 'truck_load',
+                displayName: 'Truck Load'
+            },
+            {
+                field: 'ticket',
+                displayName: 'Ticket'
+            },
+            {
+                field: 'dept_time',
+                displayName: 'Dept Time',
+                filters: 'removeDateAndSeconds'
+            },
+            {
+                field: 'arriv_time',
+                displayName: 'Arrival Time',
+                filters: 'removeDateAndSeconds'
+            },
+            {
+                field: 'accepted',
+                displayName: 'Accepted',
+                filters: 'yesNo'
+            }
+        ];
+
+        if ($rootScope.isSenior === '1') {
+
+            columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
+
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records, 5000, 'update');
+
+        } else {
+
+            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records);
+
+        }
+
+        $scope.archive = function (record) {
+
+            Restangular.one('eng/lab/archive').get({id: record.id}).then
+            (
+                function () {
+
+                    $scope.records.splice(_.indexOf($scope.records, record, 0), 1);
+
+                }
+            )
+        };
+
+        $scope.loadComments = function (row) {
+
+            $scope.curRec = row;
+
+            $scope.comments = [];
+
+            Restangular.one('eng/lab', row.id).all('comments').getList().then
+            (
+
+                function (data) {
+
+                    $scope.comments = data;
+
+                }
+
+            )
+
+        };
+
+        $scope.submitComment = function () {
+
+            Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.userID, comment: $scope.commentText}).then
+            (
+                function (data) {
+                    $scope.comments.push(data);
+
+                    $scope.commentText = '';
+
+                    Restangular.one('eng/lab/return').get({id: $scope.curRec.id}).then
+                    (
+                        function () {
+
+                            $scope.records.splice(_.indexOf($scope.records, $scope.curRec, 0), 1);
+
+                            $('#commentModal').modal('hide');
+
+                            if (!$scope.$$phase) {
+
+                                $scope.$apply();
+
+                            }
+                        }
+                    )
+                }
+            )
+
+        };
+
+        $scope.adrrGridOptions = {
+            data: 'records',
+
+            columnDefs: columnDefs,
+
+            rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true" ng-class="{\'danger\': row.red !== null, \'warning\': row.yellow !== null && row.red === null}">' +
+                '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)"><td ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
+                '</td>' +
+                '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
+                '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button ng-show="isSenior === \'1\'" class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '</tr>',
+
+            showSelectionCheckbox: true,
+
+            multiSelect: ($rootScope.isSenior === '1'),
+
+            selectedItems: $scope.selectedEntries
+        };
+
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataGetter.unset($scope.records);
+            }
+        );
     }
 )
 

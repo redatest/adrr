@@ -19,58 +19,60 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
             var index = _.indexOf(targets, target, 0);
 
-            if (truckers[index] !== null) {
+            if (index !== -1) {
+                if (truckers[index] !== null) {
 
-                args['trucker'] = truckers[index];
+                    args['trucker'] = truckers[index];
 
-            }
+                }
 
-            $http
-            ({
-                method: method !== undefined ? method : 'GET',
-                url: sourceUrl,
-                params: method !== 'POST' ? (typeof args !== 'undefined' ? args : null) : null,
-                data: method === 'POST' ? (typeof args !== 'undefined' ? $.param(args) : null) : null,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-            })
-                .success
-            (
-                function (data) {
+                $http
+                ({
+                    method: method !== undefined ? method : 'GET',
+                    url: sourceUrl,
+                    params: method !== 'POST' ? (typeof args !== 'undefined' ? args : null) : null,
+                    data: method === 'POST' ? (typeof args !== 'undefined' ? $.param(args) : null) : null,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+                })
+                    .success
+                (
+                    function (data) {
 
-                    if (angular.isArray(data)) {
+                        if (angular.isArray(data)) {
 
-                        var dataLength = data.length;
+                            var dataLength = data.length;
 
-                        var newest = dataLength > 0 ? data[0][updateTrucker] : null;
+                            var newest = dataLength > 0 ? data[0][updateTrucker] : null;
 
-                        for (var i = 0; i < dataLength; i++) {
+                            for (var i = 0; i < dataLength; i++) {
 
-                            newest = data[i][updateTrucker] > newest ? data[i][updateTrucker] : newest;
+                                newest = data[i][updateTrucker] > newest ? data[i][updateTrucker] : newest;
 
-                            var itemId = parseInt(data[i]['id'], 10);
+                                var itemId = parseInt(data[i]['id'], 10);
 
-                            if (typeof lookup[index][itemId] === 'undefined' || lookup[index][itemId] === null) {
+                                if (typeof lookup[index][itemId] === 'undefined' || lookup[index][itemId] === null) {
 
-                                lookup[index][itemId] = target.length;
+                                    lookup[index][itemId] = target.length;
 
+                                }
+
+                                target[lookup[index][itemId]] = data[i];
                             }
 
-                            target[lookup[index][itemId]] = data[i];
+                            truckers[index] = newest;
                         }
 
-                        truckers[index] = newest;
+                        setTimeout
+                        (
+                            function () {
+
+                                getData(sourceUrl, target, time, updateTrucker, method, args);
+
+                            }, time
+                        );
                     }
-
-                    setTimeout
-                    (
-                        function () {
-
-                            getData(sourceUrl, target, time, updateTrucker, method, args);
-
-                        }, time
-                    );
-                }
-            )
+                )
+            }
         };
 
         var set = function (sourceUrl, target, time, updateTrucker, method, args) {
@@ -93,6 +95,38 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
                 getData(sourceUrl, target, time, updateTrucker, method, args);
 
                 timers.push(time);
+
+            } else {
+
+                $http
+                ({
+                    method: method !== undefined ? method : 'GET',
+                    url: sourceUrl,
+                    params: method !== 'POST' ? (typeof args !== 'undefined' ? args : null) : null,
+                    data: method === 'POST' ? (typeof args !== 'undefined' ? $.param(args) : null) : null,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+                })
+                    .success
+                (
+                    function (data) {
+
+                        target.splice(0, target.length);
+
+                        if (angular.isArray(data)) {
+
+                            var numRecords = data.length;
+
+                            for (var i = 0; i < numRecords; i++) {
+
+                                target.push(data[i]);
+
+                            }
+
+                        }
+
+                    }
+                )
+
             }
         };
 
@@ -102,13 +136,13 @@ var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
 
             if (index !== -1) {
 
-                window.clearInterval(timers[index]);
-
                 timers.splice(index, 1);
 
                 targets.splice(index, 1);
 
                 lookup.splice(index, 1);
+
+                truckers.splice(index, 1)
             }
         };
 
