@@ -369,7 +369,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 function (data) {
 
-                    $scope.comments = data;
+                    $scope.comments = angular.isArray(data) ? data : [];
 
                 }
 
@@ -551,7 +551,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 function (data) {
 
-                    $scope.comments = data;
+                    $scope.comments = angular.isArray(data) ? data : [];
 
                 }
 
@@ -712,7 +712,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 function (data) {
 
-                    $scope.comments = data;
+                    $scope.comments = angular.isArray(data) ? data : [];
 
                 }
 

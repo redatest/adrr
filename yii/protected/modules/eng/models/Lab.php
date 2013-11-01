@@ -90,14 +90,17 @@ class Lab extends ArModel
 
     protected function afterSave()
     {
-        if ($this->red !== null) {
+        if ($this->isNewRecord) {
 
-            AdrrNotificationPump::register('the link goes here', '@Lab in ' . $this->red, array('roles' => array('senior')), 'Lab', $this->id, 'red', true);
+            if ($this->red !== null) {
 
-        } else if ($this->yellow !== null) {
+                AdrrNotificationPump::register('the link goes here', '@Lab in ' . $this->red, array('roles' => array('senior')), 'Lab', $this->id, 'red', true);
 
-            AdrrNotificationPump::register('the link goes here', '@Lab in ' . $this->yellow, array('roles' => array('senior')), 'Lab', $this->id, 'yellow', true);
+            } else if ($this->yellow !== null) {
 
+                AdrrNotificationPump::register('the link goes here', '@Lab in ' . $this->yellow, array('roles' => array('senior')), 'Lab', $this->id, 'yellow', true);
+
+            }
         }
     }
 
