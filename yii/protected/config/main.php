@@ -103,4 +103,5 @@ return array
 
     'params' => array('adminEmail' => 'webmaster@example.com')
 );
+
 ?>

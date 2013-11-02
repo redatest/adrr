@@ -18,6 +18,7 @@ angular.module('adrrApp.wrapper.settings', [], null)
             'wrapper.settings',
             {
                 abstract: true,
+
                 views: {
                     "@wrapper": {
                         controller: 'SettingsCtrl',
@@ -32,6 +33,7 @@ angular.module('adrrApp.wrapper.settings', [], null)
             'wrapper.settings.pouringType',
             {
                 abstract: true,
+
                 views: {
                     "@wrapper.settings": {
                         controller: 'PouringTypeCtrl',
@@ -46,7 +48,9 @@ angular.module('adrrApp.wrapper.settings', [], null)
             'wrapper.settings.pouringType.create',
             {
                 url: '^/settings/pouring-type/create',
+
                 title: 'Create a Pouring Type',
+
                 views: {
                     "@wrapper.settings.pouringType": {
                         templateUrl: 'wrapper/settings/pouringTypeForm.tpl.html'
@@ -422,13 +426,15 @@ angular.module('adrrApp.wrapper.settings', [], null)
 
         $scope.headTitle = 'Create';
 
+        $rootScope.showControls = false;
+
         $scope.$on
         (
             '$stateChangeStart', function (event, state) {
                 var name = state['name'].split('.');
                 name = name[name.length - 1];
 
-                $scope.isCreate = !!(name === 'create');
+                $scope.isCreate = (name === 'create');
 
                 $scope.headTitle = $scope.isCreate ? 'Create' : 'Update';
             }
@@ -466,7 +472,7 @@ angular.module('adrrApp.wrapper.settings', [], null)
                     $scope.formData, function (value, key) {
                         switch (typeof $scope.formData[key]) {
                             case 'boolean':
-                                $scope.formData[key] = !!(rowItem.entity[key] === '1');
+                                $scope.formData[key] = (rowItem.entity[key] === '1');
                                 break;
 
                             case 'number':
@@ -552,7 +558,7 @@ angular.module('adrrApp.wrapper.settings', [], null)
                     if (value.type == 'integer') {
                         switch (value.size) {
                             case 1:
-                                $scope.formData[key] = ((value.defaultValue === null) ? false : (!!(value['defaultValue'] === 1)));
+                                $scope.formData[key] = ((value.defaultValue === null) ? false : (value['defaultValue'] === 1));
                                 break;
 
                             default:
@@ -729,7 +735,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'PouringTypeCtrl', function PouringTypeCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Pouring Types';
 
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Pouring Types'];
 
@@ -751,8 +756,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'ZoneCtrl', function ZoneCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Zones';
-
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Zones'];
 
         $scope.$parent.className = 'Zone';
@@ -773,8 +776,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'SupplierCtrl', function SupplierCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Suppliers';
-
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Suppliers'];
 
         $scope.$parent.className = 'Supplier';
@@ -795,8 +796,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'PumpCtrl', function PumpCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Pumps';
-
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Pumps'];
 
         $scope.$parent.className = 'Pump';
@@ -817,8 +816,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'ConcreteTypeCtrl', function ConcreteTypeCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Concrete Types';
-
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Concrete Types'];
 
         // $scope.$parent.isAutoColumns = false;
@@ -861,8 +858,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'ShiftTypeCtrl', function ShiftTypeCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Shift Types';
-
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Shift Types'];
 
         $scope.$parent.className = 'ShiftType';
@@ -883,8 +878,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'ShiftListCtrl', function ShiftListCtrl($rootScope, $scope, Restangular, $http) {
-        $rootScope.pageHeader = 'Shift Lists';
-
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Shift Lists'];
 
         $scope.$parent.className = 'ShiftList';
@@ -940,7 +933,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'ProjectCtrl', function ProjectCtrl($rootScope, $scope, Restangular) {
-        $rootScope.pageHeader = 'Projects';
 
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Projects'];
 
@@ -955,7 +947,6 @@ angular.module('adrrApp.wrapper.settings', [], null)
     .controller
 (
     'IrCtrl', function IrCtrl($rootScope, $scope, Restangular, $q) {
-        $rootScope.pageHeader = 'IRs';
 
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'IRs'];
 

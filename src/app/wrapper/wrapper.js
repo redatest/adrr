@@ -48,7 +48,7 @@ angular.module('adrrApp.wrapper', [], null)
 
     .controller
 (
-    'WrapperCtrl', function ($scope, $rootScope, adrrAuth, $http) {
+    'WrapperCtrl', function ($scope, $rootScope, adrrAuth, $http, adrrDataGetter, yii) {
 
         $rootScope.configModal = function (title, message, btnClass, func, closeFunc) {
             $rootScope.modalTitle = title;
@@ -57,6 +57,12 @@ angular.module('adrrApp.wrapper', [], null)
             $rootScope.modalFunc = func;
             $rootScope.modalCloseFunc = closeFunc;
         };
+
+        $scope.menuStats = [];
+
+        $scope.yii = yii;
+
+        adrrDataGetter.set(appConfig.yiiUrl + '/stats/menu', $scope.menuStats, 1000);
 
         $scope.notsOpts = {
 

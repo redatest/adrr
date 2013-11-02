@@ -19,7 +19,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.date}}
+                                    : {{curRec.date}}
                                 </td>
                             </tr>
 
@@ -29,7 +29,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.user_id | fetchValue:yii['User']:'username'}}
+                                    : {{curRec.user_id | fetchValue:yii['User']:'username'}}
                                 </td>
                             </tr>
 
@@ -39,7 +39,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.shift_id | fetchValue:yii['ShiftType']}}
+                                    : {{curRec.shift_id | fetchValue:yii['ShiftType']}}
                                 </td>
                             </tr>
 
@@ -49,7 +49,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.supplier_id | fetchValue:yii['Supplier']}}
+                                    : {{curRec.supplier_id | fetchValue:yii['Supplier']}}
                                 </td>
                             </tr>
 
@@ -59,7 +59,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.conc_type_id | fetchValue:yii['ConcreteType']}}
+                                    : {{curRec.conc_type_id | fetchValue:yii['ConcreteType']}}
                                 </td>
                             </tr>
 
@@ -69,7 +69,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.temp}}
+                                    : {{curRec.temp}}
                                 </td>
                             </tr>
 
@@ -79,7 +79,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.slump}}
+                                    : {{curRec.slump}}
                                 </td>
                             </tr>
 
@@ -89,7 +89,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.flow}}
+                                    : {{curRec.flow}}
                                 </td>
                             </tr>
 
@@ -99,7 +99,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.plant}}
+                                    : {{curRec.plant}}
                                 </td>
                             </tr>
 
@@ -109,7 +109,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.truck}}
+                                    : {{curRec.truck}}
                                 </td>
                             </tr>
 
@@ -119,7 +119,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.truck_load}}
+                                    : {{curRec.truck_load}}
                                 </td>
                             </tr>
 
@@ -129,7 +129,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.ticket}}
+                                    : {{curRec.ticket}}
                                 </td>
                             </tr>
 
@@ -139,7 +139,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.dept_time | removeDateAndSeconds}}
+                                    : {{curRec.dept_time | removeDateAndSeconds}}
                                 </td>
                             </tr>
 
@@ -149,7 +149,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.arriv_time | removeDateAndSeconds}}
+                                    : {{curRec.arriv_time | removeDateAndSeconds}}
                                 </td>
                             </tr>
 
@@ -159,7 +159,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.accepted | yesNo}}
+                                    : {{curRec.accepted | yesNo}}
                                 </td>
                             </tr>
                         </table>
@@ -179,9 +179,6 @@
 
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

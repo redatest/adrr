@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html ng-app="adrrApp" ng-controller="AdrrAppCtrl" lang="en">
-	<head>
-		<title ng-bind="pageTitle"></title>
-		
-		<meta charset="utf-8" />
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		
-		<link rel="icon" type="image/ico" href="assets/favicon.ico" />
-		
-		<link href="assets/css/vendor.css" rel="stylesheet" />
-		<link href="assets/css/adrr.css" rel="stylesheet" />
-	</head>
-	
-	<body>
-		<view ui-view></view>
-		<view ui-view="login"></view>
+<head>
+    <title ng-bind="pageTitle"></title>
 
-		<script type="text/javascript" src="assets/js/vendor.js"></script>
-		<script type="text/javascript" src="assets/js/adrr.js"></script>
-	</body>
+    <meta charset="utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="icon" type="image/ico" href="assets/favicon.ico"/>
+
+    <link href="assets/css/vendor.css" rel="stylesheet"/>
+    <link href="assets/css/adrr.css" rel="stylesheet"/>
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+
+<body>
+<view ui-view></view>
+<view ui-view="login"></view>
+
+<script type="text/javascript" src="assets/js/vendor.js"></script>
+<script type="text/javascript" src="assets/js/adrr.js"></script>
+</body>
 </html>

@@ -42,6 +42,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 title: 'Inbox',
 
+                breadcrumb: ['Home', 'Concrete Field', 'Inbox'],
+
+                showControls: true,
+
                 views: {
                     "@wrapper.eng.lab": {
                         controller: 'LabInboxCtrl',
@@ -58,6 +62,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 url: '^/labs/returned',
 
                 title: 'Archive',
+
+                breadcrumb: ['Home', 'Concrete Field', 'Returned'],
+
+                showControls: true,
 
                 views: {
                     "@wrapper.eng.lab": {
@@ -76,6 +84,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 title: 'Archive',
 
+                breadcrumb: ['Home', 'Concrete Field', 'Archive'],
+
+                showControls: false,
+
                 views: {
                     "@wrapper.eng.lab": {
                         controller: 'LabArchiveCtrl',
@@ -93,6 +105,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 title: 'Create Lab',
 
+                breadcrumb: ['Home', 'Concrete Field', 'Create'],
+
+                showControls: false,
+
                 views: {
                     "@wrapper.eng.lab": {
                         controller: 'LabCreateCtrl',
@@ -108,12 +124,36 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 url: '^/pourings',
 
-                title: 'Pourings',
+                abstract: true,
 
                 views: {
+
                     '@wrapper.eng': {
+
                         controller: 'PouringCtrl',
+
                         templateUrl: 'wrapper/eng/pouring.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.pouring.inbox',
+            {
+                url: '^/pourings/inbox',
+
+                title: 'Pourings Inbox',
+
+                breadcrumb: ['Home', 'Pourings', 'Inbox'],
+
+                showControls: true,
+
+                views: {
+                    '@wrapper.eng.pouring': {
+                        controller: 'PouringInboxCtrl',
+                        templateUrl: 'wrapper/eng/pouringInbox.tpl.html'
                     }
                 }
             }
@@ -127,11 +167,85 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 title: 'Create Pouring',
 
+                breadcrumb: ['Home', 'Pourings', 'Create'],
+
+                showControls: false,
+
                 views: {
                     '@wrapper.eng': {
                         controller: 'PouringCreateCtrl',
                         templateUrl: 'wrapper/eng/pouringForm.tpl.html'
                     }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.temp',
+            {
+                abstract: true,
+
+                views: {
+
+                    "@wrapper.eng": {
+
+                        controller: 'TempCtrl',
+
+                        templateUrl: 'wrapper/eng/temp.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.temp.inbox',
+            {
+                url: '^/lab-temp',
+
+                title: 'Lab Temperature',
+
+                breadcrumb: ['Home', 'Lab Temperature', 'Inbox'],
+
+                showControls: false,
+
+                views: {
+
+                    '@wrapper.eng.temp': {
+
+                        controller: 'TempInboxCtrl',
+
+                        templateUrl: 'wrapper/eng/tempInbox.tpl.html'
+
+                    }
+
+                }
+            }
+        )
+
+            .state
+        (
+            'wrapper.eng.temp.create',
+            {
+                url: '^/lab-temp/create',
+
+                title: 'Add Lab Temperature',
+
+                breadcrumb: ['Home', 'Lab Temperature', 'Create'],
+
+                showControls: false,
+
+                views: {
+
+                    '@wrapper.eng.temp': {
+
+                        controller: 'TempInboxCreateCtrl',
+
+                        templateUrl: 'wrapper/eng/tempForm.tpl.html'
+
+                    }
+
                 }
             }
         );
@@ -159,6 +273,42 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .filter
 (
+    'fetchValue', function () {
+
+        return function (index, model, prop) {
+
+            if (typeof index !== 'undefined') {
+
+                prop = typeof prop === 'undefined' ? 'name' : prop;
+
+                return model['list'][index][prop];
+            }
+
+            return '';
+        };
+
+    }
+)
+
+    .filter
+(
+    'removeSeconds', function () {
+
+        return function (str) {
+
+            if (typeof str !== 'undefined') {
+
+                return str.replace(/:00$/, '');
+            }
+
+            return '';
+        }
+
+    }
+)
+
+    .filter
+(
     'removeDateAndSeconds', function () {
 
         return function (str) {
@@ -175,6 +325,24 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     }
 )
+
+    .filter
+(
+    'removeTime', function () {
+
+        return function (str) {
+
+            if (typeof str !== 'undefined') {
+
+                return str.replace(/\d{2}:\d{2}:\d{2}/, '');
+            }
+
+            return '';
+        }
+
+    }
+)
+
     .filter
 (
     'yesNo', function () {
@@ -189,26 +357,24 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'EngCtrl', function () {
+    'EngCtrl', function ($rootScope) {
 
     }
 )
 
     .controller
 (
-    'LabCtrl', function ($rootScope, $scope, Restangular, yii) {
+    'LabCtrl', function ($rootScope) {
+
+        $rootScope.showCreate = true;
+        $rootScope.createUrl = '#/labs/create';
 
     }
 )
 
     .controller
 (
-    'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
-        // ------------------------------------------------
-        $rootScope.pageHeader = 'Labs';
-
-        $rootScope.breadcrumbItems = ['Home', 'Concrete Field', 'Inbox'];
-        // ------------------------------------------------
+    'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
 
 //        if (parseInt($scope.isEng, 10)) {
 //
@@ -438,6 +604,25 @@ angular.module('adrrApp.wrapper.eng', [], null)
         };
 //        }
 
+        $rootScope.showControls = $rootScope.isSenior !== '1';
+
+        $scope.createClickHandler = function () {
+
+            $state.transitionTo('wrapper.eng.lab.create');
+
+        };
+
+        $scope.archiveAll = function () {
+
+
+        }
+
+        $rootScope.controls = [
+
+            { disabled: ($rootScope.isSenior === '1' ? ($scope.selectedEntries.length === 0) : false), clickHandler: $rootScope.isSenior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.isSenior === '1' ? 'Archive All' : 'Create' }
+
+        ];
+
         $scope.$on
         (
             '$destroy', function () {
@@ -449,13 +634,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabArchiveCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
-
-        // ------------------------------------------------
-        $rootScope.pageHeader = 'Archive';
-
-        $rootScope.breadcrumbItems = ['Home', 'Concrete Field', 'Archive'];
-        // ------------------------------------------------
+    'LabArchiveCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
 
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
@@ -585,6 +764,20 @@ angular.module('adrrApp.wrapper.eng', [], null)
             multiSelect: true
         };
 
+        $rootScope.showControls = $rootScope.isSenior !== '1';
+
+        $scope.createClickHandler = function () {
+
+            $state.transitionTo('wrapper.eng.lab.create');
+
+        };
+
+        $rootScope.controls = [
+
+            { clickHandler: $scope.createClickHandler, title: 'Create' }
+
+        ];
+
         $scope.$on
         (
             '$destroy', function () {
@@ -596,13 +789,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabReturnedCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular) {
-
-        // ------------------------------------------------
-        $rootScope.pageHeader = 'Archive';
-
-        $rootScope.breadcrumbItems = ['Home', 'Concrete Field', 'Returned'];
-        // ------------------------------------------------
+    'LabReturnedCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
 
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
@@ -779,6 +966,24 @@ angular.module('adrrApp.wrapper.eng', [], null)
             selectedItems: $scope.selectedEntries
         };
 
+        $scope.createClickHandler = function () {
+
+            $state.transitionTo('wrapper.eng.lab.create');
+
+        };
+
+        $scope.archiveAll = function () {
+
+        };
+
+        $rootScope.showControls = $rootScope.isSenior !== '1';
+
+        $rootScope.controls = [
+
+            { disabled: ($rootScope.isSenior === '1' ? $scope.selectedEntries.length === 0 : false), clickHandler: $rootScope.isSenior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.isSenior === '1' ? 'Archive All' : 'Create' }
+
+        ];
+
         $scope.$on
         (
             '$destroy', function () {
@@ -791,11 +996,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
     .controller
 (
     'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $q) {
-        // -------------------------------------------------------------
-        $rootScope.pageHeader = 'Labs';
-
-        $rootScope.breadcrumbItems = ['Home', 'Labs', 'Create'];
-        // -------------------------------------------------------------
 
         $scope.metaData = yii['Lab'];
 
@@ -1039,22 +1239,119 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringCtrl', function ($rootScope) {
-        // -------------------------------------------------------------
-        $rootScope.pageHeader = 'Pourings';
+    'PouringCtrl', function () {
 
-        $rootScope.breadcrumbItems = ['Home', 'Pourings'];
-        // -------------------------------------------------------------
     }
 )
 
     .controller
 (
-    'PouringCreateCtrl', function ($rootScope) {
-        // -------------------------------------------------------------
-        $rootScope.pageHeader = 'Pourings';
+    'PouringInboxCtrl', function ($rootScope) {
 
-        $rootScope.breadcrumbItems = ['Home', 'Pourings', 'Create'];
-        // -------------------------------------------------------------
+        $rootScope.showControls = $rootScope.isSenior !== '1';
+
+    }
+)
+
+    .controller
+(
+    'PouringCreateCtrl', function () {
+    }
+)
+
+    .controller
+(
+    'TempCtrl', function ($rootScope) {
+
+        $rootScope.createUrl = '#/lab-temp/create';
+
+    }
+)
+
+    .controller
+(
+    'TempInboxCtrl', function ($rootScope, $scope, adrrDataGetter) {
+
+        $scope.records = [];
+
+        $scope.selectedItems = [];
+
+        adrrDataGetter.set(appConfig.yiiUrl + '/eng/labTemperature', $scope.records, 5000, 'date_time');
+
+        var columnDefs = [
+
+            {
+                field: 'date_time',
+                displayName: 'Date',
+                filters: 'removeTime'
+            },
+            {
+                field: 'user_id',
+                displayName: 'User',
+                filters: 'fetchValue:yii["User"]:"username"'
+            },
+            {
+                field: 'shift_type_id',
+                displayName: 'Shift',
+                filters: 'fetchValue: yii["ShiftType"]'
+            },
+            {
+                field: 'time',
+                displayName: 'Time',
+                filters: 'removeSeconds'
+            },
+            {
+                field: 'temp',
+                displayName: 'Temperature'
+            }
+        ];
+
+        $scope.adrrGridOptions = {
+
+            data: 'records',
+
+            columnDefs: columnDefs,
+
+            multiSelect: false,
+
+            selectedItems: $scope.selectedItems
+
+        };
+
+        $scope.$on
+        (
+            '$destroy', function () {
+
+                adrrDataGetter.unset($scope.records);
+
+            }
+        );
+
+    }
+)
+
+    .controller
+(
+    'TempInboxCreateCtrl', function ($rootScope, $scope, yii, Restangular) {
+
+        $scope.metaData = yii['LabTemperature'];
+
+        $scope.submit = function () {
+
+            var post = { time: $scope.time, temp: $scope.temp };
+
+            Restangular.all('eng/labTemperature').post(post).then
+            (
+                function () {
+
+                    $scope.temp = '';
+
+                    $scope.time = '';
+
+                }
+            );
+
+        }
+
     }
 );

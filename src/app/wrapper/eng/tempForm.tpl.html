@@ -1,0 +1,21 @@
+<form role="form" name="mainForm" class="col-md-4" novalidate>
+
+    <div class="form-group" ng-class="{'has-error': timeForm.$invalid}" ng-form="timeForm">
+        <label class="control-label">{{metaData.cols['time'].label}}</label>
+
+        <adrr-timepicker required ng-model="time"></adrr-timepicker>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': tempForm.$invalid}" ng-form="tempForm">
+        <label for="temp" class="control-label">{{metaData.cols['temp'].label}}</label>
+
+        <input id="temp" class="form-control" type="number" ng-model="temp" required/>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" ng-click="submit()" ng-disabled="mainForm.$invalid">
+            Save
+        </button>
+    </div>
+
+</form>

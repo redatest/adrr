@@ -22,7 +22,8 @@ var adrrApp = angular.module
             'adrrApp.wrapper',
             'adrrApp.wrapper.dashboard',
             'adrrApp.wrapper.settings',
-            'adrrApp.wrapper.eng'
+            'adrrApp.wrapper.eng',
+            'adrrApp.wrapper.report'
         ],
         null
     )
@@ -92,7 +93,11 @@ var adrrApp = angular.module
 
                 $rootScope.pageTitle = b['title'];
 
+                $rootScope.breadcrumbItems = b['breadcrumb'];
+
                 $rootScope.showAlert = false;
+
+                $rootScope.showControls = b['showControls'];
             }
         );
     }

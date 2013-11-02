@@ -9,6 +9,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  font-size: 12px;
+}
+
 /* Angular Grid */
 .redBg {
   background-color: #f2dede !important;
@@ -84,6 +88,10 @@ html, body {
   border: none;
 }
 
+#sidenav .stat {
+  color: #800000;
+}
+
 #sidenav .navbar-collapse {
   max-height: 100%;
 
@@ -102,6 +110,14 @@ html, body {
   border-bottom: @sidenav_border;
 }
 
+#sidenav i {
+  width: 20px;
+
+  text-align: center;
+
+  margin-right: 10px;
+}
+
 #sidenav li.active > a, #sidenav li a:hover {
   background: #ffffff url("../images/sidenav_arrow.jpg") no-repeat right;
 
@@ -115,7 +131,7 @@ html, body {
 }
 
 #sidenav .sub li a {
-  padding-left: 30px;
+  padding-left: 50px;
 }
 
 #sidenavBg {
@@ -139,6 +155,16 @@ html, body {
 /* Main container */
 #maincont {
   padding-top: 15px;
+}
+
+#maincont .controls, #maincont ol {
+  margin-bottom: 10px;
+}
+
+#maincont .controls {
+  padding: 5px;
+
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 /* End */
@@ -260,6 +286,52 @@ html, body {
 
 #commentModal .col-xs-6:first-child {
   border-right: #dddddd 1px solid;
+}
+
+/* End */
+
+/* Adrr Grid */
+
+#headerCells {
+
+  background-color: #cccccc;
+
+  color: #000;
+
+}
+
+#headerCells {
+
+  background-color: #EEEEEE;
+
+  color: #000;
+
+}
+
+#headerCells th {
+
+  padding-top: 5px !important;
+
+  padding-bottom: 5px !important;
+
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+
+  padding-top: 3px;
+
+  padding-bottom: 3px;
+
+}
+
+/* End */
+
+/* Dashboard Panels */
+
+.panel-heading i {
+
+  margin-right: 10px;
+
 }
 
 /* End */

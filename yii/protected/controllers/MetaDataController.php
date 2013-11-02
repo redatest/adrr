@@ -23,14 +23,27 @@ class MetaDataController extends CController
             Lab::model(),
             LabPlant::model(),
             LabTruck::model(),
-            LabComment::model()
+            LabComment::model(),
+            LabTemperature::model()
         );
 
         $data = array();
 
         foreach ($models as $model) {
+
             $data[$model->class] = $model->map;
+
         }
+
+        $archive = Lab::model()->count('archived = 1 AND approved = 0 AND returned = 0' . (Yii::app()->user->isSenior ? '' : ' AND user_id = ' . Yii::app()->user->id));
+
+        $data['Gen'] = array
+        (
+            'stat' => array
+            (
+                'archive' => $archive
+            )
+        );
 
         echo CJSON::encode($data);
     }

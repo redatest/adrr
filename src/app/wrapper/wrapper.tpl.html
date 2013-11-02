@@ -31,27 +31,30 @@
             <div class="collapse navbar-collapse navbar-ex8-collapse">
                 <ul class="nav nav-pills nav-stacked">
                     <li ng-class="{active: state === 'wrapper.dashboard'}">
-                        <a href="#/dashboard">Dashboard</a>
+                        <a href="#/dashboard"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a>
+                    </li>
+
+                    <li ng-class="{active: state.indexOf('wrapper.eng.temp') > -1}">
+                        <a href="#/lab-temp"><i class="fa fa-sun-o fa-lg"></i> Lab Temperature</a>
                     </li>
 
                     <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.lab') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.eng.lab') === -1}" data-toggle="collapse"
-                           href="#collapseLab">Concrete Field</a>
+                           href="#collapseLab"><i class="fa fa-truck fa-lg"></i> Concrete Field</a>
 
                         <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.inbox') > -1}">
-                                <a href="#/labs/inbox">
-                                    <any ng-switch-when="1">Inbox</any>
-                                    <any ng-switch-when="0">Sent</any>
-                                </a>
+                                <a href="#/labs/inbox">{{isSenior === '1' ? 'Inbox' : 'Sent'}} <span class="stat">({{menuStats[0].lab.inbox}})</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
-                                <a href="#/labs/returned">Returned</a>
+                                <a href="#/labs/returned">Returned <span
+                                        class="stat">({{menuStats[0].lab.returned}})</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.archive') > -1}">
-                                <a href="#/labs/archive">Archive</a>
+                                <a href="#/labs/archive">Archive <span
+                                        class="stat">({{yii['Gen']['stat']['archive']}})</span></a>
                             </li>
                         </ul>
                     </li>
@@ -59,12 +62,12 @@
                     <li class="sub" ng-class="{active: state === 'wrapper.eng.pouring'}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.eng.pouring') === -1}" data-toggle="collapse"
-                           href="#collapsePouring">Pouring</a>
+                           href="#collapsePouring"><i class="fa fa-tint fa-lg"></i> Pouring</a>
 
                         <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
-                                <a href="#/pourings">Inbox</a>
+                                <a href="#/pourings/inbox">{{isSenior === '1' ? 'Inbox' : 'Sent'}}</a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
                                 <a href="#" onclick="return false;">Return</a>
@@ -78,10 +81,28 @@
                         </ul>
                     </li>
 
+                    <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
+                        <a onclick="return false;" class="accordion-toggle"
+                           ng-class="{collapsed: state.indexOf('wrapper.rep') === -1}" data-toggle="collapse"
+                           href="#collapseReports"><i class="fa fa-bar-chart-o fa-lg"></i> Reports & Statistics</a>
+
+                        <ul id="collapseReports" class="nav nav-pills nav-stacked collapse"
+                            ng-class="{collapse: state.indexOf('wrapper.rep') === -1, in: state.indexOf('wrapper.rep') > -1}">
+
+                            <li ng-class="{active: state.indexOf('wrapper.rep.conc') > -1}">
+                                <a href="#/report/conc">Concrete</a>
+                            </li>
+
+                            <li ng-class="{active: state.indexOf('wrapper.rep.pouring') > -1}">
+                                <a href="#/report/pouring">Pouring</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse"
-                           href="#collapseOne">Settings</a>
+                           href="#collapseOne"><i class="fa fa-cogs fa-lg"></i> Settings</a>
 
                         <ul id="collapseOne" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
@@ -125,9 +146,13 @@
         <li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">{{item}}</li>
     </ol>
 
-    <!--<div class="page-header hidden-xs">
-        <h1>{{pageHeader}}</h1>
-    </div>-->
+    <div class="well well-small controls" ng-show="showControls">
+        <button ng-repeat="control in controls" ng-click="control.clickHandler()" ng-disabled="control.disabled"
+                class="btn btn-primary btn-sm">
+            {{control.title}}
+        </button>
+    </div>
+
     <view ui-view></view>
 </div>
 
