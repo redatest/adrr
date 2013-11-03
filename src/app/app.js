@@ -91,6 +91,7 @@ var adrrApp = angular.module
                 $rootScope.showControls = b['showControls'];
             }
         );
+
     }
 )
 

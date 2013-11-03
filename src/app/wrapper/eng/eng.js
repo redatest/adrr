@@ -208,7 +208,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 breadcrumb: ['Home', 'Lab Temperature', 'Inbox'],
 
-                showControls: false,
+                showControls: true,
 
                 views: {
 
@@ -500,7 +500,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.loginData.senior === '1') {
+        if ($rootScope.loginData['senior'] === '1') {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -598,13 +598,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.loginData.senior === '1'),
+            multiSelect: ($rootScope.loginData['senior'] === '1'),
 
             selectedItems: $scope.selectedEntries
         };
 //        }
 
-        $rootScope.showControls = $rootScope.loginData.senior !== '1';
+        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
 
         $scope.createClickHandler = function () {
 
@@ -615,11 +615,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.archiveAll = function () {
 
 
-        }
+        };
 
         $rootScope.controls = [
 
-            { disabled: ($rootScope.loginData.senior === '1' ? ($scope.selectedEntries.length === 0) : false), clickHandler: $rootScope.loginData.senior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.loginData.senior === '1' ? 'Archive All' : 'Create' }
+            { disabled: ($rootScope.loginData['senior'] === '1' ? ($scope.selectedEntries.length === 0) : false), clickHandler: $rootScope.loginData['senior'] === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.loginData['senior'] === '1' ? 'Archive All' : 'Create' }
 
         ];
 
@@ -707,7 +707,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.loginData.senior === '1') {
+        if ($rootScope.loginData['senior'] === '1') {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -764,7 +764,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             multiSelect: true
         };
 
-        $rootScope.showControls = $rootScope.loginData.senior !== '1';
+        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
 
         $scope.createClickHandler = function () {
 
@@ -864,7 +864,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.loginData.senior === '1') {
+        if ($rootScope.loginData['senior'] === '1') {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -961,7 +961,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.loginData.senior === '1'),
+            multiSelect: ($rootScope.loginData['senior'] === '1'),
 
             selectedItems: $scope.selectedEntries
         };
@@ -976,11 +976,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
-        $rootScope.showControls = $rootScope.loginData.senior !== '1';
+        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
 
         $rootScope.controls = [
 
-            { disabled: ($rootScope.loginData.senior === '1' ? $scope.selectedEntries.length === 0 : false), clickHandler: $rootScope.loginData.senior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.loginData.senior === '1' ? 'Archive All' : 'Create' }
+            { disabled: ($rootScope.loginData['senior'] === '1' ? $scope.selectedEntries.length === 0 : false), clickHandler: $rootScope.loginData['senior'] === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.loginData['senior'] === '1' ? 'Archive All' : 'Create' }
 
         ];
 
@@ -1248,7 +1248,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 (
     'PouringInboxCtrl', function ($rootScope) {
 
-        $rootScope.showControls = $rootScope.loginData.senior !== '1';
+        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
 
     }
 )
@@ -1270,7 +1270,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'TempInboxCtrl', function ($rootScope, $scope, adrrDataGetter) {
+    'TempInboxCtrl', function ($rootScope, $scope, adrrDataGetter, $state) {
 
         $scope.records = [];
 
@@ -1318,6 +1318,20 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
+
+        $scope.createClickHandler = function () {
+
+            $state.transitionTo('wrapper.eng.temp.create');
+
+        };
+
+        $rootScope.controls = [
+
+            { clickHandler: $scope.createClickHandler, title: 'Create' }
+
+        ];
+
         $scope.$on
         (
             '$destroy', function () {
@@ -1350,7 +1364,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 }
             );
-
         }
 
     }

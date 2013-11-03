@@ -57,7 +57,7 @@ class LabController extends RESTful
 
         }
 
-        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+//        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
