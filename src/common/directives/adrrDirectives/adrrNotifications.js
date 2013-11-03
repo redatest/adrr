@@ -42,6 +42,15 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
                         isFirst = false;
                     }
                 );
+
+                scope.$on
+                (
+                    '$destroy', function () {
+
+                        adrrDataGetter.unset(scope.items);
+
+                    }
+                );
             }
         }
     }

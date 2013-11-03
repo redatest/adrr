@@ -376,7 +376,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 (
     'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
 
-//        if (parseInt($scope.isEng, 10)) {
+//        if (parseInt($scope.loginData.eng, 10)) {
 //
 //            $scope.pagingOptions =
 //            {
@@ -500,7 +500,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.isSenior === '1') {
+        if ($rootScope.loginData.senior === '1') {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -545,7 +545,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.submitComment = function () {
 
-            Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.userID, comment: $scope.commentText}).then
+            Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.loginData.user_id, comment: $scope.commentText}).then
             (
                 function (data) {
                     $scope.comments.push(data);
@@ -583,7 +583,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)">' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td ng-show="isSenior === \'1\'"><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '<td ng-show="loginData.senior === \'1\'"><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
                 '</tr>',
 
             headerTemplate: '<tr id="headerCells">' +
@@ -593,18 +593,18 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<th ng-repeat="col in cols">' +
                 '{{col.displayName}}' +
                 '</th>' +
-                '<th ng-show="isSenior === \'1\'">Actions</th>' +
+                '<th ng-show="loginData.senior === \'1\'">Actions</th>' +
                 '</tr>',
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.isSenior === '1'),
+            multiSelect: ($rootScope.loginData.senior === '1'),
 
             selectedItems: $scope.selectedEntries
         };
 //        }
 
-        $rootScope.showControls = $rootScope.isSenior !== '1';
+        $rootScope.showControls = $rootScope.loginData.senior !== '1';
 
         $scope.createClickHandler = function () {
 
@@ -619,7 +619,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $rootScope.controls = [
 
-            { disabled: ($rootScope.isSenior === '1' ? ($scope.selectedEntries.length === 0) : false), clickHandler: $rootScope.isSenior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.isSenior === '1' ? 'Archive All' : 'Create' }
+            { disabled: ($rootScope.loginData.senior === '1' ? ($scope.selectedEntries.length === 0) : false), clickHandler: $rootScope.loginData.senior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.loginData.senior === '1' ? 'Archive All' : 'Create' }
 
         ];
 
@@ -707,7 +707,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.isSenior === '1') {
+        if ($rootScope.loginData.senior === '1') {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -764,7 +764,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             multiSelect: true
         };
 
-        $rootScope.showControls = $rootScope.isSenior !== '1';
+        $rootScope.showControls = $rootScope.loginData.senior !== '1';
 
         $scope.createClickHandler = function () {
 
@@ -864,7 +864,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.isSenior === '1') {
+        if ($rootScope.loginData.senior === '1') {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -909,7 +909,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.submitComment = function () {
 
-            Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.userID, comment: $scope.commentText}).then
+            Restangular.one('eng/lab', $scope.curRec.id).all('comments').post({user_id: $rootScope.loginData.user_id, comment: $scope.commentText}).then
             (
                 function (data) {
                     $scope.comments.push(data);
@@ -946,7 +946,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button ng-show="isSenior === \'1\'" class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button ng-show="loginData.senior === \'1\'" class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
                 '</tr>',
 
             headerTemplate: '<tr id="headerCells">' +
@@ -961,7 +961,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.isSenior === '1'),
+            multiSelect: ($rootScope.loginData.senior === '1'),
 
             selectedItems: $scope.selectedEntries
         };
@@ -976,11 +976,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
-        $rootScope.showControls = $rootScope.isSenior !== '1';
+        $rootScope.showControls = $rootScope.loginData.senior !== '1';
 
         $rootScope.controls = [
 
-            { disabled: ($rootScope.isSenior === '1' ? $scope.selectedEntries.length === 0 : false), clickHandler: $rootScope.isSenior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.isSenior === '1' ? 'Archive All' : 'Create' }
+            { disabled: ($rootScope.loginData.senior === '1' ? $scope.selectedEntries.length === 0 : false), clickHandler: $rootScope.loginData.senior === '1' ? $scope.archiveAll : $scope.createClickHandler, title: $rootScope.loginData.senior === '1' ? 'Archive All' : 'Create' }
 
         ];
 
@@ -1131,7 +1131,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     if (!angular.isUndefined($scope.comment) && $scope.comment !== '') {
                         data.all('comments').post
                         ({
-                            user_id: $rootScope.userID,
+                            user_id: $rootScope.loginData.user_id,
                             comment: $scope.comment
                         }).then
                         (
@@ -1248,7 +1248,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 (
     'PouringInboxCtrl', function ($rootScope) {
 
-        $rootScope.showControls = $rootScope.isSenior !== '1';
+        $rootScope.showControls = $rootScope.loginData.senior !== '1';
 
     }
 )

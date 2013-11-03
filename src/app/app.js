@@ -41,6 +41,7 @@ var adrrApp = angular.module
             angular.forEach
             (
                 items, function (val) {
+
                     sorted[i] = val;
 
                     i++;
@@ -54,9 +55,11 @@ var adrrApp = angular.module
 
     .config
 (
-    function adrrAppConfig($stateProvider, $urlRouterProvider, RestangularProvider) {
+    function adrrAppConfig($stateProvider, $urlRouterProvider, RestangularProvider, adrrAuthProvider) {
 
         $urlRouterProvider.otherwise(appConfig.loginRoute);
+
+        adrrAuthProvider.init(appConfig.yiiUrl + '/auth/login', appConfig.yiiUrl + '/auth/logout', 'login');
 
         RestangularProvider.setBaseUrl(appConfig.restfulApiBaseUrl + '/api');
         RestangularProvider.setMethodOverriders(["put"]);
@@ -65,31 +68,19 @@ var adrrApp = angular.module
 
     .run
 (
-    function run(adrrAuth, $rootScope) {
+    function run(adrrAuth, $rootScope, $state) {
 
-        adrrAuth.check().then
-        (
-            function (data) {
-                $rootScope.isSenior = data.isSenior;
-                $rootScope.isEng = data.isEng;
-                $rootScope.userName = data.name;
-                $rootScope.userID = data.id;
-            }
-        );
-    }
-)
+        $rootScope.loginData = adrrAuth.loginData;
 
-    .controller
-(
-    'AdrrAppCtrl', function AdrrAppCtrl($scope, $state, $rootScope) {
+        $rootScope.state = $state.current.name;
 
-        $scope.state = $state.current.name;
-
-        $scope.$on
+        $rootScope.$on
         (
             '$stateChangeStart', function (a, b) {
 
-                $scope.state = b['name'];
+                $rootScope.loginData = adrrAuth.loginData;
+
+                $rootScope.state = b['name'];
 
                 $rootScope.pageTitle = b['title'];
 
@@ -100,5 +91,13 @@ var adrrApp = angular.module
                 $rootScope.showControls = b['showControls'];
             }
         );
+    }
+)
+
+    .controller
+(
+    'AdrrAppCtrl', function AdrrAppCtrl() {
+
+
     }
 );

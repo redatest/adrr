@@ -1,78 +1,146 @@
-angular.module('adrrAuth', [], null).factory
+angular.module('adrrAuth', [], null)
+
+    .provider
 (
-    'adrrAuth', function ($state, $http, $rootScope, $q) {
+    'adrrAuth', function () {
 
-        $rootScope.wrongCredentials = false;
+        // ------------------------------------------
+        var _loginApiUrl = null;
 
-        var check = function (username, password, oldUrl) {
+        var _logoutApiUrl = null;
 
-            var credentials = (!angular.isUndefined(username) && !angular.isUndefined(password)) ? $.param({ username: username, password: password }) : null;
+        var _loginState = null;
 
-            var deferred = $q.defer();
+        this.init = function (loginApiUrl, logoutApiUrl, loginState) {
 
-            $http
-            ({
-                method: 'POST',
-                url: adrrAuthConfig.loginUrl,
-                data: credentials,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-                .success
-            (
-                function (data) {
-                    deferred.resolve(data);
+            _loginApiUrl = loginApiUrl;
 
-                    if (data['logged'] === true) {
-                        if ($state.current.name == 'login') {
-                            if (!angular.isUndefined(oldUrl) && oldUrl !== 'login' && oldUrl !== 'logout') {
-                                window.location.href = '#/' + oldUrl;
-                            }
-                            else {
-                                $state.transitionTo(adrrAuthConfig.defaultState);
-                            }
-                        }
-                    }
-                    else {
-                        $state.transitionTo(adrrAuthConfig.loginState);
+            _logoutApiUrl = logoutApiUrl;
 
-                        if (credentials !== null) {
-                            $rootScope.wrongCredentials = true;
-                        }
-                    }
-                }
-            )
-                .error
-            (
-                function (data) {
-                    deferred.reject(data);
-
-                    $state.transitionTo(adrrAuthConfig.loginState);
-                }
-            );
-
-            return deferred.promise;
+            _loginState = loginState;
         };
+        // ------------------------------------------
 
-        function logout() {
+        this.$get = function ($rootScope, $http, $q, $state) {
 
-            $http
-            ({
-                method: 'POST',
-                url: adrrAuthConfig.logoutUrl
-            })
-                .success
-            (
-                function () {
-                    $state.transitionTo(adrrAuthConfig.loginState);
+            var Auth = {};
+
+            Auth.hasLogged = false;
+
+            Auth.loginData = {};
+
+            var stateChangeHandler = {};
+
+            var unregisterStateChangeHandler = function () {
+
+                if (typeof stateChangeHandler === 'function') {
+
+                    stateChangeHandler.call();
+
+                    stateChangeHandler = {};
+
                 }
-            );
+            };
+
+            Auth.check = function (username, password) {
+
+                var credentials = typeof username !== 'undefined' && typeof password !== 'undefined' ? $.param({ username: username, password: password }) : null;
+
+                var deferred = $q.defer();
+
+                $http
+                ({
+                    method: 'POST',
+                    url: _loginApiUrl,
+                    data: credentials,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                    .success
+                (
+                    function (data) {
+
+                        Auth.loginData = angular.copy(data, Auth.loginData);
+
+                        if (!Auth.hasLogged) {
+
+                            Auth.hasLogged = true;
+
+                            var stateChangeSuccess = $rootScope.$on
+                            (
+                                '$stateChangeSuccess', function () {
+                                    stateChangeSuccess();
+
+                                    stateChangeHandler = $rootScope.$on
+                                    (
+                                        '$stateChangeStart', function () {
+
+                                            Auth.check();
+
+                                        }
+                                    );
+                                }
+                            );
+
+                        }
+
+                        deferred.resolve(data);
+                    }
+                )
+                    .error
+                (
+                    function (data) {
+
+                        unregisterStateChangeHandler();
+
+                        $state.go(_loginState);
+
+                        deferred.reject(data);
+                    }
+                );
+
+                return deferred.promise;
+            };
+
+            Auth.logout = function () {
+
+                var deferred = $q.defer();
+
+                $http
+                ({
+                    method: 'POST',
+                    url: _logoutApiUrl
+                })
+                    .success
+                (
+                    function (data) {
+
+                        Auth.loginData = {};
+
+                        Auth.hasLogged = false;
+
+                        unregisterStateChangeHandler();
+
+                        $state.go(_loginState);
+
+                        deferred.resolve(data);
+
+                    }
+                )
+                    .error
+                (
+                    function (data) {
+
+                        deferred.reject(data);
+
+                    }
+                );
+
+                return deferred.promise;
+            };
+
+            return Auth;
+
         }
 
-        // -------------------------------------------------
-
-        return {
-            check: check,
-            logout: logout
-        };
     }
 );

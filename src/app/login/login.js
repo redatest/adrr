@@ -35,17 +35,15 @@ var adrrLogin = angular.module('adrrApp.login', [], null)
 
     .controller
 (
-    'LoginCtrl', function LoginCtrl($scope, adrrAuth, $rootScope) {
-        var beforeLoginUrl = String(window.location).split('/#/');
-
+    'LoginCtrl', function LoginCtrl($scope, adrrAuth, $state) {
         $scope.login = function () {
-            adrrAuth.check($scope.username, $scope.password, beforeLoginUrl[1]).then
+
+            adrrAuth.check($scope.username, $scope.password).then
             (
-                function (data) {
-                    $rootScope.isSenior = data.isSenior;
-                    $rootScope.isEng = data.isEng;
-                    $rootScope.userName = data.name;
-                    $rootScope.userID = data.id;
+                function () {
+
+                    $state.go('wrapper.dashboard');
+
                 }
             );
         };

@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="#/dashboard">C.C.M</a>
 
     <p class="navbar-text pull-right hidden-xs"><a data-toggle="modal" href="#logoutModal" onclick="return false;"
-                                                   class="navbar-link">{{userName}} (Sign out)</a></p>
+                                                   class="navbar-link">{{loginData.name}} (Sign out)</a></p>
 
     <a data-toggle="modal" href="#logoutModal" onclick="return false;" class="topnavlink visible-xs pull-right"><span
             class="glyphicon glyphicon-remove-circle"></span></a>
@@ -25,7 +25,7 @@
     </button>
 </nav>
 
-<ng-switch on="isSenior">
+<ng-switch on="loginData.senior">
     <div id="sidenav" class="col-sm-2 col-lg-2">
         <nav class="navbar navbar-default" role="navigation">
             <div class="collapse navbar-collapse navbar-ex8-collapse">
@@ -46,7 +46,8 @@
                         <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.inbox') > -1}">
-                                <a href="#/labs/inbox">{{isSenior === '1' ? 'Inbox' : 'Sent'}} <span class="stat">({{menuStats[0].lab.inbox}})</span></a>
+                                <a href="#/labs/inbox">{{loginData.senior === '1' ? 'Inbox' : 'Sent'}} <span
+                                        class="stat">({{menuStats[0].lab.inbox}})</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
                                 <a href="#/labs/returned">Returned <span
@@ -67,7 +68,7 @@
                         <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
-                                <a href="#/pourings/inbox">{{isSenior === '1' ? 'Inbox' : 'Sent'}}</a>
+                                <a href="#/pourings/inbox">{{loginData.senior === '1' ? 'Inbox' : 'Sent'}}</a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
                                 <a href="#" onclick="return false;">Return</a>

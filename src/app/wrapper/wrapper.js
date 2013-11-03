@@ -1,26 +1,5 @@
 angular.module('adrrApp.wrapper', [], null)
 
-    .factory
-(
-    'yii', function ($q, $http) {
-        var deferred = $q.defer();
-
-        $http
-        ({
-            method: 'GET',
-            url: appConfig.restfulApiBaseUrl + '/metaData'
-        })
-            .success
-        (
-            function (data) {
-                deferred.resolve(data);
-            }
-        );
-
-        return deferred.promise;
-    }
-)
-
     .config
 (
     function config($stateProvider) {
@@ -32,7 +11,45 @@ angular.module('adrrApp.wrapper', [], null)
                 abstract: true,
 
                 resolve: {
-                    yii: 'yii'
+                    yii: [
+                        'adrrAuth', '$q', '$http', function (adrrAuth, $q, $http) {
+
+                            var deferred = $q.defer();
+
+                            var getYii = function () {
+                                $http
+                                ({
+                                    method: 'GET',
+                                    url: appConfig.restfulApiBaseUrl + '/metaData'
+                                })
+                                    .success
+                                (
+                                    function (data) {
+                                        deferred.resolve(data);
+                                    }
+                                );
+                            };
+
+                            if (!adrrAuth.hasLogged) {
+
+                                adrrAuth.check().then
+                                (
+                                    function () {
+
+                                        getYii();
+
+                                    }
+                                );
+                            } else {
+
+                                getYii();
+
+                            }
+
+                            return deferred.promise;
+
+                        }
+                    ]
                 },
 
                 views: {
@@ -126,6 +143,15 @@ angular.module('adrrApp.wrapper', [], null)
                     }
                 );
             }
-        }
+        };
+
+        $scope.$on
+        (
+            '$destroy', function () {
+
+                adrrDataGetter.unset($scope.menuStats);
+
+            }
+        );
     }
 );
