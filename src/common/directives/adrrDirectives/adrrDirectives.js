@@ -126,10 +126,10 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                         (
                             newVal, function (item) {
                                 if (attrs['frequentProp']) {
-                                    return item[attrs['frequentProp']];
+                                    return item[attrs['frequentProp']] == 1;
                                 }
                                 else {
-                                    return item['mostFrequent'];
+                                    return item['mostFrequent'] == 1;
                                 }
                             }
                         );

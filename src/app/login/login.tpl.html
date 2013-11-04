@@ -1,53 +1,55 @@
-<div class='login_header big'>
-    <img src='assets/images/header.jpg'>
-</div>
-
-<div class='login_header small'>
-    <img src='assets/images/header_sm.jpg'>
-</div>
-
-<div class='login_header sx'>
-    <img src='assets/images/header_sm.jpg'>
-</div>
-
-<div class="container login"
-
-     backstretch
-     bg1='assets/images/bg1.jpg'
-     bg2='assets/images/bg2.jpg'
-     bg3='assets/images/bg3.jpg'
-     bg4='assets/images/bg4.jpg'
-     bg5='assets/images/bg5.jpg'
-     bg6='assets/images/bg6.jpg'
-     bg7='assets/images/bg7.jpg'
-     bg8='assets/images/bg8.jpg'
-        >
-
-    <div class='login_wrapper'>
-
-        <form class="form-signin">
-
-            <div class="alert alert-danger" ng-show="wrongCredentials">
-                Your credentials are wrong.
-            </div>
-
-            <h2 class="form-signin-heading">Please sign in</h2>
-
-            <hr>
-
-            <input ng-model="username" class="form-control" type="text" autofocus="" placeholder="Username">
-
-            <br>
-
-            <input ng-model="password" class="form-control" type="password" placeholder="Password">
-
-            <hr>
-
-            <button ng-click="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+<div id="logincont">
+    <div class='login_header big'>
+        <img src='assets/images/header.jpg'>
     </div>
-</div>
 
-<div class='login_footer'>
-    © copy rights
+    <div class='login_header small'>
+        <img src='assets/images/header_sm.jpg'>
+    </div>
+
+    <div class='login_header sx'>
+        <img src='assets/images/header_sm.jpg'>
+    </div>
+
+    <div class="container login"
+
+         backstretch
+         bg1='assets/images/bg1.jpg'
+         bg2='assets/images/bg2.jpg'
+         bg3='assets/images/bg3.jpg'
+         bg4='assets/images/bg4.jpg'
+         bg5='assets/images/bg5.jpg'
+         bg6='assets/images/bg6.jpg'
+         bg7='assets/images/bg7.jpg'
+         bg8='assets/images/bg8.jpg'
+            >
+
+        <div class='login_wrapper'>
+
+            <form class="form-signin">
+
+                <div class="alert alert-danger" ng-show="wrongCredentials">
+                    Your credentials are wrong.
+                </div>
+
+                <h2 class="form-signin-heading">Please sign in</h2>
+
+                <hr>
+
+                <input ng-model="username" class="form-control" type="text" autofocus="" placeholder="Username">
+
+                <br>
+
+                <input ng-model="password" class="form-control" type="password" placeholder="Password">
+
+                <hr>
+
+                <button ng-click="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+
+    <div class='login_footer'>
+        © copy rights
+    </div>
 </div>

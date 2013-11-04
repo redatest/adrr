@@ -214,8 +214,6 @@ angular.module('adrrApp.wrapper.report', [], null)
 
     .controller
 (
-    'RepPouringCtrl', function () {
-
-
+    'RepPouringCtrl', function ($state) {
     }
 );
