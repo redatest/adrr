@@ -17,7 +17,7 @@ var adrrApp = angular.module
             'adrrDirectives.jslimscroll',
             'adrrDirectives.notifications',
             'adrrAuth',
-            'adrrDataGetter',
+            'adrrDataFetcher',
             'adrrApp.login',
             'adrrApp.wrapper',
             'adrrApp.wrapper.dashboard',

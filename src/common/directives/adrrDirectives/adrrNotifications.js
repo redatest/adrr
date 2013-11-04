@@ -1,8 +1,8 @@
-var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDataGetter'], null)
+var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDataFetcher'], null)
 
     .directive
 (
-    'adrrNotifications', function ($compile, adrrDataGetter) {
+    'adrrNotifications', function ($compile, adrrDataFetcher) {
 
         return {
 
@@ -30,12 +30,12 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
 
                         if (newVal.time !== oldVal.time || isFirst) {
 
-                            adrrDataGetter.set(newVal.sourceUrl, scope.items, parseInt(newVal.time, 10), newVal.updateTrucker);
+                            adrrDataFetcher.set(newVal.sourceUrl, scope.items, parseInt(newVal.time, 10), newVal.updateTrucker);
 
                         }
                         else if (newVal.time !== oldVal.time) {
 
-                            adrrDataGetter.updateTime(scope.items, newVal.time);
+                            adrrDataFetcher.updateTime(scope.items, newVal.time);
 
                         }
 
@@ -47,7 +47,7 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
                 (
                     '$destroy', function () {
 
-                        adrrDataGetter.unset(scope.items);
+                        adrrDataFetcher.unset(scope.items);
 
                     }
                 );

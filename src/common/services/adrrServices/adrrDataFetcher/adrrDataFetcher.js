@@ -1,6 +1,6 @@
-var adrrDataGetter = angular.module('adrrDataGetter', [], null).factory
+var adrrDataFetcher = angular.module('adrrDataFetcher', [], null).factory
 (
-    'adrrDataGetter', function ($http) {
+    'adrrDataFetcher', function ($http) {
 
         var targets = [];
 

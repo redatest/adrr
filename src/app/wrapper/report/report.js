@@ -82,7 +82,7 @@ angular.module('adrrApp.wrapper.report', [], null)
 
     .controller
 (
-    'RepConcCtrl', function RepConcCtrl($rootScope, $scope, yii, adrrDataGetter, Restangular) {
+    'RepConcCtrl', function RepConcCtrl($rootScope, $scope, yii, adrrDataFetcher, Restangular) {
 
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
@@ -155,7 +155,7 @@ angular.module('adrrApp.wrapper.report', [], null)
             }
         ];
 
-        adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
+        adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
 
         $scope.loadComments = function (row) {
 
@@ -205,7 +205,7 @@ angular.module('adrrApp.wrapper.report', [], null)
         $scope.$on
         (
             '$destroy', function () {
-                adrrDataGetter.unset($scope.records);
+                adrrDataFetcher.unset($scope.records);
             }
         )
 

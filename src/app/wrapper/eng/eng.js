@@ -374,7 +374,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
+    'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataFetcher, Restangular, $state) {
 
 //        if (parseInt($scope.loginData.eng, 10)) {
 //
@@ -504,11 +504,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records, 5000, 'update');
+            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records, 5000, 'update');
 
         } else {
 
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records);
+            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records);
 
         }
 
@@ -626,7 +626,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.$on
         (
             '$destroy', function () {
-                adrrDataGetter.unset($scope.records);
+                adrrDataFetcher.unset($scope.records);
             }
         )
     }
@@ -634,7 +634,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabArchiveCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
+    'LabArchiveCtrl', function ($rootScope, $scope, yii, adrrDataFetcher, Restangular, $state) {
 
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
@@ -711,11 +711,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
+            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
 
         } else {
 
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records);
+            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records);
 
         }
 
@@ -781,7 +781,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.$on
         (
             '$destroy', function () {
-                adrrDataGetter.unset($scope.records);
+                adrrDataFetcher.unset($scope.records);
             }
         )
     }
@@ -789,7 +789,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabReturnedCtrl', function ($rootScope, $scope, yii, adrrDataGetter, Restangular, $state) {
+    'LabReturnedCtrl', function ($rootScope, $scope, yii, adrrDataFetcher, Restangular, $state) {
 
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
@@ -868,11 +868,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records, 5000, 'update');
+            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records, 5000, 'update');
 
         } else {
 
-            adrrDataGetter.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records);
+            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records);
 
         }
 
@@ -987,7 +987,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.$on
         (
             '$destroy', function () {
-                adrrDataGetter.unset($scope.records);
+                adrrDataFetcher.unset($scope.records);
             }
         );
     }
@@ -1270,13 +1270,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'TempInboxCtrl', function ($rootScope, $scope, adrrDataGetter, $state) {
+    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
 
         $scope.records = [];
 
         $scope.selectedItems = [];
 
-        adrrDataGetter.set(appConfig.yiiUrl + '/eng/labTemperature', $scope.records, 5000, 'date_time');
+        adrrDataFetcher.set(appConfig.yiiUrl + '/eng/labTemperature', $scope.records, 5000, 'date_time');
 
         var columnDefs = [
 
@@ -1336,7 +1336,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         (
             '$destroy', function () {
 
-                adrrDataGetter.unset($scope.records);
+                adrrDataFetcher.unset($scope.records);
 
             }
         );
