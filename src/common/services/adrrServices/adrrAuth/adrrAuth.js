@@ -11,13 +11,17 @@ angular.module('adrrAuth', [], null)
 
         var _loginState = null;
 
-        this.init = function (loginApiUrl, logoutApiUrl, loginState) {
+        var _oneHttp = true;
+
+        this.init = function (loginApiUrl, logoutApiUrl, loginState, oneHttp) {
 
             _loginApiUrl = loginApiUrl;
 
             _logoutApiUrl = logoutApiUrl;
 
             _loginState = loginState;
+
+            if (typeof oneHttp !== 'undefined') _oneHttp = oneHttp;
         };
         // ------------------------------------------
 
@@ -30,6 +34,36 @@ angular.module('adrrAuth', [], null)
             Auth.loginData = {};
 
             var stateChangeHandler = {};
+
+            var registerHandlers = function (deferred) {
+
+                if (!Auth.hasLogged) {
+
+                    var stateChangeSuccess = $rootScope.$on
+                    (
+                        '$stateChangeSuccess', function () {
+
+                            stateChangeSuccess();
+
+                            stateChangeHandler = $rootScope.$on
+                            (
+                                '$stateChangeStart', function () {
+
+                                    if (_oneHttp) {
+
+                                        deferred.resolve(Auth.loginData);
+
+                                    } else {
+
+                                        Auth.check();
+
+                                    }
+                                }
+                            );
+                        }
+                    );
+                }
+            };
 
             var unregisterStateChangeHandler = function () {
 
@@ -61,27 +95,9 @@ angular.module('adrrAuth', [], null)
 
                         Auth.loginData = angular.copy(data, Auth.loginData);
 
-                        if (!Auth.hasLogged) {
+                        registerHandlers(deferred);
 
-                            Auth.hasLogged = true;
-
-                            var stateChangeSuccess = $rootScope.$on
-                            (
-                                '$stateChangeSuccess', function () {
-                                    stateChangeSuccess();
-
-                                    stateChangeHandler = $rootScope.$on
-                                    (
-                                        '$stateChangeStart', function () {
-
-                                            Auth.check();
-
-                                        }
-                                    );
-                                }
-                            );
-
-                        }
+                        Auth.hasLogged = true;
 
                         deferred.resolve(data);
                     }

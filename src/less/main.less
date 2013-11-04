@@ -5,6 +5,15 @@
 @sidenav_border: 1px solid #cccccc;
 /* End */
 
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 html, body {
   min-height: 100%;
 }
@@ -147,6 +156,10 @@ body {
   display: inherit;
 
   margin: 0 10px 0 -10px;
+}
+
+#sidenav .sub li.active > a > span > i {
+  color: #a00;
 }
 
 #sidenav .sub .collapse {
