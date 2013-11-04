@@ -77,7 +77,7 @@ var adrrDataFetcher = angular.module('adrrDataFetcher', [], null).factory
 
         var set = function (sourceUrl, target, time, updateTrucker, method, args) {
 
-            if (typeof time !== 'undefined') {
+            if (typeof time !== 'undefined' && time !== null) {
 
                 targets.push(target);
 
