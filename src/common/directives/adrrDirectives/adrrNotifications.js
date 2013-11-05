@@ -16,8 +16,6 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
 
                 var isFirst = true;
 
-                scope.items = [];
-
                 scope.$watch
                 (
                     attrs.adrrOptions, function (newVal, oldVal) {
@@ -30,7 +28,7 @@ var adrrNotifications = angular.module('adrrDirectives.notifications', ['adrrDat
 
                         if (newVal.time !== oldVal.time || isFirst) {
 
-                            adrrDataFetcher.set(newVal.sourceUrl, scope.items, parseInt(newVal.time, 10), newVal.updateTrucker);
+                            scope.items = adrrDataFetcher.set(newVal.sourceUrl, parseInt(newVal.time, 10), newVal.updateTrucker);
 
                         }
                         else if (newVal.time !== oldVal.time) {

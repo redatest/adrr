@@ -87,8 +87,6 @@ angular.module('adrrApp.wrapper.report', [], null)
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
 
-        $scope.records = [];
-
         var columnDefs = [
 
             {
@@ -155,7 +153,7 @@ angular.module('adrrApp.wrapper.report', [], null)
             }
         ];
 
-        adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', 5000, 'update');
 
         $scope.loadComments = function (row) {
 

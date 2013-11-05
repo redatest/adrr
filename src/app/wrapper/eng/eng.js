@@ -430,8 +430,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.metaData = yii['Lab'].cols;
 
-        $scope.records = [];
-
         $scope.selectedEntries = [];
 
         var columnDefs = [
@@ -504,11 +502,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records, 5000, 'update');
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', 5000, 'update');
 
         } else {
 
-            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', $scope.records);
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived');
 
         }
 
@@ -639,8 +637,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
 
-        $scope.records = [];
-
         var columnDefs = [
 
             {
@@ -711,11 +707,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records, 5000, 'update');
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', 5000, 'update');
 
         } else {
 
-            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', $scope.records);
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived');
 
         }
 
@@ -794,8 +790,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.yii = yii;
         $scope.metaData = yii['Lab'].cols;
 
-        $scope.records = [];
-
         $scope.selectedEntries = [];
 
         var columnDefs = [
@@ -868,11 +862,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records, 5000, 'update');
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', 5000, 'update');
 
         } else {
 
-            adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', $scope.records);
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned');
 
         }
 
@@ -1272,11 +1266,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 (
     'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
 
-        $scope.records = [];
-
         $scope.selectedItems = [];
 
-        adrrDataFetcher.set(appConfig.yiiUrl + '/eng/labTemperature', $scope.records, 5000, 'date_time');
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/eng/labTemperature', 5000, 'date_time');
 
         var columnDefs = [
 

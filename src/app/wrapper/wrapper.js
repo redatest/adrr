@@ -75,11 +75,9 @@ angular.module('adrrApp.wrapper', [], null)
             $rootScope.modalCloseFunc = closeFunc;
         };
 
-        $scope.menuStats = [];
-
         $scope.yii = yii;
 
-        adrrDataFetcher.set(appConfig.yiiUrl + '/stats/menu', $scope.menuStats, 1000);
+        $scope.menuStats = adrrDataFetcher.set(appConfig.yiiUrl + '/stats/menu', 1000);
 
         $scope.notsOpts = {
 

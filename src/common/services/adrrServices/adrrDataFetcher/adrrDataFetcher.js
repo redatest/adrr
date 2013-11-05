@@ -75,7 +75,9 @@ var adrrDataFetcher = angular.module('adrrDataFetcher', [], null).factory
             }
         };
 
-        var set = function (sourceUrl, target, time, updateTrucker, method, args) {
+        var set = function (sourceUrl, time, updateTrucker, method, args) {
+
+            var target = [];
 
             if (typeof time !== 'undefined' && time !== null) {
 
@@ -128,6 +130,8 @@ var adrrDataFetcher = angular.module('adrrDataFetcher', [], null).factory
                 )
 
             }
+
+            return target;
         };
 
         var unset = function (target) {
