@@ -3,133 +3,220 @@
     <any ng-hide="alert">Something went wrong.</any>
 </div>
 
-<form role="form" name="mainForm" class="col-md-4 labForm" novalidate>
-    <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
-        <label for="date" class="control-label">{{metaData.cols['date'].label}}</label>
+<form role="form" name="mainForm" class="labForm" novalidate>
 
-        <div>
-            <button class="btn btn-default" ng-click="setToday()">Today</button>
-            <input id="date" readonly="readonly" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
-                   ng-model="date" class="form-control" type="text" required/>
+<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+<div class="well well-sm">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel" ng-class="{'panel-danger': basForm.$invalid, 'panel-success': basForm.$valid}"
+                 ng-form="basForm">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basics</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
+                        <label for="date" class="control-label">{{metaData.cols['date'].label}}</label>
+
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" ng-click="setToday()">Today</button>
+                            </div>
+
+                            <input id="date" readonly="readonly" ui-date="{dateFormat: 'dd-mm-yy'}"
+                                   ui-date-format="dd-mm-yy"
+                                   ng-model="date" class="form-control" type="text" required/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
+                        <label for="shiftId" class="control-label">{{metaData.cols['shift_id'].label}}</label>
+
+                        <select id="shiftId" ng-model="shiftId" class="form-control" required>
+                            <option value="">Select...</option>
+                            <option ng-repeat="shiftType in shiftTypes" value="{{shiftType.id}}">
+                                {{shiftType.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': supplierForm.$invalid}"
+                         ng-form="supplierForm">
+                        <label class="control-label">{{metaData.cols['supplier_id'].label}}</label>
+
+                        <adrr-select2-wrapper ng-model="supplierId" adrr-id="supId"
+                                              frequent-prop="very_frequent"
+                                              adrr-data="suppliers"
+                                              required>
+                        </adrr-select2-wrapper>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
+                        <label for="plant" class="control-label">{{metaData.cols['plant'].label}}</label>
+
+                        <input id="plant" adrr-num-range min="0" class="form-control" type="number"
+                               pattern="[0-9]*"
+                               ng-model="plant"
+                               typeahead="obj.plant for obj in plants | filter:$viewValue | limitTo:8"
+                               required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel" ng-class="{'panel-danger': identForm.$invalid, 'panel-success': identForm.$valid}"
+                 ng-form="identForm">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Truck Identification</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
+                        <label for="truck" class="control-label">{{metaData.cols['truck'].label}}</label>
+
+                        <input id="truck" adrr-num-range min="0" class="form-control" type="number"
+                               pattern="[0-9]*"
+                               ng-model="truck"
+                               typeahead="obj.truck for obj in trucks | filter:$viewValue | limitTo:8"
+                               required/>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}"
+                         ng-form="truckLoadForm">
+                        <label for="truck_load"
+                               class="control-label">{{metaData.cols['truck_load'].label}}</label>
+
+                        <input id="truck_load" adrr-num-range min="1" max="12" type="number" pattern="[0-9]*"
+                               value=""
+                               ng-model="truckLoad" class="form-control" required/>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
+                        <label for="ticket" class="control-label">{{metaData.cols['ticket'].label}}</label>
+
+                        <input id="ticket" class="form-control" type="text" ng-model="ticket" required/>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': deptTimeForm.$invalid}"
+                         ng-form="deptTimeForm">
+                        <label class="control-label">{{metaData.cols['dept_time'].label}}</label>
+
+                        <adrr-timepicker required ng-model="deptTime"></adrr-timepicker>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error': arivTimeForm.$invalid || !validateTime() }"
+                         ng-form="arivTimeForm">
+                        <label class="control-label">{{metaData.cols['arriv_time'].label}}</label>
+
+                        <adrr-timepicker required ng-model="arrivTime"></adrr-timepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6" style="margin-top: -62px;">
+            <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+                 ng-form="infoForm">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Concrete Info</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                         ng-form="concTypeForm">
+                        <label class="control-label">{{metaData.cols['conc_type_id'].label}}</label>
+
+                        <adrr-select2-wrapper ng-model="concTypeId" adrr-id="concId"
+                                              frequent-prop="very_frequent"
+                                              adrr-data="concreteTypes" required>
+                        </adrr-select2-wrapper>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': tempForm.$invalid || checkTempRed()}"
+                         ng-form="tempForm">
+                        <label for="temp" class="control-label">{{metaData.cols['temp'].label}}</label>
+
+                        <input id="temp" class="form-control" type="number" pattern="[0-9]*" ng-model="temp"
+                               required/>
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}"
+                         ng-form="slumpForm"
+                         ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
+                        <label for="slump" class="control-label">{{metaData.cols['slump'].label}}</label>
+
+                        <input id="slump" class="form-control" type="number" pattern="[0-9]*" ng-model="slump"
+                               ng-required="getItemById(concreteTypes, concTypeId).category === 'slump'"/>
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': flowForm.$invalid || checkFlowRed(), 'has-warning': checkFlowYellow()}"
+                         ng-form="flowForm"
+                         ng-show="getItemById(concreteTypes, concTypeId).category === 'flow'">
+                        <label for="flow" class="control-label">{{metaData.cols['flow'].label}}</label>
+
+                        <input id="flow" class="form-control" type="number" pattern="[0-9]*" ng-model="flow"
+                               ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'"/>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': acceptedForm.$invalid}"
+                         ng-form="acceptedForm">
+                        <label for="accepted" class="control-label">{{metaData.cols['accepted'].label}}</label>
+
+                        <select id="accepted" class="form-control" ng-model="accepted" required>
+                            <option value="">Select...</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                    <!--<div class="from-group" ng-show="red === '' && yellow === ''">
+                        <label for="comment_2" class="control-label">Comment</label>
+
+                        <textarea id="comment_2" ng-model="comment" class="form-control" rows="3"></textarea>
+                    </div>-->
+
+                    <div class="from-group" ng-class="{ 'has-error': red !== '' }"
+
+                         ng-form="commentForm">
+                        <label for="comment_1" class="control-label">Comment</label>
+
+                        <textarea id="comment_1" ng-model="comment" class="form-control" rows="3"
+                                  ng-required="red !== ''"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="panel" ng-class="{'panel-danger': cylindForm.$invalid, 'panel-success': cylindForm.$valid}"
+                 ng-form="cylindForm">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Casting of Cylinders</h3>
+                </div>
+                <div class="panel-body">
+                    Casting goes here
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
-        <label class="control-label">{{metaData.cols['shift_id'].label}}</label>
 
-        <adrr-select2-wrapper ng-model="shiftId" frequent-prop="very_frequent" adrr-data="shiftTypes"
-                              required></adrr-select2-wrapper>
+    <div class="row">
+
     </div>
+</div>
 
-    <div class="form-group" ng-class="{'has-error': supplierForm.$invalid}" ng-form="supplierForm">
-        <label class="control-label">{{metaData.cols['supplier_id'].label}}</label>
-
-        <adrr-select2-wrapper ng-model="supplierId" frequent-prop="very_frequent" adrr-data="suppliers"
-                              required></adrr-select2-wrapper>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}" ng-form="concTypeForm">
-        <label class="control-label">{{metaData.cols['conc_type_id'].label}}</label>
-
-        <adrr-select2-wrapper ng-model="concTypeId" frequent-prop="very_frequent" adrr-data="concreteTypes"
-                              required></adrr-select2-wrapper>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': tempForm.$invalid || checkTempRed()}" ng-form="tempForm"
-         ng-hide="concTypeId === '' || concTypeId === undefined">
-        <label for="temp" class="control-label">{{metaData.cols['temp'].label}}</label>
-
-        <input id="temp" class="form-control" type="number" pattern="[0-9]*" ng-model="temp" required/>
-    </div>
-
-    <div class="form-group"
-         ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}"
-         ng-form="slumpForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
-        <label for="slump" class="control-label">{{metaData.cols['slump'].label}}</label>
-
-        <input id="slump" class="form-control" type="number" pattern="[0-9]*" ng-model="slump"
-               ng-required="getItemById(concreteTypes, concTypeId).category === 'slump'"/>
-    </div>
-
-    <div class="form-group"
-         ng-class="{'has-error': flowForm.$invalid || checkFlowRed(), 'has-warning': checkFlowYellow()}"
-         ng-form="flowForm" ng-show="getItemById(concreteTypes, concTypeId).category === 'flow'">
-        <label for="flow" class="control-label">{{metaData.cols['flow'].label}}</label>
-
-        <input id="flow" class="form-control" type="number" pattern="[0-9]*" ng-model="flow"
-               ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'"/>
-    </div>
-
-    <div class="from-group" ng-class="{ 'has-error': red !== '' }" ng-show="red !== '' || yellow !== ''"
-         ng-form="commentForm">
-        <label for="comment_1" class="control-label">Comment</label>
-
-        <textarea id="comment_1" ng-model="comment" class="form-control" rows="3" ng-required="red !== ''"></textarea>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
-        <label for="plant" class="control-label">{{metaData.cols['plant'].label}}</label>
-
-        <input id="plant" adrr-num-range min="0" class="form-control" type="number" pattern="[0-9]*" ng-model="plant"
-               typeahead="obj.plant for obj in plants | filter:$viewValue | limitTo:8" required/>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
-        <label for="truck" class="control-label">{{metaData.cols['truck'].label}}</label>
-
-        <input id="truck" adrr-num-range min="0" class="form-control" type="number" pattern="[0-9]*" ng-model="truck"
-               typeahead="obj.truck for obj in trucks | filter:$viewValue | limitTo:8" required/>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
-        <label for="ticket" class="control-label">{{metaData.cols['ticket'].label}}</label>
-
-        <input id="ticket" class="form-control" type="text" ng-model="ticket" required/>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': deptTimeForm.$invalid}" ng-form="deptTimeForm">
-        <label class="control-label">{{metaData.cols['dept_time'].label}}</label>
-
-        <adrr-timepicker required ng-model="deptTime"></adrr-timepicker>
-    </div>
-
-    <div class="form-group" ng-class="{ 'has-error': arivTimeForm.$invalid || !validateTime() }" ng-form="arivTimeForm">
-        <label class="control-label">{{metaData.cols['arriv_time'].label}}</label>
-
-        <adrr-timepicker required ng-model="arrivTime"></adrr-timepicker>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}" ng-form="truckLoadForm">
-        <label for="truck_load" class="control-label">{{metaData.cols['truck_load'].label}}</label>
-
-        <input id="truck_load" adrr-num-range min="1" max="12" type="number" pattern="[0-9]*" value=""
-               ng-model="truckLoad" class="form-control" required/>
-    </div>
-
-    <div class="form-group" ng-class="{'has-error': acceptedForm.$invalid}" ng-form="acceptedForm">
-        <label for="accepted" class="control-label">{{metaData.cols['accepted'].label}}</label>
-
-        <select id="accepted" class="form-control" ng-model="accepted" required>
-            <option value="">Select...</option>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-    </div>
-
-    <div class="from-group" ng-show="red === '' && yellow === ''">
-        <label for="comment_2" class="control-label">Comment</label>
-
-        <textarea id="comment_2" ng-model="comment" class="form-control" rows="3"></textarea>
-    </div>
-
-    <div class="form-group">
-        <button class="btn btn-primary" data-toggle="modal" href="#confirmationModal" onclick="return false;"
-                ng-disabled="mainForm.$invalid || !validateTime()">
-            Save
-        </button>
-    </div>
+<div class="form-group">
+    <button class="btn btn-primary" data-toggle="modal" href="#confirmationModal" onclick="return false;"
+            ng-disabled="mainForm.$invalid || !validateTime()">
+        Save
+    </button>
+</div>
+</div>
 </form>
 
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -15,10 +15,11 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 adrrOptions: '&'
             },
 
-            template: '<table class="col-xs-12"><tr>' +
-                '<td><input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" /></td>' +
-                '<td><input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" /></td>' +
-                '</tr></table>',
+            template: '<div class="input-group double-input">' +
+                '<input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
+                '<input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
+                '<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> </span>' +
+                '</div>',
 
             link: function (scope, element, attrs, ctrl) {
 
@@ -97,11 +98,80 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
     // }
 // )
 
+    // Select version
+    /*.directive
+     (
+     'adrrSelect2Wrapper', function () {
+     return {
+     restrict: 'E',
+
+     require: 'ngModel',
+
+     scope: {
+     ngModel: '=',
+     adrrData: '&'
+     },
+
+     template: '<div>' +
+     '<button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button>' +
+     '</div>' +
+     '<select class="form-control s2w"><option value="">Select...</option><option ng-repeat="item in adrrData()" value="{{item.id}}" ng-selected="item.id == ngModel">{{item.name}}</option></select>',
+
+     link: function (scope, element, attrs, ctrl) {
+
+     var $select = element.find('.s2w');
+
+     scope.$watch
+     (
+     'adrrData()', function (newVal) {
+     scope.frequents = _.filter
+     (
+     newVal, function (item) {
+     if (attrs['frequentProp']) {
+     return item[attrs['frequentProp']] == 1;
+     }
+     else {
+     return item['mostFrequent'] == 1;
+     }
+     }
+     );
+     }
+     );
+
+     scope.programmaticallySelect = function (id) {
+     scope.ngModel = id;
+     };
+
+     $select.on
+     (
+     'change', function () {
+
+     scope.ngModel = $select.val();
+
+     if (!scope.$$phase) {
+     scope.$apply();
+     }
+     }
+     );
+
+     scope.$watch
+     (
+     'ngModel', function (newVal) {
+     ctrl.$setViewValue(newVal);
+
+     $select.val(newVal);
+     }, true
+     );
+     }
+     }
+     }
+     )*/
+
     .directive
 (
     'adrrSelect2Wrapper', function () {
         return {
-            restrict: 'E',
+            restrict: 'EA',
 
             require: 'ngModel',
 
@@ -110,12 +180,41 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 adrrData: '&'
             },
 
-            template: '<div>' +
-                '<button ng-repeat="frequent in frequents" class="btn btn-default" ng-click="programmaticallySelect(frequent.id)">{{frequent.name}}</button>' +
+            template: '<div class="input-group">' +
+                '<div class="input-group-btn">' +
+                '<button ng-show="frequents.length" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{id}}">' +
+                'frequents' +
+                '</button>' +
                 '</div>' +
-                '<select class="form-control s2w"><option value="">Select...</option><option ng-repeat="item in adrrData()" value="{{item.id}}" ng-selected="item.id == ngModel">{{item.name}}</option></select>',
+
+                '<select class="form-control s2w">' +
+                '<option value="">Select...</option>' +
+                '<option ng-repeat="item in adrrData()" value="{{item.id}}" ng-selected="item.id == ngModel">' +
+                '{{item.name}}' +
+                '</option>' +
+                '</select>' +
+                '</div>' +
+
+                '<div class="modal" id="modal-{{id}}" tabindex="-1" role="dialog" aria-labelledby="label-{{id}}" aria-hidden="true">' +
+                '<div class="modal-dialog">' +
+                '<div class="modal-content">' +
+                '<div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h4 class="modal-title" id="title-{{id}}">Frequents:</h4>' +
+                '</div>' +
+
+                '<div class="modal-body">' +
+                '<div class="list-group">' +
+                '<a ng-repeat="frequent in frequents" data-dismiss="modal" class="list-group-item" href="#" ng-click="programmaticallySelect(frequent.id)" onclick="return false;">{{frequent.name}}</a>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>',
 
             link: function (scope, element, attrs, ctrl) {
+
+                scope.id = attrs['adrrId'];
 
                 var $select = element.find('.s2w');
 

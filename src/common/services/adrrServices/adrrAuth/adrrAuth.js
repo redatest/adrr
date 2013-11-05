@@ -13,13 +13,17 @@ angular.module('adrrAuth', [], null)
 
         var _oneHttp = true;
 
-        this.init = function (loginApiUrl, logoutApiUrl, loginState, oneHttp) {
+        var _defaultState = null;
+
+        this.init = function (loginApiUrl, logoutApiUrl, loginState, defaultState, oneHttp) {
 
             _loginApiUrl = loginApiUrl;
 
             _logoutApiUrl = logoutApiUrl;
 
             _loginState = loginState;
+
+            _defaultState = defaultState;
 
             if (typeof oneHttp !== 'undefined') _oneHttp = oneHttp;
         };
@@ -49,7 +53,7 @@ angular.module('adrrAuth', [], null)
                             (
                                 '$stateChangeStart', function () {
 
-                                    if (_oneHttp) {
+                                    if (_oneHttp && Auth.hasLogged) {
 
                                         deferred.resolve(Auth.loginData);
 
@@ -153,6 +157,20 @@ angular.module('adrrAuth', [], null)
 
                 return deferred.promise;
             };
+//            console.log($state);
+//            if (!Auth.hasLogged) {
+//
+//                Auth.check().then
+//                (
+//                    function () {
+//                        $state.go(_defaultState);
+//                    },
+//
+//                    function () {
+//                        $state.go(_loginState);
+//                    }
+//                );
+//            }
 
             return Auth;
 

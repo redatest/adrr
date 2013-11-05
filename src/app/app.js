@@ -59,7 +59,7 @@ var adrrApp = angular.module
 
         $urlRouterProvider.otherwise(appConfig.loginRoute);
 
-        adrrAuthProvider.init(appConfig.yiiUrl + '/auth/login', appConfig.yiiUrl + '/auth/logout', 'login');
+        adrrAuthProvider.init(appConfig.yiiUrl + '/auth/login', appConfig.yiiUrl + '/auth/logout', 'login', 'wrapper.dashboard');
 
         RestangularProvider.setBaseUrl(appConfig.restfulApiBaseUrl + '/api');
         RestangularProvider.setMethodOverriders(["put"]);

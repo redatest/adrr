@@ -1232,7 +1232,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         };
 
         $scope.setToday = function () {
-            $scope.date = $.datepicker.formatDate('yy-mm-dd', new Date()).toString();
+            $scope.date = $.datepicker.formatDate('dd-mm-yy', new Date()).toString();
         };
     }
 )
