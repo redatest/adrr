@@ -11,7 +11,6 @@ angular.module('redaDirectives', [], null)
             link: function (scope) {
                 scope.$watch('values', function (values) {
                     if (values) {
-                        console.log('values from directive: ', values);
 
                         var width = 330,
                             height = 340,

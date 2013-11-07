@@ -63,11 +63,18 @@ angular.module('adrrApp.wrapper.dashboard', [], null)
                     }
                 ];
 
-            $timeout(give_data, 5000);
-
+            timeoutId = $timeout(give_data, 5000);
         }
 
-        $timeout(give_data, 5000);
+        var timeoutId = $timeout(give_data, 5000);
 
+        $scope.$on
+        (
+            '$destroy', function () {
+
+                $timeout.cancel(timeoutId);
+
+            }
+        );
     }
 );
