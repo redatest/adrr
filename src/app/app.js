@@ -18,6 +18,7 @@ var adrrApp = angular.module
             'adrrDirectives.notifications',
             'adrrAuth',
             'adrrDataFetcher',
+            'redaDirectives',
             'adrrApp.login',
             'adrrApp.wrapper',
             'adrrApp.wrapper.dashboard',
