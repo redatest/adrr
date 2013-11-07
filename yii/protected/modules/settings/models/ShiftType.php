@@ -23,7 +23,7 @@ class ShiftType extends ArModel
         return array();
     }
 
-    public function getMap($getList = false)
+    public function getMap($getList = false, $indexAttr = 'id')
     {
         $map = parent::getMap(true);
 

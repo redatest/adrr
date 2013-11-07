@@ -1,7 +1,7 @@
 <?php
 class ArModel extends CActiveRecord
 {
-    public function getMap($getList = false)
+    public function getMap($getList = false, $indexAttr = 'id')
     {
         $columns = $this->metaData->columns;
 
@@ -21,7 +21,16 @@ class ArModel extends CActiveRecord
             $list = $this->findAll();
 
             foreach ($list as $item) {
-                $map['list'][$item->id] = $item;
+
+                if (isset($item->id)) {
+
+                    $map['list'][$item[$indexAttr]] = $item;
+
+                } else {
+
+                    $map['list'][] = $item;
+
+                }
             }
         }
 

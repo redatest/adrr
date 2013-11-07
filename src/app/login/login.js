@@ -38,14 +38,7 @@ var adrrLogin = angular.module('adrrApp.login', [], null)
     'LoginCtrl', function LoginCtrl($scope, adrrAuth, $state) {
         $scope.login = function () {
 
-            adrrAuth.check($scope.username, $scope.password).then
-            (
-                function () {
-
-                    $state.go('wrapper.dashboard');
-
-                }
-            );
+            adrrAuth.check($scope.username, $scope.password);
         };
     }
 )

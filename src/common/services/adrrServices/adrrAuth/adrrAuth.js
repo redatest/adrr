@@ -11,11 +11,9 @@ angular.module('adrrAuth', [], null)
 
         var _loginState = null;
 
-        var _oneHttp = true;
-
         var _defaultState = null;
 
-        this.init = function (loginApiUrl, logoutApiUrl, loginState, defaultState, oneHttp) {
+        this.init = function (loginApiUrl, logoutApiUrl, loginState, defaultState) {
 
             _loginApiUrl = loginApiUrl;
 
@@ -24,157 +22,145 @@ angular.module('adrrAuth', [], null)
             _loginState = loginState;
 
             _defaultState = defaultState;
-
-            if (typeof oneHttp !== 'undefined') _oneHttp = oneHttp;
         };
         // ------------------------------------------
 
-        this.$get = function ($rootScope, $http, $q, $state) {
+        // ------------------------------------------
+        var _service = { hasLogged: false, loginData: {} };
 
-            var Auth = {};
+        var _lastState = '';
 
-            Auth.hasLogged = false;
+        var _checkedOnce = false;
+        // ------------------------------------------
 
-            Auth.loginData = {};
+        this.$get = [
+            '$rootScope', '$http', '$q', '$state', function ($rootScope, $http, $q, $state) {
 
-            var stateChangeHandler = {};
+                _service.check = function (username, password) {
 
-            var registerHandlers = function (deferred) {
+                    _checkedOnce = true;
 
-                if (!Auth.hasLogged) {
+                    var credentials = typeof username !== 'undefined' && typeof password !== 'undefined' ? $.param({ username: username, password: password }) : null;
 
-                    var stateChangeSuccess = $rootScope.$on
+                    var deferred = $q.defer();
+
+                    $http
+                    ({
+                        method: 'POST',
+                        url: _loginApiUrl,
+                        data: credentials,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
+                        .success
                     (
-                        '$stateChangeSuccess', function () {
+                        function (data) {
 
-                            stateChangeSuccess();
+                            _service.loginData = angular.copy(data, _service.loginData);
 
-                            stateChangeHandler = $rootScope.$on
-                            (
-                                '$stateChangeStart', function () {
+                            _service.hasLogged = true;
 
-                                    if (_oneHttp && Auth.hasLogged) {
+                            if (_lastState !== '') {
 
-                                        deferred.resolve(Auth.loginData);
+                                window.location.href = $state.href(_lastState);
 
-                                    } else {
+                                $state.go(_lastState);
 
-                                        Auth.check();
+                                _lastState = '';
 
-                                    }
-                                }
-                            );
+                            } else {
+
+                                window.location.href = $state.href(_defaultState);
+
+                                $state.go(_defaultState);
+
+                            }
+
+                            deferred.resolve(data);
+                        }
+                    )
+                        .error
+                    (
+                        function (data) {
+
+                            window.location.href = $state.href(_loginState);
+
+                            $state.go(_loginState);
+
+                            deferred.reject(data);
                         }
                     );
-                }
-            };
 
-            var unregisterStateChangeHandler = function () {
+                    return deferred.promise;
+                };
 
-                if (typeof stateChangeHandler === 'function') {
+                _service.logout = function () {
 
-                    stateChangeHandler.call();
+                    var deferred = $q.defer();
 
-                    stateChangeHandler = {};
+                    $http
+                    ({
+                        method: 'POST',
+                        url: _logoutApiUrl
+                    })
+                        .success
+                    (
+                        function (data) {
 
-                }
-            };
+                            _service.loginData = {};
 
-            Auth.check = function (username, password) {
+                            _service.hasLogged = false;
 
-                var credentials = typeof username !== 'undefined' && typeof password !== 'undefined' ? $.param({ username: username, password: password }) : null;
+                            window.location.href = $state.href(_loginState);
 
-                var deferred = $q.defer();
+                            deferred.resolve(data);
 
-                $http
-                ({
-                    method: 'POST',
-                    url: _loginApiUrl,
-                    data: credentials,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                })
-                    .success
+                        }
+                    )
+                        .error
+                    (
+                        function (data) {
+
+                            deferred.reject(data);
+
+                        }
+                    );
+
+                    return deferred.promise;
+                };
+
+                $rootScope.$on
                 (
-                    function (data) {
+                    '$stateChangeStart', function (event, toState) {
 
-                        Auth.loginData = angular.copy(data, Auth.loginData);
+                        if (_service.hasLogged && toState.name === _loginState) {
 
-                        registerHandlers(deferred);
+                            event.preventDefault();
 
-                        Auth.hasLogged = true;
+                            window.location.href = $state.href(_defaultState);
 
-                        deferred.resolve(data);
-                    }
-                )
-                    .error
-                (
-                    function (data) {
+                        } else if (!_service.hasLogged) {
 
-                        unregisterStateChangeHandler();
+                            if (toState.name !== _loginState) {
 
-                        $state.go(_loginState);
+                                _lastState = toState.name;
 
-                        deferred.reject(data);
-                    }
-                );
+                            }
 
-                return deferred.promise;
-            };
+                            if (toState.name !== _loginState || !_checkedOnce) {
 
-            Auth.logout = function () {
+                                event.preventDefault();
 
-                var deferred = $q.defer();
+                                _service.check();
 
-                $http
-                ({
-                    method: 'POST',
-                    url: _logoutApiUrl
-                })
-                    .success
-                (
-                    function (data) {
+                            }
 
-                        Auth.loginData = {};
-
-                        Auth.hasLogged = false;
-
-                        unregisterStateChangeHandler();
-
-                        $state.go(_loginState);
-
-                        deferred.resolve(data);
-
-                    }
-                )
-                    .error
-                (
-                    function (data) {
-
-                        deferred.reject(data);
-
+                        }
                     }
                 );
 
-                return deferred.promise;
-            };
-//            console.log($state);
-//            if (!Auth.hasLogged) {
-//
-//                Auth.check().then
-//                (
-//                    function () {
-//                        $state.go(_defaultState);
-//                    },
-//
-//                    function () {
-//                        $state.go(_loginState);
-//                    }
-//                );
-//            }
+                return _service;
 
-            return Auth;
-
-        }
-
+            }
+        ];
     }
 );

@@ -16,35 +16,14 @@ angular.module('adrrApp.wrapper', [], null)
 
                             var deferred = $q.defer();
 
-                            var getYii = function () {
-                                $http
-                                ({
-                                    method: 'GET',
-                                    url: appConfig.restfulApiBaseUrl + '/metaData'
-                                })
-                                    .success
-                                (
-                                    function (data) {
-                                        deferred.resolve(data);
-                                    }
-                                );
-                            };
+                            $http.get(appConfig.restfulApiBaseUrl + '/metaData').success
+                            (
+                                function (data) {
 
-                            if (!adrrAuth.hasLogged) {
+                                    deferred.resolve(data);
 
-                                adrrAuth.check().then
-                                (
-                                    function () {
-
-                                        getYii();
-
-                                    }
-                                );
-                            } else {
-
-                                getYii();
-
-                            }
+                                }
+                            );
 
                             return deferred.promise;
 

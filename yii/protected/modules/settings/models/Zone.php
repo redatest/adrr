@@ -33,7 +33,7 @@ class Zone extends ArModel
         );
     }
 
-    public function getMap($getList = true)
+    public function getMap($getList = true, $indexAttr = 'id')
     {
         $map = parent::getMap();
 

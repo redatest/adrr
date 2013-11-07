@@ -3,208 +3,267 @@
     <any ng-hide="alert">Something went wrong.</any>
 </div>
 
-<form role="form" name="mainForm" class="labForm" novalidate>
+<form id="labForm" role="form" name="mainForm" class="labForm" novalidate>
 
 <div class="col-xs-12 col-lg-10 col-lg-offset-1">
 <div class="well well-sm">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel" ng-class="{'panel-danger': basForm.$invalid, 'panel-success': basForm.$valid}"
-                 ng-form="basForm">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Basics</h3>
+<div class="row">
+<div class="col-xs-12 col-sm-6">
+    <div class="panel" ng-class="{'panel-danger': basForm.$invalid, 'panel-success': basForm.$valid}"
+         ng-form="basForm">
+        <div class="panel-heading">
+            <h3 class="panel-title">1. Basics</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
+                <label for="date" class="control-label">{{yii['Lab']['cols']['date'].label}}</label>
+
+                <div class="input-group">
+                    <div class="input-group-btn" ng-show="loginData.senior == 0">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal"
+                                ng-disabled="state.indexOf('edit') > -1">
+                            Frequents
+                        </button>
+                    </div>
+
+                    <input ng-show="loginData.senior == 1" id="date" readonly="readonly"
+                           ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <input ng-show="loginData.senior == 0" id="date" readonly="readonly"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                 </div>
-                <div class="panel-body">
-                    <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
-                        <label for="date" class="control-label">{{metaData.cols['date'].label}}</label>
 
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary" ng-click="setToday()">Today</button>
+                <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Frequents</h4>
                             </div>
+                            <div class="modal-body">
+                                <div class="list-group">
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setCurrentShift()" onclick="return false;">
+                                        Current Shift
+                                    </a>
 
-                            <input id="date" readonly="readonly" ui-date="{dateFormat: 'dd-mm-yy'}"
-                                   ui-date-format="dd-mm-yy"
-                                   ng-model="date" class="form-control" type="text" required/>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setToday()" onclick="return false;">
+                                        Today
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min1Day()" onclick="return false;">
+                                        Yesterday
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min2Days()" onclick="return false;">
+                                        2 days ago
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min3Days()" onclick="return false;">
+                                        3 days ago
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
-                        <label for="shiftId" class="control-label">{{metaData.cols['shift_id'].label}}</label>
-
-                        <select id="shiftId" ng-model="shiftId" class="form-control" required>
-                            <option value="">Select...</option>
-                            <option ng-repeat="shiftType in shiftTypes" value="{{shiftType.id}}">
-                                {{shiftType.name}}
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': supplierForm.$invalid}"
-                         ng-form="supplierForm">
-                        <label class="control-label">{{metaData.cols['supplier_id'].label}}</label>
-
-                        <adrr-select2-wrapper ng-model="supplierId" adrr-id="supId"
-                                              frequent-prop="very_frequent"
-                                              adrr-data="suppliers"
-                                              required>
-                        </adrr-select2-wrapper>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
-                        <label for="plant" class="control-label">{{metaData.cols['plant'].label}}</label>
-
-                        <input id="plant" adrr-num-range min="0" class="form-control" type="number"
-                               pattern="[0-9]*"
-                               ng-model="plant"
-                               typeahead="obj.plant for obj in plants | filter:$viewValue | limitTo:8"
-                               required/>
-                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel" ng-class="{'panel-danger': identForm.$invalid, 'panel-success': identForm.$valid}"
-                 ng-form="identForm">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Truck Identification</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
-                        <label for="truck" class="control-label">{{metaData.cols['truck'].label}}</label>
+            <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
+                <label for="shift_id" class="control-label">{{yii['Lab']['cols']['shift_id'].label}}</label>
 
-                        <input id="truck" adrr-num-range min="0" class="form-control" type="number"
-                               pattern="[0-9]*"
-                               ng-model="truck"
-                               typeahead="obj.truck for obj in trucks | filter:$viewValue | limitTo:8"
-                               required/>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}"
-                         ng-form="truckLoadForm">
-                        <label for="truck_load"
-                               class="control-label">{{metaData.cols['truck_load'].label}}</label>
-
-                        <input id="truck_load" adrr-num-range min="1" max="12" type="number" pattern="[0-9]*"
-                               value=""
-                               ng-model="truckLoad" class="form-control" required/>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
-                        <label for="ticket" class="control-label">{{metaData.cols['ticket'].label}}</label>
-
-                        <input id="ticket" class="form-control" type="text" ng-model="ticket" required/>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': deptTimeForm.$invalid}"
-                         ng-form="deptTimeForm">
-                        <label class="control-label">{{metaData.cols['dept_time'].label}}</label>
-
-                        <adrr-timepicker required ng-model="deptTime"></adrr-timepicker>
-                    </div>
-
-                    <div class="form-group" ng-class="{ 'has-error': arivTimeForm.$invalid || !validateTime() }"
-                         ng-form="arivTimeForm">
-                        <label class="control-label">{{metaData.cols['arriv_time'].label}}</label>
-
-                        <adrr-timepicker required ng-model="arrivTime"></adrr-timepicker>
-                    </div>
-                </div>
+                <select id="shift_id" ng-model="formData.shift_id" class="form-control"
+                        ng-disabled="loginData.senior == 0 && state.indexOf('edit') > -1" required>
+                    <option value="">Select...</option>
+                    <option ng-repeat="shiftType in yii['ShiftType']['list']"
+                            ng-selected="shiftType.id === formData.shift_id"
+                            value="{{shiftType.id}}">
+                        {{shiftType.name}}
+                    </option>
+                </select>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-sm-6" style="margin-top: -62px;">
-            <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
-                 ng-form="infoForm">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Concrete Info</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
-                         ng-form="concTypeForm">
-                        <label class="control-label">{{metaData.cols['conc_type_id'].label}}</label>
+            <div class="form-group" ng-class="{'has-error': supplierForm.$invalid}" ng-form="supplierForm">
 
-                        <adrr-select2-wrapper ng-model="concTypeId" adrr-id="concId"
-                                              frequent-prop="very_frequent"
-                                              adrr-data="concreteTypes" required>
-                        </adrr-select2-wrapper>
-                    </div>
+                <label class="control-label">{{yii['Lab']['cols']['supplier_id'].label}}</label>
 
-                    <div class="form-group" ng-class="{'has-error': tempForm.$invalid || checkTempRed()}"
-                         ng-form="tempForm">
-                        <label for="temp" class="control-label">{{metaData.cols['temp'].label}}</label>
-
-                        <input id="temp" class="form-control" type="number" pattern="[0-9]*" ng-model="temp"
-                               required/>
-                    </div>
-
-                    <div class="form-group"
-                         ng-class="{'has-error': slumpForm.$invalid || checkSlumpRed(), 'has-warning': checkSlumpYellow()}"
-                         ng-form="slumpForm"
-                         ng-show="getItemById(concreteTypes, concTypeId).category === 'slump'">
-                        <label for="slump" class="control-label">{{metaData.cols['slump'].label}}</label>
-
-                        <input id="slump" class="form-control" type="number" pattern="[0-9]*" ng-model="slump"
-                               ng-required="getItemById(concreteTypes, concTypeId).category === 'slump'"/>
-                    </div>
-
-                    <div class="form-group"
-                         ng-class="{'has-error': flowForm.$invalid || checkFlowRed(), 'has-warning': checkFlowYellow()}"
-                         ng-form="flowForm"
-                         ng-show="getItemById(concreteTypes, concTypeId).category === 'flow'">
-                        <label for="flow" class="control-label">{{metaData.cols['flow'].label}}</label>
-
-                        <input id="flow" class="form-control" type="number" pattern="[0-9]*" ng-model="flow"
-                               ng-required="getItemById(concreteTypes, concTypeId).category === 'flow'"/>
-                    </div>
-
-                    <div class="form-group" ng-class="{'has-error': acceptedForm.$invalid}"
-                         ng-form="acceptedForm">
-                        <label for="accepted" class="control-label">{{metaData.cols['accepted'].label}}</label>
-
-                        <select id="accepted" class="form-control" ng-model="accepted" required>
-                            <option value="">Select...</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-
-                    <!--<div class="from-group" ng-show="red === '' && yellow === ''">
-                        <label for="comment_2" class="control-label">Comment</label>
-
-                        <textarea id="comment_2" ng-model="comment" class="form-control" rows="3"></textarea>
-                    </div>-->
-
-                    <div class="from-group" ng-class="{ 'has-error': red !== '' }"
-
-                         ng-form="commentForm">
-                        <label for="comment_1" class="control-label">Comment</label>
-
-                        <textarea id="comment_1" ng-model="comment" class="form-control" rows="3"
-                                  ng-required="red !== ''"></textarea>
-                    </div>
-                </div>
+                <adrr-select2-wrapper ng-model="formData.supplier_id" adrr-id="supId"
+                                      frequent-prop="very_frequent"
+                                      adrr-data="yii['Supplier']['list']"
+                                      required>
+                </adrr-select2-wrapper>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel" ng-class="{'panel-danger': cylindForm.$invalid, 'panel-success': cylindForm.$valid}"
-                 ng-form="cylindForm">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Casting of Cylinders</h3>
-                </div>
-                <div class="panel-body">
-                    Casting goes here
-                </div>
+            <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
+                <label for="plant" class="control-label">{{yii['Lab']['cols']['plant'].label}}</label>
+
+                <input id="plant" adrr-num-range min="0" class="form-control" type="number"
+                       pattern="[0-9]*"
+                       ng-model="formData.plant"
+                       typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"
+                       required/>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
+<div class="col-xs-12 col-sm-6">
+    <div class="panel" ng-class="{'panel-danger': identForm.$invalid, 'panel-success': identForm.$valid}"
+         ng-form="identForm">
+        <div class="panel-heading">
+            <h3 class="panel-title">2. Truck Identification</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
+                <label for="truck" class="control-label">{{yii['Lab']['cols']['truck'].label}}</label>
 
+                <input id="truck" adrr-num-range min="0" class="form-control" type="number"
+                       pattern="[0-9]*"
+                       ng-model="formData.truck"
+                       typeahead="obj.truck for obj in yii['LabTruck']['list'] | filter:$viewValue | limitTo:8"
+                       required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}"
+                 ng-form="truckLoadForm">
+                <label for="truck_load"
+                       class="control-label">{{yii['Lab']['cols']['truck_load'].label}}</label>
+
+                <input id="truck_load" adrr-num-range min="1" max="12" type="number" pattern="[0-9]*"
+                       value=""
+                       ng-model="formData.truck_load" class="form-control" required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
+                <label for="ticket" class="control-label">{{yii['Lab']['cols']['ticket'].label}}</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">{{prefix}}</span>
+                    <input id="ticket" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.ticket"
+                           adrr-num-range required/>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': deptTimeForm.$invalid || !validateTime()}"
+                 ng-form="deptTimeForm">
+                <label class="control-label">{{yii['Lab']['cols']['dept_time'].label}}</label>
+
+                <adrr-timepicker required ng-model="formData.dept_time"></adrr-timepicker>
+                <!--<span ng-hide="validateTime()" class="help-block">Out of shift range.</span>-->
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': arivTimeForm.$invalid || !validateTime() }"
+                 ng-form="arivTimeForm">
+                <label class="control-label">{{yii['Lab']['cols']['arriv_time'].label}}</label>
+
+                <adrr-timepicker required ng-model="formData.arriv_time"></adrr-timepicker>
+                <!--<span ng-hide="validateTime()" class="help-block">Out of shift range.</span>-->
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="col-xs-12 col-sm-6 case1">
+    <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+         ng-form="infoForm">
+        <div class="panel-heading">
+            <h3 class="panel-title">3. Concrete Info</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                 ng-form="concTypeForm">
+                <label class="control-label">{{yii['Lab']['cols']['conc_type_id'].label}}</label>
+
+                <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                      frequent-prop="very_frequent"
+                                      adrr-data="yii['ConcreteType']['list']" required>
+                </adrr-select2-wrapper>
+            </div>
+
+            <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+                <label for="temp" class="control-label">{{yii['Lab']['cols']['temp'].label}}</label>
+
+                <input id="temp" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                       required/>
+            </div>
+
+            <div class="form-group"
+                 ng-class="getRangeClass('slump', formData.slump)"
+                 ng-form="slumpForm"
+                 ng-show="yii['ConcreteType']['list'][formData.conc_type_id].category === 'slump'">
+
+                <label for="slump" class="control-label">{{yii['Lab']['cols']['slump'].label}}</label>
+
+                <input id="slump" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.slump"
+                       ng-required="yii['ConcreteType']['list'][formData.conc_type_id].category === 'slump'"/>
+            </div>
+
+            <div class="form-group"
+                 ng-class="getRangeClass('flow', formData.flow)"
+                 ng-form="flowForm"
+                 ng-show="yii['ConcreteType']['list'][formData.conc_type_id].category === 'flow'">
+
+                <label for="flow" class="control-label">{{yii['Lab']['cols']['flow'].label}}</label>
+
+                <input id="flow" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.flow"
+                       ng-required="yii['ConcreteType']['list'][formData.conc_type_id].category === 'flow'"/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': acceptedForm.$invalid}"
+                 ng-form="acceptedForm">
+                <label for="accepted" class="control-label">{{yii['Lab']['cols']['accepted'].label}}</label>
+
+                <select id="accepted" class="form-control" ng-model="formData.accepted" required>
+                    <option value="">Select...</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <!--<div class="from-group" ng-show="red === '' && yellow === ''">
+                <label for="comment_2" class="control-label">Comment</label>
+
+                <textarea id="comment_2" ng-model="comment" class="form-control" rows="3"></textarea>
+            </div>-->
+
+            <div class="from-group" ng-class="{ 'has-error': red !== '' && state.indexOf('edit') === -1 }"
+                 ng-form="commentForm" ng-hide="state.indexOf('edit') > -1">
+                <label for="comment_1" class="control-label">Comment</label>
+
+                <textarea id="comment_1" ng-model="comment" class="form-control" rows="3"
+                          ng-required="red !== '' && state.indexOf('edit') === -1">
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+    <div class="panel" ng-class="{'panel-danger': cylindForm.$invalid, 'panel-success': cylindForm.$valid}"
+         ng-form="cylindForm">
+        <div class="panel-heading">
+            <h3 class="panel-title">Casting of Cylinders</h3>
+        </div>
+        <div class="panel-body">
+            Casting goes here
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="row">
+
+</div>
 </div>
 
 <div class="form-group">
@@ -229,61 +288,61 @@
                 <table class="table table-striped">
                     <tr>
                         <td>Date</td>
-                        <td>{{date}}</td>
+                        <td>{{formData.date}}</td>
                     </tr>
                     <tr>
                         <td>Shift</td>
-                        <td>{{getItemById(shiftTypes, shiftId).name}}</td>
+                        <td>{{yii['ShiftType']['list'][formData.shift_id]['name']}}</td>
                     </tr>
                     <tr>
                         <td>Supplier</td>
-                        <td>{{getItemById(suppliers, supplierId).name}}</td>
+                        <td>{{yii['Supplier']['list'][formData.supplier_id]['name']}}</td>
                     </tr>
                     <tr>
                         <td>Concrete Type</td>
-                        <td>{{getItemById(concreteTypes, concTypeId).name}}</td>
+                        <td>{{yii['ConcreteType']['list'][formData.conc_type_id]['name']}}</td>
                     </tr>
                     <tr>
                         <td>Plant</td>
-                        <td>{{plant}}</td>
+                        <td>{{formData.plant}}</td>
                     </tr>
                     <tr>
                         <td>Truck</td>
-                        <td>{{truck}}</td>
+                        <td>{{formData.truck}}</td>
                     </tr>
                     <tr>
                         <td>Ticket</td>
-                        <td>{{ticket}}</td>
+                        <td>{{formData.ticket}}</td>
                     </tr>
                     <tr>
                         <td>Departure time</td>
-                        <td>{{deptTime}}</td>
+                        <td>{{formData.dept_time}}</td>
                     </tr>
                     <tr>
                         <td>Arrival time</td>
-                        <td>{{arrivTime}}</td>
+                        <td>{{formData.arriv_time}}</td>
                     </tr>
                     <tr>
                         <td>Truck load (m3)</td>
-                        <td>{{truckLoad}}</td>
+                        <td>{{formData.truck_load}}</td>
                     </tr>
                     <tr>
                         <td>Temperature</td>
-                        <td>{{temp}}</td>
+                        <td>{{formData.temp}}</td>
                     </tr>
                     <tr>
                         <td>Slump</td>
-                        <td>{{slump}}</td>
+                        <td>{{formData.slump}}</td>
                     </tr>
                     <tr>
                         <td>Flow</td>
-                        <td>{{flow}}</td>
+                        <td>{{formData.flow}}</td>
                     </tr>
                     <tr>
                         <td>Accepted</td>
-                        <td>{{accepted}}</td>
+                        <td>{{formData.accepted | yesNo}}</td>
                     </tr>
-                    <tr>
+                    <tr ng-show="state.indexOf('edit') === -1">
                         <td>comment</td>
                         <td>{{comment}}</td>
                     </tr>

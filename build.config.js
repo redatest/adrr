@@ -22,7 +22,8 @@ module.exports =
             'vendor/bootstrap/dist/js/bootstrap.min.js',
 
             'vendor/angular/angular.min.js',
-            'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+//            'vendor/angular-typeahead-master/angular-typeahead.js',
+//            'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
             'vendor/angular-ui-router/release/angular-ui-router.min.js',
             'vendor/ng-grid/plugins/ng-grid-flexible-height.js',
             'vendor/ng-grid/build/ng-grid.min.js',
@@ -31,8 +32,6 @@ module.exports =
 
             'vendor/restangular/dist/restangular.js',
             'vendor/jquery-backstretch/jquery.backstretch.min.js',
-
-            'vendor/angular-strap/angular-strap.min.js',
 
             'vendor/jquery.slimScroll/jquery.slimscroll.min.js'
         ],

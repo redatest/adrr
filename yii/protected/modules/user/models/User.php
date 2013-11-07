@@ -207,7 +207,7 @@ class User extends ArModel
         $this->lastvisit_at = date('Y-m-d H:i:s', $value);
     }
 
-    public function getMap($getList = false)
+    public function getMap($getList = false, $indexAttr = 'id')
     {
         return parent::getMap(true);
     }

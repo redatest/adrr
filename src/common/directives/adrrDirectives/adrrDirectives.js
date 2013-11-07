@@ -16,8 +16,8 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
             },
 
             template: '<div class="input-group double-input">' +
-                '<input ng-model="hour" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
-                '<input ng-model="min" type="number" length="2" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
+                '<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
+                '<input ng-model="mint" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
                 '<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> </span>' +
                 '</div>',
 
@@ -27,26 +27,39 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 (
                     'ngModel', function (newVal) {
 
-                        if (!angular.isUndefined(newVal)) {
+                        if (!angular.isUndefined(newVal) && newVal !== '' && newVal !== null) {
+
+                            newVal = newVal.match(/(\d{1,2}:\d{1,2}:\d{1,2})/)[0];
+
+                            scope.ngModel = newVal;
 
                             var timeArr = newVal.split(':');
 
                             scope.hour = timeArr[0];
 
-                            scope.min = timeArr[1];
+                            scope.mint = timeArr[1];
+                        } else {
+//                            scope.hour = '';
+//                            scope.mint = '';
                         }
-                    }, true
+                    }
                 );
 
                 scope.formatTime = function () {
 
-                    if (!angular.isUndefined(scope.hour) && scope.hour !== null && scope.hour !== '' && !angular.isUndefined(scope.min) && scope.min !== null && scope.min !== '') {
+                    if (!angular.isUndefined(scope.hour) && scope.hour !== null && !angular.isUndefined(scope.mint) && scope.mint !== null && scope.mint !== '' && scope.mint !== '') {
+
                         var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
-                        time += (String(scope.min).length < 2 ? '0' + scope.min : scope.min) + ':00';
+                        time += (String(scope.mint).length < 2 ? '0' + scope.mint : scope.mint) + ':00';
 
                         ctrl.$setViewValue(time);
 
                         scope.ngModel = time;
+
+                        ctrl.$setValidity('wrong', true);
+
+                    } else {
+                        ctrl.$setValidity('wrong', false);
                     }
                 };
 
@@ -183,7 +196,7 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
             template: '<div class="input-group">' +
                 '<div class="input-group-btn">' +
                 '<button ng-show="frequents.length" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{id}}">' +
-                'frequents' +
+                'Frequents' +
                 '</button>' +
                 '</div>' +
 
@@ -200,7 +213,7 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 '<div class="modal-content">' +
                 '<div class="modal-header">' +
                 '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '<h4 class="modal-title" id="title-{{id}}">Frequents:</h4>' +
+                '<h4 class="modal-title" id="title-{{id}}">Frequents</h4>' +
                 '</div>' +
 
                 '<div class="modal-body">' +
@@ -254,9 +267,13 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 scope.$watch
                 (
                     'ngModel', function (newVal) {
-                        ctrl.$setViewValue(newVal);
 
-                        $select.val(newVal);
+                        if (typeof newVal !== 'undefined') {
+
+                            ctrl.$setViewValue(newVal);
+
+                            $select.val(newVal);
+                        }
                     }, true
                 );
             }

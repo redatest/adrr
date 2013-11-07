@@ -43,8 +43,8 @@
                     <td>{{record['plant']}}</td>
                     <td>{{record['truck']}}</td>
                     <td>{{record['ticket']}}</td>
-                    <td>{{record['dept_time'] | removeDateAndSeconds}}</td>
-                    <td>{{record['arriv_time'] | removeDateAndSeconds}}</td>
+                    <td>{{record['dept_time'] | stringDate:'HH:mm'}}</td>
+                    <td>{{record['arriv_time'] | stringDate:'HH:mm'}}</td>
                     <td>{{record['truck_load']}}</td>
                     <td>{{record['accepted'] | yesNo}}</td>
                     <td>
@@ -197,7 +197,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.dept_time | removeDateAndSeconds}}
+                                    {{curRec.dept_time | stringDate:'HH:mm'}}
                                 </td>
                             </tr>
 
@@ -207,7 +207,7 @@
                                 </td>
 
                                 <td>
-                                    {{curRec.arriv_time | removeDateAndSeconds}}
+                                    {{curRec.arriv_time | stringDate:'HH:mm'}}
                                 </td>
                             </tr>
 

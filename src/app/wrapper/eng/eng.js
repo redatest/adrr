@@ -120,6 +120,31 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             .state
         (
+            'wrapper.eng.lab.edit',
+            {
+                url: '^/labs/edit/:id',
+
+                title: 'Edit Lab',
+
+                breadcrumb: ['Home', 'Concrete Field', 'Edit'],
+
+                showControls: false,
+
+                views: {
+
+                    "@wrapper.eng.lab": {
+
+                        controller: 'LabEditCtrl',
+                        templateUrl: 'wrapper/eng/labForm.tpl.html'
+
+                    }
+
+                }
+            }
+        )
+
+            .state
+        (
             'wrapper.eng.pouring',
             {
                 url: '^/pourings',
@@ -254,20 +279,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .filter
 (
-    'fetchValue', function () {
-
-        return function (index, model, prop) {
-
-            if (typeof index !== 'undefined') {
-
-                prop = typeof prop === 'undefined' ? 'name' : prop;
-
-                return model['list'][index][prop];
-            }
-
-            return '';
-        };
-
+    'stringDate', function ($filter) {
+        return function (str, format) {
+            return $filter('date')(new Date(str), format);
+        }
     }
 )
 
@@ -309,48 +324,192 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .filter
 (
-    'removeDateAndSeconds', function () {
-
-        return function (str) {
-
-            if (typeof str !== 'undefined') {
-
-                var result = str.replace(/\d{4}-\d{2}-\d{2}/, '');
-
-                return result.replace(/:00$/, '');
-            }
-
-            return '';
-        }
-
-    }
-)
-
-    .filter
-(
-    'removeTime', function () {
-
-        return function (str) {
-
-            if (typeof str !== 'undefined') {
-
-                return str.replace(/\d{2}:\d{2}:\d{2}/, '');
-            }
-
-            return '';
-        }
-
-    }
-)
-
-    .filter
-(
     'yesNo', function () {
 
         return function (val) {
 
             return val === '1' ? 'Yes' : 'No';
 
+        }
+    }
+)
+
+    .filter
+(
+    'validTime', function () {
+
+        return function (dept, arriv, shift) {
+
+//            if (typeof dept !== 'undefined' && typeof arriv !== 'undefined') {
+//
+//                if (typeof shift !== 'undefined') {
+//
+//                    if (dept > arriv && parseInt(shift['overlap'], 10)) {
+//
+//                        return (dept > shift['start_time'] || dept < shift['end_time']) && (arriv > shift['start_time'] || arriv < shift['end_time']);
+//
+//                    } else if (dept < arriv) {
+//
+//                        return dept > shift['start_time'] && dept < shift['end_time'] && arriv > shift['start_time'] && arriv < shift['end_time'];
+//
+//                    }
+//
+//                    false
+//
+//                }
+//            }
+//
+//            return false;
+
+            if (typeof dept !== 'undefined' && typeof arriv !== 'undefined') {
+
+                var deptArr = dept.split(':');
+                var arrivArr = arriv.split(':');
+
+                var t1 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), deptArr[0], deptArr[1], 0);
+                var t2 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), arrivArr[0], arrivArr[1], 0);
+
+                if (Math.abs(t1 - t2) / 1000 / 60 <= 120) {
+
+                    if (typeof shift !== 'undefined' && dept > arriv && parseInt(shift['overlap'], 10)) {
+
+                        return dept > shift['end_time'] && arriv < shift['start_time'];
+
+                    }
+
+                    return dept < arriv;
+                }
+            }
+
+            return false;
+
+        }
+
+    }
+)
+
+    .filter
+(
+    'rangeClass', function () {
+
+        return function (conc, type, val, data) {
+
+            if (typeof val !== 'undefined' && val !== '') {
+
+                var pattern = new RegExp("(" + type + "|," + type + ")", "ig");
+
+                var setRed = function () {
+
+                    if (typeof data.red === 'undefined' || data.red === '') {
+                        data.red = type;
+                    }
+                    else if (!pattern.test(data.red)) {
+                        data.red += ',' + type
+                    }
+
+                };
+
+                var unsetRed = function () {
+
+                    if (typeof data.red !== 'undefined') {
+                        data.red = data.red.replace(pattern, '');
+
+                        if (data.red === '') {
+                            data.red = null;
+                        }
+                    }
+                };
+
+                var setYellow = function () {
+
+                    if (typeof data.yellow === 'undefined' || data.yellow === '') {
+                        data.yellow = type;
+                    }
+                    else if (!pattern.test(data.yellow)) {
+                        data.yellow += ',' + type
+                    }
+
+                };
+
+                var unsetYellow = function () {
+
+                    if (typeof data.yellow !== 'undefined') {
+                        data.yellow = data.red.replace(pattern, '');
+
+                        if (data.yellow === '') {
+                            data.yellow = null;
+                        }
+                    }
+                };
+
+                if (type === 'flow') {
+
+                    if (val < conc['flow_acpt_from'] || val > conc['flow_acpt_to']) {
+
+                        setRed();
+
+                        unsetYellow();
+
+                        return 'has-error';
+
+                    } else if (val < conc['flow_norm_from'] || val > conc['flow_norm_to']) {
+
+                        setYellow();
+
+                        unsetRed();
+
+                        return 'has-warning';
+
+                    }
+
+                    unsetRed();
+                    unsetYellow();
+
+                    return '';
+
+                } else if (type === 'slump') {
+
+                    if (val < conc['slump_acpt_from'] || val > conc['slump_acpt_to']) {
+
+                        setRed();
+
+                        unsetYellow();
+
+                        return 'has-error';
+
+                    } else if (val < conc['slump_norm_from'] || val > conc['slump_norm_to']) {
+
+                        setYellow();
+
+                        unsetRed();
+
+                        return 'has-warning';
+
+                    }
+
+                    unsetRed();
+
+                    unsetYellow();
+
+                    return '';
+
+                } else {
+
+                    if (val < conc['temp_from'] || val > conc['temp_to']) {
+
+                        setRed();
+
+                        return 'has-error';
+                    }
+
+                    unsetRed();
+
+                    return '';
+
+                }
+            }
+
+            return 'has-error';
         }
     }
 )
@@ -436,7 +595,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             {
                 field: 'date',
-                displayName: 'Date'
+                displayName: 'Date',
+                filters: 'stringDate:"dd-MM-yyyy"'
             },
             {
                 field: 'shift_id',
@@ -484,12 +644,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 field: 'dept_time',
                 displayName: 'Dept Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'arriv_time',
                 displayName: 'Arrival Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'accepted',
@@ -581,7 +741,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)">' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td ng-show="loginData.senior === \'1\'"><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '<td ng-show="loginData.senior === \'1\'">' +
+                '<a onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<i class="fa fa-comments-o fa-lg fa-fw orng"></i>' +
+                '</a>' +
+                '<a href="#" onclick="return false;" ng-click="archive(row)">' +
+                '<i class="fa fa-download fa-lg fa-fw blk"></i>' +
+                '</a>' +
+                '</td>' +
                 '</tr>',
 
             headerTemplate: '<tr id="headerCells">' +
@@ -641,7 +808,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             {
                 field: 'date',
-                displayName: 'Date'
+                displayName: 'Date',
+                filters: 'stringDate:"dd-MM-yyyy"'
             },
             {
                 field: 'shift_id',
@@ -689,12 +857,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 field: 'dept_time',
                 displayName: 'Dept Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'arriv_time',
                 displayName: 'Arrival Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'accepted',
@@ -796,7 +964,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             {
                 field: 'date',
-                displayName: 'Date'
+                displayName: 'Date',
+                filters: 'date:"dd-MM-yyyy"'
             },
             {
                 field: 'shift_id',
@@ -844,12 +1013,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 field: 'dept_time',
                 displayName: 'Dept Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'arriv_time',
                 displayName: 'Arrival Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'accepted',
@@ -940,7 +1109,17 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">comment</button><button ng-show="loginData.senior === \'1\'" class="btn btn-default btn-xs" ng-click="archive(row)">archive</button></td>' +
+                '<td>' +
+                '<a href="#" onclick="return false;" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<i class="fa fa-comments-o fa-lg fa-fw orng"></i>' +
+                '</a>' +
+                '<a ng-show="loginData.senior === \'1\'" onclick="return false;" href="#" ng-click="archive(row)">' +
+                '<i class="fa fa-download fa-lg fa-fw blk"></i>' +
+                '</a>' +
+                '<a href="#/labs/edit/{{row.id}}">' +
+                '<i class="fa fa-edit fa-lg fa-fw"></i>' +
+                '</a>' +
+                '</td>' +
                 '</tr>',
 
             headerTemplate: '<tr id="headerCells">' +
@@ -989,147 +1168,124 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $q) {
+    'LabCreateCtrl', function ($rootScope, $scope, yii, Restangular, $filter) {
 
-        $scope.metaData = yii['Lab'];
+        $scope.rest = function () {
 
-        $q.all
-            (
-                [
-                    Restangular.all('settings/shiftType').getList(),
-                    Restangular.all('settings/supplier').getList(),
-                    Restangular.all('settings/concreteType').getList(),
-                    Restangular.all('eng/labPlant').getList(),
-                    Restangular.all('eng/labTruck').getList()
-                ]
-            ).then
-        (
-            function (dataArr) {
-                $scope.plants = angular.isArray(dataArr[3]) ? dataArr[3] : [];
+            $scope.formData = {};
 
-                $scope.trucks = angular.isArray(dataArr[4]) ? dataArr[4] : [];
+            $scope.comment = '';
 
-                $scope.suppliers = angular.isArray(dataArr[1]) ? dataArr[1] : [];
-
-                $scope.shiftTypes = angular.isArray(dataArr[0]) ? dataArr[0] : [];
-
-                $scope.concreteTypes = angular.isArray(dataArr[2]) ? dataArr[2] : [];
-            }
-        );
-
-        $scope.red = '';
-        $scope.yellow = '';
-
-        $scope.getItemById = function (arr, id) {
-
-            if (!angular.isUndefined(arr)) {
-
-                var arrLength = arr.length;
-
-                for (var i = 0; i < arrLength; i++) {
-
-                    if (arr[i].id === id) {
-
-                        return arr[i];
-
-                    }
-                }
-            }
-
-            return false;
         };
+
+        $scope.rest();
+
+        $scope.yii = yii;
+
+        $scope.prefix = 'Select a supplier...';
 
         $scope.$watch
         (
-            'supplierId', function (newVal) {
+            'formData.supplier_id', function (newVal) {
 
                 if (!angular.isUndefined(newVal) && newVal !== '') {
 
-                    $scope.ticket = $scope.getItemById($scope.suppliers, newVal).prefix;
+                    $scope.prefix = yii['Supplier']['list'][newVal].prefix;
                 }
             }
         );
 
         $scope.model = Restangular.all('eng/lab');
 
-        $scope.validateTime = function () {
+        $scope.setToday = function () {
 
-            var overlap = 0;
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', new Date());
 
-            var shiftType = null;
-
-            if (!angular.isUndefined($scope.shiftId) && $scope.shiftId !== '') {
-                shiftType = $scope.getItemById($scope.shiftTypes, $scope.shiftId);
-
-                overlap = parseInt(shiftType['overlap'], 10);
-            }
-
-            if (!angular.isUndefined($scope.deptTime) && !angular.isUndefined($scope.arrivTime)) {
-                if (overlap) {
-                    if ($scope.deptTime > $scope.arrivTime) {
-                        return $scope.deptTime > shiftType['end_time'] && $scope.arrivTime < shiftType['start_time'];
-                    }
-
-                    return true;
-                }
-                else {
-                    return $scope.deptTime < $scope.arrivTime;
-                }
-            }
-
-            return false;
         };
 
-        $scope.rest = function () {
-            $scope.date = null;
-            $scope.shiftId = '';
-            $scope.supplierId = '';
-            $scope.concTypeId = '';
-            $scope.plant = '';
-            $scope.truck = '';
-            $scope.ticket = '';
-            $scope.deptTime = '';
-            $scope.arrivTime = '';
-            $scope.truckLoad = '';
-            $scope.temp = '';
-            $scope.slump = '';
-            $scope.flow = '';
-            $scope.red = '';
-            $scope.yellow = '';
-            $scope.comment = '';
-            $scope.accepted = '';
+        $scope.setCurrentShift = function () {
+
+            $scope.formData.date = yii['ShiftList']['list'][$scope.loginData['shift_type_id']]['date'];
+
+        }
+
+        $scope.min1Day = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 1);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        }
+
+        $scope.min2Days = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 2);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        }
+
+        $scope.min3Days = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 3);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        }
+
+        $scope.validateTime = function () {
+
+            return $filter('validTime')($scope.formData['dept_time'], $scope.formData['arriv_time'], yii['ShiftType']['list'][$scope.formData['shift_id']]);
+
         };
 
         $scope.submit = function () {
-            $scope.model.post
-            ({
-                date: $scope.date,
-                shift_id: $scope.shiftId,
-                supplier_id: $scope.supplierId,
-                conc_type_id: $scope.concTypeId,
-                plant: $scope.plant,
-                truck: $scope.truck,
-                ticket: $scope.ticket,
-                dept_time: $scope.date + ' ' + $scope.deptTime,
-                arriv_time: $scope.date + ' ' + $scope.arrivTime,
-                truck_load: $scope.truckLoad,
-                temp: $scope.temp,
-                slump: $scope.slump,
-                flow: $scope.flow,
-                red: $scope.red !== '' ? $scope.red : null,
-                yellow: $scope.yellow !== '' ? $scope.yellow : null,
-                accepted: $scope.accepted
-            }).then
+
+            var datePlusOne = function (val) {
+
+                var date = new Date(val.split('-'));
+
+                date.setDate(date.getDate() + 1);
+
+                return $.datepicker.formatDate('yy-mm-dd', date);
+            };
+
+            var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
+
+            var overlap = parseInt(shift['overlap']);
+
+            if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
+
+                $scope.formData['dept_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['dept_time'];
+
+            } else {
+                $scope.formData['dept_time'] = $scope.formData['date'] + ' ' + $scope.formData['dept_time'];
+            }
+
+            if (overlap && $scope.formData['arriv_time'] < shift['start_time']) {
+
+                $scope.formData['arriv_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['arriv_time'];
+
+            } else {
+                $scope.formData['arriv_time'] = $scope.formData['date'] + ' ' + $scope.formData['arriv_time'];
+            }
+
+
+            $scope.model.post($scope.formData).then
             (
                 function (data) {
-                    if (!angular.isUndefined($scope.comment) && $scope.comment !== '') {
+
+                    if ($scope.comment !== '') {
+
                         data.all('comments').post
                         ({
                             user_id: $rootScope.loginData.user_id,
                             comment: $scope.comment
+
                         }).then
                         (
                             function () {
+
                                 $scope.rest();
 
                                 $rootScope.showAlert = true;
@@ -1137,12 +1293,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
                             },
 
                             function () {
+
                                 $rootScope.showAlert = true;
                                 $rootScope.alert = false;
                             }
                         );
                     }
                     else {
+
                         $scope.rest();
 
                         $rootScope.showAlert = true;
@@ -1157,77 +1315,124 @@ angular.module('adrrApp.wrapper.eng', [], null)
             );
         };
 
-        function checkRed(from, to, prop, type) {
-            var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+        $scope.getRangeClass = function (type, val) {
 
-            var isRed = !angular.isUndefined(concType) && (concType[from] > prop || concType[to] < prop);
+            if (typeof $scope.formData['conc_type_id'] !== 'undefined') {
 
-            var pattern = new RegExp("(" + type + "|," + type + ")", "ig");
+                return $filter('rangeClass')(yii['ConcreteType']['list'][$scope.formData['conc_type_id']], type, val, $scope.formData);
 
-            if (isRed) {
-                if ($scope.red === '') {
-                    $scope.red = type;
-                }
-                else if (!pattern.test($scope.red)) {
-                    $scope.red += ',' + type
-                }
-            }
-            else {
-                $scope.red = $scope.red.replace(pattern, '');
             }
 
-            $scope.red = $scope.red.replace(/^,/ig, '');
+            return 'has-error';
 
-            return isRed;
-        }
+        };
+    }
+)
 
-        var checkYellow = function (from, to, prop, type) {
-            var concType = $scope.getItemById($scope.concreteTypes, $scope.concTypeId);
+    .controller
+(
+    'LabEditCtrl', function ($rootScope, $scope, $state, Restangular, $q, yii, $filter) {
 
-            var isYellow = !angular.isUndefined(concType) && (concType[from] > prop || concType[to] < prop);
+        $scope.formData = {};
 
-            var pattern = new RegExp("(" + type + "|," + type + ")", "ig");
+        $scope.yii = yii;
 
-            if (isYellow) {
-                if ($scope.yellow === '') {
-                    $scope.yellow = type;
-                }
-                else if (!pattern.test($scope.yellow)) {
-                    $scope.yellow += ',' + type
+        Restangular.one('eng/lab', $state.params.id).get().then
+        (
+            function (data) {
+                $scope.formData = data;
+
+                $scope.formData.plant = parseInt($scope.formData.plant, 10);
+                $scope.formData.temp = parseInt($scope.formData.temp, 10);
+                $scope.formData.slump = $scope.formData.slump !== null ? parseInt($scope.formData.slump, 10) : null;
+                $scope.formData.flow = $scope.formData.flow !== null ? parseInt($scope.formData.flow, 10) : null;
+                $scope.formData.truck = parseInt($scope.formData.truck, 10);
+                $scope.formData.truck_load = parseInt($scope.formData.truck_load, 10);
+                $scope.formData.ticket = parseInt($scope.formData.ticket, 10);
+            }
+        );
+
+        $scope.$watch
+        (
+            'formData.supplier_id', function (newVal) {
+
+                if (!angular.isUndefined(newVal) && newVal !== '') {
+
+                    $scope.prefix = yii['Supplier']['list'][newVal].prefix;
                 }
             }
-            else {
-                $scope.yellow = $scope.yellow.replace(pattern, '');
+        );
+
+        $scope.validateTime = function () {
+
+            if (typeof $scope.formData['dept_time'] !== 'undefined') {
+
+                return $filter('validTime')($scope.formData['dept_time'], $scope.formData['arriv_time'], yii['ShiftType']['list'][$scope.formData['shift_id']]);
             }
 
-            $scope.yellow = $scope.yellow.replace(/^,/ig, '');
-
-            return isYellow;
         };
 
-        $scope.checkFlowRed = function () {
-            return checkRed('flow_acpt_from', 'flow_acpt_to', $scope.flow, 'flow');
+        $scope.submit = function () {
+
+            var datePlusOne = function (val) {
+
+                var date = new Date(val.split('-'));
+
+                date.setDate(date.getDate() + 1);
+
+                return $.datepicker.formatDate('yy-mm-dd', date);
+            };
+
+            var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
+
+            var overlap = parseInt(shift['overlap']);
+
+            if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
+
+                $scope.formData['dept_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['dept_time'];
+
+            } else {
+                $scope.formData['dept_time'] = $scope.formData['date'] + ' ' + $scope.formData['dept_time'];
+            }
+
+            if (overlap && $scope.formData['arriv_time'] < shift['start_time']) {
+
+                $scope.formData['arriv_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['arriv_time'];
+
+            } else {
+                $scope.formData['arriv_time'] = $scope.formData['date'] + ' ' + $scope.formData['arriv_time'];
+            }
+
+
+            $scope.formData.put().then
+            (
+                function () {
+
+                    if ($scope.comment !== '') {
+
+                        $state.go('wrapper.eng.lab.returned');
+                    }
+                },
+
+                function () {
+                    $rootScope.showAlert = true;
+                    $rootScope.alert = false;
+                }
+            );
         };
 
-        $scope.checkFlowYellow = function () {
-            return checkYellow('flow_norm_from', 'flow_norm_to', $scope.flow, 'flow');
+        $scope.getRangeClass = function (type, val) {
+
+            if (typeof $scope.formData['conc_type_id'] !== 'undefined') {
+
+                return $filter('rangeClass')(yii['ConcreteType']['list'][$scope.formData['conc_type_id']], type, val, $scope.formData);
+
+            }
+
+            return 'has-error';
+
         };
 
-        $scope.checkSlumpRed = function () {
-            return checkRed('slump_acpt_from', 'slump_acpt_to', $scope.slump, 'slump');
-        };
-
-        $scope.checkSlumpYellow = function () {
-            return checkYellow('slump_norm_from', 'slump_norm_to', $scope.slump, 'slump');
-        };
-
-        $scope.checkTempRed = function () {
-            return checkRed('temp_from', 'temp_to', $scope.temp, 'temp');
-        };
-
-        $scope.setToday = function () {
-            $scope.date = $.datepicker.formatDate('dd-mm-yy', new Date()).toString();
-        };
     }
 )
 
@@ -1275,7 +1480,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 field: 'date_time',
                 displayName: 'Date',
-                filters: 'removeTime'
+                filters: 'stringDate:"dd-MM-yyyy"'
             },
             {
                 field: 'user_id',

@@ -139,7 +139,7 @@
                                 </td>
 
                                 <td>
-                                    : {{curRec.dept_time | removeDateAndSeconds}}
+                                    : {{curRec.dept_time | stringDate:'HH:mm'}}
                                 </td>
                             </tr>
 
@@ -149,7 +149,7 @@
                                 </td>
 
                                 <td>
-                                    : {{curRec.arriv_time | removeDateAndSeconds}}
+                                    : {{curRec.arriv_time | stringDate:'HH:mm'}}
                                 </td>
                             </tr>
 

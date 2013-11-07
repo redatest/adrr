@@ -20,9 +20,9 @@ class ShiftList extends ArModel
         return array();
     }
 
-    public function getMap($getList = true)
+    public function getMap($getList = true, $indexAttr = 'id')
     {
-        $map = parent::getMap();
+        $map = parent::getMap(true, 'shift_id');
 
         unset($map['cols']['time']);
         unset($map['cols']['status']);

@@ -34,13 +34,13 @@ var adrrNumRange = angular.module('adrrDirectives.numRange', [], null)
                         if (!angular.isUndefined(attrs.min)) {
                             var minVal = parseInt(attrs.min, 10);
 
-                            if (val < minVal) val = minVal;
+                            if (val < minVal) val = '';
                         }
 
                         if (!angular.isUndefined(attrs.max)) {
                             var maxVal = parseInt(attrs.max, 10);
 
-                            if (val > maxVal) val = maxVal;
+                            if (val > maxVal) val = '';
                         }
 
                         val = isNaN(val) ? (angular.isUndefined(attrs.value) ? attrs.min : attrs.value) : val;
