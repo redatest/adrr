@@ -91,7 +91,8 @@ angular.module('adrrApp.wrapper.report', [], null)
 
             {
                 field: 'date',
-                displayName: 'Date'
+                displayName: 'Date',
+                filters: 'stringDate:"dd-MM-yyyy"'
             },
             {
                 field: 'shift_id',
@@ -139,12 +140,12 @@ angular.module('adrrApp.wrapper.report', [], null)
             {
                 field: 'dept_time',
                 displayName: 'Dept Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'arriv_time',
                 displayName: 'Arrival Time',
-                filters: 'removeDateAndSeconds'
+                filters: 'stringDate:"HH:mm"'
             },
             {
                 field: 'accepted',

@@ -280,8 +280,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
     .filter
 (
     'stringDate', function ($filter) {
-        return function (str, format) {
+
+        return function (str, format, justTime) {
+
+            justTime = typeof justTime !== 'undefined';
+
+            str = justTime ? '2013-01-01 ' + str : str;
+
             return $filter('date')(new Date(str), format);
+
         }
     }
 )
@@ -305,22 +312,22 @@ angular.module('adrrApp.wrapper.eng', [], null)
     }
 )
 
-    .filter
-(
-    'removeSeconds', function () {
-
-        return function (str) {
-
-            if (typeof str !== 'undefined') {
-
-                return str.replace(/:00$/, '');
-            }
-
-            return '';
-        }
-
-    }
-)
+//    .filter
+//(
+//    'removeSeconds', function () {
+//
+//        return function (str) {
+//
+//            if (typeof str !== 'undefined') {
+//
+//                return str.replace(/:00$/, '');
+//            }
+//
+//            return '';
+//        }
+//
+//    }
+//)
 
     .filter
 (
@@ -741,12 +748,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)">' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td ng-show="loginData.senior === \'1\'">' +
-                '<a onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
-                '<i class="fa fa-comments-o fa-lg fa-fw orng"></i>' +
+                '<td class="actions" ng-show="loginData.senior === \'1\'">' +
+                '<a class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a href="#" onclick="return false;" ng-click="archive(row)">' +
-                '<i class="fa fa-download fa-lg fa-fw blk"></i>' +
+                '<a class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)">' +
+                '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
                 '</td>' +
                 '</tr>',
@@ -912,7 +919,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td><button ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">history</button></td>' +
+                '<td class="actions">' +
+                '<a onclick="return false;" href="#" ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">' +
+                '<i class="fa fa-comments fa-lg orng"></i>' +
+                '</a>' +
+                '</td>' +
                 '</tr>',
 
             headerTemplate: '<tr id="headerCells">' +
@@ -922,7 +933,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<th ng-repeat="col in cols">' +
                 '{{col.displayName}}' +
                 '</th>' +
-                '<th>Comments</th>' +
+                '<th>Actions</th>' +
                 '</tr>',
 
             multiSelect: true
@@ -1109,15 +1120,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
-                '<td>' +
-                '<a href="#" onclick="return false;" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
-                '<i class="fa fa-comments-o fa-lg fa-fw orng"></i>' +
+                '<td class="actions">' +
+                '<a class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a ng-show="loginData.senior === \'1\'" onclick="return false;" href="#" ng-click="archive(row)">' +
-                '<i class="fa fa-download fa-lg fa-fw blk"></i>' +
+                '<a class="btn btn-default btn-xs" ng-show="loginData.senior === \'1\'" onclick="return false;" href="#" ng-click="archive(row)">' +
+                '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
-                '<a href="#/labs/edit/{{row.id}}">' +
-                '<i class="fa fa-edit fa-lg fa-fw"></i>' +
+                '<a class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
+                '<i class="fa fa-edit fa-lg blu"></i>' +
                 '</a>' +
                 '</td>' +
                 '</tr>',
@@ -1207,7 +1218,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.formData.date = yii['ShiftList']['list'][$scope.loginData['shift_type_id']]['date'];
 
-        }
+        };
 
         $scope.min1Day = function () {
             var date = new Date();
@@ -1215,7 +1226,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             date.setDate(date.getDate() - 1);
 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
-        }
+        };
 
         $scope.min2Days = function () {
             var date = new Date();
@@ -1223,7 +1234,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             date.setDate(date.getDate() - 2);
 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
-        }
+        };
 
         $scope.min3Days = function () {
             var date = new Date();
@@ -1231,7 +1242,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             date.setDate(date.getDate() - 3);
 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
-        }
+        };
 
         $scope.validateTime = function () {
 
@@ -1370,6 +1381,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 return $filter('validTime')($scope.formData['dept_time'], $scope.formData['arriv_time'], yii['ShiftType']['list'][$scope.formData['shift_id']]);
             }
 
+            return false;
+
         };
 
         $scope.submit = function () {
@@ -1495,7 +1508,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 field: 'time',
                 displayName: 'Time',
-                filters: 'removeSeconds'
+                filters: 'stringDate:"HH:mm":true'
             },
             {
                 field: 'temp',
