@@ -401,13 +401,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         return function (conc, type, val, data) {
 
-            if (typeof val !== 'undefined' && val !== '') {
+            if (typeof val !== 'undefined' && val !== '' && val !== null) {
 
                 var pattern = new RegExp("(" + type + "|," + type + ")", "ig");
 
                 var setRed = function () {
 
-                    if (typeof data.red === 'undefined' || data.red === '') {
+                    if (typeof data.red === 'undefined' || data.red === '' || data.red === null) {
                         data.red = type;
                     }
                     else if (!pattern.test(data.red)) {
@@ -418,7 +418,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 var unsetRed = function () {
 
-                    if (typeof data.red !== 'undefined') {
+                    if (typeof data.red !== 'undefined' && data.red !== null) {
                         data.red = data.red.replace(pattern, '');
 
                         if (data.red === '') {
@@ -429,7 +429,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 var setYellow = function () {
 
-                    if (typeof data.yellow === 'undefined' || data.yellow === '') {
+                    if (typeof data.yellow === 'undefined' || data.yellow === '' || data.yellow === null) {
                         data.yellow = type;
                     }
                     else if (!pattern.test(data.yellow)) {
@@ -440,8 +440,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 var unsetYellow = function () {
 
-                    if (typeof data.yellow !== 'undefined') {
-                        data.yellow = data.red.replace(pattern, '');
+                    if (typeof data.yellow !== 'undefined' && data.yellow !== null) {
+                        data.yellow = data.yellow.replace(pattern, '');
 
                         if (data.yellow === '') {
                             data.yellow = null;
@@ -749,10 +749,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a href="#" onclick="return false;" ng-click="rowClickHandler(i)">' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
                 '<td class="actions" ng-show="loginData.senior === \'1\'">' +
-                '<a class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)">' +
+                '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
                 '</td>' +
@@ -920,7 +920,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
                 '<td class="actions">' +
-                '<a onclick="return false;" href="#" ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">' +
+                '<a title="Comments" onclick="return false;" href="#" ng-click="loadComments(row)" class="btn btn-default btn-xs" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments fa-lg orng"></i>' +
                 '</a>' +
                 '</td>' +
@@ -1121,13 +1121,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell></td></a>' +
                 '<td class="actions">' +
-                '<a class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<a title="Comments" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a class="btn btn-default btn-xs" ng-show="loginData.senior === \'1\'" onclick="return false;" href="#" ng-click="archive(row)">' +
+                '<a title="Archive" class="btn btn-default btn-xs" ng-show="loginData.senior === \'1\'" onclick="return false;" href="#" ng-click="archive(row)">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
-                '<a class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
+                '<a title="Edit" class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
                 '<i class="fa fa-edit fa-lg blu"></i>' +
                 '</a>' +
                 '</td>' +
