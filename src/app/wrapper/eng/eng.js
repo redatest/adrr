@@ -1214,6 +1214,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.formData.date = yii['ShiftList']['list'][$scope.loginData['shift_type_id']]['date'];
 
+            $scope.formData['shift_id'] = $scope.loginData['shift_type_id'];
+
         };
 
         $scope.min1Day = function () {

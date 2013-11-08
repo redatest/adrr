@@ -42,32 +42,32 @@ angular.module('adrrApp.wrapper.dashboard', [], null)
             }
         ];
 
-        var give_data = function () {
-
-            // generate random numbers for the chart
-            var a = Math.floor(Math.random() * 10);
-            var b = Math.floor(Math.random() * 10);
-            var c = Math.floor(Math.random() * 10);
-
-            $('svg').remove();
-
-            $scope.datas =
-                [
-                    {
-                        "id": "id1",
-                        "name": "the name 1",
-                        "values": [
-                            { "age": "East", "population": a },
-                            { "age": "West", "population": b },
-                            { "age": "North", "population": c }
-                        ]
-                    }
-                ];
-
-            timeoutId = $timeout(give_data, 5000);
-        }
-
-        var timeoutId = $timeout(give_data, 5000);
+//        var give_data = function () {
+//
+//            // generate random numbers for the chart
+//            var a = Math.floor(Math.random() * 10);
+//            var b = Math.floor(Math.random() * 10);
+//            var c = Math.floor(Math.random() * 10);
+//
+//            $('svg').remove();
+//
+//            $scope.datas =
+//                [
+//                    {
+//                        "id": "id1",
+//                        "name": "the name 1",
+//                        "values": [
+//                            { "age": "East", "population": a },
+//                            { "age": "West", "population": b },
+//                            { "age": "North", "population": c }
+//                        ]
+//                    }
+//                ];
+//
+//            timeoutId = $timeout(give_data, 5000);
+//        }
+//
+//        var timeoutId = $timeout(give_data, 5000);
 
         $scope.$on
         (
