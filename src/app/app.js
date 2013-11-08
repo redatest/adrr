@@ -54,6 +54,22 @@ var adrrApp = angular.module
     }
 )
 
+    .filter
+(
+    'stringDate', function ($filter) {
+
+        return function (str, format, justTime) {
+
+            justTime = typeof justTime !== 'undefined';
+
+            str = justTime ? '2013-01-01 ' + str : str;
+
+            return $filter('date')(new Date(str), format);
+
+        }
+    }
+)
+
     .config
 (
     function adrrAppConfig($stateProvider, $urlRouterProvider, RestangularProvider, adrrAuthProvider) {

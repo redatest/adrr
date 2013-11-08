@@ -279,22 +279,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .filter
 (
-    'stringDate', function ($filter) {
-
-        return function (str, format, justTime) {
-
-            justTime = typeof justTime !== 'undefined';
-
-            str = justTime ? '2013-01-01 ' + str : str;
-
-            return $filter('date')(new Date(str), format);
-
-        }
-    }
-)
-
-    .filter
-(
     'fetchValue', function () {
 
         return function (index, model, prop) {
@@ -521,6 +505,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
     }
 )
 
+    .filter
+(
+    'tickPref', function () {
+        return function (tick, model) {
+            return model.prefix + tick;
+        }
+    }
+)
+
     .controller
 (
     'EngCtrl', function ($rootScope) {
@@ -646,7 +639,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
             },
             {
                 field: 'ticket',
-                displayName: 'Ticket'
+                displayName: 'Ticket',
+                filters: 'tickPref:yii["Supplier"]["list"][row.supplier_id]'
             },
             {
                 field: 'dept_time',
@@ -859,7 +853,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
             },
             {
                 field: 'ticket',
-                displayName: 'Ticket'
+                displayName: 'Ticket',
+                filters: 'tickPref:yii["Supplier"]["list"][row.supplier_id]'
             },
             {
                 field: 'dept_time',
@@ -1019,7 +1014,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
             },
             {
                 field: 'ticket',
-                displayName: 'Ticket'
+                displayName: 'Ticket',
+                filters: 'tickPref:yii["Supplier"]["list"][row.supplier_id]'
             },
             {
                 field: 'dept_time',
