@@ -42,9 +42,10 @@
 
                 <input ng-model="password" class="form-control" type="password" placeholder="Password">
 
-                <hr>
+                <p ng-show="wrong" class="wrong-message">your username or password is wrong.</p>
 
-                <button ng-click="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button ng-click="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in <i
+                        ng-show="loading" class="fa fa-spinner fa-spin"></i></button>
             </form>
         </div>
     </div>

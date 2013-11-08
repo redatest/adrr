@@ -49,7 +49,8 @@ angular.module('adrrApp.wrapper.dashboard', [], null)
             var b = Math.floor(Math.random() * 10);
             var c = Math.floor(Math.random() * 10);
 
-            $('svg').remove() //  remove previous chart
+            $('svg').remove();
+
             $scope.datas =
                 [
                     {
