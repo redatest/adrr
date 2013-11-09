@@ -1,7 +1,6 @@
 var adrrGrid = angular.module('adrrDirectives.grid', [], null)
 
-    .directive
-(
+    .directive(
 
     'adrrGridCell', function ($compile) {
 
@@ -31,8 +30,7 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
     }
 )
 
-    .directive
-(
+    .directive(
 
     'adrrGridRow', function ($compile) {
 
@@ -63,8 +61,7 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
     }
 )
 
-    .directive
-(
+    .directive(
 
     'adrrGrid', function ($compile) {
 
@@ -97,12 +94,12 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                             '<thead>' +
                             (typeof scope.options.headerTemplate !== 'undefined' ? scope.options.headerTemplate :
                                 '<tr id="headerCells">' +
-                            '<th ng-show="multiSelect && showSelectionCheckbox">' +
-                            '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
-                            '</th>' +
-                            '<th ng-repeat="col in cols">' +
-                            '{{col.displayName}}' +
-                            '</th>' +
+                                    '<th ng-show="multiSelect && showSelectionCheckbox">' +
+                                    '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
+                                    '</th>' +
+                                    '<th ng-repeat="col in cols">' +
+                                    '{{col.displayName}}' +
+                                    '</th>' +
                                     '</tr>') +
                             '</thead>' +
                             '<tbody adrr-grid-row>' +
@@ -114,8 +111,8 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                         element.html($compile(template)(scope));
 
                         // watch any change of the data
-                        scope.$parent.$watch
-                        (
+                        scope.$parent.$watch(
+
                             scope.options.data, function (newVal, oldVal) {
 
                                 if (newVal !== oldVal) {
@@ -133,6 +130,12 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                         // @param {optional Array} indexes - indexes of rows for being selected or unselected
                         // @param {optional Boolean} state - to define the selection state
                         scope.programaticallySelect = function (indexes, state) {
+
+                            if (typeof scope.options['onBeforeSelectionChangeHandler'] !== 'undefined') {
+
+                                scope.options['onBeforeSelectionChangeHandler'].call();
+
+                            }
 
                             if (typeof indexes === 'undefined' || indexes === null) {
 
@@ -164,10 +167,22 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                                 // here we'll check for user programaticlly selection
                             }
 
+                            if (typeof scope.options['onAfterSelectionChangeHandler'] !== 'undefined') {
+
+                                scope.options['onAfterSelectionChangeHandler'].call();
+
+                            }
+
                         };
 
                         // manage selecting
                         scope.rowClickHandler = function (index) {
+
+                            if (typeof scope.options['onBeforeSelectionChangeHandler'] !== 'undefined') {
+
+                                scope.options['onBeforeSelectionChangeHandler'].call();
+
+                            }
 
                             var curIndex = scope.selectedItems.indexOf(index);
 
@@ -178,12 +193,6 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                                 $(rows[index]).removeClass('active');
 
                                 scope.selectedItems.splice(curIndex, 1);
-
-                                if (typeof scope.options['onAfterDeselectRow'] !== 'undefined') {
-
-                                    scope.options['onAfterDeselectRow'](scope.$parent.data[index]);
-
-                                }
 
                             } else {
 
@@ -198,12 +207,12 @@ var adrrGrid = angular.module('adrrDirectives.grid', [], null)
                                 $(rows[index]).addClass('active');
 
                                 scope.selectedItems.push(index);
+                            }
 
-                                if (typeof scope.options['onAfterSelectRow'] !== 'undefined') {
+                            if (typeof scope.options['onAfterSelectionChangeHandler'] !== 'undefined') {
 
-                                    scope.options['onAfterSelectRow'](scope.$parent.data[index]);
+                                scope.options['onAfterSelectionChangeHandler'].call();
 
-                                }
                             }
                         };
                     }

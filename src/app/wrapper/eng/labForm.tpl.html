@@ -3,7 +3,8 @@
     <any ng-hide="alert">Something went wrong.</any>
 </div>
 
-<form id="labForm" role="form" name="mainForm" class="labForm" novalidate>
+<form id="labForm" role="form" name="mainForm" class="labForm" novalidate
+      ng-mousemove="controls[0]['disabled'] = mainForm.$invalid">
 
 <div class="col-xs-12 col-lg-10 col-lg-offset-1">
 <div class="well well-sm">
@@ -266,10 +267,9 @@
 </div>
 </div>
 
-<div class="form-group">
-    <button class="btn btn-primary" data-toggle="modal" href="#confirmationModal" onclick="return false;"
-            ng-disabled="mainForm.$invalid || !validateTime()">
-        Save
+<div class="form-group" ng-show="false">
+    <button ng-disabled="controls[0]['disabled'] = mainForm.$invalid">
+    Save
     </button>
 </div>
 </div>

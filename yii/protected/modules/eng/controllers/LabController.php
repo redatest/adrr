@@ -93,6 +93,31 @@ class LabController extends RESTful
 
     public function actionArchive()
     {
+        $json = file_get_contents('php://input');
+
+        $put_vars = CJSON::decode($json, true);
+
+        if ($put_vars !== null) {
+
+            $back = array();
+
+            foreach ($put_vars['toArchive'] as $id) {
+
+                $model = $this->_model->findByPk($id);
+
+                if ($model !== null) {
+
+                    $model->archived = 1;
+                    $model->returned = 0;
+                    $model->approved = 0;
+
+                    if ($model->save()) $back[] = $model->id;
+                }
+            }
+
+            $this->_sendResponse(200, CJSON::encode($back));
+        }
+
         if (isset($_GET['id'])) {
 
             $model = $this->_model->findByPk($_GET['id']);

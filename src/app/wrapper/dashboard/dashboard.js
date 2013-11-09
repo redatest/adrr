@@ -73,7 +73,7 @@ angular.module('adrrApp.wrapper.dashboard', [], null)
         (
             '$destroy', function () {
 
-                $timeout.cancel(timeoutId);
+//                $timeout.cancel(timeoutId);
 
             }
         );

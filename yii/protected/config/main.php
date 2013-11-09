@@ -74,6 +74,7 @@ return array
                 array('<module>/<controller>/delete', 'pattern' => 'api/<module\w+>/<controller:\w+>/<id:\d+>', 'verb' => 'OPTIONS'),
                 array('<module>/<controller>/create', 'pattern' => 'api/<module\w+>/<controller:\w+>', 'verb' => 'POST'),
                 array('<module>/<controller>/<action>', 'pattern' => 'api/<module\w+>/<controller:\w+>/<action:\w+>', 'verb' => 'GET'),
+                array('<module>/<controller>/<action>', 'pattern' => 'api/<module\w+>/<controller:\w+>/<action:\w+>', 'verb' => 'POST'),
                 array('<module>/<controller>/getRelatedList', 'pattern' => 'api/<module\w+>/<controller:\w+>/<id:\d+>/<related:\w+>', 'verb' => 'GET'),
                 array('<module>/<controller>/getRelated', 'pattern' => 'api/<module\w+>/<controller:\w+>/<id:\d+>/<related:\w+>/<related_id:\d+>', 'verb' => 'GET'),
                 array('<module>/<controller>/updateRelated', 'pattern' => 'api/<module\w+>/<controller:\w+>/<id:\d+>/<related:\w+>/<related_id:\d+>', 'verb' => 'POST'),

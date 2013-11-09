@@ -170,7 +170,8 @@
         </ol>
 
         <div class="well well-small controls" ng-show="showControls">
-            <button ng-repeat="control in controls" ng-click="control.clickHandler()" ng-disabled="control.disabled"
+            <button ng-show="control.visibility" ng-repeat="control in controls" ng-click="control.clickHandler()"
+                    ng-disabled="control.disabled"
                     class="btn btn-primary btn-sm">
                 {{control.title}}
             </button>
