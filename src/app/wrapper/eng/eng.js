@@ -103,9 +103,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 url: '^/labs/create',
 
-                title: 'Create Lab',
+                title: 'New concrete field record',
 
-                breadcrumb: ['Home', 'Concrete Field', 'Create'],
+                breadcrumb: ['Home', 'Concrete Field', 'New record'],
 
                 showControls: true,
 
@@ -190,9 +190,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 url: '^/pourings/create',
 
-                title: 'Create Pouring',
+                title: 'New pouring record',
 
-                breadcrumb: ['Home', 'Pourings', 'Create'],
+                breadcrumb: ['Home', 'Pourings', 'New record'],
 
                 showControls: true,
 
@@ -255,9 +255,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 url: '^/lab-temp/create',
 
-                title: 'Add Lab Temperature',
+                title: 'New lab temperature record',
 
-                breadcrumb: ['Home', 'Lab Temperature', 'Create'],
+                breadcrumb: ['Home', 'Lab Temperature', 'New record'],
 
                 showControls: true,
 
@@ -616,7 +616,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $rootScope.controls = [
 
             {
-                title: 'Create',
+                title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['senior'] == 0
             },
@@ -961,7 +961,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $rootScope.controls = [
 
             {
-                title: 'Create',
+                title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['senior'] == 0
             }
@@ -1203,7 +1203,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $rootScope.controls = [
 
             {
-                title: 'Create',
+                title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['senior'] == 0
             },
@@ -1544,7 +1544,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $rootScope.controls = [
 
             {
-                title: 'Create',
+                title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['senior'] == 0
             }/*,
@@ -1634,7 +1634,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $rootScope.controls = [
 
-            { clickHandler: $scope.createClickHandler, title: 'Create' }
+            {
+                title: 'New record',
+                clickHandler: $scope.createClickHandler,
+                visibility: $rootScope.loginData['senior'] == 0
+            }
 
         ];
 
@@ -1671,6 +1675,17 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 }
             );
         }
+
+        $scope.controls = $rootScope.controls = [
+
+            {
+                title: 'New record',
+                clickHandler: $scope.createClickHandler,
+                visibility: $rootScope.loginData['senior'] == 0,
+                disabled: true
+            }
+
+        ];
 
     }
 );

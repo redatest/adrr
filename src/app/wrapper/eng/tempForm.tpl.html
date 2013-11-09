@@ -12,9 +12,9 @@
         <input id="temp" class="form-control" type="number" ng-model="temp" required/>
     </div>
 
-    <div class="form-group">
-        <button class="btn btn-primary" ng-click="submit()" ng-disabled="mainForm.$invalid">
-            Save
+    <div class="form-group" ng-show="false">
+        <button class="btn btn-primary" ng-click="submit()" ng-disabled="controls[0]['disabled'] = mainForm.$invalid">
+        Save
         </button>
     </div>
 
