@@ -1679,8 +1679,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.controls = $rootScope.controls = [
 
             {
-                title: 'New record',
-                clickHandler: $scope.createClickHandler,
+                title: 'Save',
+                clickHandler: $scope.submit,
                 visibility: $rootScope.loginData['senior'] == 0,
                 disabled: true
             }
