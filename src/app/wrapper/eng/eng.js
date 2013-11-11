@@ -781,6 +781,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
+                '<a title="Edit" class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
+                '<i class="fa fa-edit fa-lg blu"></i>' +
+                '</a>' +
                 '</td>' +
                 '</tr>',
 

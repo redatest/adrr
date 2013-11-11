@@ -13,7 +13,11 @@ angular.module('adrrAuth', [], null)
 
         var _defaultState = null;
 
-        this.init = function (loginApiUrl, logoutApiUrl, loginState, defaultState) {
+        var _errorState = null;
+
+        var _roleProp = 'role';
+
+        this.init = function (loginApiUrl, logoutApiUrl, loginState, defaultState, errorState, roleProp) {
 
             _loginApiUrl = loginApiUrl;
 
@@ -22,6 +26,14 @@ angular.module('adrrAuth', [], null)
             _loginState = loginState;
 
             _defaultState = defaultState;
+
+            _errorState = typeof errorState === 'undefined' ? defaultState : errorState;
+
+            if (typeof roleProp !== 'undefined') {
+
+                _roleProp = roleProp;
+
+            }
         };
         // ------------------------------------------
 

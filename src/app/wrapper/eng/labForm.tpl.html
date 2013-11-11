@@ -3,9 +3,7 @@
     <any ng-hide="alert">Something went wrong.</any>
 </div>
 
-<form id="labForm" role="form" name="mainForm" class="labForm" novalidate
-      ng-mousemove="controls[0]['disabled'] = mainForm.$invalid">
-
+<form id="labForm" role="form" name="mainForm" class="labForm" novalidate>
 <div class="col-xs-12 col-lg-10 col-lg-offset-1">
 <div class="well well-sm">
 <div class="row">
@@ -269,7 +267,7 @@
 
 <div class="form-group" ng-show="false">
     <button ng-disabled="controls[0]['disabled'] = mainForm.$invalid">
-    Save
+        Save
     </button>
 </div>
 </div>

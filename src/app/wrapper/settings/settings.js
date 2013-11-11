@@ -893,37 +893,45 @@ angular.module('adrrApp.wrapper.settings', [], null)
             }
         );
 
-        $scope.listChangeHandler = function () {
-            var list = $scope.formData['list'];
+        $scope.$watch
+        (
+            'formData["list"]', function (newVal, oldVal) {
+                if (typeof newVal !== 'undefined' && newVal !== oldVal && newVal !== '') {
 
-            if (!angular.isUndefined(list)) {
-                list = list.replace(/[^0-9,]+/g, '');
-                list = list.replace(/,,+/g, ',');
+                    var list = newVal;
 
-                if (list[0] === ',') list = list.slice(1, list.length);
+                    list = list.replace(/[^0-9,]+/g, '');
+                    list = list.replace(/,,+/g, ',');
 
-                var listLength = list.length - 1;
+                    if (list[0] === ',') list = list.slice(1, list.length);
 
-                $scope.formData['list'] = list;
+                    var listLength = list.length - 1;
 
-                if (list[listLength] === ',') list = list.slice(0, listLength);
+                    $scope.formData['list'] = list;
 
-                if (list !== '') {
-                    $http
-                    ({
-                        method: 'GET',
-                        url: appConfig.yiiUrl + '/user/user/list',
-                        params: { list: list }
-                    })
-                        .success
-                    (
-                        function (data) {
-                            $scope.usersList = data;
-                        }
-                    )
+                    if (list[listLength] === ',') list = list.slice(0, listLength);
+
+                    if (list !== '') {
+                        $http
+                        ({
+                            method: 'GET',
+                            url: appConfig.yiiUrl + '/user/user/list',
+                            params: { list: list }
+                        })
+                            .success
+                        (
+                            function (data) {
+                                $scope.usersList = data;
+                            }
+                        )
+                    }
+                } else if (typeof newVal === 'undefined' || newVal === '') {
+
+                    $scope.usersList = [];
+
                 }
             }
-        }
+        );
     }
 )
 //---------------------------------------------------------
@@ -932,8 +940,7 @@ angular.module('adrrApp.wrapper.settings', [], null)
 
     .controller
 (
-    'ProjectCtrl', function ProjectCtrl($rootScope, $scope, Restangular) {
-
+    'ProjectCtrl', function ProjectCtrl($rootScope, $scope, Restangular, $state) {
         $rootScope.breadcrumbItems = ['Home', 'Settings', 'Projects'];
 
         $scope.$parent.className = 'Project';
