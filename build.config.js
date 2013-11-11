@@ -32,7 +32,7 @@ module.exports =
             'vendor/restangular/dist/restangular.js',
             'vendor/jquery-backstretch/jquery.backstretch.min.js',
 
-            'vendor/jquery.slimScroll/jquery.slimscroll.min.js',
+//            'vendor/jquery.slimScroll/jquery.slimscroll.min.js',
 
             'vendor/d3/d3.min.js'
         ],
