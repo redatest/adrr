@@ -21,9 +21,64 @@
             <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
                 <label for="date" class="control-label">Date</label>
 
-                <input id="date" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
-                       readonly="readonly" class="form-control"
-                       ng-model="formData['date']" required/>
+                <div class="input-group">
+                    <div class="input-group-btn" ng-show="loginData.senior == 0">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal"
+                                ng-disabled="state.indexOf('edit') > -1">
+                            Frequents
+                        </button>
+                    </div>
+
+                    <input ng-show="loginData.senior == 1" id="date" readonly="readonly"
+                           ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <input ng-show="loginData.senior == 0" readonly="readonly"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                </div>
+
+                <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Frequents</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="list-group">
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setCurrentShift()" onclick="return false;">
+                                        Current Shift
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setToday()" onclick="return false;">
+                                        Today
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min1Day()" onclick="return false;">
+                                        Yesterday
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min2Days()" onclick="return false;">
+                                        2 days ago
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min3Days()" onclick="return false;">
+                                        3 days ago
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group" ng-class="{'has-error': !shiftForm.$valid}" ng-form="shiftForm">
@@ -36,12 +91,11 @@
             </div>
 
             <div class="form-group" ng-class="{'has-error': !supplierForm.$valid}" ng-form="supplierForm">
-                <label for="supplier_id" class="control-label">Supplier</label>
-                <select id="supplier_id" class="form-control" ng-model="formData['supplier_id']" required>
-                    <option ng-repeat="supplier in yii['Supplier']['list']" value="{{supplier.id}}">
-                        {{supplier.name}}
-                    </option>
-                </select>
+                <label class="control-label">Supplier</label>
+
+                <adrr-select2-wrapper ng-model="formData['supplier_id']" adrr-id="supId" frequent-prop="very_frequent"
+                                      adrr-data="yii['Supplier']['list']" required>
+                </adrr-select2-wrapper>
             </div>
         </div>
     </div>
@@ -67,33 +121,33 @@
             </div>
 
             <div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
-                <label class="control-label">IR</label>
-                <input type="text" class="form-control" ng-model="ir" required/>
+                <label for="ir" class="control-label">IR</label>
+                <input id="ir" type="text" class="form-control" ng-model="formData['ir']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': zoneForm.$invalid}" ng-form="zoneForm">
-                <label class="control-label">Zone</label>
-                <input type="text" class="form-control" ng-model="zone" required/>
+                <label for="zone_id" class="control-label">Zone</label>
+                <input id="zone_id" type="text" class="form-control" ng-model="formData['zone_id']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': areaForm.$invalid}" ng-form="areaForm">
-                <label class="control-label">Area</label>
-                <input type="text" class="form-control" ng-model="area" required/>
+                <label for="area" class="control-label">Area</label>
+                <input id="area" type="text" class="form-control" ng-model="formData['area']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': axisForm.$invalid}" ng-form="axisForm">
-                <label class="control-label">Axis</label>
-                <input type="text" class="form-control" ng-model="axis" required/>
+                <label for="axis" class="control-label">Axis</label>
+                <input id="axis" type="text" class="form-control" ng-model="formData['axis']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': levelForm.$invalid}" ng-form="levelForm">
-                <label class="control-label">Level</label>
-                <input type="text" class="form-control" ng-model="level" required/>
+                <label for="level" class="control-label">Level</label>
+                <input id="level" type="text" class="form-control" ng-model="formData['level']" required/>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': evForm.$invalid}" ng-form="evForm">
-                <label class="control-label">Estimated Vol (m)</label>
-                <input type="text" class="form-control" ng-model="ev" required/>
+            <div class="form-group" ng-class="{'has-error': estVolForm.$invalid}" ng-form="estVolForm">
+                <label for="est_vol" class="control-label">Estimated Volume</label>
+                <input id="est_vol" type="text" class="form-control" ng-model="formData['est_vol']" required/>
             </div>
         </div>
     </div>
@@ -110,24 +164,29 @@
 
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': ticketForm.$invalid}" ng-form="ticketForm">
-                <label class="control-label">Ticket</label>
-                <input type="text" class="form-control" ng-model="ticket" required/>
+                <label for="ticket" class="control-label">Ticket</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">{{prefix}}</span>
+                    <input id="ticket" type="text" class="form-control" ng-model="formData['ticket']" required
+                           ng-readonly="formData['supplier_id'] === undefined || formData['supplier_id'] === ''"/>
+                </div>
             </div>
 
             <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
-                <label class="control-label">Truck</label>
-                <input type="text" class="form-control" ng-model="truck" required/>
+                <label for="truck" class="control-label">Truck</label>
+                <input id="truck" type="text" class="form-control" ng-model="formData['truck']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': concForm.$invalid}" ng-form="concForm">
-                <label class="control-label">Concrete</label>
-                <select class="form-control" ng-model="conc_type_id" required></select>
+                <label for="conc_type_id" class="control-label">Concrete</label>
+                <select id="conc_type_id" class="form-control" ng-model="formData['conc_type_id']" required></select>
             </div>
 
             <div class="form-group" ng-class="{'has-error': truckVolForm.$invalid}"
                  ng-form="truckVolForm">
-                <label class="control-label">Truck Load</label>
-                <input type="text" class="form-control" ng-model="truckVol" required/>
+                <label for="truck_load" class="control-label">Truck Load</label>
+                <input id="truck_load" type="text" class="form-control" ng-model="formData['truck_load']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': pouredForm.$invalid}" ng-form="pouredForm">
@@ -155,23 +214,23 @@
 
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
-                <label class="control-label">Slump B</label>
-                <input type="text" class="form-control" ng-model="slumpb" required/>
+                <label for="slumpb" class="control-label">Slump B</label>
+                <input id="slumpb" type="text" class="form-control" ng-model="formData['slumpb']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
-                <label class="control-label">HRWR (ltr)</label>
-                <input type="text" class="form-control" ng-model="hrwr" required/>
+                <label for="hrwr" class="control-label">HRWR (ltr)</label>
+                <input id="hrwr" type="text" class="form-control" ng-model="formData['hrwr']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': waterForm.$invalid}" ng-form="waterForm">
-                <label class="control-label">Water (ltr)</label>
-                <input type="text" class="form-control" ng-model="water" required/>
+                <label for="water" class="control-label">Water (ltr)</label>
+                <input id="water" type="text" class="form-control" ng-model="formData['water']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
-                <label class="control-label">Slump A</label>
-                <input type="text" class="form-control" ng-model="slumpa" required/>
+                <label for="slumpa" class="control-label">Slump A</label>
+                <input id="slumpa" type="text" class="form-control" ng-model="formData['slumpa']" required/>
             </div>
         </div>
     </div>
@@ -188,16 +247,16 @@
 
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': acptForm.$invalid}" ng-form="acptForm">
-                <label class="control-label">Accepted</label>
-                <select class="form-control" ng-model="acpt" required>
-                    <option value="1">Yes</option>
+                <label for="accepted" class="control-label">Accepted</label>
+                <select id="accepted" class="form-control" ng-model="formData['acpt']" required>
+                <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
             </div>
 
             <div class="form-group" ng-class="{'has-error': pumpForm.$invalid}" ng-form="pumpForm">
-                <label class="control-label">Pump</label>
-                <select class="form-control" ng-model="pump_id" required></select>
+                <label for="pump_id" class="control-label">Pump</label>
+                <select id="pump_id" class="form-control" ng-model="formData['pump_id']" required></select>
             </div>
         </div>
     </div>
@@ -216,29 +275,23 @@
             <div class="form-group" ng-class="{'has-error': startForm.$invalid}" ng-form="startForm">
                 <label class="control-label">Start</label>
 
-                <adrr-timepicker required ng-model="start"></adrr-timepicker>
+                <adrr-timepicker required ng-model="formData['start']"></adrr-timepicker>
             </div>
 
             <div class="form-group" ng-class="{'has-error': endForm.$invalid}" ng-form="endForm">
                 <label class="control-label">End</label>
 
-                <adrr-timepicker required ng-model="end"></adrr-timepicker>
+                <adrr-timepicker required ng-model="formData['end']"></adrr-timepicker>
             </div>
 
             <div class="from-group">
-                <label class="control-label">Comment</label>
+                <label for="comment" class="control-label">Comment</label>
 
-                <textarea ng-model="comment" class="form-control" rows="3"></textarea>
+                <textarea id="comment" ng-model="formData['comment']" class="form-control" rows="3"></textarea>
             </div>
         </div>
     </div>
 </div>
-</div>
-
-<div class="form-group">
-    <button class="btn btn-primary">Save and add</button>
-    <button class="btn btn-primary">Save and add same IR</button>
-    <button class="btn btn-primary">Save and back to list</button>
 </div>
 </div>
 </div>

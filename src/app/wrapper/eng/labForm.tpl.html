@@ -95,10 +95,8 @@
 
                 <label class="control-label">{{yii['Lab']['cols']['supplier_id'].label}}</label>
 
-                <adrr-select2-wrapper ng-model="formData.supplier_id" adrr-id="supId"
-                                      frequent-prop="very_frequent"
-                                      adrr-data="yii['Supplier']['list']"
-                                      required>
+                <adrr-select2-wrapper ng-model="formData.supplier_id" adrr-id="supId" required
+                                      frequent-prop="very_frequent" adrr-data="yii['Supplier']['list']">
                 </adrr-select2-wrapper>
             </div>
 
@@ -106,10 +104,8 @@
                 <label for="plant" class="control-label">{{yii['Lab']['cols']['plant'].label}}</label>
 
                 <input id="plant" adrr-num-range min="0" class="form-control" type="number"
-                       pattern="[0-9]*"
-                       ng-model="formData.plant"
-                       typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"
-                       required/>
+                       pattern="[0-9]*" ng-model="formData.plant" required
+                       typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"/>
             </div>
         </div>
     </div>
@@ -148,6 +144,7 @@
                 <div class="input-group">
                     <span class="input-group-addon">{{prefix}}</span>
                     <input id="ticket" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.ticket"
+                           ng-readonly="formData['supplier_id'] === undefined || formData['supplier_id'] === ''"
                            adrr-num-range required/>
                 </div>
             </div>

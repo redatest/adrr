@@ -1255,6 +1255,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 if (!angular.isUndefined(newVal) && newVal !== '') {
 
                     $scope.prefix = yii['Supplier']['list'][newVal].prefix;
+                } else {
+                    $scope.prefix = 'Select a supplier...';
                 }
             }
         );
@@ -1566,7 +1568,58 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringCreateCtrl', function () {
+    'PouringCreateCtrl', function ($rootScope, $scope, yii, $q, Restangular) {
+
+        $scope.reset = function () {
+
+            $scope.formData = {};
+
+        };
+
+        $scope.reset();
+
+        $scope.$watch
+        (
+            'formData.supplier_id', function (newVal) {
+
+                if (!angular.isUndefined(newVal) && newVal !== '') {
+
+                    $scope.prefix = yii['Supplier']['list'][newVal].prefix;
+                } else {
+                    $scope.prefix = 'Select a supplier...';
+                }
+            }
+        );
+
+        $scope.submit = function () {
+
+        };
+
+        $scope.controls = $rootScope.controls = [
+
+            {
+                title: 'Save and add',
+
+                clickHandler: $scope.submit,
+
+                visibility: $rootScope.loginData['senior'] == 0
+            },
+            {
+                title: 'Save and add same IR',
+
+                clickHandler: $scope.submit,
+
+                visibility: $rootScope.loginData['senior'] == 0
+            },
+            {
+                title: 'Save and back to list',
+
+                clickHandler: $scope.submit,
+
+                visibility: $rootScope.loginData['senior'] == 0
+            }
+
+        ];
     }
 )
 
@@ -1677,7 +1730,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 }
             );
-        }
+        };
 
         $scope.controls = $rootScope.controls = [
 

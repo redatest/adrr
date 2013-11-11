@@ -161,6 +161,19 @@ class LabController extends RESTful
 
         throw new CHttpException(400, 'Couldn\'t return this record');
     }
+
+    public function actionGetTicket()
+    {
+        if (isset($_GET['ticket'])) {
+
+            $model = $this->_model->findByAttributes(array('ticket' => $_GET['ticket']));
+
+            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+
+        }
+
+        $this->_sendResponse(404, 'Ticket was not found');
+    }
 }
 
 ?>
