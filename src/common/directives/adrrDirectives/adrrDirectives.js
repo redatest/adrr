@@ -12,12 +12,13 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
 
             scope: {
                 ngModel: '=',
-                adrrOptions: '&'
+                adrrOptions: '&',
+                ngDisabled: '='
             },
 
             template: '<div class="input-group double-input">' +
-                '<input ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
-                '<input ng-model="mint" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
+                '<input ng-disabled="ngDisabled" ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
+                '<input ng-disabled="ngDisabled" ng-model="mint" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
                 '<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> </span>' +
                 '</div>',
 
@@ -35,12 +36,15 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
 
                             var timeArr = newVal.split(':');
 
-                            scope.hour = timeArr[0];
+                            scope.hour = parseInt(timeArr[0], 10);
 
-                            scope.mint = timeArr[1];
+                            scope.mint = parseInt(timeArr[1], 10);
+
+                            ctrl.$setValidity('wrong', true);
+                            ctrl.$setViewValue(newVal);
                         } else {
-//                            scope.hour = '';
-//                            scope.mint = '';
+                            scope.hour = '';
+                            scope.mint = '';
                         }
                     }
                 );

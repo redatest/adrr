@@ -164,9 +164,9 @@ class LabController extends RESTful
 
     public function actionGetTicket()
     {
-        if (isset($_GET['ticket'])) {
+        if (isset($_GET['ticket']) && isset($_GET['supplier'])) {
 
-            $model = $this->_model->findByAttributes(array('ticket' => $_GET['ticket']));
+            $model = $this->_model->findByAttributes(array('ticket' => $_GET['ticket'], 'supplier_id' => $_GET['supplier']));
 
             if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
 

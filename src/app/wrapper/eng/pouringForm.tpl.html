@@ -90,11 +90,12 @@
                 </select>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': !supplierForm.$valid}" ng-form="supplierForm">
-                <label class="control-label">Supplier</label>
+            <div class="form-group" ng-class="{'has-error': supplierForm.$invalid}" ng-form="supplierForm">
 
-                <adrr-select2-wrapper ng-model="formData['supplier_id']" adrr-id="supId" frequent-prop="very_frequent"
-                                      adrr-data="yii['Supplier']['list']" required>
+                <label class="control-label">{{yii['Lab']['cols']['supplier_id'].label}}</label>
+
+                <adrr-select2-wrapper ng-model="formData.supplier_id" adrr-id="supId" required
+                                      frequent-prop="very_frequent" adrr-data="yii['Supplier']['list']">
                 </adrr-select2-wrapper>
             </div>
         </div>
@@ -112,12 +113,11 @@
 
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': ptForm.$invalid}" ng-form="ptForm">
-                <label for="pouring_type_id" class="control-label">Pouring Type</label>
-                <select id="pouring_type_id" class="form-control" ng-model="formData['pouring_type_id']" required>
-                    <option ng-repeat="pouringType in yii['PouringType']['list']"
-                            value="{{pouringType.id}}">{{pouringType.name}}
-                    </option>
-                </select>
+                <label class="control-label">Pouring Type</label>
+
+                <adrr-select2-wrapper ng-model="formData.pouring_type_id" adrr-id="pouring_type_id" required
+                                      frequent-prop="very_frequent" adrr-data="yii['PouringType']['list']">
+                </adrr-select2-wrapper>
             </div>
 
             <div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
@@ -175,29 +175,38 @@
 
             <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
                 <label for="truck" class="control-label">Truck</label>
-                <input id="truck" type="text" class="form-control" ng-model="formData['truck']" required/>
+
+                <input ng-disabled="ticketFound" id="truck" type="text" class="form-control"
+                       ng-model="formData['truck']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': concForm.$invalid}" ng-form="concForm">
                 <label for="conc_type_id" class="control-label">Concrete</label>
-                <select id="conc_type_id" class="form-control" ng-model="formData['conc_type_id']" required></select>
+                <select ng-disabled="ticketFound" id="conc_type_id" class="form-control"
+                        ng-model="formData['conc_type_id']" required>
+                    <option ng-repeat="concType in yii['ConcreteType']['list']" value="{{concType.id}}"
+                            ng-selected="formData['conc_type_id'] === concType.id">{{concType.name}}
+                    </option>
+                </select>
             </div>
 
             <div class="form-group" ng-class="{'has-error': truckVolForm.$invalid}"
                  ng-form="truckVolForm">
                 <label for="truck_load" class="control-label">Truck Load</label>
-                <input id="truck_load" type="text" class="form-control" ng-model="formData['truck_load']" required/>
-            </div>
 
-            <div class="form-group" ng-class="{'has-error': pouredForm.$invalid}" ng-form="pouredForm">
-                <label for="poured_qty" class="control-label">Poured QTY</label>
-                <input id="poured_qty" type="text" class="form-control" ng-model="formData['poured_qty']" required/>
+                <input ng-disabled="ticketFound" id="truck_load" type="text" class="form-control"
+                       ng-model="formData['truck_load']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': deptForm.$invalid}" ng-form="deptForm">
                 <label class="control-label">Dept Time</label>
 
-                <adrr-timepicker required ng-model="formData['deptTime']"></adrr-timepicker>
+                <adrr-timepicker ng-disabled="ticketFound" required ng-model="formData.dept_time"></adrr-timepicker>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': pouredForm.$invalid}" ng-form="pouredForm">
+                <label for="poured_qty" class="control-label">Poured QTY</label>
+                <input id="poured_qty" type="text" class="form-control" ng-model="formData['poured_qty']" required/>
             </div>
         </div>
     </div>
@@ -249,14 +258,20 @@
             <div class="form-group" ng-class="{'has-error': acptForm.$invalid}" ng-form="acptForm">
                 <label for="accepted" class="control-label">Accepted</label>
                 <select id="accepted" class="form-control" ng-model="formData['acpt']" required>
-                <option value="1">Yes</option>
+                    <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
             </div>
 
             <div class="form-group" ng-class="{'has-error': pumpForm.$invalid}" ng-form="pumpForm">
-                <label for="pump_id" class="control-label">Pump</label>
-                <select id="pump_id" class="form-control" ng-model="formData['pump_id']" required></select>
+                <label class="control-label">Pump</label>
+                <!--<select class="form-control" ng-model="formData['pump_id']" required>
+                    <option ng-repeat="pump in yii['Pump']['list']" value="{{pump.id}}">{{pump.name}}</option>
+                </select>-->
+
+                <adrr-select2-wrapper ng-model="formData.pump_id" adrr-id="pumpId" required
+                                      frequent-prop="very_frequent" adrr-data="yii['Pump']['list']">
+                </adrr-select2-wrapper>
             </div>
         </div>
     </div>

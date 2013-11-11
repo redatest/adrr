@@ -1585,9 +1585,47 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 if (!angular.isUndefined(newVal) && newVal !== '') {
 
                     $scope.prefix = yii['Supplier']['list'][newVal].prefix;
+
+                    $scope.formData['ticket'] = '';
+
                 } else {
+
                     $scope.prefix = 'Select a supplier...';
                 }
+            }
+        );
+
+        $scope.$watch
+        (
+            'formData.ticket', function (newVal) {
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
+                    (
+                        function (data) {
+
+                            $scope.formData['truck'] = data['truck'];
+                            $scope.formData['truck_load'] = data['truck_load'];
+                            $scope.formData['conc_type_id'] = data['conc_type_id'];
+                            $scope.formData['dept_time'] = data['dept_time'];
+
+                            $scope.ticketFound = true;
+                        },
+
+                        function () {
+
+                            $scope.formData['truck'] = '';
+                            $scope.formData['truck_load'] = '';
+                            $scope.formData['conc_type_id'] = '';
+                            $scope.formData['dept_time'] = '';
+
+                            $scope.ticketFound = false;
+                        }
+                    );
+
+                }
+
             }
         );
 
