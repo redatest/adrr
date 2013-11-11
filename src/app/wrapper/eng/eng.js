@@ -1578,6 +1578,44 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.reset();
 
+        $scope.setToday = function () {
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', new Date());
+
+        };
+
+        $scope.setCurrentShift = function () {
+
+            $scope.formData.date = yii['ShiftList']['list'][$scope.loginData['shift_type_id']]['date'];
+
+            $scope.formData['shift_id'] = $scope.loginData['shift_type_id'];
+
+        };
+
+        $scope.min1Day = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 1);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        };
+
+        $scope.min2Days = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 2);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        };
+
+        $scope.min3Days = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 3);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        };
+
         $scope.$watch
         (
             'formData.supplier_id', function (newVal) {
@@ -1626,6 +1664,33 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 }
 
+            }
+        );
+
+        $scope.$watch
+        (
+            'formData.ir', function (newVal) {
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('settings/ir/getIr').get({ir: newVal}).then
+                    (
+                        function (data) {
+
+                            $scope.formData['zone_id'] = data['zone_id'];
+                            $scope.formData['area'] = data['area'];
+                            $scope.formData['est_vol'] = data['volume'];
+
+                        },
+
+                        function (data) {
+
+                            console.log('wrong');
+
+                        }
+                    )
+
+                }
             }
         );
 

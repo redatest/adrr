@@ -33,9 +33,9 @@ class Zone extends ArModel
         );
     }
 
-    public function getMap($getList = true, $indexAttr = 'id')
+    public function getMap($getList = false, $indexAttr = 'id')
     {
-        $map = parent::getMap();
+        $map = parent::getMap(true);
 
         unset($map['cols']['state']);
 
