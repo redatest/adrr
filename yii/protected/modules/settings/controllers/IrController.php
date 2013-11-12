@@ -13,7 +13,15 @@ class IrController extends RESTful
 
             $model = $this->_model->findByAttributes(array('ir' => $_GET['ir']));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) {
+
+                $data = array();
+                $data['model'] = $model;
+                $data['pts'] = $model->pouringTypes;
+                $data['als'] = $model->als;
+
+                $this->_sendResponse(200, CJSON::encode($data));
+            }
 
         }
 

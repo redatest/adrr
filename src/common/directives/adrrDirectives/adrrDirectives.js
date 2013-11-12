@@ -194,17 +194,18 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
 
             scope: {
                 ngModel: '=',
-                adrrData: '&'
+                adrrData: '&',
+                ngDisabled: '='
             },
 
             template: '<div class="input-group">' +
                 '<div class="input-group-btn">' +
-                '<button ng-show="frequents.length" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{id}}">' +
+                '<button ng-disabled="ngDisabled" ng-show="frequents.length" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{id}}">' +
                 'Frequents' +
                 '</button>' +
                 '</div>' +
 
-                '<select class="form-control s2w">' +
+                '<select ng-disabled="ngDisabled" class="form-control s2w">' +
                 '<option value="">Select...</option>' +
                 '<option ng-repeat="item in adrrData()" value="{{item.id}}" ng-selected="item.id == ngModel">' +
                 '{{item.name}}' +
@@ -238,18 +239,23 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 scope.$watch
                 (
                     'adrrData()', function (newVal) {
+
                         scope.frequents = _.filter
                         (
                             newVal, function (item) {
+
                                 if (attrs['frequentProp']) {
+
                                     return item[attrs['frequentProp']] == 1;
-                                }
-                                else {
+
+                                } else {
+
                                     return item['mostFrequent'] == 1;
+
                                 }
                             }
                         );
-                    }
+                    }, true
                 );
 
                 scope.programmaticallySelect = function (id) {

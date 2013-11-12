@@ -5,10 +5,12 @@
 @sidenav_border: 1px solid #cccccc;
 /* End */
 
+//noinspection CssInvalidPseudoSelector
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+//noinspection CssInvalidPseudoSelector
 input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -139,8 +141,13 @@ body {
   font-size: 1.5em;
 }
 
+//noinspection CssUnknownTarget
 #sidenav li.active > a, #sidenav li a:hover {
-  background: #ffffff url("../images/sidenav_arrow.jpg") no-repeat right;
+
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url(../images/sidenav_arrow.jpg);
+  background-color: #ffffff;
 
   color: #428bca;
 
@@ -337,11 +344,11 @@ body {
 }
 
 #pouringForm .case1 {
-  margin-top: -248px;
+  margin-top: -186px;
 }
 
 #pouringForm .case2 {
-  margin-top: -124px;
+  margin-top: 0px;
 }
 
 /* End */

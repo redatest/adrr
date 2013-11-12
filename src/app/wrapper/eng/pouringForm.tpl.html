@@ -104,65 +104,11 @@
 
 <div class="col-xs-12 col-sm-6">
 
-    <div class="panel" ng-form="secondForm"
-         ng-class="{'panel-danger': secondForm.$invalid, 'panel-success': secondForm.$valid}">
-
-        <div class="panel-heading">
-            <h3 class="panel-title">2. Member identification</h3>
-        </div>
-
-        <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': ptForm.$invalid}" ng-form="ptForm">
-                <label class="control-label">Pouring Type</label>
-
-                <adrr-select2-wrapper ng-model="formData.pouring_type_id" adrr-id="pouring_type_id" required
-                                      frequent-prop="very_frequent" adrr-data="yii['PouringType']['list']">
-                </adrr-select2-wrapper>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
-                <label for="ir" class="control-label">IR</label>
-                <input id="ir" type="text" class="form-control" ng-model="formData['ir']" required/>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': zoneForm.$invalid}" ng-form="zoneForm">
-                <label class="control-label">Zone</label>
-
-                <adrr-select2-wrapper ng-model="formData.zone_id" adrr-id="zoneId" required
-                                      frequent-prop="very_frequent" adrr-data="yii['Zone']['list']">
-                </adrr-select2-wrapper>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': areaForm.$invalid}" ng-form="areaForm">
-                <label for="area" class="control-label">Area</label>
-                <input id="area" type="text" class="form-control" ng-model="formData['area']" required/>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': axisForm.$invalid}" ng-form="axisForm">
-                <label for="axis" class="control-label">Axis</label>
-                <input id="axis" type="text" class="form-control" ng-model="formData['axis']" required/>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': levelForm.$invalid}" ng-form="levelForm">
-                <label for="level" class="control-label">Level</label>
-                <input id="level" type="text" class="form-control" ng-model="formData['level']" required/>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': estVolForm.$invalid}" ng-form="estVolForm">
-                <label for="est_vol" class="control-label">Estimated Volume</label>
-                <input id="est_vol" type="text" class="form-control" ng-model="formData['est_vol']" required/>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-xs-12 col-sm-6 case1">
-
     <div class="panel" ng-form="thirdForm"
          ng-class="{'panel-danger': thirdForm.$invalid, 'panel-success': thirdForm.$valid}">
 
         <div class="panel-heading">
-            <h3 class="panel-title">3. Truck</h3>
+            <h3 class="panel-title">2. Truck</h3>
         </div>
 
         <div class="panel-body">
@@ -210,6 +156,86 @@
             <div class="form-group" ng-class="{'has-error': pouredForm.$invalid}" ng-form="pouredForm">
                 <label for="poured_qty" class="control-label">Poured QTY</label>
                 <input id="poured_qty" type="text" class="form-control" ng-model="formData['poured_qty']" required/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6 case1">
+
+    <div class="panel" ng-form="secondForm"
+         ng-class="{'panel-danger': secondForm.$invalid, 'panel-success': secondForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">3. Member identification</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
+                <label for="ir" class="control-label">IR</label>
+                <input id="ir" type="text" class="form-control" ng-model="formData['ir']" required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': zoneForm.$invalid}" ng-form="zoneForm">
+                <label class="control-label">Zone</label>
+
+                <adrr-select2-wrapper ng-disabled="irFound" ng-model="formData.zone_id" adrr-id="zoneId" required
+                                      frequent-prop="very_frequent" adrr-data="yii['Zone']['list']">
+                </adrr-select2-wrapper>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': areaForm.$invalid}" ng-form="areaForm">
+                <label for="area" class="control-label">Area</label>
+                <input id="area" ng-disabled="irFound" type="text" class="form-control" ng-model="formData['area']"
+                       required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': estVolForm.$invalid}" ng-form="estVolForm">
+                <label for="est_vol" class="control-label">Estimated Volume</label>
+                <input id="est_vol" ng-disabled="irFound" type="text" class="form-control"
+                       ng-model="formData['est_vol']" required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': ptForm.$invalid}" ng-form="ptForm">
+                <label class="control-label">Pouring Type</label>
+
+                <adrr-select2-wrapper ng-disabled="onePouringType" ng-model="formData.pouring_type_id"
+                                      adrr-id="pouring_type_id" required
+                                      frequent-prop="very_frequent" adrr-data="pouringTypes">
+                </adrr-select2-wrapper>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': axisForm.$invalid}" ng-form="axisForm"
+                 ng-show="als.length < 2">
+                <label for="axis" class="control-label">Axis</label>
+
+                <input id="axis" type="text" class="form-control" ng-model="formData['axis']" ng-disabled="oneAl"
+                       required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': levelForm.$invalid}" ng-form="levelForm"
+                 ng-show="als.length < 2">
+                <label for="level" class="control-label">Level</label>
+
+                <input id="level" type="text" class="form-control" ng-model="formData['level']" ng-disabled="oneAl"
+                       required/>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': axis2Form.$invalid}" ng-form="axis2Form"
+                 ng-show="als.length > 1">
+                <label for="axis2" class="control-label">Axis</label>
+
+                <select id="axis2" class="form-control" ng-model="formData.axis" required>
+                    <option ng-repeat="(i, al) in als" value="{{i}}">{{al.axis}}</option>
+                </select>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': level2Form.$invalid}" ng-form="level2Form"
+                 ng-show="als.length > 1">
+                <label for="level2" class="control-label">Axis</label>
+
+                <input id="level2" class="form-control" type="text" value="{{als[formData.axis].level}}" required
+                       disabled/>
             </div>
         </div>
     </div>
