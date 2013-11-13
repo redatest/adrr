@@ -186,6 +186,27 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             .state
         (
+            'wrapper.eng.pouring.returned',
+            {
+                url: '^/pourings/returned',
+
+                title: 'Returned Pourings',
+
+                breadcrumb: ['Home', 'Pourings', 'Returned'],
+
+                showControls: true,
+
+                views: {
+                    '@wrapper.eng.pouring': {
+                        controller: 'PouringReturnedCtrl',
+                        templateUrl: 'wrapper/eng/pouringReturned.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
             'wrapper.eng.pouring.create',
             {
                 url: '^/pourings/create',
@@ -1800,6 +1821,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
 
         ];
+
+    }
+)
+
+    .controller
+(
+    'PouringReturnedCtrl', function () {
 
     }
 )
