@@ -1,1 +1,389 @@
-<div>Form</div>
+<div ng-show="showAlert" class="alert" ng-class="{ 'alert-success': alert, 'alert-danger': !alert }">
+    <any ng-show="alert">Successfully saved.</any>
+    <any ng-hide="alert">Something went wrong.</any>
+</div>
+
+<form id="labForm" role="form" name="mainForm" class="labForm" novalidate>
+<div class="col-xs-12 col-lg-8 col-lg-offset-1">
+<div class="well well-sm">
+<div class="row">
+
+<div class="col-xs-12 col-sm-6 col-lg-offset-3">
+    <div class="panel" ng-class="{'panel-danger': basForm.$invalid, 'panel-success': basForm.$valid}"
+         ng-form="basForm">
+
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
+                <label for="date" class="control-label"> Date </label>
+
+                <div class="input-group">
+                    <div class="input-group-btn" ng-show="loginData.senior == 0">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal"
+                                ng-disabled="state.indexOf('edit') > -1">
+                            Frequents
+                        </button>
+                    </div>
+
+                    <input ng-show="loginData.senior == 1" id="date" readonly="readonly"
+                           ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <input ng-show="loginData.senior == 0" readonly="readonly"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                </div>
+
+                <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Frequents</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="list-group">
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setCurrentShift()" onclick="return false;">
+                                        Current Shift
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setToday()" onclick="return false;">
+                                        Today
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min1Day()" onclick="return false;">
+                                        Yesterday
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min2Days()" onclick="return false;">
+                                        2 days ago
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min3Days()" onclick="return false;">
+                                        3 days ago
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
+                <label for="shift_id" class="control-label"> shift </label>
+
+                <select id="shift_id" ng-model="formData.shift_id" class="form-control"
+                        ng-disabled="loginData.senior == 0 && state.indexOf('edit') > -1" required>
+                    <option value="">Select...</option>
+                    <option ng-repeat="shiftType in yii['ShiftType']['list']"
+                            ng-selected="shiftType.id === formData.shift_id"
+                            value="{{shiftType.id}}">
+                        {{shiftType.name}}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-offset-3">
+        <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+             ng-form="infoForm">
+            <div class="panel-heading">
+                <h3 class="panel-title">2 Pouring location, rebars, and embeds are clean and free foreign materials</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                     ng-form="concTypeForm">
+                    <label class="control-label"> State </label>
+
+                    <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                          frequent-prop="very_frequent"
+                                          adrr-data="yii['ConcreteType']['list']" required>
+                    </adrr-select2-wrapper>
+                </div>
+
+                <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+                    <label for="lre" class="control-label">Remark</label>
+
+                    <input id="lre" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                           required/>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3 -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-offset-3">
+            <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+                 ng-form="infoForm">
+                <div class="panel-heading">
+                    <h3 class="panel-title">3 Concreting tools and equipement are clean and free of old concrete, mud, etc</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                         ng-form="concTypeForm">
+                        <label class="control-label"> State </label>
+
+                        <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                              frequent-prop="very_frequent"
+                                              adrr-data="yii['ConcreteType']['list']" required>
+                        </adrr-select2-wrapper>
+                    </div>
+
+                    <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+                        <label for="cte" class="control-label"> Remark </label>
+
+                        <input id="cte" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                               required/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 4 -->
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-offset-3">
+        <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+             ng-form="infoForm">
+            <div class="panel-heading">
+                <h3 class="panel-title">4 Sufficiant labor(L) concreting tools(T) and equiepement(E) are provided </h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                     ng-form="concTypeForm">
+                    <label class="control-label"> State </label>
+
+                    <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                          frequent-prop="very_frequent"
+                                          adrr-data="yii['ConcreteType']['list']" required>
+                    </adrr-select2-wrapper>
+                </div>
+
+                <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+                    <label for="lte" class="control-label"> Remark </label>
+
+                    <input id="lte" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                           required/>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 5 -->
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-offset-3">
+        <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+             ng-form="infoForm">
+            <div class="panel-heading">
+                <h3 class="panel-title">5 Concrete is properly protected from high speed wind</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                     ng-form="concTypeForm">
+                    <label class="control-label"> State </label>
+
+                    <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                          frequent-prop="very_frequent"
+                                          adrr-data="yii['ConcreteType']['list']" required>
+                    </adrr-select2-wrapper>
+                </div>
+
+                <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+                    <label for="cpp" class="control-label"> Remark </label>
+
+                    <input id="cpp" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                           required/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 6 -->
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-offset-3">
+        <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+             ng-form="infoForm">
+            <div class="panel-heading">
+                <h3 class="panel-title">6 Provisions for hot-weather concreting </h3>
+            </div>
+
+            <br/>
+            <div class="alert alert-warning"><strong>Forms</strong>, rebars and sub-grade should be thoroughly wetted just before concrete placement </div>
+            <div class="panel-body">
+                <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                     ng-form="concTypeForm">
+                    <label class="control-label"> State </label>
+
+                    <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                          frequent-prop="very_frequent"
+                                          adrr-data="yii['ConcreteType']['list']" required>
+                    </adrr-select2-wrapper>
+                </div>
+
+                <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+
+                    <label for="frs" class="control-label"> Remark </label>
+
+                    <input id="frs" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                           required/>
+                </div>
+
+
+            </div>
+
+            <br/>
+            <div class="alert alert-warning"><strong>Casting</strong>, is done during the prohibited time </div>
+            <div class="panel-body">
+                <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
+                     ng-form="concTypeForm">
+                    <label class="control-label"> State </label>
+
+                    <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
+                                          frequent-prop="very_frequent"
+                                          adrr-data="yii['ConcreteType']['list']" required>
+                    </adrr-select2-wrapper>
+                </div>
+
+                <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+
+
+                    <label for="cdd" class="control-label"> Remark </label>
+
+                    <input id="cdd" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                           required/>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+
+</div>
+</div>
+
+<div class="form-group" ng-show="false">
+    <button ng-disabled="controls[0]['disabled'] = mainForm.$invalid">
+        Save
+    </button>
+</div>
+</div>
+</form>
+
+<div class="modal" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Date</td>
+                        <td>{{formData.date}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shift</td>
+                        <td>{{yii['ShiftType']['list'][formData.shift_id]['name']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Supplier</td>
+                        <td>{{yii['Supplier']['list'][formData.supplier_id]['name']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Concrete Type</td>
+                        <td>{{yii['ConcreteType']['list'][formData.conc_type_id]['name']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Plant</td>
+                        <td>{{formData.plant}}</td>
+                    </tr>
+                    <tr>
+                        <td>Truck</td>
+                        <td>{{formData.truck}}</td>
+                    </tr>
+                    <tr>
+                        <td>Ticket</td>
+                        <td>{{formData.ticket}}</td>
+                    </tr>
+                    <tr>
+                        <td>Departure time</td>
+                        <td>{{formData.dept_time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Arrival time</td>
+                        <td>{{formData.arriv_time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Truck load (m3)</td>
+                        <td>{{formData.truck_load}}</td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>{{formData.temp}}</td>
+                    </tr>
+                    <tr>
+                        <td>Slump</td>
+                        <td>{{formData.slump}}</td>
+                    </tr>
+                    <tr>
+                        <td>Flow</td>
+                        <td>{{formData.flow}}</td>
+                    </tr>
+                    <tr>
+                        <td>Accepted</td>
+                        <td>{{formData.accepted | yesNo}}</td>
+                    </tr>
+                    <tr ng-show="state.indexOf('edit') === -1">
+                        <td>comment</td>
+                        <td>{{comment}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
