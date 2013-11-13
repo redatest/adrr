@@ -69,21 +69,10 @@ class PouringController extends RESTful
     {
         $condition = 'archived = 0';
 
-        if (isset($_GET['trucker'])) {
+        if (isset($_GET['trucker'])) $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
 
-            $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
-
-        }
-
-        if (Yii::app()->user->isSenior) {
-
-            $condition .= ' AND returned = 0 AND approved = 1';
-
-        } else {
-
-            $condition .= ' AND returned = 1 AND approved = 0 AND user_id = ' . Yii::app()->user->id;
-
-        }
+        if (Yii::app()->user->isSenior) $condition .= ' AND returned = 0 AND approved = 1';
+        else $condition .= ' AND returned = 1 AND approved = 0 AND user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;

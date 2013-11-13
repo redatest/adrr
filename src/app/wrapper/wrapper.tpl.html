@@ -80,11 +80,11 @@
                                         class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}}</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
-                                <a href="#" onclick="return false;"><span class="menu-text"><i
+                                <a href="#/pourings/returned"><span class="menu-text"><i
                                         class="fa fa-angle-double-right"></i>Return</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.archive') > -1}">
-                                <a href="#" onclick="return false;"><span class="menu-text"><i
+                                <a href="#/pourings/archive"><span class="menu-text"><i
                                         class="fa fa-angle-double-right"></i>Archive</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}" ng-switch-when="0">
