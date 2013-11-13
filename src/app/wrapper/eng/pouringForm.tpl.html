@@ -157,7 +157,8 @@
                 <label for="poured_qty" class="control-label">Poured QTY</label>
 
                 <div class="input-group">
-                    <input id="poured_qty" type="text" adrr-num-range max="{{total - used}}" class="form-control"
+                    <input id="poured_qty" type="text" adrr-num-range max="{{total - used}}" min="1"
+                           class="form-control"
                            ng-model="formData['poured_qty']" required/>
                     <span class="input-group-addon">used: {{used}}</span>
                 </div>
@@ -258,7 +259,7 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
                 <label for="slumpb" class="control-label">Slump B</label>
-                <input id="slumpb" type="text" class="form-control" ng-model="formData['slumpb']" required/>
+                <input id="slumpb" type="text" class="form-control" ng-model="formData['slump_b']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
@@ -273,7 +274,7 @@
 
             <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
                 <label for="slumpa" class="control-label">Slump A</label>
-                <input id="slumpa" type="text" class="form-control" ng-model="formData['slumpa']" required/>
+                <input id="slumpa" type="text" class="form-control" ng-model="formData['slump_a']" required/>
             </div>
         </div>
     </div>
@@ -291,7 +292,7 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': acptForm.$invalid}" ng-form="acptForm">
                 <label for="accepted" class="control-label">Accepted</label>
-                <select id="accepted" class="form-control" ng-model="formData['acpt']" required>
+                <select id="accepted" class="form-control" ng-model="formData['accepted']" required>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
@@ -324,19 +325,19 @@
             <div class="form-group" ng-class="{'has-error': startForm.$invalid}" ng-form="startForm">
                 <label class="control-label">Start</label>
 
-                <adrr-timepicker required ng-model="formData.start"></adrr-timepicker>
+                <adrr-timepicker required ng-model="formData.start_time"></adrr-timepicker>
             </div>
 
             <div class="form-group" ng-class="{'has-error': endForm.$invalid}" ng-form="endForm">
                 <label class="control-label">End</label>
 
-                <adrr-timepicker required ng-model="formData.end"></adrr-timepicker>
+                <adrr-timepicker required ng-model="formData.end_time"></adrr-timepicker>
             </div>
 
             <div class="from-group">
                 <label for="comment" class="control-label">Comment</label>
 
-                <textarea id="comment" ng-model="formData['comment']" class="form-control" rows="3"></textarea>
+                <textarea id="comment" ng-model="comment" class="form-control" rows="3"></textarea>
             </div>
         </div>
     </div>

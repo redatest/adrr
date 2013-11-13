@@ -48,6 +48,7 @@ class Pouring extends ArModel
             'returned' => 'Returned',
             'approved' => 'Approved',
             'archived' => 'Archived',
+            'create_time' => 'Create Time',
             'update' => 'Update'
         );
     }
@@ -84,22 +85,6 @@ class Pouring extends ArModel
         $this->update = date('Y:m:d H:i:s');
 
         return parent::save($runValidation, $attributes);
-    }
-
-    protected function afterSave()
-    {
-        if ($this->isNewRecord) {
-
-            if ($this->red !== null) {
-
-                AdrrNotificationPump::register('the link goes here', '@Lab in ' . $this->red, array('roles' => array('senior')), 'Lab', $this->id, 'red', true);
-
-            } else if ($this->yellow !== null) {
-
-                AdrrNotificationPump::register('the link goes here', '@Lab in ' . $this->yellow, array('roles' => array('senior')), 'Lab', $this->id, 'yellow', true);
-
-            }
-        }
     }
 
     public static function model($className = __CLASS__)

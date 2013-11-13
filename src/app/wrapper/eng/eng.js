@@ -1337,7 +1337,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 $scope.formData['arriv_time'] = $scope.formData['date'] + ' ' + $scope.formData['arriv_time'];
             }
 
-
             $scope.model.post($scope.formData).then
             (
                 function (data) {
@@ -1573,6 +1572,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.formData = {};
 
+            $scope.comment = '';
+
         };
 
         $scope.reset();
@@ -1645,6 +1646,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
                     Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
                     (
                         function (data) {
+
+                            $scope.lab = data;
 
                             $scope.formData['truck'] = data['truck'];
                             $scope.formData['truck_load'] = data['truck_load'];
@@ -1779,6 +1782,76 @@ angular.module('adrrApp.wrapper.eng', [], null)
         );
 
         $scope.submit = function () {
+
+            var deferred = $q.defer();
+
+            var datePlusOne = function (val) {
+
+                var date = new Date(val.split('-'));
+
+                date.setDate(date.getDate() + 1);
+
+                return $.datepicker.formatDate('yy-mm-dd', date);
+            };
+
+            var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
+
+            var overlap = parseInt(shift['overlap']);
+
+            if ($scope.ticketFound) {
+
+                $scope.formData['dept_time'] = $scope.lab['dept_time'];
+
+            } else if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
+
+                $scope.formData['dept_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['dept_time'];
+
+            } else {
+
+                $scope.formData['dept_time'] = $scope.formData['date'] + ' ' + $scope.formData['dept_time'];
+            }
+
+            if (overlap && $scope.formData['start_time'] < shift['start_time']) {
+
+                $scope.formData['start_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['start_time'];
+
+            } else {
+                $scope.formData['start_time'] = $scope.formData['date'] + ' ' + $scope.formData['start_time'];
+            }
+
+            if (overlap && $scope.formData['end_time'] < shift['start_time']) {
+
+                $scope.formData['end_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['end_time'];
+
+            } else {
+                $scope.formData['end_time'] = $scope.formData['date'] + ' ' + $scope.formData['end_time'];
+            }
+
+            if ($scope.als.length > 1) {
+
+                $scope.formData['level'] = $scope.als[$scope.formData.axis].level;
+                $scope.formData['axis'] = $scope.als[$scope.formData.axis].axis;
+
+            }
+
+            Restangular.all('eng/pouring').post($scope.formData).then
+            (
+                function (data) {
+
+                    if (typeof $scope.comment !== 'undefined' && $scope.comment !== '') {
+
+                        data.all('comments').post({comment: $scope.comment}).then
+                        (
+                            function () {
+
+                                $scope.reset();
+
+                            }
+                        );
+                    }
+
+                }
+            );
 
         };
 

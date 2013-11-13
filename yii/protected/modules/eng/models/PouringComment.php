@@ -2,11 +2,11 @@
 /**
  * @property mixed date_time
  */
-class LabComment extends ArModel
+class PouringComment extends ArModel
 {
     public function tableName()
     {
-        return '{{lab_comment}}';
+        return '{{pouring_comment}}';
     }
 
     public function relations()
@@ -24,6 +24,13 @@ class LabComment extends ArModel
             'comment' => 'Comment',
             'date_time' => 'Date & Time'
         );
+    }
+
+    protected function beforeSave()
+    {
+        $this->user_id = Yii::app()->user->id;
+
+        return parent::beforeSave();
     }
 
     public function save($runValidation = true, $attributes = null)
