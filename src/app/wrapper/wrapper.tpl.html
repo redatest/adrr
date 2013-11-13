@@ -63,6 +63,10 @@
                         </ul>
                     </li>
 
+                    <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
+                        <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Lab Temperature</a>
+                    </li>
+
                     <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.eng.pouring') === -1}" data-toggle="collapse"

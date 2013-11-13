@@ -1696,7 +1696,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             onAfterSelectionChangeHandler: $scope.afterSelectionChangeHandler
 
-        }
+        };
 
         $scope.createClickHandler = function () {
 
@@ -2023,7 +2023,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.submit = function () {
 
-            var deferred = $q.defer();
+//            var deferred = $q.defer();
 
             var datePlusOne = function (val) {
 
