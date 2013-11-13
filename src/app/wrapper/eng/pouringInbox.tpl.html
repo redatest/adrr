@@ -1,1 +1,274 @@
-<div>List</div>
+<div class="table-responsive" adrr-grid="adrrGridOptions"></div>
+
+<div class="modal" id="commentModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Comments</h4>
+</div>
+<div class="modal-body">
+<div class="container">
+<div class="col-xs-6">
+<table class="table table-striped">
+<tr>
+    <td>
+        <b>Date</b>
+    </td>
+
+    <td>
+        {{curRec.date}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>User</b>
+    </td>
+
+    <td>
+        {{curRec.user_id | fetchValue:yii['User']:'username'}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Shift</b>
+    </td>
+
+    <td>
+        {{curRec.shift_id | fetchValue:yii['ShiftType']}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Pouring Type</b>
+    </td>
+
+    <td>
+        {{curRec.pouring_type_id | fetchValue:yii['PouringType']}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>IR</b>
+    </td>
+
+    <td>
+        {{curRec.ir}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Zone</b>
+    </td>
+
+    <td>
+        {{curRec.zone_id | fetchValue:yii['Zone']}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Area</b>
+    </td>
+
+    <td>
+        {{curRec.area}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Axis</b>
+    </td>
+
+    <td>
+        {{curRec.axis}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Level</b>
+    </td>
+
+    <td>
+        {{curRec.level}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Estimated Volume</b>
+    </td>
+
+    <td>
+        {{curRec.est_vol}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Ticket</b>
+    </td>
+
+    <td>
+        {{curRec.ticket | tickPref:yii["Supplier"]["list"][curRec.supplier_id]}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Truck</b>
+    </td>
+
+    <td>
+        {{curRec.truck}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Truck Load</b>
+    </td>
+
+    <td>
+        {{curRec.truck_load}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Concrete</b>
+    </td>
+
+    <td>
+        {{curRec.conc_type_id | fetchValue:yii['ConcreteType']}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Dept Time</b>
+    </td>
+
+    <td>
+        {{curRec.dept_time | stringDate:'HH:mm'}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Poured QTY</b>
+    </td>
+
+    <td>
+        {{curRec.poured_qty}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Slump B</b>
+    </td>
+
+    <td>
+        {{curRec.slump_b}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>HRWR</b>
+    </td>
+
+    <td>
+        {{curRec.hrwr}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Water</b>
+    </td>
+
+    <td>
+        {{curRec.water}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Slump A</b>
+    </td>
+
+    <td>
+        {{curRec.slump_a}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Start Time</b>
+    </td>
+
+    <td>
+        {{curRec.start_time | stringDate:"HH:mm"}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>End Time</b>
+    </td>
+
+    <td>
+        {{curRec.end_time | stringDate:"HH:mm"}}
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>Accepted</b>
+    </td>
+
+    <td>
+        {{curRec.accepted | yesNo}}
+    </td>
+</tr>
+</table>
+</div>
+
+<div class="col-xs-6">
+    <div class="panel panel-default" ng-repeat="(i, comment) in comments">
+        <div class="panel-heading" ng-class="{'right': i % 2 !== 0}">
+            {{comment.user_id |
+            fetchValue:yii['User']:'username'}}<span>{{comment.date_time}}</span>
+        </div>
+
+        <div class="panel-body">
+            {{comment.comment}}
+        </div>
+    </div>
+    <label for="newComment">New comment:</label>
+
+    <textarea id="newComment" class="form-control" ng-model="commentText"></textarea>
+
+    <button style="float: right; margin-top: 10px;" type="button" class="btn btn-primary"
+            ng-click="submitComment()"
+            ng-disabled="commentText === '' || commentText === undefined">Send
+    </button>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>

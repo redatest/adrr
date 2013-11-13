@@ -71,8 +71,8 @@
 
                         <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
-                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
-                                <a href="#/pourings/inbox"><span class="menu-text"><i
+                            <li ng-class="{active: state == 'wrapper.eng.pouring.inbox'}">
+                            <a href="#/pourings/inbox"><span class="menu-text"><i
                                         class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}}</span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
