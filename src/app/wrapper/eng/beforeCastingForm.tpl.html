@@ -16,65 +16,8 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
                 <label for="date" class="control-label"> Date </label>
-
-                <div class="input-group">
-                    <div class="input-group-btn" ng-show="loginData.senior == 0">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal"
-                                ng-disabled="state.indexOf('edit') > -1">
-                            Frequents
-                        </button>
-                    </div>
-
-                    <input ng-show="loginData.senior == 1" id="date" readonly="readonly"
-                           ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
-                           ng-model="formData.date" class="form-control" type="text" required/>
-
-                    <input ng-show="loginData.senior == 0" readonly="readonly"
-                           ng-model="formData.date" class="form-control" type="text" required/>
-
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
-                </div>
-
-                <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Frequents</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="list-group">
-                                    <a data-dismiss="modal" class="list-group-item" href="#"
-                                       ng-click="setCurrentShift()" onclick="return false;">
-                                        Current Shift
-                                    </a>
-
-                                    <a data-dismiss="modal" class="list-group-item" href="#"
-                                       ng-click="setToday()" onclick="return false;">
-                                        Today
-                                    </a>
-
-                                    <a data-dismiss="modal" class="list-group-item" href="#"
-                                       ng-click="min1Day()" onclick="return false;">
-                                        Yesterday
-                                    </a>
-
-                                    <a data-dismiss="modal" class="list-group-item" href="#"
-                                       ng-click="min2Days()" onclick="return false;">
-                                        2 days ago
-                                    </a>
-
-                                    <a data-dismiss="modal" class="list-group-item" href="#"
-                                       ng-click="min3Days()" onclick="return false;">
-                                        3 days ago
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <input id="date" readonly="readonly" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" class="form-control" type="text" required/>
+                
             </div>
 
             <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
@@ -284,7 +227,7 @@
                         <option value="no">NO</option>
                         <option value="yes">YES</option>
                     </select>
-                    
+
                 </div>
 
                 <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
