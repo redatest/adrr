@@ -253,10 +253,11 @@
                      ng-form="concTypeForm">
                     <label class="control-label"> State </label>
 
-                    <adrr-select2-wrapper ng-model="formData.conc_type_id" adrr-id="concId"
-                                          frequent-prop="very_frequent"
-                                          adrr-data="yii['ConcreteType']['list']" required>
-                    </adrr-select2-wrapper>
+                    <select class="form-control">
+                        <option value="na">N/A</option>
+                        <option value="no">NO</option>
+                        <option value="yes">YES</option>
+                    </select>
                 </div>
 
                 <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
