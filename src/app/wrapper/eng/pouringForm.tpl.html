@@ -155,7 +155,12 @@
 
             <div class="form-group" ng-class="{'has-error': pouredForm.$invalid}" ng-form="pouredForm">
                 <label for="poured_qty" class="control-label">Poured QTY</label>
-                <input id="poured_qty" type="text" class="form-control" ng-model="formData['poured_qty']" required/>
+
+                <div class="input-group">
+                    <input id="poured_qty" type="text" adrr-num-range max="{{total - used}}" class="form-control"
+                           ng-model="formData['poured_qty']" required/>
+                    <span class="input-group-addon">used: {{used}}</span>
+                </div>
             </div>
         </div>
     </div>

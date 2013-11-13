@@ -265,7 +265,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                     '@wrapper.eng.temp': {
 
-                        controller: 'TempInboxCreateCtrl',
+                        controller: 'TempCreateCtrl',
 
                         templateUrl: 'wrapper/eng/tempForm.tpl.html'
 
@@ -816,8 +816,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
     }
 )
 
-    .
-    controller
+    .controller
 (
     'LabArchiveCtrl', function ($rootScope, $scope, yii, adrrDataFetcher, Restangular, $state) {
 
@@ -1638,6 +1637,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
         (
             'formData.ticket', function (newVal) {
 
+                $scope.used = 0;
+                $scope.total = 12;
+
                 if (typeof newVal !== 'undefined' && newVal !== '') {
 
                     Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
@@ -1650,6 +1652,16 @@ angular.module('adrrApp.wrapper.eng', [], null)
                             $scope.formData['dept_time'] = data['dept_time'];
 
                             $scope.ticketFound = true;
+
+                            Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['truck']}).then
+                            (
+                                function (data) {
+
+                                    $scope.used = data['used'];
+                                    $scope.total = data['total'];
+
+                                }
+                            );
                         },
 
                         function () {
@@ -1755,6 +1767,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                             } else if (data['als'].length > 1) {
 
+                                $scope.formData.level = 1;
                                 $scope.als = data['als'];
 
                             }
@@ -1886,7 +1899,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'TempInboxCreateCtrl', function ($rootScope, $scope, yii, Restangular) {
+    'TempCreateCtrl', function ($rootScope, $scope, yii, Restangular) {
 
         $scope.metaData = yii['LabTemperature'];
 

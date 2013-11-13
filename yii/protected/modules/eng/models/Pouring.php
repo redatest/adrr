@@ -1,26 +1,17 @@
 <?php
 
-/**
- * @property mixed create_time
- * @property mixed user_id
- * @property mixed red
- * @property mixed id
- * @property mixed yellow
- * @property mixed isNewRecord
- * @property mixed update
- */
-class Lab extends ArModel
+class Pouring extends ArModel
 {
     public function tableName()
     {
-        return '{{lab}}';
+        return '{{pouring}}';
     }
 
     public function relations()
     {
         return array
         (
-            'comments' => array(self::HAS_MANY, 'LabComment', 'lab_id')
+            'comments' => array(self::HAS_MANY, 'PouringComment', 'pouring_id')
         );
     }
 
@@ -33,20 +24,27 @@ class Lab extends ArModel
             'date' => 'Date',
             'shift_id' => 'Shift',
             'supplier_id' => 'Supplier',
-            'conc_type_id' => 'Conc Type',
-            'plant' => 'Plant',
-            'truck' => 'Truck',
+            'pouring_type_id' => 'Pouring Type',
+            'ir' => 'IR',
+            'zone_id' => 'Zone',
+            'area' => 'Area',
+            'axis' => 'Axis',
+            'level' => 'Level',
+            'est_vol' => 'Estimated Volume',
             'ticket' => 'Ticket',
-            'dept_time' => 'Departure Time',
-            'arriv_time' => 'Arrival Time',
+            'truck' => 'Truck',
+            'conc_type_id' => 'Concrete Type',
             'truck_load' => 'Truck Load',
-            'temp' => 'Temperature',
-            'slump' => 'Slump',
-            'flow' => 'Flow',
+            'poured_qty' => 'Poured QTY',
+            'dept_time' => 'Departure Time',
+            'slump_b' => 'Slump B',
+            'hrwr' => 'HRWR',
+            'water' => 'Water',
+            'slump_a' => 'Slump A',
             'accepted' => 'Accepted',
-            'red' => 'Red Alert',
-            'yellow' => 'Yellow Alert',
-            'create_time' => 'Create Time',
+            'pump_id' => 'Pump',
+            'start_time' => 'Start Time',
+            'end_time' => 'End Time',
             'returned' => 'Returned',
             'approved' => 'Approved',
             'archived' => 'Archived',

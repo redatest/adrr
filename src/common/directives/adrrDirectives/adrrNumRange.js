@@ -11,8 +11,11 @@ var adrrNumRange = angular.module('adrrDirectives.numRange', [], null)
             scope: false,
 
             link: function (scope, element, attrs, ctrl) {
+
                 ctrl.$render = function () {
+
                     check(ctrl.$modelValue);
+
                 };
 
                 element.on
@@ -28,10 +31,13 @@ var adrrNumRange = angular.module('adrrDirectives.numRange', [], null)
                 );
 
                 function check(val) {
+
                     if (val !== '' && val !== '-' && !angular.isUndefined(val)) {
+
                         val = parseInt(val, 10);
 
                         if (!angular.isUndefined(attrs.min)) {
+
                             var minVal = parseInt(attrs.min, 10);
 
                             if (val < minVal) val = '';

@@ -1,12 +1,12 @@
 <?php
-class LabController extends RESTful
+class PouringController extends RESTful
 {
     public function __construct()
     {
-        $this->_model = Lab::model();
+        $this->_model = Pouring::model();
     }
 
-    public function actionTodayRecords()
+    /*public function actionTodayRecords()
     {
         date_default_timezone_set('Asia/Riyadh');
 
@@ -27,7 +27,7 @@ class LabController extends RESTful
         $result['numRows'] = $this->_model->count("date = '" . $date . "' and user_id=" . Yii::app()->user->id);
 
         $this->_sendResponse(200, CJSON::encode($result));
-    }
+    }*/
 
     public function actionGetUnarchived()
     {
@@ -132,7 +132,7 @@ class LabController extends RESTful
             }
         }
 
-        throw new CHttpException(404, 'Couldn\'t archive this record');
+        throw new CHttpException(404, 'Could not archive this record');
     }
 
     public function actionReturn()
@@ -159,7 +159,7 @@ class LabController extends RESTful
             }
         }
 
-        throw new CHttpException(404, 'Couldn\'t return this record');
+        throw new CHttpException(404, 'Could not return this record');
     }
 
     public function actionGetTicket()
@@ -173,6 +173,27 @@ class LabController extends RESTful
         }
 
         $this->_sendResponse(404, 'Ticket was not found');
+    }
+
+    public function actionGetPouredQTY()
+    {
+        if (isset($_GET['ticket'])) {
+
+            $models = $this->_model->findAllByAttributes(array('ticket' => $_GET['ticket']));
+
+            $stat = array();
+
+            $stat['total'] = $models[0]->truck_load;
+            $stat['used'] = 0;
+
+            foreach ($models as $model) {
+
+                $stat['used'] += $model->poured_qty;
+
+            }
+            echo CJSON::encode($stat);
+
+        }
     }
 }
 
