@@ -16,7 +16,13 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
                 <label for="date" class="control-label"> Date </label>
-                <input id="date" readonly="readonly" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" class="form-control" type="text" required/>
+
+                <div class="input-group">
+
+                    <input id="date" ng-model="formData.date" readonly="readonly" ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd" class="form-control" type="text" required/>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                </div>
+
                 
             </div>
 
