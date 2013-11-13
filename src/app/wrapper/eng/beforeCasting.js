@@ -49,6 +49,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
             'wrapper.beforeCasting.create',
             {
                 url: '^/before-casting/create',
+		showControls: true,
 
                 views: {
 
@@ -215,13 +216,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
             {
                 title: 'Save and add',
-
-                clickHandler: $scope.submit,
-
-                visibility: $rootScope.loginData['senior'] == 0
-            },
-            {
-                title: 'Save and add same IR',
 
                 clickHandler: $scope.submit,
 
