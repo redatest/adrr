@@ -23,7 +23,6 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                 </div>
 
-                
             </div>
 
             <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
@@ -51,16 +50,16 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-lg-offset-3">
         <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
-             ng-form="infoForm">
+             ng-form="lreForm">
             <div class="panel-heading">
                 <h3 class="panel-title">2 Pouring location, rebars, and embeds are clean and free foreign materials</h3>
             </div>
             <div class="panel-body">
                 <div class="form-group" ng-class="{'has-error': concTypeForm.$invalid}"
-                     ng-form="concTypeForm">
+                     ng-form="lreStateForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control">
+                    <select class="form-control" ng-model="formData.lre">
                         <option value="na">N/A</option>
                         <option value="no">NO</option>
                         <option value="yes">YES</option>
@@ -68,11 +67,11 @@
 
                 </div>
 
-                <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+                <div class="form-group" ng-class="getRangeClass('temp', formData.lre)" ng-form="lreCmtForm">
 
                     <label for="lre" class="control-label">Remark</label>
 
-                    <input id="lre" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                    <input id="lre" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.lre_comment"
                            required/>
                 </div>
 
@@ -96,11 +95,12 @@
                          ng-form="concTypeForm">
                         <label class="control-label"> State </label>
 
-                        <select class="form-control">
-                        <option value="na">N/A</option>
-                        <option value="no">NO</option>
-                        <option value="yes">YES</option>
-                    </select>
+
+                        <select class="form-control" ng-model="formData.cte">
+                            <option value="na">N/A</option>
+                            <option value="no">NO</option>
+                            <option value="yes">YES</option>
+                        </select>
 
                     </div>
 
@@ -108,7 +108,7 @@
 
                         <label for="cte" class="control-label"> Remark </label>
 
-                        <input id="cte" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                        <input id="cte" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.cte_comment"
                                required/>
                     </div>
 
@@ -130,7 +130,7 @@
                      ng-form="concTypeForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control">
+                    <select class="form-control" ng-model="formData.lte">
                         <option value="na">N/A</option>
                         <option value="no">NO</option>
                         <option value="yes">YES</option>
@@ -142,7 +142,7 @@
 
                     <label for="lte" class="control-label"> Remark </label>
 
-                    <input id="lte" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                    <input id="lte" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.lte_comment"
                            required/>
                 </div>
 
@@ -165,7 +165,7 @@
                      ng-form="concTypeForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control">
+                    <select class="form-control" ng-model="formData.cpp">
                         <option value="na">N/A</option>
                         <option value="no">NO</option>
                         <option value="yes">YES</option>
@@ -177,7 +177,7 @@
 
                     <label for="cpp" class="control-label"> Remark </label>
 
-                    <input id="cpp" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                    <input id="cpp" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.cpp_comment"
                            required/>
                 </div>
 
@@ -202,11 +202,12 @@
                      ng-form="concTypeForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control">
+                    <select class="form-control" ng-model="formData.frs">
                         <option value="na">N/A</option>
                         <option value="no">NO</option>
                         <option value="yes">YES</option>
                     </select>
+
                 </div>
 
                 <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
@@ -214,7 +215,7 @@
 
                     <label for="frs" class="control-label"> Remark </label>
 
-                    <input id="frs" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                    <input id="frs" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.frs_comment"
                            required/>
                 </div>
 
@@ -228,7 +229,7 @@
                      ng-form="concTypeForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control">
+                    <select class="form-control" ng-model="formData.cdd">
                         <option value="na">N/A</option>
                         <option value="no">NO</option>
                         <option value="yes">YES</option>
@@ -241,7 +242,7 @@
 
                     <label for="cdd" class="control-label"> Remark </label>
 
-                    <input id="cdd" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.temp"
+                    <input id="cdd" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.cdd_comment"
                            required/>
                 </div>
 
@@ -258,92 +259,7 @@
 </div>
 </div>
 
-<div class="form-group" ng-show="false">
-    <button ng-disabled="controls[0]['disabled'] = mainForm.$invalid">
-        Save
-    </button>
-</div>
+
 </div>
 </form>
 
-<div class="modal" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Confirmation</h4>
-            </div>
-
-            <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <td>Date</td>
-                        <td>{{formData.date}}</td>
-                    </tr>
-                    <tr>
-                        <td>Shift</td>
-                        <td>{{yii['ShiftType']['list'][formData.shift_id]['name']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Supplier</td>
-                        <td>{{yii['Supplier']['list'][formData.supplier_id]['name']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Concrete Type</td>
-                        <td>{{yii['ConcreteType']['list'][formData.conc_type_id]['name']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Plant</td>
-                        <td>{{formData.plant}}</td>
-                    </tr>
-                    <tr>
-                        <td>Truck</td>
-                        <td>{{formData.truck}}</td>
-                    </tr>
-                    <tr>
-                        <td>Ticket</td>
-                        <td>{{formData.ticket}}</td>
-                    </tr>
-                    <tr>
-                        <td>Departure time</td>
-                        <td>{{formData.dept_time}}</td>
-                    </tr>
-                    <tr>
-                        <td>Arrival time</td>
-                        <td>{{formData.arriv_time}}</td>
-                    </tr>
-                    <tr>
-                        <td>Truck load (m3)</td>
-                        <td>{{formData.truck_load}}</td>
-                    </tr>
-                    <tr>
-                        <td>Temperature</td>
-                        <td>{{formData.temp}}</td>
-                    </tr>
-                    <tr>
-                        <td>Slump</td>
-                        <td>{{formData.slump}}</td>
-                    </tr>
-                    <tr>
-                        <td>Flow</td>
-                        <td>{{formData.flow}}</td>
-                    </tr>
-                    <tr>
-                        <td>Accepted</td>
-                        <td>{{formData.accepted | yesNo}}</td>
-                    </tr>
-                    <tr ng-show="state.indexOf('edit') === -1">
-                        <td>comment</td>
-                        <td>{{comment}}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">Save</button>
-            </div>
-        </div>
-    </div>
-</div>

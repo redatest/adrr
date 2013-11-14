@@ -49,7 +49,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
             'wrapper.beforeCasting.create',
             {
                 url: '^/before-casting/create',
-		showControls: true,
+                showControls: true,
 
                 views: {
 
@@ -196,9 +196,28 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         //$scope.metaData = yii['beforeCasting'];
 
-        /*$scope.submit = function () {
+        $scope.submit = function () {
 
-            var post = { time: $scope.time, temp: $scope.temp };
+            console.log($scope);
+
+            var post = {
+                date: $scope.formData['date'],
+                shift_id: $scope.formData['shift_id'],
+                lre: $scope.formData["lre"],
+                lre_comment: $scope.formData["lre_comment"],
+                cte: $scope.formData['cte'],
+                cte_comment: $scope.formData['cte_comment'],
+                lte:$scope.formData['lte'],
+                lte_comment: $scope.formData["lte_comment"],
+                cpp: $scope.formData['cpp'],
+                cpp_comment: $scope.formData['cpp_comment'],
+                frs: $scope.formData['frs'],
+                frs_comment: $scope.formData['frs_comment'],
+                cdd: $scope.formData['cdd'],
+                cdd_comment: $scope.formData['cdd_comment']
+            };
+
+            console.log(post);
 
             Restangular.all('eng/beforeCasting').post(post).then
             (
@@ -210,7 +229,9 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
                 }
             );
-        };*/
+
+            console.log("button pressed");
+        };
 
         $scope.controls = $rootScope.controls = [
 
