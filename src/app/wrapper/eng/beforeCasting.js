@@ -67,8 +67,10 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
     .controller
 (
-    'BeforeCastingCtrl', function ( $rootScope ) {
+    'BeforeCastingCtrl', function ($rootScope) {
+
         $rootScope.createUrl = '#/beforeCasting/create';
+
     }
 )
 
@@ -187,7 +189,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
     }
 
 
-
 ) // end controller
 
     .controller
@@ -198,7 +199,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         console.log($scope.formData);
         $scope.submit = function () {
-
 
 
             Restangular.all('eng/beforeCasting').post($scope.formData).then

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2013 at 06:52 AM
+-- Generation Time: Nov 14, 2013 at 11:09 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -31,17 +31,17 @@ CREATE TABLE IF NOT EXISTS `tbl_before_casting` (
   `user_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `shift_id` int(11) NOT NULL,
-  `lre` tinyint(1) DEFAULT NULL,
+  `lre` enum('Yes','No','N/A') NOT NULL,
   `lre_comment` text NOT NULL,
-  `cte` tinyint(1) DEFAULT NULL,
+  `cte` enum('Yes','No','N/A') NOT NULL,
   `cte_comment` text NOT NULL,
-  `lte` tinyint(1) DEFAULT NULL,
+  `lte` enum('Yes','No','N/A') NOT NULL,
   `lte_comment` text NOT NULL,
-  `cpp` tinyint(1) DEFAULT NULL,
+  `cpp` enum('Yes','No','N/A') NOT NULL,
   `cpp_comment` text NOT NULL,
-  `frs` tinyint(1) DEFAULT NULL,
+  `frs` enum('Yes','No','N/A') NOT NULL,
   `frs_comment` text NOT NULL,
-  `cdd` tinyint(1) DEFAULT NULL,
+  `cdd` enum('Yes','No','N/A') NOT NULL,
   `cdd_comment` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
