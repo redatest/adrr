@@ -84,13 +84,13 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
 
             {
-                field: 'date_time',
+                field: 'date',
                 displayName: 'Date',
                 filters: 'stringDate:"dd-MM-yyyy"'
             },
 
             {
-                field: 'shift_type_id',
+                field: 'shift_id',
                 displayName: 'Shift',
                 filters: 'fetchValue: yii["ShiftType"]'
             },
