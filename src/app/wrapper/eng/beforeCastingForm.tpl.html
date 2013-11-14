@@ -59,7 +59,9 @@
                      ng-form="lreStateForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control" ng-model="formData.lre">
+                    <select class="form-control" ng-model="formData.lre" ng-class="{'has-error': lreStateForm.$invalid}"
+                            ng-form="lreStateForm">
+
                         <option value="N/A">N/A</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
@@ -97,7 +99,9 @@
                         <label class="control-label"> State </label>
 
 
-                        <select class="form-control" ng-model="formData.cte">
+                        <select class="form-control" ng-model="formData.cte" ng-class="{'has-error': cteStateForm.$invalid}"
+                                ng-form="cteStateForm">
+
                             <option value="N/A">N/A</option>
                             <option value="No">No</option>
                             <option value="yes">Yes</option>
@@ -131,7 +135,9 @@
                      ng-form="lteStateForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control" ng-model="formData.lte">
+                    <select class="form-control" ng-model="formData.lte" ng-class="{'has-error': lteStateForm.$invalid}"
+                            ng-form="lteStateForm">
+
                         <option value="N/A">N/A</option>
                         <option value="no">No</option>
                         <option value="Yes">Yes</option>
@@ -166,7 +172,9 @@
                      ng-form="cppStateForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control" ng-model="formData.cpp">
+                    <select class="form-control" ng-model="formData.cpp" ng-class="{'has-error': cppStateForm.$invalid}"
+                            ng-form="cppStateForm">
+
                         <option value="N/A">N/A</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
@@ -203,7 +211,9 @@
                      ng-form="frsStateForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control" ng-model="formData.frs">
+                    <select class="form-control" ng-model="formData.frs" ng-class="{'has-error': frsStateForm.$invalid}"
+                            ng-form="frsStateForm">
+
                         <option value="N/A">N/A</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
@@ -230,7 +240,9 @@
                      ng-form="cddStateForm">
                     <label class="control-label"> State </label>
 
-                    <select class="form-control" ng-model="formData.cdd">
+                    <select class="form-control" ng-model="formData.cdd" ng-class="{'has-error': cddStateForm.$invalid}"
+                            ng-form="cddStateForm">
+
                         <option value="N/A">N/A</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
