@@ -55,7 +55,7 @@
                 <h3 class="panel-title">2 Pouring location, rebars, and embeds are clean and free foreign materials</h3>
             </div>
             <div class="panel-body">
-                <div class="form-group" ng-class="{'panel-danger': lreStateForm.$invalid, 'panel-success': lreStateForm.$valid}"
+                <div class="form-group" ng-class="{'has-error': lreStateForm.$invalid}"
                      ng-form="lreStateForm">
                     <label class="control-label"> State </label>
 
@@ -67,7 +67,7 @@
 
                 </div>
 
-                <div class="form-group" ng-class="{'panel-danger': lreCmtForm.$invalid, 'panel-success': lreCmtForm.$valid}" ng-form="lreCmtForm">
+                <div class="form-group" ng-class="{'has-error': lreCmtForm.$invalid}" ng-form="lreCmtForm">
 
                     <label for="lre" class="control-label">Remark</label>
 
@@ -92,7 +92,7 @@
                     <h3 class="panel-title">3 Concreting tools and equipement are clean and free of old concrete, mud, etc</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group" ng-class="{'panel-danger': cteStateForm.$invalid, 'panel-success': cteStateForm.$valid}"
+                    <div class="form-group" ng-class="{'has-error': cteStateForm.$invalid}"
                          ng-form="cteStateForm">
                         <label class="control-label"> State </label>
 
@@ -105,7 +105,7 @@
 
                     </div>
 
-                    <div class="form-group" ng-class="getRangeClass('temp', formData.temp)" ng-form="tempForm">
+                    <div class="form-group" ng-class="{'has-error': cteCmtForm.$invalid}" ng-form="cteCmtForm">
 
                         <label for="cte" class="control-label"> Remark </label>
 
@@ -127,7 +127,7 @@
                 <h3 class="panel-title">4 Sufficiant labor(L) concreting tools(T) and equiepement(E) are provided </h3>
             </div>
             <div class="panel-body">
-                <div class="form-group" ng-class="{'panel-danger': lteStateForm.$invalid, 'panel-success': lteStateForm.$valid}"
+                <div class="form-group" ng-class="{'has-error': lteStateForm.$invalid}"
                      ng-form="lteStateForm">
                     <label class="control-label"> State </label>
 
@@ -139,7 +139,7 @@
 
                 </div>
 
-                <div class="form-group" ng-class="{'panel-danger': lteCmtForm.$invalid, 'panel-success': lteCmtForm.$valid}" ng-form="lteCmtForm">
+                <div class="form-group" ng-class="{'has-error': lteCmtForm.$invalid}" ng-form="lteCmtForm">
 
                     <label for="lte" class="control-label"> Remark </label>
 
@@ -162,7 +162,7 @@
                 <h3 class="panel-title">5 Concrete is properly protected from high speed wind</h3>
             </div>
             <div class="panel-body">
-                <div class="form-group" ng-class="{'panel-danger': cppStateForm.$invalid, 'panel-success': cppStateForm.$valid}"
+                <div class="form-group" ng-class="{'has-error': cppStateForm.$invalid}"
                      ng-form="cppStateForm">
                     <label class="control-label"> State </label>
 
@@ -174,7 +174,7 @@
 
                 </div>
 
-                <div class="form-group" ng-class="{'panel-danger': cppCmtForm.$invalid, 'panel-success': cppCmtForm.$valid}" ng-form="cppCmtForm">
+                <div class="form-group" ng-class="{'has-error': cppCmtForm.$invalid}" ng-form="cppCmtForm">
 
                     <label for="cpp" class="control-label"> Remark </label>
 
@@ -199,7 +199,7 @@
             <br/>
             <div class="alert alert-warning"><strong>Forms</strong>, rebars and sub-grade should be thoroughly wetted just before concrete placement </div>
             <div class="panel-body">
-                <div class="form-group" ng-class="{'panel-danger': frsStateForm.$invalid, 'panel-success': frsStateForm.$valid}"
+                <div class="form-group" ng-class="{'has-error': frsStateForm.$invalid}"
                      ng-form="frsStateForm">
                     <label class="control-label"> State </label>
 
@@ -211,7 +211,7 @@
 
                 </div>
 
-                <div class="form-group" ng-class="{'panel-danger': frsCmtForm.$invalid, 'panel-success': frsCmtForm.$valid}" ng-form="frsCmtForm">
+                <div class="form-group" ng-class="{'has-error': frsCmtForm.$invalid}" ng-form="frsCmtForm">
 
 
                     <label for="frs" class="control-label"> Remark </label>
@@ -226,7 +226,7 @@
             <br/>
             <div class="alert alert-warning"><strong>Casting</strong>, is done during the prohibited time </div>
             <div class="panel-body">
-                <div class="form-group" ng-class="{'panel-danger': cddStateForm.$invalid, 'panel-success': cddStateForm.$valid}"
+                <div class="form-group" ng-class="{'has-error': cddStateForm.$invalid}"
                      ng-form="cddStateForm">
                     <label class="control-label"> State </label>
 
@@ -238,7 +238,7 @@
 
                 </div>
 
-                <div class="form-group" ng-class="{'panel-danger': cddCmtForm.$invalid, 'panel-success': cddCmtForm.$valid}" ng-form="cddCmtForm">
+                <div class="form-group" ng-class="{'has-error': cddCmtForm.$invalid}" ng-form="cddCmtForm">
 
 
                     <label for="cdd" class="control-label"> Remark </label>
