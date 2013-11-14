@@ -2830,17 +2830,17 @@ angular.module('adrrApp.wrapper.eng', [], null)
                                         $scope.formData.level = 1;
                                         $scope.als = data['als'];
 
-                                        console.log(recData.axis);
-                                        console.log(recData.level);
-                                        console.log($scope.als);
+                                        var numAls = $scope.als.length;
 
-                                        var ii = _.indexOf
-                                        (
-                                            $scope.als, function (item) {
-//                                                return item.axis == recData.axis &&
+                                        for (var i = 0; i < numAls; i++) {
+
+                                            if ($scope.als[i].axis == recData.axis && $scope.als[i].level == recData.level) {
+
+                                                $scope.formData.axis = i;
+
+                                                break;
                                             }
-                                        )
-//                                        console.log();
+                                        }
 
                                     }
                                 }
