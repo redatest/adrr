@@ -166,20 +166,25 @@ class PouringController extends RESTful
 
     public function actionGetPouredQTY()
     {
-        if (isset($_GET['ticket'])) {
+        error_reporting(E_ALL);
 
-            $models = $this->_model->findAllByAttributes(array('ticket' => $_GET['ticket']));
+        ini_set('display_errors', 1);
+
+        if (isset($_GET['ticket']) && isset($_GET['supplier_id'])) {
+
+            $models = $this->_model->findAllByAttributes(array('supplier_id' => $_GET['supplier_id'], 'ticket' => $_GET['ticket']));
 
             $stat = array();
 
-            $stat['total'] = $models[0]->truck_load;
+            $stat['total'] = count($models) ? $models[0]->truck_load : 0;
             $stat['used'] = 0;
 
             foreach ($models as $model) {
 
-                $stat['used'] += $model->poured_qty;
+                $stat['used'] = intval($stat['used']) + intval($model['poured_qty']);
 
             }
+
             echo CJSON::encode($stat);
 
         }

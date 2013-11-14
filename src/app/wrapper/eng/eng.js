@@ -2346,6 +2346,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.comment = '';
 
+            $scope.total = 12;
+
+            $scope.used = 0;
+
         };
 
         $scope.reset();
@@ -2383,6 +2387,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         };
 
         $scope.min3Days = function () {
+
             var date = new Date();
 
             date.setDate(date.getDate() - 3);
@@ -2401,7 +2406,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 } else {
 
                     $scope.prefix = 'Select a supplier...';
+
                 }
+
+                $scope.formData.ticket = '';
             }
         );
 
@@ -2427,13 +2435,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                             $scope.ticketFound = true;
 
-                            Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['truck']}).then
+                            Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['ticket'], supplier_id: $scope.formData['supplier_id']}).then
                             (
                                 function (data) {
 
-                                    $scope.used = data['used'];
-                                    $scope.total = data['total'];
-
+                                    $scope.total = data['total'] == 0 ? parseInt($scope.lab['truck_load'], 10) : parseInt(data['total'], 10);
+                                    $scope.used = parseInt(data['used'], 10);
                                 }
                             );
                         },
@@ -2732,12 +2739,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                                     $scope.ticketFound = true;
 
-                                    Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['truck']}).then
+                                    Restangular.one('eng/pouring/getPouredQTY').get({supplier_id: data['supplier_id'], ticket: data['ticket']}).then
                                     (
                                         function (data) {
 
-                                            $scope.used = data['used'] - (typeof $scope.formData['poured_qty'] !== 'undefined' ? $scope.formData['poured_qty'] : 0);
-                                            $scope.total = data['total'];
+                                            $scope.used = parseInt(data['used'], 10) - (typeof $scope.formData['poured_qty'] !== 'undefined' ? parseInt($scope.formData['poured_qty'], 10) : 0);
+                                            $scope.total = data['total'] == 0 ? parseInt($scope.lab['truck_load'], 10) : parseInt(data['total'], 10);
 
                                         }
                                     );
