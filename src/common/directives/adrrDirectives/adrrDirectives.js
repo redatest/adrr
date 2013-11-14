@@ -19,7 +19,7 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
             template: '<div class="input-group double-input">' +
                 '<input ng-disabled="ngDisabled" ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
                 '<input ng-disabled="ngDisabled" ng-model="mint" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
-                '<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> </span>' +
+                '<span class="input-group-addon ar-info"><i class="glyphicon glyphicon-time"></i> </span>' +
                 '</div>',
 
             link: function (scope, element, attrs, ctrl) {

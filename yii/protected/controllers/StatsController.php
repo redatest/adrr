@@ -25,9 +25,14 @@ class StatsController extends CController
 
         $labReturned = Lab::model()->count($returned);
 
+        $pouringInbox = Pouring::model()->count($inbox);
+
+        $pouringReturned = Pouring::model()->count($returned);
+
         $stats = array();
 
         $stats['lab'] = array('inbox' => $labInbox, 'returned' => $labReturned);
+        $stats['pouring'] = array('inbox' => $pouringInbox, 'returned' => $pouringReturned);
 
         echo CJSON::encode(array($stats));
     }

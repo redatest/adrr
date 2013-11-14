@@ -1,6 +1,6 @@
 <nav id="topnav" class="navbar navbar-default navbar-static-top" role="navigation" xmlns="http://www.w3.org/1999/html">
 
-<a class="navbar-brand" href="#/dashboard">C.C.M</a>
+    <a class="navbar-brand" href="#/dashboard">C.C.M</a>
 
     <p class="navbar-text pull-right hidden-xs"><a data-toggle="modal" href="#logoutModal" onclick="return false;"
                                                    class="navbar-link">{{loginData.name}} (Sign out)</a></p>
@@ -9,7 +9,7 @@
             class="glyphicon glyphicon-remove-circle"></span></a>
 
     <div class="dropdown pull-right">
-    <a class="topnavlink" data-toggle="dropdown" href="#" onclick="return false;">
+        <a class="topnavlink" data-toggle="dropdown" href="#" onclick="return false;">
             <span class="glyphicon glyphicon-refresh"></span>
         </a>
 
@@ -47,8 +47,12 @@
                         <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.inbox') > -1}">
-                                <a href="#/labs/inbox"><span class="menu-text"><i class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}} <span
-                                        class="badge badge-primary pull-right stat-blue">{{menuStats[0].lab.inbox}}</span></span></a>
+                                <a href="#/labs/inbox">
+                                    <span class="menu-text">
+                                        <i class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}} <span
+                                            class="badge badge-primary pull-right stat-blue">{{menuStats[0].lab.inbox}}</span>
+                                    </span>
+                                </a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
                                 <a href="#/labs/returned"><span class="menu-text"><i
@@ -58,7 +62,7 @@
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.archive') > -1}">
                                 <a href="#/labs/archive"><span class="menu-text"><i
                                         class="fa fa-angle-double-right"></i>Archive <span
-                                        class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['archive']}}</span></span></a>
+                                        class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['labArchive']}}</span></span></a>
                             </li>
                         </ul>
                     </li>
@@ -76,16 +80,22 @@
                         <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
                             <li ng-class="{active: state == 'wrapper.eng.pouring.inbox'}">
-                            <a href="#/pourings/inbox"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}}</span></a>
+                                <a href="#/pourings/inbox">
+                                    <span class="menu-text">
+                                        <i class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}} <span
+                                            class="badge badge-primary pull-right stat-blue">{{menuStats[0].pouring.inbox}}</span>
+                                    </span>
+                                </a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
                                 <a href="#/pourings/returned"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Return</span></a>
+                                        class="fa fa-angle-double-right"></i>Return <span
+                                        class="badge badge-primary pull-right stat-red">{{menuStats[0].pouring.returned}}</span></span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.archive') > -1}">
                                 <a href="#/pourings/archive"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Archive</span></a>
+                                        class="fa fa-angle-double-right"></i>Archive <span
+                                        class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['pouringArchive']}}</span></span></a>
                             </li>
                             <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}" ng-switch-when="0">
                                 <a href="#" onclick="return false;"><span class="menu-text"><i
@@ -169,7 +179,7 @@
         <ol class="breadcrumb">
             <i class="fa fa-home fa-lg" style="margin-right: 10px; font-size: 1.5em;"></i>
             <li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">
-            {{item}}
+                {{item}}
             </li>
         </ol>
 
@@ -189,7 +199,7 @@
 </div>
 
 <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -211,7 +221,7 @@
 </div>
 
 <div class="modal" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 Sure to logout?

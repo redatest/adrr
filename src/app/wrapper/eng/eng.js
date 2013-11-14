@@ -249,6 +249,27 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             .state
         (
+            'wrapper.eng.pouring.edit',
+            {
+                url: '^/pourings/edit/:id',
+
+                title: 'Edit pouring record',
+
+                breadcrumb: ['Home', 'Pourings', 'Edit record'],
+
+                showControls: true,
+
+                views: {
+                    '@wrapper.eng': {
+                        controller: 'PouringEditCtrl',
+                        templateUrl: 'wrapper/eng/pouringForm.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
             'wrapper.eng.temp',
             {
                 abstract: true,
@@ -1457,6 +1478,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         Restangular.one('eng/lab', $state.params.id).get().then
         (
             function (data) {
+
                 $scope.formData = data;
 
                 $scope.formData.plant = parseInt($scope.formData.plant, 10);
@@ -1714,7 +1736,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
-                '<a title="Edit" class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
+                '<a title="Edit" class="btn btn-default btn-xs" href="#/pourings/edit/{{row.id}}">' +
                 '<i class="fa fa-edit fa-lg blu"></i>' +
                 '</a>' +
                 '</td>' +
@@ -1989,7 +2011,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)" ng-show="loginData.senior === \'1\'">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
-                '<a title="Edit" class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
+                '<a title="Edit" class="btn btn-default btn-xs" href="#/pourings/edit/{{row.id}}">' +
                 '<i class="fa fa-edit fa-lg blu"></i>' +
                 '</a>' +
                 '</td>' +
@@ -2256,9 +2278,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)" ng-show="loginData.senior === \'1\'">' +
-                '<i class="fa fa-download fa-lg blk"></i>' +
-                '</a>' +
                 '</td>' +
                 '</tr>',
 
@@ -2404,8 +2423,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                             $scope.lab = data;
 
-                            $scope.formData['truck'] = data['truck'];
-                            $scope.formData['truck_load'] = data['truck_load'];
+                            $scope.formData['truck'] = parseInt(data['truck'], 10);
+                            $scope.formData['truck_load'] = parseInt(data['truck_load'], 10);
                             $scope.formData['conc_type_id'] = data['conc_type_id'];
                             $scope.formData['dept_time'] = data['dept_time'];
 
@@ -2472,7 +2491,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                             $scope.formData['zone_id'] = data['model']['zone_id'];
                             $scope.formData['area'] = data['model']['area'];
-                            $scope.formData['est_vol'] = data['model']['volume'];
+                            $scope.formData['est_vol'] = parseInt(data['model']['volume'], 10);
 
                             $scope.irFound = true;
 
@@ -2639,6 +2658,198 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
 
         ];
+    }
+)
+
+    .controller
+(
+    'PouringEditCtrl', function ($scope, $state, yii, Restangular) {
+
+        $scope.reset = function () {
+
+            $scope.formData = {};
+
+            $scope.comment = '';
+
+        };
+
+        $scope.reset();
+
+        Restangular.one('eng/pouring', $state.params['id']).get().then
+        (
+            function (data) {
+
+                $scope.formData = angular.copy(data);
+
+                $scope.formData['ticket'] = parseInt($scope.formData['ticket'], 10);
+                $scope.formData['poured_qty'] = parseInt($scope.formData['poured_qty'], 10);
+                $scope.formData['ir'] = parseInt($scope.formData['ir'], 10);
+
+            }
+        );
+
+        $scope.$watch
+        (
+            'formData.supplier_id', function (newVal) {
+
+                if (!angular.isUndefined(newVal) && newVal !== '') {
+
+                    $scope.prefix = yii['Supplier']['list'][newVal].prefix;
+
+                } else {
+
+                    $scope.prefix = 'Select a supplier...';
+                }
+            }
+        );
+
+        $scope.$watch
+        (
+            'formData.ticket', function (newVal) {
+
+                $scope.used = 0;
+                $scope.total = 12;
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
+                    (
+                        function (data) {
+
+                            $scope.lab = data;
+
+                            $scope.formData['truck'] = parseInt(data['truck'], 10);
+                            $scope.formData['truck_load'] = parseInt(data['truck_load'], 10);
+                            $scope.formData['conc_type_id'] = data['conc_type_id'];
+                            $scope.formData['dept_time'] = data['dept_time'];
+
+                            $scope.ticketFound = true;
+
+                            Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['truck']}).then
+                            (
+                                function (data) {
+
+                                    $scope.used = data['used'];
+                                    $scope.total = data['total'];
+
+                                }
+                            );
+                        },
+
+                        function () {
+
+                            $scope.formData['truck'] = '';
+                            $scope.formData['truck_load'] = '';
+                            $scope.formData['conc_type_id'] = '';
+                            $scope.formData['dept_time'] = '';
+
+                            $scope.ticketFound = false;
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+        $scope.resetIr = function () {
+
+            $scope.pouringTypes = angular.copy(yii['PouringType']['list']);
+
+            $scope.als = [];
+
+            $scope.formData['zone_id'] = '';
+            $scope.formData['area'] = '';
+            $scope.formData['est_vol'] = '';
+            $scope.formData['pouring_type_id'] = '';
+            $scope.formData['axis'] = '';
+            $scope.formData['level'] = '';
+
+            $scope.irFound = false;
+
+            $scope.onePouringType = false;
+
+            $scope.oneAl = false;
+        };
+
+        $scope.$watch
+        (
+            'formData.ir', function (newVal) {
+
+                $scope.resetIr();
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('settings/ir/getIr').get({ir: newVal}).then
+                    (
+                        function (data) {
+
+                            $scope.formData['zone_id'] = data['model']['zone_id'];
+                            $scope.formData['area'] = data['model']['area'];
+                            $scope.formData['est_vol'] = parseInt(data['model']['volume'], 10);
+
+                            $scope.irFound = true;
+
+                            if (data['pts'].length == 1) {
+
+                                $scope.formData['pouring_type_id'] = data['pts'][0]['pouring_type_id'];
+
+                                $scope.onePouringType = true;
+
+                            } else if (data['pts'].length > 1) {
+
+                                $scope.onePouringType = false;
+
+                                var numPts = data['pts'].length;
+
+                                angular.forEach
+                                (
+                                    $scope.pouringTypes, function (item, i) {
+
+                                        var checker = false;
+
+                                        for (var j = 0; j < numPts; j++) {
+
+                                            checker = item.id == data['pts'][j]['pouring_type_id'];
+
+                                            if (checker) {
+
+                                                break;
+
+                                            }
+                                        }
+
+                                        if (!checker) {
+
+                                            delete $scope.pouringTypes[i];
+
+                                        }
+
+                                    }
+                                );
+
+                            }
+
+                            if (data['als'].length == 1) {
+
+                                $scope.formData['axis'] = data['als'][0]['axis'];
+                                $scope.formData['level'] = data['als'][0]['level'];
+
+                                $scope.oneAl = true;
+
+                            } else if (data['als'].length > 1) {
+
+                                $scope.formData.level = 1;
+                                $scope.als = data['als'];
+
+                            }
+                        }
+                    )
+
+                }
+            }
+        );
+
     }
 )
 

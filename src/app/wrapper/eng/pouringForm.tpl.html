@@ -36,7 +36,7 @@
                     <input ng-show="loginData.senior == 0" readonly="readonly"
                            ng-model="formData.date" class="form-control" type="text" required/>
 
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                    <span class="input-group-addon ar-info"><i class="glyphicon glyphicon-calendar"></i> </span>
                 </div>
 
                 <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
@@ -117,7 +117,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">{{prefix}}</span>
-                    <input id="ticket" type="text" class="form-control" ng-model="formData['ticket']" required
+                    <input id="ticket" type="number" class="form-control" ng-model="formData['ticket']" required
                            ng-readonly="formData['supplier_id'] === undefined || formData['supplier_id'] === ''"/>
                 </div>
             </div>
@@ -125,7 +125,7 @@
             <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
                 <label for="truck" class="control-label">Truck</label>
 
-                <input ng-disabled="ticketFound" id="truck" type="text" class="form-control"
+                <input ng-disabled="ticketFound" id="truck" type="number" class="form-control"
                        ng-model="formData['truck']" required/>
             </div>
 
@@ -139,11 +139,11 @@
                 </select>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': truckVolForm.$invalid}"
-                 ng-form="truckVolForm">
+            <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}"
+                 ng-form="truckLoadForm">
                 <label for="truck_load" class="control-label">Truck Load</label>
 
-                <input ng-disabled="ticketFound" id="truck_load" type="text" class="form-control"
+                <input ng-disabled="ticketFound" id="truck_load" type="number" class="form-control"
                        ng-model="formData['truck_load']" required/>
             </div>
 
@@ -157,10 +157,10 @@
                 <label for="poured_qty" class="control-label">Poured QTY</label>
 
                 <div class="input-group">
-                    <input id="poured_qty" type="text" adrr-num-range max="{{total - used}}" min="1"
+                    <input id="poured_qty" type="number" adrr-num-range max="{{total - used}}" min="1"
                            class="form-control"
                            ng-model="formData['poured_qty']" required/>
-                    <span class="input-group-addon">used: {{used}}</span>
+                    <span class="input-group-addon ar-info">used: {{used}}</span>
                 </div>
             </div>
         </div>
@@ -179,7 +179,7 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': irForm.$invalid}" ng-form="irForm">
                 <label for="ir" class="control-label">IR</label>
-                <input id="ir" type="text" class="form-control" ng-model="formData['ir']" required/>
+                <input id="ir" type="number" class="form-control" ng-model="formData['ir']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': zoneForm.$invalid}" ng-form="zoneForm">
@@ -198,7 +198,7 @@
 
             <div class="form-group" ng-class="{'has-error': estVolForm.$invalid}" ng-form="estVolForm">
                 <label for="est_vol" class="control-label">Estimated Volume</label>
-                <input id="est_vol" ng-disabled="irFound" type="text" class="form-control"
+                <input id="est_vol" ng-disabled="irFound" type="number" class="form-control"
                        ng-model="formData['est_vol']" required/>
             </div>
 
@@ -238,7 +238,7 @@
 
             <div class="form-group" ng-class="{'has-error': level2Form.$invalid}" ng-form="level2Form"
                  ng-show="als.length > 1">
-                <label for="level2" class="control-label">Axis</label>
+                <label for="level2" class="control-label">Level</label>
 
                 <input id="level2" class="form-control" type="text" value="{{als[formData.axis].level}}" required
                        disabled/>
@@ -259,22 +259,22 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
                 <label for="slumpb" class="control-label">Slump B</label>
-                <input id="slumpb" type="text" class="form-control" ng-model="formData['slump_b']" required/>
+                <input id="slumpb" type="number" class="form-control" ng-model="formData['slump_b']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
                 <label for="hrwr" class="control-label">HRWR (ltr)</label>
-                <input id="hrwr" type="text" class="form-control" ng-model="formData['hrwr']" required/>
+                <input id="hrwr" type="number" class="form-control" ng-model="formData['hrwr']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': waterForm.$invalid}" ng-form="waterForm">
                 <label for="water" class="control-label">Water (ltr)</label>
-                <input id="water" type="text" class="form-control" ng-model="formData['water']" required/>
+                <input id="water" type="number" class="form-control" ng-model="formData['water']" required/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
                 <label for="slumpa" class="control-label">Slump A</label>
-                <input id="slumpa" type="text" class="form-control" ng-model="formData['slump_a']" required/>
+                <input id="slumpa" type="number" class="form-control" ng-model="formData['slump_a']" required/>
             </div>
         </div>
     </div>
@@ -334,8 +334,8 @@
                 <adrr-timepicker required ng-model="formData.end_time"></adrr-timepicker>
             </div>
 
-            <div class="from-group">
-                <label for="comment" class="control-label">Comment</label>
+            <div class="from-group" ng-show="state.indexOf('edit') === -1">
+            <label for="comment" class="control-label">Comment</label>
 
                 <textarea id="comment" ng-model="comment" class="form-control" rows="3"></textarea>
             </div>
