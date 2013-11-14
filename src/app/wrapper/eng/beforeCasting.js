@@ -194,38 +194,18 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 (
     'BeforeCastingFormCtrl', function ($rootScope, $scope, yii, Restangular) {
 
-        //$scope.metaData = yii['beforeCasting'];
+        $scope.formData = {};
 
+        console.log($scope.formData);
         $scope.submit = function () {
 
-            console.log($scope);
 
-            var post = {
-                date: $scope.formData['date'],
-                shift_id: $scope.formData['shift_id'],
-                lre: $scope.formData["lre"],
-                lre_comment: $scope.formData["lre_comment"],
-                cte: $scope.formData['cte'],
-                cte_comment: $scope.formData['cte_comment'],
-                lte:$scope.formData['lte'],
-                lte_comment: $scope.formData["lte_comment"],
-                cpp: $scope.formData['cpp'],
-                cpp_comment: $scope.formData['cpp_comment'],
-                frs: $scope.formData['frs'],
-                frs_comment: $scope.formData['frs_comment'],
-                cdd: $scope.formData['cdd'],
-                cdd_comment: $scope.formData['cdd_comment']
-            };
 
-            console.log(post);
-
-            Restangular.all('eng/beforeCasting').post(post).then
+            Restangular.all('eng/beforeCasting').post($scope.formData).then
             (
                 function () {
 
-                    $scope.temp = '';
-
-                    $scope.time = '';
+                    $scope.formData = {};
 
                 }
             );
