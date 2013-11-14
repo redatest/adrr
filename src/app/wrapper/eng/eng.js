@@ -1382,7 +1382,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
 
-            var overlap = parseInt(shift['overlap']);
+            var overlap = parseInt(shift['overlap'], 10);
 
             if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
 
@@ -1526,7 +1526,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
 
-            var overlap = parseInt(shift['overlap']);
+            var overlap = parseInt(shift['overlap'], 10);
 
             if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
 
@@ -1543,7 +1543,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
             } else {
                 $scope.formData['arriv_time'] = $scope.formData['date'] + ' ' + $scope.formData['arriv_time'];
             }
-
 
             $scope.formData.put().then
             (
@@ -2399,8 +2398,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                     $scope.prefix = yii['Supplier']['list'][newVal].prefix;
 
-                    $scope.formData['ticket'] = '';
-
                 } else {
 
                     $scope.prefix = 'Select a supplier...';
@@ -2570,7 +2567,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
 
-            var overlap = parseInt(shift['overlap']);
+            var overlap = parseInt(shift['overlap'], 10);
 
             if ($scope.ticketFound) {
 
@@ -2671,86 +2668,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.comment = '';
 
+            $scope.total = 12;
+
+            $scope.used = 0;
+
         };
 
         $scope.reset();
-
-        Restangular.one('eng/pouring', $state.params['id']).get().then
-        (
-            function (data) {
-
-                $scope.formData = angular.copy(data);
-
-                $scope.formData['ticket'] = parseInt($scope.formData['ticket'], 10);
-                $scope.formData['poured_qty'] = parseInt($scope.formData['poured_qty'], 10);
-                $scope.formData['ir'] = parseInt($scope.formData['ir'], 10);
-
-            }
-        );
-
-        $scope.$watch
-        (
-            'formData.supplier_id', function (newVal) {
-
-                if (!angular.isUndefined(newVal) && newVal !== '') {
-
-                    $scope.prefix = yii['Supplier']['list'][newVal].prefix;
-
-                } else {
-
-                    $scope.prefix = 'Select a supplier...';
-                }
-            }
-        );
-
-        $scope.$watch
-        (
-            'formData.ticket', function (newVal) {
-
-                $scope.used = 0;
-                $scope.total = 12;
-
-                if (typeof newVal !== 'undefined' && newVal !== '') {
-
-                    Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
-                    (
-                        function (data) {
-
-                            $scope.lab = data;
-
-                            $scope.formData['truck'] = parseInt(data['truck'], 10);
-                            $scope.formData['truck_load'] = parseInt(data['truck_load'], 10);
-                            $scope.formData['conc_type_id'] = data['conc_type_id'];
-                            $scope.formData['dept_time'] = data['dept_time'];
-
-                            $scope.ticketFound = true;
-
-                            Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['truck']}).then
-                            (
-                                function (data) {
-
-                                    $scope.used = data['used'];
-                                    $scope.total = data['total'];
-
-                                }
-                            );
-                        },
-
-                        function () {
-
-                            $scope.formData['truck'] = '';
-                            $scope.formData['truck_load'] = '';
-                            $scope.formData['conc_type_id'] = '';
-                            $scope.formData['dept_time'] = '';
-
-                            $scope.ticketFound = false;
-                        }
-                    );
-
-                }
-
-            }
-        );
 
         $scope.resetIr = function () {
 
@@ -2772,80 +2696,174 @@ angular.module('adrrApp.wrapper.eng', [], null)
             $scope.oneAl = false;
         };
 
-        $scope.$watch
+        Restangular.one('eng/pouring', $state.params['id']).get().then
         (
-            'formData.ir', function (newVal) {
+            function (recData) {
 
-                $scope.resetIr();
+                $scope.formData = angular.copy(recData);
 
-                if (typeof newVal !== 'undefined' && newVal !== '') {
+                $scope.formData['ticket'] = parseInt($scope.formData['ticket'], 10);
+                $scope.formData['poured_qty'] = parseInt($scope.formData['poured_qty'], 10);
+                $scope.formData['ir'] = parseInt($scope.formData['ir'], 10);
+                $scope.formData['slump_b'] = parseInt($scope.formData['slump_b'], 10);
+                $scope.formData['hrwr'] = parseInt($scope.formData['hrwr'], 10);
+                $scope.formData['water'] = parseInt($scope.formData['water'], 10);
+                $scope.formData['slump_a'] = parseInt($scope.formData['slump_a'], 10);
 
-                    Restangular.one('settings/ir/getIr').get({ir: newVal}).then
-                    (
-                        function (data) {
+                $scope.$watch
+                (
+                    'formData.ticket', function (newVal) {
 
-                            $scope.formData['zone_id'] = data['model']['zone_id'];
-                            $scope.formData['area'] = data['model']['area'];
-                            $scope.formData['est_vol'] = parseInt(data['model']['volume'], 10);
+                        $scope.used = 0;
+                        $scope.total = 12;
 
-                            $scope.irFound = true;
+                        if (typeof newVal !== 'undefined' && newVal !== '') {
 
-                            if (data['pts'].length == 1) {
+                            Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
+                            (
+                                function (data) {
 
-                                $scope.formData['pouring_type_id'] = data['pts'][0]['pouring_type_id'];
+                                    $scope.lab = data;
 
-                                $scope.onePouringType = true;
+                                    $scope.formData['truck'] = parseInt(data['truck'], 10);
+                                    $scope.formData['truck_load'] = parseInt(data['truck_load'], 10);
+                                    $scope.formData['conc_type_id'] = data['conc_type_id'];
+                                    $scope.formData['dept_time'] = data['dept_time'];
 
-                            } else if (data['pts'].length > 1) {
+                                    $scope.ticketFound = true;
 
-                                $scope.onePouringType = false;
+                                    Restangular.one('eng/pouring/getPouredQTY').get({ticket: data['truck']}).then
+                                    (
+                                        function (data) {
 
-                                var numPts = data['pts'].length;
+                                            $scope.used = data['used'] - (typeof $scope.formData['poured_qty'] !== 'undefined' ? $scope.formData['poured_qty'] : 0);
+                                            $scope.total = data['total'];
 
-                                angular.forEach
-                                (
-                                    $scope.pouringTypes, function (item, i) {
+                                        }
+                                    );
+                                },
 
-                                        var checker = false;
+                                function () {
 
-                                        for (var j = 0; j < numPts; j++) {
+                                    $scope.formData['truck'] = parseInt(recData['truck'], 10);
+                                    $scope.formData['truck_load'] = parseInt(recData['truck_load'], 10);
+                                    $scope.formData['conc_type_id'] = recData['conc_type_id'];
+                                    $scope.formData['dept_time'] = recData['dept_time'];
 
-                                            checker = item.id == data['pts'][j]['pouring_type_id'];
+                                    $scope.ticketFound = false;
+                                }
+                            );
 
-                                            if (checker) {
+                        }
 
-                                                break;
+                    }
+                );
+
+                $scope.$watch
+                (
+                    'formData.ir', function (newVal) {
+
+                        $scope.resetIr();
+
+                        if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                            Restangular.one('settings/ir/getIr').get({ir: newVal}).then
+                            (
+                                function (data) {
+
+                                    $scope.formData['zone_id'] = data['model']['zone_id'];
+                                    $scope.formData['area'] = data['model']['area'];
+                                    $scope.formData['est_vol'] = parseInt(data['model']['volume'], 10);
+
+                                    $scope.irFound = true;
+
+                                    if (data['pts'].length == 1) {
+
+                                        $scope.formData['pouring_type_id'] = data['pts'][0]['pouring_type_id'];
+
+                                        $scope.onePouringType = true;
+
+                                    } else if (data['pts'].length > 1) {
+
+                                        $scope.onePouringType = false;
+
+                                        var numPts = data['pts'].length;
+
+                                        angular.forEach
+                                        (
+                                            $scope.pouringTypes, function (item, i) {
+
+                                                var checker = false;
+
+                                                for (var j = 0; j < numPts; j++) {
+
+                                                    checker = item.id == data['pts'][j]['pouring_type_id'];
+
+                                                    if (checker) {
+
+                                                        break;
+
+                                                    }
+                                                }
+
+                                                if (!checker) {
+
+                                                    delete $scope.pouringTypes[i];
+
+                                                }
 
                                             }
-                                        }
+                                        );
 
-                                        if (!checker) {
+                                        $scope.formData['pouring_type_id'] = recData['pouring_type_id'];
+                                    }
 
-                                            delete $scope.pouringTypes[i];
+                                    if (data['als'].length == 1) {
 
-                                        }
+                                        $scope.formData['axis'] = data['als'][0]['axis'];
+                                        $scope.formData['level'] = data['als'][0]['level'];
+
+                                        $scope.oneAl = true;
+
+                                    } else if (data['als'].length > 1) {
+
+                                        $scope.formData.level = 1;
+                                        $scope.als = data['als'];
+
+                                        console.log(recData.axis);
+                                        console.log(recData.level);
+                                        console.log($scope.als);
+
+                                        var ii = _.indexOf
+                                        (
+                                            $scope.als, function (item) {
+//                                                return item.axis == recData.axis &&
+                                            }
+                                        )
+//                                        console.log();
 
                                     }
-                                );
+                                }
+                            )
 
-                            }
-
-                            if (data['als'].length == 1) {
-
-                                $scope.formData['axis'] = data['als'][0]['axis'];
-                                $scope.formData['level'] = data['als'][0]['level'];
-
-                                $scope.oneAl = true;
-
-                            } else if (data['als'].length > 1) {
-
-                                $scope.formData.level = 1;
-                                $scope.als = data['als'];
-
-                            }
                         }
-                    )
+                    }
+                );
 
+            }
+        );
+
+        $scope.$watch
+        (
+            'formData.supplier_id', function (newVal) {
+
+                if (!angular.isUndefined(newVal) && newVal !== '') {
+
+                    $scope.prefix = yii['Supplier']['list'][newVal].prefix;
+
+                } else {
+
+                    $scope.prefix = 'Select a supplier...';
                 }
             }
         );
