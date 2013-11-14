@@ -201,6 +201,14 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         /* Frequent Date methods */
 
+        $scope.setToday = function(){
+            var date = new Date();
+
+            date.setDate( date.getDate() );
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        }
+
         $scope.min1Day = function () {
             var date = new Date();
 
