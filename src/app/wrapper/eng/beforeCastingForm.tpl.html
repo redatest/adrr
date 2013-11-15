@@ -13,7 +13,7 @@
          ng-class="{'panel-danger': firstForm.$invalid, 'panel-success': firstForm.$valid}">
 
         <div class="panel-heading">
-            <h3 class="panel-title">1. Basics</h3>
+            <h3 class="panel-title">1. Basic</h3>
         </div>
 
         <div class="panel-body">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="list-group">
-                                    
+
                                     <a data-dismiss="modal" class="list-group-item" href="#"
                                        ng-click="setToday()" onclick="return false;">
                                         Today
@@ -134,74 +134,7 @@
 </div>
 
 
-<div class="col-xs-12 col-sm-6">
-    <div class="panel" ng-form="thirdForm"
-         ng-class="{'panel-danger': thirdForm.$invalid, 'panel-success': thirdForm.$valid}">
 
-        <div class="panel-heading">
-            <h3 class="panel-title">6 Provisions for hot-weather concreting </h3>
-        </div>
-
-        <br/>
-        <div class="alert alert-warning"><strong>Forms</strong>, rebars and sub-grade should be thoroughly wetted just before concrete placement </div>
-        <div class="panel-body" style="margin-top: -6%">
-            <div class="form-group" ng-class="{'has-error': frsStateForm.$invalid}"
-                 ng-form="frsStateForm">
-                <label class="control-label"> State </label>
-
-                <select class="form-control" ng-model="formData.frs" ng-class="{'has-error': frsStateForm.$invalid}"
-                        ng-form="frsStateForm" required>
-                    <option value="">Select...</option>
-                    <option value="N/A">N/A</option>
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                </select>
-
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': frsCmtForm.$invalid}" ng-form="frsCmtForm">
-
-
-                <label for="frs" class="control-label"> Remark </label>
-
-                <input id="frs" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.frs_comment"
-                       required/>
-            </div>
-
-
-        </div>
-
-        <br/>
-        <div class="alert alert-warning"><strong>Casting</strong>, is done during the prohibited time </div>
-        <div class="panel-body" style="margin-top: -6%">
-            <div class="form-group" ng-class="{'has-error': cddStateForm.$invalid}"
-                 ng-form="cddStateForm">
-                <label class="control-label"> State </label>
-
-                <select class="form-control" ng-model="formData.cdd" ng-class="{'has-error': cddStateForm.$invalid}"
-                        ng-form="cddStateForm" required>
-                    <option value="">Select...</option>
-                    <option value="N/A">N/A</option>
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                </select>
-
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': cddCmtForm.$invalid}" ng-form="cddCmtForm">
-
-
-                <label for="cdd" class="control-label"> Remark </label>
-
-                <input id="cdd" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.cdd_comment"
-                       required/>
-            </div>
-
-
-        </div>
-
-    </div>
-</div>
 
 <div class="col-xs-12 col-sm-6 case1">
 
@@ -324,6 +257,75 @@
 
     </div>
 
+</div>
+
+<div class="col-xs-12 col-sm-6">
+    <div class="panel" ng-form="thirdForm"
+         ng-class="{'panel-danger': thirdForm.$invalid, 'panel-success': thirdForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">6 Provisions for hot-weather concreting </h3>
+        </div>
+
+        <br/>
+        <div class="alert alert-warning"><strong>Forms</strong>, rebars and sub-grade should be thoroughly wetted just before concrete placement </div>
+        <div class="panel-body" style="margin-top: -6%">
+            <div class="form-group" ng-class="{'has-error': frsStateForm.$invalid}"
+                 ng-form="frsStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.frs" ng-class="{'has-error': frsStateForm.$invalid}"
+                        ng-form="frsStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': frsCmtForm.$invalid}" ng-form="frsCmtForm">
+
+
+                <label for="frs" class="control-label"> Remark </label>
+
+                <input id="frs" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.frs_comment"
+                       required/>
+            </div>
+
+
+        </div>
+
+        <br/>
+        <div class="alert alert-warning"><strong>Casting</strong>, is done during the prohibited time </div>
+        <div class="panel-body" style="margin-top: -6%">
+            <div class="form-group" ng-class="{'has-error': cddStateForm.$invalid}"
+                 ng-form="cddStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.cdd" ng-class="{'has-error': cddStateForm.$invalid}"
+                        ng-form="cddStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': cddCmtForm.$invalid}" ng-form="cddCmtForm">
+
+
+                <label for="cdd" class="control-label"> Remark </label>
+
+                <input id="cdd" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.cdd_comment"
+                       required/>
+            </div>
+
+
+        </div>
+
+    </div>
 </div>
 
 </div>
