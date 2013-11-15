@@ -67,10 +67,6 @@
                         </ul>
                     </li>
 
-                    <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
-                        <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
-                    </li>
-
                     <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.eng.pouring') === -1}" data-toggle="collapse"
@@ -102,6 +98,10 @@
                                         class="fa fa-angle-double-right"></i>Draft</span></a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
+                        <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
                     </li>
 
                     <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">

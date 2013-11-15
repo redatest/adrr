@@ -61,7 +61,8 @@ var adrrApp = angular.module
 
         return function (str, format, justTime) {
 
-            if (typeof str !== 'undefined') {
+            if (typeof str !== 'undefined' && str !== '' && str !== null) {
+
                 str = str.replace(/-/g, '/');
 
                 justTime = typeof justTime !== 'undefined';

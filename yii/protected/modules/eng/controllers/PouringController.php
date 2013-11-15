@@ -31,7 +31,25 @@ class PouringController extends RESTful
 
     public function actionGetUnarchived()
     {
-        $condition = 'archived = 0 AND returned = 0 AND approved = 0';
+        $condition = 'archived = 0 AND returned = 0 AND approved = 0 AND draft = 0';
+
+        if (isset($_GET['trucker'])) {
+
+            $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
+
+        }
+
+        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = $condition;
+
+        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+    }
+
+    public function actionGetDrafts()
+    {
+        $condition = 'archived = 0 AND returned = 0 AND approved = 0 AND draft = 1';
 
         if (isset($_GET['trucker'])) {
 
@@ -49,7 +67,7 @@ class PouringController extends RESTful
 
     public function actionGetArchived()
     {
-        $condition = 'archived = 1 AND returned = 0 AND approved = 0';
+        $condition = 'archived = 1 AND returned = 0 AND approved = 0 AND draft = 0';
 
         if (isset($_GET['trucker'])) {
 
@@ -72,7 +90,7 @@ class PouringController extends RESTful
         if (isset($_GET['trucker'])) $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
 
         if (Yii::app()->user->isSenior) $condition .= ' AND returned = 0 AND approved = 1';
-        else $condition .= ' AND returned = 1 AND approved = 0 AND user_id = ' . Yii::app()->user->id;
+        else $condition .= ' AND returned = 1 AND draft = 0 AND approved = 0 AND user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;

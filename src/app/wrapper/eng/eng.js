@@ -228,6 +228,27 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             .state
         (
+            'wrapper.eng.pouring.draft',
+            {
+                url: '^/pourings/draft',
+
+                title: 'Pourings Drafts',
+
+                breadcrumb: ['Home', 'Pourings', 'Drafts'],
+
+                showControls: true,
+
+                views: {
+                    '@wrapper.eng.pouring': {
+                        controller: 'PouringDraftCtrl',
+                        templateUrl: 'wrapper/eng/pouringDraft.tpl.html'
+                    }
+                }
+            }
+        )
+
+            .state
+        (
             'wrapper.eng.pouring.create',
             {
                 url: '^/pourings/create',
@@ -346,7 +367,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         return function (index, model, prop) {
 
-            if (typeof index !== 'undefined') {
+            if (typeof index !== 'undefined' && index !== '' && index !== null) {
 
                 prop = typeof prop === 'undefined' ? 'name' : prop;
 
@@ -365,7 +386,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         return function (val) {
 
-            return val === '1' ? 'Yes' : 'No';
+            if (typeof val !== 'undefined' && val !== '') {
+
+                return val === '1' ? 'Yes' : 'No';
+
+            }
+
+            return '';
 
         }
     }
@@ -1633,14 +1660,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 field: 'area',
                 displayName: 'Area'
             },
-            {
-                field: 'axis',
-                displayName: 'Axis'
-            },
-            {
-                field: 'level',
-                displayName: 'Level'
-            },
+//            {
+//                field: 'axis',
+//                displayName: 'Axis'
+//            },
+//            {
+//                field: 'level',
+//                displayName: 'Level'
+//            },
             {
                 field: 'est_vol',
                 displayName: 'Est Vol'
@@ -1658,10 +1685,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 displayName: 'Concrete',
                 filters: 'fetchValue: yii["ConcreteType"]'
             },
-            {
-                field: 'truck_load',
-                displayName: 'Truck Load'
-            },
+//            {
+//                field: 'truck_load',
+//                displayName: 'Truck Load'
+//            },
             {
                 field: 'poured_qty',
                 displayName: 'QTY'
@@ -1671,22 +1698,22 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 displayName: 'Dept Time',
                 filters: 'stringDate:"HH:mm"'
             },
-            {
-                field: 'slump_b',
-                displayName: 'Slump B'
-            },
-            {
-                field: 'hrwr',
-                displayName: 'HRWR'
-            },
-            {
-                field: 'water',
-                displayName: 'Water'
-            },
-            {
-                field: 'slump_a',
-                displayName: 'Slump A'
-            },
+//            {
+//                field: 'slump_b',
+//                displayName: 'Slump B'
+//            },
+//            {
+//                field: 'hrwr',
+//                displayName: 'HRWR'
+//            },
+//            {
+//                field: 'water',
+//                displayName: 'Water'
+//            },
+//            {
+//                field: 'slump_a',
+//                displayName: 'Slump A'
+//            },
             {
                 field: 'start_time',
                 displayName: 'Start',
@@ -1908,14 +1935,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 field: 'area',
                 displayName: 'Area'
             },
-            {
-                field: 'axis',
-                displayName: 'Axis'
-            },
-            {
-                field: 'level',
-                displayName: 'Level'
-            },
+//            {
+//                field: 'axis',
+//                displayName: 'Axis'
+//            },
+//            {
+//                field: 'level',
+//                displayName: 'Level'
+//            },
             {
                 field: 'est_vol',
                 displayName: 'Est Vol'
@@ -1933,10 +1960,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 displayName: 'Concrete',
                 filters: 'fetchValue: yii["ConcreteType"]'
             },
-            {
-                field: 'truck_load',
-                displayName: 'Truck Load'
-            },
+//            {
+//                field: 'truck_load',
+//                displayName: 'Truck Load'
+//            },
             {
                 field: 'poured_qty',
                 displayName: 'QTY'
@@ -1946,22 +1973,22 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 displayName: 'Dept Time',
                 filters: 'stringDate:"HH:mm"'
             },
-            {
-                field: 'slump_b',
-                displayName: 'Slump B'
-            },
-            {
-                field: 'hrwr',
-                displayName: 'HRWR'
-            },
-            {
-                field: 'water',
-                displayName: 'Water'
-            },
-            {
-                field: 'slump_a',
-                displayName: 'Slump A'
-            },
+//            {
+//                field: 'slump_b',
+//                displayName: 'Slump B'
+//            },
+//            {
+//                field: 'hrwr',
+//                displayName: 'HRWR'
+//            },
+//            {
+//                field: 'water',
+//                displayName: 'Water'
+//            },
+//            {
+//                field: 'slump_a',
+//                displayName: 'Slump A'
+//            },
             {
                 field: 'start_time',
                 displayName: 'Start',
@@ -2183,14 +2210,14 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 field: 'area',
                 displayName: 'Area'
             },
-            {
-                field: 'axis',
-                displayName: 'Axis'
-            },
-            {
-                field: 'level',
-                displayName: 'Level'
-            },
+//            {
+//                field: 'axis',
+//                displayName: 'Axis'
+//            },
+//            {
+//                field: 'level',
+//                displayName: 'Level'
+//            },
             {
                 field: 'est_vol',
                 displayName: 'Est Vol'
@@ -2208,10 +2235,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 displayName: 'Concrete',
                 filters: 'fetchValue: yii["ConcreteType"]'
             },
-            {
-                field: 'truck_load',
-                displayName: 'Truck Load'
-            },
+//            {
+//                field: 'truck_load',
+//                displayName: 'Truck Load'
+//            },
             {
                 field: 'poured_qty',
                 displayName: 'QTY'
@@ -2221,22 +2248,22 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 displayName: 'Dept Time',
                 filters: 'stringDate:"HH:mm"'
             },
-            {
-                field: 'slump_b',
-                displayName: 'Slump B'
-            },
-            {
-                field: 'hrwr',
-                displayName: 'HRWR'
-            },
-            {
-                field: 'water',
-                displayName: 'Water'
-            },
-            {
-                field: 'slump_a',
-                displayName: 'Slump A'
-            },
+//            {
+//                field: 'slump_b',
+//                displayName: 'Slump B'
+//            },
+//            {
+//                field: 'hrwr',
+//                displayName: 'HRWR'
+//            },
+//            {
+//                field: 'water',
+//                displayName: 'Water'
+//            },
+//            {
+//                field: 'slump_a',
+//                displayName: 'Slump A'
+//            },
             {
                 field: 'start_time',
                 displayName: 'Start',
@@ -2338,7 +2365,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringCreateCtrl', function ($rootScope, $scope, yii, $q, Restangular) {
+    'PouringCreateCtrl', function ($rootScope, $scope, yii, $q, Restangular, $state) {
 
         $scope.reset = function () {
 
@@ -2559,9 +2586,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         );
 
-        $scope.submit = function () {
+        $scope.submit = function (draft) {
 
-//            var deferred = $q.defer();
+            $scope.formData['draft'] = typeof draft !== 'undefined' ? 1 : 0;
+
+            var deferred = $q.defer();
 
             var datePlusOne = function (val) {
 
@@ -2576,33 +2605,42 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             var overlap = parseInt(shift['overlap'], 10);
 
-            if ($scope.ticketFound) {
+            if (typeof $scope.formData['dept_time'] !== 'undefined' && $scope.formData['dept_time'] !== '') {
 
-                $scope.formData['dept_time'] = $scope.lab['dept_time'];
+                if ($scope.ticketFound) {
 
-            } else if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
+                    $scope.formData['dept_time'] = $scope.lab['dept_time'];
 
-                $scope.formData['dept_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['dept_time'];
+                } else if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
 
-            } else {
+                    $scope.formData['dept_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['dept_time'];
 
-                $scope.formData['dept_time'] = $scope.formData['date'] + ' ' + $scope.formData['dept_time'];
+                } else {
+
+                    $scope.formData['dept_time'] = $scope.formData['date'] + ' ' + $scope.formData['dept_time'];
+                }
             }
 
-            if (overlap && $scope.formData['start_time'] < shift['start_time']) {
+            if (typeof $scope.formData['start_time'] !== 'undefined' && $scope.formData['start_time'] !== '') {
 
-                $scope.formData['start_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['start_time'];
+                if (overlap && $scope.formData['start_time'] < shift['start_time']) {
 
-            } else {
-                $scope.formData['start_time'] = $scope.formData['date'] + ' ' + $scope.formData['start_time'];
+                    $scope.formData['start_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['start_time'];
+
+                } else {
+                    $scope.formData['start_time'] = $scope.formData['date'] + ' ' + $scope.formData['start_time'];
+                }
             }
 
-            if (overlap && $scope.formData['end_time'] < shift['start_time']) {
+            if (typeof $scope.formData['end_time'] !== 'undefined' && $scope.formData['end_time'] !== '') {
 
-                $scope.formData['end_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['end_time'];
+                if (overlap && $scope.formData['end_time'] < shift['start_time']) {
 
-            } else {
-                $scope.formData['end_time'] = $scope.formData['date'] + ' ' + $scope.formData['end_time'];
+                    $scope.formData['end_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['end_time'];
+
+                } else {
+                    $scope.formData['end_time'] = $scope.formData['date'] + ' ' + $scope.formData['end_time'];
+                }
             }
 
             if ($scope.als.length > 1) {
@@ -2624,40 +2662,93 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                                 $scope.reset();
 
+                                deferred.resolve(data);
+
                             }
                         );
 
                     } else {
 
                         $scope.reset();
+
+                        deferred.resolve(data);
                     }
 
                 }
             );
+
+            return deferred.promise;
+
+        };
+
+        $scope.saveAndNewWithSameIr = function () {
+
+            $scope.submit().then
+            (
+                function (data) {
+
+                    setTimeout
+                    (
+                        function () {
+
+                            $scope.formData.ir = parseInt(data['ir'], 10);
+
+                            if (!$scope.$$phase) {
+
+                                $scope.$apply();
+                            }
+
+                        }, 100
+                    );
+
+                }
+            );
+        };
+
+        $scope.saveAndBackToList = function () {
+
+            $scope.submit().then
+            (
+                function () {
+                    setTimeout
+                    (
+                        function () {
+
+                            $state.go('wrapper.eng.pouring.inbox');
+
+                        }, 100
+                    );
+                }
+            );
+
+        };
+
+        $scope.saveAsDraft = function () {
+
+            $scope.submit(1);
 
         };
 
         $scope.controls = $rootScope.controls = [
 
             {
-                title: 'Save and add',
-
+                title: 'Save and new',
                 clickHandler: $scope.submit,
-
                 visibility: $rootScope.loginData['senior'] == 0
             },
             {
-                title: 'Save and add same IR',
-
-                clickHandler: $scope.submit,
-
+                title: 'Save and new with same IR',
+                clickHandler: $scope.saveAndNewWithSameIr,
                 visibility: $rootScope.loginData['senior'] == 0
             },
             {
                 title: 'Save and back to list',
-
-                clickHandler: $scope.submit,
-
+                clickHandler: $scope.saveAndBackToList,
+                visibility: $rootScope.loginData['senior'] == 0
+            },
+            {
+                title: 'Save as draft',
+                clickHandler: $scope.saveAsDraft,
                 visibility: $rootScope.loginData['senior'] == 0
             }
 

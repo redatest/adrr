@@ -48,6 +48,7 @@ class Pouring extends ArModel
             'returned' => 'Returned',
             'approved' => 'Approved',
             'archived' => 'Archived',
+            'draft' => 'Draft',
             'create_time' => 'Create Time',
             'update' => 'Update'
         );

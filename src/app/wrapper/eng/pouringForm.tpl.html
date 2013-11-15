@@ -159,7 +159,7 @@
                 <div class="input-group">
                     <input id="poured_qty" type="number" adrr-num-range max="{{total - used}}" min="1"
                            class="form-control" ng-model="formData.poured_qty" required/>
-                    <span class="input-group-addon ar-info">used: {{used}}</span>
+                    <span class="input-group-addon ar-info">remained: {{used}}</span>
                 </div>
             </div>
         </div>
@@ -334,12 +334,20 @@
             </div>
 
             <div class="from-group" ng-show="state.indexOf('edit') === -1">
-            <label for="comment" class="control-label">Comment</label>
+                <label for="comment" class="control-label">Comment</label>
 
                 <textarea id="comment" ng-model="comment" class="form-control" rows="3"></textarea>
             </div>
         </div>
     </div>
+</div>
+
+<div ng-hide="true">
+    <button ng-disabled="controls[0].disabled = mainForm.$invalid || !irFound">save add new</button>
+    <button ng-disabled="controls[1].disabled = mainForm.$invalid || !irFound">save add new with same ir</button>
+    <button ng-disabled="controls[2].disabled = mainForm.$invalid || !irFound">save add back to list</button>
+    <button ng-disabled="controls[3].disabled = formData.date === undefined || formData.date === ''">save add new
+    </button>
 </div>
 </div>
 </div>
