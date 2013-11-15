@@ -146,6 +146,9 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
             }
         ];
 
+
+
+
         $scope.adrrGridOptions = {
 
             data: 'records',
@@ -196,6 +199,48 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
     'BeforeCastingFormCtrl', function ($rootScope, $scope, yii, Restangular) {
 
         $scope.formData = {};
+
+        /* Frequent Date methods */
+
+        $scope.setToday = function(){
+            var date = new Date();
+
+            date.setDate( date.getDate() );
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        }
+
+        $scope.min1Day = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 1);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        };
+
+        $scope.min2Days = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 2);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        };
+
+        $scope.min3Days = function () {
+            var date = new Date();
+
+            date.setDate(date.getDate() - 3);
+
+            $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+        };
+
+        $scope.validateTime = function () {
+
+            return $filter('validTime')($scope.formData['dept_time'], $scope.formData['arriv_time'], yii['ShiftType']['list'][$scope.formData['shift_id']]);
+
+        };
+
+        /* End frequent Date methods */
 
         console.log($scope.formData);
         $scope.submit = function () {
