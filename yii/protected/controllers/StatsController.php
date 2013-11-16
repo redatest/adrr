@@ -8,6 +8,8 @@ class StatsController extends CController
 
         $inbox = 'archived = 0 AND returned = 0 AND approved = 0';
 
+        $draft = $inbox . ' AND draft = 1';
+
         $returned = 'archived = 0';
 
         if (Yii::app()->user->isSenior) {
@@ -29,10 +31,12 @@ class StatsController extends CController
 
         $pouringReturned = Pouring::model()->count($returned);
 
+        $pouringDrafts = Pouring::model()->count($draft);
+
         $stats = array();
 
         $stats['lab'] = array('inbox' => $labInbox, 'returned' => $labReturned);
-        $stats['pouring'] = array('inbox' => $pouringInbox, 'returned' => $pouringReturned);
+        $stats['pouring'] = array('inbox' => $pouringInbox, 'returned' => $pouringReturned, 'drafts' => $pouringDrafts);
 
         echo CJSON::encode(array($stats));
     }

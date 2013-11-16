@@ -93,9 +93,10 @@
                                         class="fa fa-angle-double-right"></i>Archive <span
                                         class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['pouringArchive']}}</span></span></a>
                             </li>
-                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}" ng-switch-when="0">
-                                <a href="#" onclick="return false;"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Draft</span></a>
+                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}">
+                                <a href="#/pourings/drafts"><span class="menu-text"><i
+                                        class="fa fa-angle-double-right"></i>Draft <span
+                                        class="badge badge-primary pull-right stat-blue">{{menuStats[0].pouring.drafts}}</span></span></a>
                             </li>
                         </ul>
                     </li>

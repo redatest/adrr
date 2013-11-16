@@ -159,7 +159,7 @@
                 <div class="input-group">
                     <input id="poured_qty" type="number" adrr-num-range max="{{total - used}}" min="1"
                            class="form-control" ng-model="formData.poured_qty" required/>
-                    <span class="input-group-addon ar-info">remained: {{used}}</span>
+                    <span class="input-group-addon ar-info">remained: {{total - used}}</span>
                 </div>
             </div>
         </div>
@@ -258,22 +258,22 @@
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
                 <label for="slumpb" class="control-label">Slump B</label>
-                <input id="slumpb" type="number" class="form-control" ng-model="formData['slump_b']" required/>
+                <input id="slumpb" type="number" class="form-control" ng-model="formData['slump_b']"/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
                 <label for="hrwr" class="control-label">HRWR (ltr)</label>
-                <input id="hrwr" type="number" class="form-control" ng-model="formData['hrwr']" required/>
+                <input id="hrwr" type="number" class="form-control" ng-model="formData['hrwr']"/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': waterForm.$invalid}" ng-form="waterForm">
                 <label for="water" class="control-label">Water (ltr)</label>
-                <input id="water" type="number" class="form-control" ng-model="formData['water']" required/>
+                <input id="water" type="number" class="form-control" ng-model="formData['water']"/>
             </div>
 
             <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
                 <label for="slumpa" class="control-label">Slump A</label>
-                <input id="slumpa" type="number" class="form-control" ng-model="formData['slump_a']" required/>
+                <input id="slumpa" type="number" class="form-control" ng-model="formData['slump_a']"/>
             </div>
         </div>
     </div>

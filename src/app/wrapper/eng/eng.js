@@ -230,7 +230,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         (
             'wrapper.eng.pouring.draft',
             {
-                url: '^/pourings/draft',
+                url: '^/pourings/drafts',
 
                 title: 'Pourings Drafts',
 
@@ -1891,6 +1891,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataFetcher.unset($scope.records);
+            }
+        );
+
     }
 )
 
@@ -2166,6 +2173,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataFetcher.unset($scope.records);
+            }
+        );
+
     }
 )
 
@@ -2360,6 +2374,206 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataFetcher.unset($scope.records);
+            }
+        );
+
+    }
+)
+
+    .controller
+(
+    'PouringDraftCtrl', function ($rootScope, $scope, adrrDataFetcher, $state, Restangular) {
+
+        var columnDefs = [
+
+            {
+                field: 'date',
+                displayName: 'Date',
+                filters: 'stringDate:"dd-MM-yyyy"'
+            },
+            {
+                field: 'shift_id',
+                displayName: 'Shift',
+                filters: 'fetchValue: yii["ShiftType"]'
+            },
+            {
+                field: 'pouring_type_id',
+                displayName: 'Pouring',
+                filters: 'fetchValue: yii["PouringType"]'
+            },
+            {
+                field: 'ir',
+                displayName: 'IR'
+            },
+            {
+                field: 'zone_id',
+                displayName: 'Zone',
+                filters: 'fetchValue: yii["Zone"]'
+            },
+            {
+                field: 'area',
+                displayName: 'Area'
+            },
+            {
+                field: 'est_vol',
+                displayName: 'Est Vol'
+            },
+            {
+                field: 'ticket',
+                displayName: 'Ticket'
+            },
+            {
+                field: 'truck',
+                displayName: 'Truck'
+            },
+            {
+                field: 'conc_type_id',
+                displayName: 'Concrete',
+                filters: 'fetchValue: yii["ConcreteType"]'
+            },
+            {
+                field: 'poured_qty',
+                displayName: 'QTY'
+            },
+            {
+                field: 'dept_time',
+                displayName: 'Dept Time',
+                filters: 'stringDate:"HH:mm"'
+            },
+            {
+                field: 'start_time',
+                displayName: 'Start',
+                filters: 'stringDate:"HH:mm"'
+            },
+            {
+                field: 'end_time',
+                displayName: 'End',
+                filters: 'stringDate:"HH:mm"'
+            }
+
+        ];
+
+        if ($rootScope.loginData['senior'] === '1') {
+
+            columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
+
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getDrafts', 5000, 'update');
+
+        } else {
+
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getDrafts');
+
+        }
+
+        $scope.adrrGridOptions = {
+
+            data: 'records',
+
+            columnDefs: columnDefs,
+
+            rowTemplate: '<tr class="adrrGridRow" ng-repeat="(i, row) in rows | orderBy:\'update\':true">' +
+                '<td ng-show="multiSelect && showSelectionCheckbox" ng-click="rowClickHandler(i)">' +
+                '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
+                '</td>' +
+                '<td ng-repeat="col in cols" adrr-grid-cell ng-click="rowClickHandler(i)"></td>' +
+                '<td class="actions">' +
+                '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
+                '<i class="fa fa-comments-o fa-lg orng"></i>' +
+                '</a>' +
+                '<a title="Edit" class="btn btn-default btn-xs" href="#/pourings/edit/{{row.id}}">' +
+                '<i class="fa fa-edit fa-lg blu"></i>' +
+                '</a>' +
+                '</td>' +
+                '</tr>',
+
+            headerTemplate: '<tr id="headerCells">' +
+                '<th ng-show="multiSelect && showSelectionCheckbox">' +
+                '<input type="checkbox" ng-checked="rows.length === selectedItems.length" ng-click="programaticallySelect()" />' +
+                '</th>' +
+                '<th ng-repeat="col in cols">' +
+                '{{col.displayName}}' +
+                '</th>' +
+                '<th>Actions</th>' +
+                '</tr>',
+
+            showSelectionCheckbox: false
+
+        };
+
+        $scope.createClickHandler = function () {
+
+            $state.go('wrapper.eng.pouring.create');
+
+        };
+
+        $scope.loadComments = function (row) {
+
+            $scope.curRec = row;
+
+            $scope.comments = [];
+
+            Restangular.one('eng/pouring', row.id).all('comments').getList().then
+            (
+
+                function (data) {
+
+                    $scope.comments = angular.isArray(data) ? data : [];
+
+                }
+
+            )
+
+        };
+
+        $scope.submitComment = function () {
+
+            Restangular.one('eng/pouring', $scope.curRec.id).all('comments').post({user_id: $rootScope.loginData.user_id, comment: $scope.commentText}).then
+            (
+                function (data) {
+                    $scope.comments.push(data);
+
+                    $scope.commentText = '';
+
+                    Restangular.one('eng/pouring/return').get({id: $scope.curRec.id}).then
+                    (
+                        function () {
+
+                            $scope.records.splice(_.indexOf($scope.records, $scope.curRec, 0), 1);
+
+                            $('#commentModal').modal('hide');
+
+                            if (!$scope.$$phase) {
+
+                                $scope.$apply();
+
+                            }
+                        }
+                    )
+                }
+            )
+
+        };
+
+        $rootScope.controls = [
+
+            {
+                title: 'New record',
+                clickHandler: $scope.createClickHandler,
+                visibility: $rootScope.loginData['senior'] == 0
+            }
+
+        ];
+
+        $scope.$on
+        (
+            '$destroy', function () {
+                adrrDataFetcher.unset($scope.records);
+            }
+        );
     }
 )
 
@@ -2468,6 +2682,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                                     $scope.total = data['total'] == 0 ? parseInt($scope.lab['truck_load'], 10) : parseInt(data['total'], 10);
                                     $scope.used = parseInt(data['used'], 10);
+
+                                    console.log($scope.total);
+                                    console.log($scope.used);
                                 }
                             );
                         },
@@ -2758,7 +2975,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringEditCtrl', function ($scope, $state, yii, Restangular) {
+    'PouringEditCtrl', function ($rootScope, $scope, $state, yii, $q, Restangular) {
 
         $scope.reset = function () {
 
@@ -2798,15 +3015,35 @@ angular.module('adrrApp.wrapper.eng', [], null)
         (
             function (recData) {
 
-                $scope.formData = angular.copy(recData);
+                $scope.formData = Restangular.copy(recData);
 
-                $scope.formData['ticket'] = parseInt($scope.formData['ticket'], 10);
-                $scope.formData['poured_qty'] = parseInt($scope.formData['poured_qty'], 10);
-                $scope.formData['ir'] = parseInt($scope.formData['ir'], 10);
-                $scope.formData['slump_b'] = parseInt($scope.formData['slump_b'], 10);
-                $scope.formData['hrwr'] = parseInt($scope.formData['hrwr'], 10);
-                $scope.formData['water'] = parseInt($scope.formData['water'], 10);
-                $scope.formData['slump_a'] = parseInt($scope.formData['slump_a'], 10);
+                if ($scope.formData['ticket'] !== null) {
+                    $scope.formData['ticket'] = parseInt($scope.formData['ticket'], 10);
+                }
+
+                if ($scope.formData['poured_qty'] !== null) {
+                    $scope.formData['poured_qty'] = parseInt($scope.formData['poured_qty'], 10);
+                }
+
+                if ($scope.formData['ir'] !== null) {
+                    $scope.formData['ir'] = parseInt($scope.formData['ir'], 10);
+                }
+
+                if ($scope.formData['slump_b'] !== null) {
+                    $scope.formData['slump_b'] = parseInt($scope.formData['slump_b'], 10);
+                }
+
+                if ($scope.formData['hrwr'] !== null) {
+                    $scope.formData['hrwr'] = parseInt($scope.formData['hrwr'], 10);
+                }
+
+                if ($scope.formData['water'] !== null) {
+                    $scope.formData['water'] = parseInt($scope.formData['water'], 10);
+                }
+
+                if ($scope.formData['slump_a'] !== null) {
+                    $scope.formData['slump_a'] = parseInt($scope.formData['slump_a'], 10);
+                }
 
                 $scope.$watch
                 (
@@ -2815,7 +3052,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                         $scope.used = 0;
                         $scope.total = 12;
 
-                        if (typeof newVal !== 'undefined' && newVal !== '') {
+                        if (typeof newVal !== 'undefined' && newVal !== '' && newVal !== null) {
 
                             Restangular.one('eng/lab/getTicket').get({ticket: $scope.formData['ticket'], supplier: $scope.formData['supplier_id']}).then
                             (
@@ -2833,10 +3070,11 @@ angular.module('adrrApp.wrapper.eng', [], null)
                                     Restangular.one('eng/pouring/getPouredQTY').get({supplier_id: data['supplier_id'], ticket: data['ticket']}).then
                                     (
                                         function (data) {
-
-                                            $scope.used = parseInt(data['used'], 10) - (typeof $scope.formData['poured_qty'] !== 'undefined' ? parseInt($scope.formData['poured_qty'], 10) : 0);
+                                            console.log($scope.formData['poured_qty']);
+                                            $scope.used = parseInt(data['used'], 10) - (typeof $scope.formData['poured_qty'] !== 'undefined' ? parseInt($scope.formData['poured_qty'] !== null ? $scope.formData['poured_qty'] : 0, 10) : 0);
                                             $scope.total = data['total'] == 0 ? parseInt($scope.lab['truck_load'], 10) : parseInt(data['total'], 10);
-
+                                            console.log($scope.used);
+                                            console.log($scope.total);
                                         }
                                     );
                                 },
@@ -2863,7 +3101,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                         $scope.resetIr();
 
-                        if (typeof newVal !== 'undefined' && newVal !== '') {
+                        if (typeof newVal !== 'undefined' && newVal !== '' && newVal !== null) {
 
                             Restangular.one('settings/ir/getIr').get({ir: newVal}).then
                             (
@@ -2955,7 +3193,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
         (
             'formData.supplier_id', function (newVal) {
 
-                if (!angular.isUndefined(newVal) && newVal !== '') {
+                if (typeof newVal !== 'undefined' && newVal !== '' && newVal !== null) {
 
                     $scope.prefix = yii['Supplier']['list'][newVal].prefix;
 
@@ -2965,6 +3203,168 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 }
             }
         );
+
+        $scope.submit = function (draft) {
+
+            $scope.formData['draft'] = typeof draft !== 'undefined' ? 1 : 0;
+
+            var deferred = $q.defer();
+
+            var datePlusOne = function (val) {
+
+                var date = new Date(val.split('-'));
+
+                date.setDate(date.getDate() + 1);
+
+                return $.datepicker.formatDate('yy-mm-dd', date);
+            };
+
+            var shift = yii['ShiftType']['list'][$scope.formData['shift_id']];
+
+            var overlap = parseInt(shift['overlap'], 10);
+
+            if (typeof $scope.formData['dept_time'] !== 'undefined' && $scope.formData['dept_time'] !== '') {
+
+                if ($scope.ticketFound) {
+
+                    $scope.formData['dept_time'] = $scope.lab['dept_time'];
+
+                } else if (overlap && $scope.formData['dept_time'] < shift['start_time']) {
+
+                    $scope.formData['dept_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['dept_time'];
+
+                } else {
+
+                    $scope.formData['dept_time'] = $scope.formData['date'] + ' ' + $scope.formData['dept_time'];
+                }
+            }
+
+            if (typeof $scope.formData['start_time'] !== 'undefined' && $scope.formData['start_time'] !== '') {
+
+                if (overlap && $scope.formData['start_time'] < shift['start_time']) {
+
+                    $scope.formData['start_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['start_time'];
+
+                } else {
+                    $scope.formData['start_time'] = $scope.formData['date'] + ' ' + $scope.formData['start_time'];
+                }
+            }
+
+            if (typeof $scope.formData['end_time'] !== 'undefined' && $scope.formData['end_time'] !== '') {
+
+                if (overlap && $scope.formData['end_time'] < shift['start_time']) {
+
+                    $scope.formData['end_time'] = datePlusOne($scope.formData['date']) + ' ' + $scope.formData['end_time'];
+
+                } else {
+                    $scope.formData['end_time'] = $scope.formData['date'] + ' ' + $scope.formData['end_time'];
+                }
+            }
+
+            if ($scope.als.length > 1) {
+
+                $scope.formData['level'] = $scope.als[$scope.formData.axis].level;
+                $scope.formData['axis'] = $scope.als[$scope.formData.axis].axis;
+
+            }
+
+            $scope.formData.put().then
+            (
+                function (data) {
+
+                    if (typeof $scope.comment !== 'undefined' && $scope.comment !== '') {
+
+                        data.all('comments').post({comment: $scope.comment}).then
+                        (
+                            function () {
+
+                                $scope.reset();
+
+                                deferred.resolve(data);
+
+                            }
+                        );
+
+                    } else {
+
+                        $scope.reset();
+
+                        deferred.resolve(data);
+                    }
+
+                }
+            );
+
+            return deferred.promise;
+
+        };
+
+        $scope.saveAndNewWithSameIr = function () {
+
+            $scope.submit().then
+            (
+                function (data) {
+
+                    setTimeout
+                    (
+                        function () {
+
+                            $scope.formData.ir = parseInt(data['ir'], 10);
+
+                            if (!$scope.$$phase) {
+
+                                $scope.$apply();
+                            }
+
+                        }, 100
+                    );
+
+                }
+            );
+        };
+
+        $scope.saveAndBackToList = function () {
+
+            $scope.submit().then
+            (
+                function () {
+                    setTimeout
+                    (
+                        function () {
+
+                            $state.go('wrapper.eng.pouring.inbox');
+
+                        }, 100
+                    );
+                }
+            );
+
+        };
+
+        $scope.controls = $rootScope.controls = [
+
+            {
+                title: 'Save and new',
+                clickHandler: $scope.submit,
+                visibility: true
+            },
+            {
+                title: 'Save and new with same IR',
+                clickHandler: $scope.saveAndNewWithSameIr,
+                visibility: true
+            },
+            {
+                title: 'Save and back to list',
+                clickHandler: $scope.saveAndBackToList,
+                visibility: true
+            },
+            {
+                title: 'Save as draft',
+                clickHandler: $scope.submit,
+                visibility: false
+            }
+
+        ];
 
     }
 )
