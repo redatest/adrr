@@ -203,16 +203,6 @@ class UserModule extends CWebModule
         }
     }
 
-    public static function isSenior()
-    {
-        return (Yii::app()->user->isGuest ? 0 : self::user()->profile->senior);
-    }
-
-    public static function isEng()
-    {
-        return (Yii::app()->user->isGuest ? 0 : self::user()->profile->eng);
-    }
-
     /**
      * Return admins.
      * @return array syperusers names

@@ -49,6 +49,8 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
             'wrapper.beforeCasting.create',
             {
                 url: '^/before-casting/create',
+                title: 'New before casting',
+                breadcrumb: ['Home', 'Before Casting', 'New'],
                 showControls: true,
 
                 views: {
@@ -147,8 +149,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
         ];
 
 
-
-
         $scope.adrrGridOptions = {
 
             data: 'records',
@@ -161,7 +161,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         };
 
-        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
+        $rootScope.showControls = $rootScope.loginData['role'] == 4;
 
         $scope.createClickHandler = function () {
 
@@ -174,7 +174,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];
@@ -202,13 +202,13 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         /* Frequent Date methods */
 
-        $scope.setToday = function(){
+        $scope.setToday = function () {
             var date = new Date();
 
-            date.setDate( date.getDate() );
+            date.setDate(date.getDate());
 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
-        }
+        };
 
         $scope.min1Day = function () {
             var date = new Date();
@@ -232,12 +232,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
             date.setDate(date.getDate() - 3);
 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
-        };
-
-        $scope.validateTime = function () {
-
-            return $filter('validTime')($scope.formData['dept_time'], $scope.formData['arriv_time'], yii['ShiftType']['list'][$scope.formData['shift_id']]);
-
         };
 
         /* End frequent Date methods */
@@ -265,14 +259,14 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
                 clickHandler: $scope.submit,
 
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
             {
                 title: 'Save and back to list',
 
                 clickHandler: $scope.submit,
 
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];

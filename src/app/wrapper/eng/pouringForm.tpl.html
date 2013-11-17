@@ -22,18 +22,18 @@
                 <label for="date" class="control-label">Date</label>
 
                 <div class="input-group">
-                    <div class="input-group-btn" ng-show="loginData.senior == 0">
+                    <div class="input-group-btn" ng-show="loginData.role == 4">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal"
                                 ng-disabled="state.indexOf('edit') > -1">
                             Frequents
                         </button>
                     </div>
 
-                    <input ng-show="loginData.senior == 1" id="date" readonly="readonly"
+                    <input ng-show="loginData.role == 3" id="date" readonly="readonly"
                            ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
                            ng-model="formData.date" class="form-control" type="text" required/>
 
-                    <input ng-show="loginData.senior == 0" readonly="readonly"
+                    <input ng-show="loginData.role == 4" readonly="readonly"
                            ng-model="formData.date" class="form-control" type="text" required/>
 
                     <span class="input-group-addon ar-info"><i class="glyphicon glyphicon-calendar"></i> </span>

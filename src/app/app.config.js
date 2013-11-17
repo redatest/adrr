@@ -1,4 +1,5 @@
 var appConfig = new function () {
+
     this.loginRoute = '/login';
 
     // this.defaultRoute = '/dashboard';
@@ -16,4 +17,15 @@ var appConfig = new function () {
     this.yiiUrl = this.getYiiUrl();
 
     this.restfulApiBaseUrl = this.yiiUrl;
+
+    this.roles = [
+        {
+            role: 3,
+            name: 'Senior'
+        },
+        {
+            role: 4,
+            name: 'Engineer'
+        }
+    ];
 };

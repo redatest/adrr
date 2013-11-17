@@ -708,13 +708,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
 
             {
                 title: 'Archive Selected',
                 clickHandler: $scope.archiveSelected,
-                visibility: $rootScope.loginData['senior'] == 1,
+                visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
             }
 
@@ -788,7 +788,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -864,7 +864,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell ng-click="rowClickHandler(i)"></td>' +
-                '<td class="actions" ng-show="loginData.senior === \'1\'">' +
+                '<td class="actions" ng-show="loginData.role == 3">' +
                 '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
@@ -884,12 +884,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<th ng-repeat="col in cols">' +
                 '{{col.displayName}}' +
                 '</th>' +
-                '<th ng-show="loginData.senior === \'1\'">Actions</th>' +
+                '<th ng-show="loginData.role == 3">Actions</th>' +
                 '</tr>',
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.loginData['senior'] === '1'),
+            multiSelect: ($rootScope.loginData['role'] == 3),
 
             selectedItems: $scope.selectedItems,
 
@@ -981,7 +981,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -1055,7 +1055,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];
@@ -1146,7 +1146,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -1237,7 +1237,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a title="Comments" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a title="Archive" class="btn btn-default btn-xs" ng-show="loginData.senior === \'1\'" onclick="return false;" href="#" ng-click="archive(row)">' +
+                '<a title="Archive" class="btn btn-default btn-xs" ng-show="loginData.role == 3" onclick="return false;" href="#" ng-click="archive(row)">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
                 '<a title="Edit" class="btn btn-default btn-xs" href="#/labs/edit/{{row.id}}">' +
@@ -1258,7 +1258,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.loginData['senior'] === '1'),
+            multiSelect: ($rootScope.loginData['role'] == 3),
 
             selectedItems: $scope.selectedItems,
 
@@ -1297,13 +1297,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
 
             {
                 title: 'Archive Selected',
                 clickHandler: $scope.archiveSelected,
-                visibility: $rootScope.loginData['senior'] == 1,
+                visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
             }
 
@@ -1487,7 +1487,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'Save',
                 clickHandler: $scope.submit,
-                visibility: $rootScope.loginData['senior'] == '0',
+                visibility: $rootScope.loginData['role'] == 4,
                 disabled: true
             }
         ];
@@ -1604,7 +1604,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'Save',
                 clickHandler: $scope.submit,
-                visibility: $rootScope.loginData['senior'] == '0',
+                visibility: $rootScope.loginData['role'] == 4,
                 disabled: true
             }
         ];
@@ -1727,7 +1727,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -1755,7 +1755,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell ng-click="rowClickHandler(i)"></td>' +
-                '<td class="actions" ng-show="loginData.senior === \'1\'">' +
+                '<td class="actions" ng-show="loginData.role === 3">' +
                 '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
@@ -1775,12 +1775,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<th ng-repeat="col in cols">' +
                 '{{col.displayName}}' +
                 '</th>' +
-                '<th ng-show="loginData.senior === \'1\'">Actions</th>' +
+                '<th ng-show="loginData.role == 3">Actions</th>' +
                 '</tr>',
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.loginData['senior'] === '1'),
+            multiSelect: ($rootScope.loginData['role'] == 3),
 
             selectedItems: $scope.selectedItems,
 
@@ -1880,12 +1880,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
             {
                 title: 'Archive Selected',
                 clickHandler: $scope.archiveSelected,
-                visibility: $rootScope.loginData['senior'] == 1,
+                visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
             }
 
@@ -2009,7 +2009,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -2041,7 +2041,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
-                '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)" ng-show="loginData.senior === \'1\'">' +
+                '<a title="Archive" class="btn btn-default btn-xs" href="#" onclick="return false;" ng-click="archive(row)" ng-show="loginData.role == 3">' +
                 '<i class="fa fa-download fa-lg blk"></i>' +
                 '</a>' +
                 '<a title="Edit" class="btn btn-default btn-xs" href="#/pourings/edit/{{row.id}}">' +
@@ -2062,7 +2062,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             showSelectionCheckbox: true,
 
-            multiSelect: ($rootScope.loginData['senior'] === '1'),
+            multiSelect: ($rootScope.loginData['role'] == 3),
 
             selectedItems: $scope.selectedItems,
 
@@ -2162,12 +2162,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
             {
                 title: 'Archive Selected',
                 clickHandler: $scope.archiveSelected,
-                visibility: $rootScope.loginData['senior'] == 1,
+                visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
             }
 
@@ -2291,7 +2291,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -2369,7 +2369,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];
@@ -2457,7 +2457,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         ];
 
-        if ($rootScope.loginData['senior'] === '1') {
+        if ($rootScope.loginData['role'] == 3) {
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
@@ -2563,7 +2563,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];
@@ -2951,22 +2951,22 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'Save and new',
                 clickHandler: $scope.submit,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
             {
                 title: 'Save and new with same IR',
                 clickHandler: $scope.saveAndNewWithSameIr,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
             {
                 title: 'Save and back to list',
                 clickHandler: $scope.saveAndBackToList,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             },
             {
                 title: 'Save as draft',
                 clickHandler: $scope.saveAsDraft,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];
@@ -3426,7 +3426,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
-        $rootScope.showControls = $rootScope.loginData['senior'] !== '1';
+        $rootScope.showControls = $rootScope.loginData['role'] == 4;
 
         $scope.createClickHandler = function () {
 
@@ -3439,7 +3439,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
-                visibility: $rootScope.loginData['senior'] == 0
+                visibility: $rootScope.loginData['role'] == 4
             }
 
         ];
@@ -3483,7 +3483,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             {
                 title: 'Save',
                 clickHandler: $scope.submit,
-                visibility: $rootScope.loginData['senior'] == 0,
+                visibility: $rootScope.loginData['role'] == 4,
                 disabled: true
             }
 

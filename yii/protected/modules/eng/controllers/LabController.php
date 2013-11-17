@@ -39,7 +39,7 @@ class LabController extends RESTful
 
         }
 
-        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+        if (!Yii::app()->user->role === 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
@@ -57,7 +57,7 @@ class LabController extends RESTful
 
         }
 
-//        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+//        if (!Yii::app()->user->role === 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
@@ -75,7 +75,7 @@ class LabController extends RESTful
 
         }
 
-        if (Yii::app()->user->isSenior) {
+        if (Yii::app()->user->role === 3) {
 
             $condition .= ' AND returned = 0 AND approved = 1';
 
@@ -143,7 +143,7 @@ class LabController extends RESTful
 
             if ($model !== null) {
 
-                if (Yii::app()->user->isSenior) {
+                if (Yii::app()->user->role === 3) {
 
                     $model->returned = 1;
                     $model->approved = 0;

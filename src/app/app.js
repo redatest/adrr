@@ -22,6 +22,7 @@ var adrrApp = angular.module
             'adrrApp.login',
             'adrrApp.wrapper',
             'adrrApp.wrapper.dashboard',
+            'adrrApp.wrapper.user',
             'adrrApp.wrapper.settings',
             'adrrApp.wrapper.eng',
             'adrrApp.wrapper.beforeCasting',

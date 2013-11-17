@@ -1,0 +1,148 @@
+<?php
+
+class AdrrUserController extends RESTful
+{
+    public function __construct()
+    {
+        $this->_model = User::model();
+    }
+
+    public function actionIndex()
+    {
+        $models = Yii::app()->db->createCommand()
+            ->select('u.id, u.username, u.email, p.name, p.last_name, p.emp_num, p.role')
+            ->from('tbl_users u')
+            ->join('tbl_profiles p', 'u.id = p.user_id')
+            ->where('u.status = 1')
+            ->queryAll();
+
+        $this->_sendResponse(200, CJSON::encode($models));
+    }
+
+    public function actionView()
+    {
+        $model = Yii::app()->db->createCommand()
+            ->select('u.id, u.username, u.email, p.name, p.last_name, p.emp_num, p.role')
+            ->from('tbl_users u')
+            ->join('tbl_profiles p', 'u.id = p.user_id')
+            ->where('u.status = 1 AND u.id = ' . $_GET['id'])
+            ->queryRow();
+
+        $this->_sendResponse(200, CJSON::encode($model));
+    }
+
+    public function actionCreate()
+    {
+        $json = file_get_contents('php://input');
+
+        $put_vars = CJSON::decode($json, true);
+
+        $transaction = Yii::app()->db->beginTransaction();
+
+        try {
+            $model = new User();
+            $model->username = $put_vars['username'];
+            $model->password = md5($put_vars['password']);
+            $model->email = $put_vars['email'];
+            $model->activkey = uniqid();
+            $model->superuser = $put_vars['role'] === '3' ? 1 : 0;
+            $model->status = 1;
+
+            if ($model->save()) {
+
+                $profile = new Profile();
+                $profile->user_id = $model->id;
+                $profile->name = $put_vars['name'];
+                $profile->last_name = $put_vars['last_name'];
+                $profile->emp_num = $put_vars['emp_num'];
+                $profile->role = $put_vars['role'];
+
+                if ($profile->save()) {
+
+                    $transaction->commit();
+
+                }
+            }
+        } catch (Exception $e) {
+
+            $transaction->rollback();
+
+        }
+    }
+
+    public function actionUpdate()
+    {
+        $this->_checkParams();
+
+        $json = file_get_contents('php://input');
+
+        $put_vars = CJSON::decode($json, true);
+
+        $transaction = Yii::app()->db->beginTransaction();
+
+        try {
+            $model = $this->_model->findByPk($_GET['id']);
+            $model->username = $put_vars['username'];
+            $model->password = md5($put_vars['password']);
+            $model->email = $put_vars['email'];
+            $model->superuser = $put_vars['role'] === '3' ? 1 : 0;
+            $model->status = 1;
+
+            if ($model->save()) {
+
+                $model->profile->name = $put_vars['name'];
+                $model->profile->last_name = $put_vars['last_name'];
+                $model->profile->emp_num = $put_vars['emp_num'];
+                $model->profile->role = $put_vars['role'];
+
+                if ($model->profile->save()) {
+
+                    $transaction->commit();
+
+                }
+            }
+        } catch (Exception $e) {
+
+            $transaction->rollback();
+
+        }
+    }
+
+    public function actionGetNo()
+    {
+        if (isset($_GET['emp_num']) && isset($_GET['id'])) {
+
+            $model = Profile::model()->find(array('condition' => 'emp_num = ' . $_GET['emp_num'] . ' AND user_id != ' . $_GET['id']));
+
+            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+        }
+
+        $this->_sendResponse(404, 'This no can be taken');
+    }
+
+    public function actionGetUsername()
+    {
+        if (isset($_GET['username']) && isset($_GET['id'])) {
+
+            $model = $this->_model->find(array('condition' => 'username = "' . $_GET['username'] . '" AND id != ' . $_GET['id']));
+
+            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+        }
+
+        $this->_sendResponse(404, 'This username can be taken');
+    }
+
+    public function actionGetEmail()
+    {
+        if (isset($_GET['email']) && isset($_GET['id'])) {
+
+            $model = $this->_model->find(array('condition' => 'email = "' . $_GET['email'] . '" AND id != ' . $_GET['id']));
+
+            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+        }
+
+        $this->_sendResponse(404, 'This email can be taken');
+    }
+}
+
+?>

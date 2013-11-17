@@ -39,7 +39,7 @@ class PouringController extends RESTful
 
         }
 
-        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+        if (!Yii::app()->user->role === 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
@@ -57,7 +57,7 @@ class PouringController extends RESTful
 
         }
 
-        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+        if (!Yii::app()->user->role === 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
@@ -75,7 +75,7 @@ class PouringController extends RESTful
 
         }
 
-//        if (!Yii::app()->user->isSenior) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+//        if (!Yii::app()->user->role === 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
@@ -89,7 +89,7 @@ class PouringController extends RESTful
 
         if (isset($_GET['trucker'])) $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
 
-        if (Yii::app()->user->isSenior) $condition .= ' AND returned = 0 AND approved = 1';
+        if (Yii::app()->user->role === 3) $condition .= ' AND returned = 0 AND approved = 1';
         else $condition .= ' AND returned = 1 AND draft = 0 AND approved = 0 AND user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
@@ -150,7 +150,7 @@ class PouringController extends RESTful
 
             if ($model !== null) {
 
-                if (Yii::app()->user->isSenior) {
+                if (Yii::app()->user->role === 3) {
 
                     $model->returned = 1;
                     $model->approved = 0;

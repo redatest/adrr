@@ -1,9 +1,9 @@
-<ng-switch on="loginData.senior">
+<ng-switch on="loginData.role">
 
-    <any ng-switch-when="1">
+    <any ng-switch-when="3">
         <ng-include src="'wrapper/dashboard/seniorDashboard.tpl.html'"></ng-include>
     </any>
-    <any ng-switch-when="0">
+    <any ng-switch-when="4">
         <ng-include src="'wrapper/dashboard/engineerDashboard.tpl.html'"></ng-include>
     </any>
 

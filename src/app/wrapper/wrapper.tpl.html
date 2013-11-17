@@ -25,13 +25,17 @@
     </button>
 </nav>
 
-<div id="pagecont" class="container" ng-switch="loginData['senior']">
+<div id="pagecont" class="container" ng-switch="loginData['role']">
     <div id="sidenav" class="">
         <nav class="navbar navbar-default" role="navigation">
             <div class="collapse navbar-collapse navbar-ex8-collapse">
                 <ul class="nav nav-pills nav-stacked">
                     <li ng-class="{active: state === 'wrapper.dashboard'}">
                         <a href="#/dashboard"><i class="fa fa-dashboard fa-fw fa-lg"></i> Dashboard</a>
+                    </li>
+
+                    <li ng-class="{active: state === 'wrapper.user.list'}" ng-show="loginData['role'] == 3">
+                        <a href="#/user/list"><i class="fa fa-user fa-fw fa-lg"></i> Users</a>
                     </li>
 
                     <li ng-class="{active: state.indexOf('wrapper.eng.temp') > -1}">
@@ -49,7 +53,7 @@
                             <li ng-class="{active: state.indexOf('wrapper.eng.lab.inbox') > -1}">
                                 <a href="#/labs/inbox">
                                     <span class="menu-text">
-                                        <i class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}} <span
+                                        <i class="fa fa-angle-double-right"></i>{{loginData.role == 3 ? 'Inbox' : 'Sent'}} <span
                                             class="badge badge-primary pull-right stat-blue">{{menuStats[0].lab.inbox}}</span>
                                     </span>
                                 </a>
@@ -78,7 +82,7 @@
                             <li ng-class="{active: state == 'wrapper.eng.pouring.inbox'}">
                                 <a href="#/pourings/inbox">
                                     <span class="menu-text">
-                                        <i class="fa fa-angle-double-right"></i>{{loginData.senior === '1' ? 'Inbox' : 'Sent'}} <span
+                                        <i class="fa fa-angle-double-right"></i>{{loginData.role == 3 ? 'Inbox' : 'Sent'}} <span
                                             class="badge badge-primary pull-right stat-blue">{{menuStats[0].pouring.inbox}}</span>
                                     </span>
                                 </a>
@@ -105,7 +109,7 @@
                         <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
                     </li>
 
-                    <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
+                    <li ng-switch-when="3" class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.rep') === -1}" data-toggle="collapse"
                            href="#collapseReports"><i class="fa fa-bar-chart-o fa-lg fa-fw"></i> Reports & Statistics <i
@@ -125,7 +129,7 @@
                         </ul>
                     </li>
 
-                    <li ng-switch-when="1" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
+                    <li ng-switch-when="3" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse"
                            href="#collapseOne"><i class="fa fa-cogs fa-lg fa-fw"></i> Settings <i

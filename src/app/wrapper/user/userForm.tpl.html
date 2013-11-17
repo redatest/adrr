@@ -1,0 +1,117 @@
+<form id="userForm" role="form" name="mainForm" class="labForm" novalidate>
+    <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel"
+                         ng-class="{'panel-danger': basForm.$invalid || formData.password !== formData.repass, 'panel-success': basForm.$valid && formData.repass === formData.password}"
+                         ng-form="basForm">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">1. Basics</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group" ng-class="{'has-error': unForm.$invalid || usernameUsed}"
+                                 ng-form="unForm">
+
+                                <label for="username" class="control-label">Username</label>
+
+                                <input id="username" class="form-control" type="text" ng-model="formData.username"
+                                       required/>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': emailForm.$invalid || emailUsed}"
+                                 ng-form="emailForm">
+
+                                <label for="email" class="control-label">Email</label>
+
+                                <input id="email" class="form-control" type="email" ng-model="formData.email"
+                                       required/>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': passwordForm.$invalid}"
+                                 ng-form="passwordForm">
+
+                                <label for="password" class="control-label">Password</label>
+
+                                <input id="password" class="form-control" type="password" ng-model="formData.password"
+                                       required/>
+                            </div>
+
+                            <div class="form-group"
+                                 ng-class="{'has-error': repassForm.$invalid || formData.password !== formData.repass}"
+                                 ng-form="repassForm">
+
+                                <label for="repass" class="control-label">Repeat Password</label>
+
+                                <input id="repass" class="form-control" type="password" ng-model="formData.repass"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel" ng-class="{'panel-danger': infoForm.$invalid, 'panel-success': infoForm.$valid}"
+                         ng-form="infoForm">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">2. Info</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group" ng-class="{'has-error': noForm.$invalid || noUsed}"
+                                 ng-form="noForm">
+
+                                <label for="no" class="control-label">No.</label>
+
+                                <input id="no" class="form-control" adrr-num-range min="1" type="number"
+                                       ng-model="formData.emp_num" pattern="[0-9]*" required/>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': fnameForm.$invalid}" ng-form="fnameForm">
+
+                                <label for="fname" class="control-label">First Name</label>
+
+                                <input id="fname" class="form-control" type="text" ng-model="formData.name"
+                                       required/>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': lnameForm.$invalid}" ng-form="lnameForm">
+
+                                <label for="lname" class="control-label">Last Name</label>
+
+                                <input id="lname" class="form-control" type="text" ng-model="formData.last_name"
+                                       required/>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': roleForm.$invalid}" ng-form="roleForm">
+
+                                <label for="role" class="control-label">Last Name</label>
+
+                                <select class="form-control" id="role" ng-model="formData.role" required
+                                        ng-class="{'has-error': roleForm.$invalid}" ng-form="roleForm">
+
+                                    <option value="">Select...</option>
+                                    <option ng-repeat="role in roles" ng-selected="formData.role === role.role"
+                                            value="{{role.role}}">{{role.name}}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-hide="true">
+
+                    <button ng-disabled="controls[0].disabled = (noUsed || usernameUsed || emailUsed || !(formData.repass === formData.password && formData.password !== undefined))">
+                        Save & back to list
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
