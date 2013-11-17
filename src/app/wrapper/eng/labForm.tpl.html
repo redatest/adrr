@@ -232,12 +232,13 @@
                 <textarea id="comment_2" ng-model="comment" class="form-control" rows="3"></textarea>
             </div>-->
 
-            <div class="from-group" ng-class="{ 'has-error': red !== '' && state.indexOf('edit') === -1 }"
+            <div class="from-group"
+                 ng-class="{ 'has-error': red !== '' && red !== undefined && state.indexOf('edit') === -1 }"
                  ng-form="commentForm" ng-hide="state.indexOf('edit') > -1">
                 <label for="comment_1" class="control-label">Comment</label>
 
                 <textarea id="comment_1" ng-model="comment" class="form-control" rows="3"
-                          ng-required="red !== '' && state.indexOf('edit') === -1">
+                          ng-required="red !== '' && red !== undefined && state.indexOf('edit') === -1">
                 </textarea>
             </div>
         </div>
