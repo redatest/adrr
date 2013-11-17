@@ -103,7 +103,7 @@
             <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
                 <label for="plant" class="control-label">{{yii['Lab']['cols']['plant'].label}}</label>
 
-                <input id="plant" adrr-num-range min="0" class="form-control" type="number"
+                <input id="plant" adrr-num-range min="0" class="form-control" type="number" autocomplete="off"
                        pattern="[0-9]*" ng-model="formData.plant" required
                        typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"/>
             </div>

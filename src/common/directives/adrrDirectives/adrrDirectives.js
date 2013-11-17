@@ -17,8 +17,8 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
             },
 
             template: '<div class="input-group double-input">' +
-                '<input ng-disabled="ngDisabled" ng-model="hour" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
-                '<input ng-disabled="ngDisabled" ng-model="mint" type="number" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
+                '<input ng-disabled="ngDisabled" ng-model="hour" type="text" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="23" min="0" class="form-control text-center" />' +
+                '<input ng-disabled="ngDisabled" ng-model="mint" type="text" pattern="[0-9]*" ng-change="formatTime()" adrr-num-range max="59" min="0" class="form-control text-center" />' +
                 '<span class="input-group-addon ar-info"><i class="glyphicon glyphicon-time"></i> </span>' +
                 '</div>',
 
@@ -28,42 +28,61 @@ var adrrDirectives = angular.module('adrrDirectives', ['ui.select2'], null)
                 (
                     'ngModel', function (newVal) {
 
-                        if (!angular.isUndefined(newVal) && newVal !== '' && newVal !== null) {
+                        if (typeof newVal !== 'undefined' && newVal !== '' && newVal !== null) {
 
-                            newVal = newVal.match(/(\d{1,2}:\d{1,2}:\d{1,2})/)[0];
+                            newVal = newVal.match(/(\d{2}:\d{2}:\d{2})/)[0];
 
                             scope.ngModel = newVal;
 
                             var timeArr = newVal.split(':');
 
-                            scope.hour = parseInt(timeArr[0], 10);
+                            scope.hour = parseInt(timeArr[0], 10).toString();
 
-                            scope.mint = parseInt(timeArr[1], 10);
+                            scope.mint = parseInt(timeArr[1], 10).toString();
 
                             ctrl.$setValidity('wrong', true);
+
                             ctrl.$setViewValue(newVal);
+
                         } else {
+
                             scope.hour = '';
                             scope.mint = '';
+
+                            ctrl.$setValidity('wrong', false);
                         }
                     }
                 );
 
                 scope.formatTime = function () {
 
-                    if (!angular.isUndefined(scope.hour) && scope.hour !== null && !angular.isUndefined(scope.mint) && scope.mint !== null && scope.mint !== '' && scope.mint !== '') {
+                    if (typeof scope.hour !== 'undefined' && scope.hour.length > 2) {
 
-                        var time = (String(scope.hour).length < 2 ? '0' + scope.hour : scope.hour) + ':';
-                        time += (String(scope.mint).length < 2 ? '0' + scope.mint : scope.mint) + ':00';
+                        scope.hour = '';
 
-                        ctrl.$setViewValue(time);
+                    }
+
+                    if (typeof scope.mint !== 'undefined' && scope.mint.length > 2) {
+
+                        scope.mint = '';
+
+                    }
+
+                    if (typeof scope.hour !== 'undefined' && scope.hour !== '' && typeof scope.mint !== 'undefined' && scope.mint !== '') {
+
+                        var time = (scope.hour.length < 2 ? '0' + scope.hour : scope.hour) + ':';
+                        time += (scope.mint.length < 2 ? '0' + scope.mint : scope.mint) + ':00';
+
+//                        ctrl.$setViewValue(time);
 
                         scope.ngModel = time;
 
                         ctrl.$setValidity('wrong', true);
 
                     } else {
+
                         ctrl.$setValidity('wrong', false);
+
                     }
                 };
 
