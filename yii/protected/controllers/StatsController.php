@@ -12,7 +12,7 @@ class StatsController extends CController
 
         $returned = 'archived = 0';
 
-        if (Yii::app()->user->role === 3) {
+        if (Yii::app()->user->role == 3) {
 
             $returned .= ' AND approved = 1 AND returned = 0';
 

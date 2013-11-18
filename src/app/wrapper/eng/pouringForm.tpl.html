@@ -248,40 +248,41 @@
 
 <div class="col-xs-12 col-sm-6">
 
-    <div class="panel" ng-form="fourthForm"
-         ng-class="{'panel-danger': fourthForm.$invalid, 'panel-success': fourthForm.$valid}">
+    <div class="panel" ng-form="sixthForm"
+         ng-class="{'panel-danger': sixthForm.$invalid, 'panel-success': sixthForm.$valid}">
 
         <div class="panel-heading">
-            <h3 class="panel-title">4. Redozing</h3>
+            <h3 class="panel-title">4. Casting Time</h3>
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
-                <label for="slumpb" class="control-label">Slump B</label>
-                <input id="slumpb" type="number" class="form-control" ng-model="formData['slump_b']"/>
+            <div class="form-group" ng-class="{'has-error': startForm.$invalid, 'has-warning': validateStart()}"
+                 ng-form="startForm">
+                <label class="control-label">Start</label>
+
+                <adrr-timepicker required ng-model="formData.start_time"></adrr-timepicker>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
-                <label for="hrwr" class="control-label">HRWR (ltr)</label>
-                <input id="hrwr" type="number" class="form-control" ng-model="formData['hrwr']"/>
+            <div class="form-group" ng-class="{'has-error': endForm.$invalid || validateEnd()}" ng-form="endForm">
+                <label class="control-label">End</label>
+
+                <adrr-timepicker required ng-model="formData.end_time"></adrr-timepicker>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': waterForm.$invalid}" ng-form="waterForm">
-                <label for="water" class="control-label">Water (ltr)</label>
-                <input id="water" type="number" class="form-control" ng-model="formData['water']"/>
-            </div>
+            <div class="from-group" ng-show="state.indexOf('edit') === -1"
+                 ng-class="{'has-error': validateStart() || validateEnd()}">
+                <label for="comment" class="control-label">Comment</label>
 
-            <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
-                <label for="slumpa" class="control-label">Slump A</label>
-                <input id="slumpa" type="number" class="form-control" ng-model="formData['slump_a']"/>
+                <textarea id="comment" ng-model="comment" class="form-control" rows="3"
+                          ng-required="(validateStart() || validateEnd()) && state.indexOf('edit') === -1"></textarea>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-xs-12 col-sm-6 case2">
+<div class="col-xs-12 col-sm-6">
 
-    <div class="panel" ng-form="fifthForm"
+<div class="panel" ng-form="fifthForm"
          ng-class="{'panel-danger': fifthForm.$invalid, 'panel-success': fifthForm.$valid}">
 
         <div class="panel-heading">
@@ -311,32 +312,34 @@
     </div>
 </div>
 
-<div class="col-xs-12 col-sm-6">
+<div class="col-xs-12 col-sm-6 case2">
 
-    <div class="panel" ng-form="sixthForm"
-         ng-class="{'panel-danger': sixthForm.$invalid, 'panel-success': sixthForm.$valid}">
+    <div class="panel" ng-form="fourthForm"
+         ng-class="{'panel-danger': fourthForm.$invalid, 'panel-success': fourthForm.$valid}">
 
         <div class="panel-heading">
-            <h3 class="panel-title">6. Casting Time</h3>
+            <h3 class="panel-title">6. Redozing</h3>
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': startForm.$invalid}" ng-form="startForm">
-                <label class="control-label">Start</label>
-
-                <adrr-timepicker required ng-model="formData.start_time"></adrr-timepicker>
+            <div class="form-group" ng-class="{'has-error': slumpbForm.$invalid}" ng-form="slumpbForm">
+                <label for="slumpb" class="control-label">Slump B</label>
+                <input id="slumpb" type="number" class="form-control" ng-model="formData['slump_b']"/>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': endForm.$invalid}" ng-form="endForm">
-                <label class="control-label">End</label>
-
-                <adrr-timepicker required ng-model="formData.end_time"></adrr-timepicker>
+            <div class="form-group" ng-class="{'has-error': hrwrForm.$invalid}" ng-form="hrwrForm">
+                <label for="hrwr" class="control-label">HRWR (ltr)</label>
+                <input id="hrwr" type="number" class="form-control" ng-model="formData['hrwr']"/>
             </div>
 
-            <div class="from-group" ng-show="state.indexOf('edit') === -1">
-                <label for="comment" class="control-label">Comment</label>
+            <div class="form-group" ng-class="{'has-error': waterForm.$invalid}" ng-form="waterForm">
+                <label for="water" class="control-label">Water (ltr)</label>
+                <input id="water" type="number" class="form-control" ng-model="formData['water']"/>
+            </div>
 
-                <textarea id="comment" ng-model="comment" class="form-control" rows="3"></textarea>
+            <div class="form-group" ng-class="{'has-error': slumpaForm.$invalid}" ng-form="slumpaForm">
+                <label for="slumpa" class="control-label">Slump A</label>
+                <input id="slumpa" type="number" class="form-control" ng-model="formData['slump_a']"/>
             </div>
         </div>
     </div>

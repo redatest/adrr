@@ -1755,7 +1755,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 '<input type="checkbox" ng-checked="selectedItems.indexOf(i) !== -1" />' +
                 '</td>' +
                 '<td ng-repeat="col in cols" adrr-grid-cell ng-click="rowClickHandler(i)"></td>' +
-                '<td class="actions" ng-show="loginData.role === 3">' +
+                '<td class="actions" ng-show="loginData.role == 3">' +
                 '<a title="Comments" class="btn btn-default btn-xs" onclick="return false;" href="#" ng-click="loadComments(row)" data-toggle="modal" data-target="#commentModal">' +
                 '<i class="fa fa-comments-o fa-lg orng"></i>' +
                 '</a>' +
@@ -2362,7 +2362,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
-        $rootScope.showControls = $rootScope.loginData['eng'];
+        $rootScope.showControls = $rootScope.loginData['role'] == 4;
 
         $rootScope.controls = [
 
@@ -2557,6 +2557,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
             )
 
         };
+
+        $rootScope.showControls = $rootScope.loginData['role'] == 4;
 
         $rootScope.controls = [
 
@@ -2802,6 +2804,68 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 }
             }
         );
+
+        $scope.validateStart = function () {
+
+            var conc_type = yii['ConcreteType']['list'][$scope.formData['conc_type_id']];
+
+            if (typeof conc_type !== 'undefined' && typeof $scope.formData['dept_time'] !== 'undefined') {
+
+                var prefix = "2013/01/01 ";
+
+                var dept_start = (new Date(prefix + conc_type['dept_start']) - new Date(prefix + '00:00:00')) / 1000 / 60;
+
+                var start_time = new Date(prefix + $scope.formData['start_time']);
+
+                var dept_time = new Date(prefix + $scope.formData['dept_time']);
+
+                var diff = (start_time - dept_time) / 1000 / 60;
+
+                if (diff < 0) {
+
+                    diff += 1440;
+
+                }
+
+                $scope.formData.yellow = dept_start < diff ? 1 : 0;
+
+                return $scope.formData.yellow;
+            }
+
+            return true;
+
+        };
+
+        $scope.validateEnd = function () {
+
+            var conc_type = yii['ConcreteType']['list'][$scope.formData['conc_type_id']];
+
+            if (typeof conc_type !== 'undefined' && typeof $scope.formData['dept_time'] !== 'undefined') {
+
+                var prefix = "2013/01/01 ";
+
+                var dept_end = (new Date(prefix + conc_type['dept_end']) - new Date(prefix + '00:00:00')) / 1000 / 60;
+
+                var end_time = new Date(prefix + $scope.formData['end_time']);
+
+                var dept_time = new Date(prefix + $scope.formData['dept_time']);
+
+                var diff = (end_time - dept_time) / 1000 / 60;
+
+                if (diff < 0) {
+
+                    diff += 1440;
+
+                }
+
+                $scope.formData.red = dept_end < diff ? 1 : 0;
+
+                return $scope.formData.red;
+            }
+
+            return true;
+
+        };
 
         $scope.submit = function (draft) {
 
@@ -3203,6 +3267,68 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 }
             }
         );
+
+        $scope.validateStart = function () {
+
+            var conc_type = yii['ConcreteType']['list'][$scope.formData['conc_type_id']];
+
+            if (typeof conc_type !== 'undefined' && typeof $scope.formData['dept_time'] !== 'undefined') {
+
+                var prefix = "2013/01/01 ";
+
+                var dept_start = (new Date(prefix + conc_type['dept_start']) - new Date(prefix + '00:00:00')) / 1000 / 60;
+
+                var start_time = new Date(prefix + $scope.formData['start_time']);
+
+                var dept_time = new Date(prefix + $scope.formData['dept_time']);
+
+                var diff = (start_time - dept_time) / 1000 / 60;
+
+                if (diff < 0) {
+
+                    diff += 1440;
+
+                }
+
+                $scope.formData.yellow = dept_start < diff ? 1 : 0;
+
+                return $scope.formData.yellow;
+            }
+
+            return true;
+
+        };
+
+        $scope.validateEnd = function () {
+
+            var conc_type = yii['ConcreteType']['list'][$scope.formData['conc_type_id']];
+
+            if (typeof conc_type !== 'undefined' && typeof $scope.formData['dept_time'] !== 'undefined') {
+
+                var prefix = "2013/01/01 ";
+
+                var dept_end = (new Date(prefix + conc_type['dept_end']) - new Date(prefix + '00:00:00')) / 1000 / 60;
+
+                var end_time = new Date(prefix + $scope.formData['end_time']);
+
+                var dept_time = new Date(prefix + $scope.formData['dept_time']);
+
+                var diff = (end_time - dept_time) / 1000 / 60;
+
+                if (diff < 0) {
+
+                    diff += 1440;
+
+                }
+
+                $scope.formData.red = dept_end < diff ? 1 : 0;
+
+                return $scope.formData.red;
+            }
+
+            return true;
+
+        };
 
         $scope.submit = function (draft) {
 

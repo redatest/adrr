@@ -181,7 +181,7 @@ angular.module('adrrApp.wrapper.user', [], null)
 
         };
 
-        $scope.new = function () {
+        $scope.newUser = function () {
 
             $state.go('wrapper.user.create');
 
@@ -191,7 +191,7 @@ angular.module('adrrApp.wrapper.user', [], null)
 
             {
                 title: 'New user',
-                clickHandler: $scope.new,
+                clickHandler: $scope.newUser,
                 visibility: true
             }
 

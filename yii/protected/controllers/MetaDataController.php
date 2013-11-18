@@ -35,8 +35,8 @@ class MetaDataController extends CController
 
         }
 
-        $labArchive = Lab::model()->count('archived = 1 AND approved = 0 AND returned = 0' . (Yii::app()->user->role === 3 ? '' : ' AND user_id = ' . Yii::app()->user->id));
-        $pouringArchive = Pouring::model()->count('archived = 1 AND approved = 0 AND returned = 0' . (Yii::app()->user->role === 3 ? '' : ' AND user_id = ' . Yii::app()->user->id));
+        $labArchive = Lab::model()->count('archived = 1 AND approved = 0 AND returned = 0' . (Yii::app()->user->role == 3 ? '' : ' AND user_id = ' . Yii::app()->user->id));
+        $pouringArchive = Pouring::model()->count('archived = 1 AND approved = 0 AND returned = 0' . (Yii::app()->user->role == 3 ? '' : ' AND user_id = ' . Yii::app()->user->id));
 
         $data['Gen'] = array
         (
