@@ -236,7 +236,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         /* End frequent Date methods */
 
-        console.log($scope.formData);
         $scope.submit = function () {
 
 
@@ -248,8 +247,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
                 }
             );
-
-            console.log("button pressed");
         };
 
         $scope.controls = $rootScope.controls = [

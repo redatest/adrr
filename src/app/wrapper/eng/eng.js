@@ -2684,9 +2684,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                                     $scope.total = data['total'] == 0 ? parseInt($scope.lab['truck_load'], 10) : parseInt(data['total'], 10);
                                     $scope.used = parseInt(data['used'], 10);
-
-                                    console.log($scope.total);
-                                    console.log($scope.used);
                                 }
                             );
                         },
@@ -3134,11 +3131,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
                                     Restangular.one('eng/pouring/getPouredQTY').get({supplier_id: data['supplier_id'], ticket: data['ticket']}).then
                                     (
                                         function (data) {
-                                            console.log($scope.formData['poured_qty']);
+
                                             $scope.used = parseInt(data['used'], 10) - (typeof $scope.formData['poured_qty'] !== 'undefined' ? parseInt($scope.formData['poured_qty'] !== null ? $scope.formData['poured_qty'] : 0, 10) : 0);
                                             $scope.total = data['total'] == 0 ? parseInt($scope.lab['truck_load'], 10) : parseInt(data['total'], 10);
-                                            console.log($scope.used);
-                                            console.log($scope.total);
                                         }
                                     );
                                 },
