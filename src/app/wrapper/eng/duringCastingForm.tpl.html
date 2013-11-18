@@ -1,0 +1,446 @@
+<div ng-show="showAlert" class="alert" ng-class="{ 'alert-success': alert, 'alert-danger': !alert }">
+    <any ng-show="alert">Successfully saved.</any>
+    <any ng-hide="alert">Something went wrong.</any>
+</div>
+
+<form id="bcForm" role="form" name="mainForm" class="labForm" novalidate>
+<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+<div class="well well-sm">
+<div class="row">
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="firstForm"
+         ng-class="{'panel-danger': firstForm.$invalid, 'panel-success': firstForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">1. Basic</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
+                <label for="date" class="control-label">Date</label>
+
+                <div class="input-group">
+                    <div class="input-group-btn" ng-show="loginData.role == 4">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal"
+                                ng-disabled="state.indexOf('edit') > -1">
+                            Frequents
+                        </button>
+                    </div>
+
+                    <input ng-show="loginData.role == 3" id="date" readonly="readonly"
+                           ui-date="{dateFormat: 'yy-mm-dd'}" ui-date-format="yy-mm-dd"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <input ng-show="loginData.role == 4" readonly="readonly"
+                           ng-model="formData.date" class="form-control" type="text" required/>
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                </div>
+
+                <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Frequents</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="list-group">
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="setToday()" onclick="return false;">
+                                        Today
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min1Day()" onclick="return false;">
+                                        Yesterday
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min2Days()" onclick="return false;">
+                                        2 days ago
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#"
+                                       ng-click="min3Days()" onclick="return false;">
+                                        3 days ago
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
+                <label for="shift_id" class="control-label"> shift </label>
+
+                <select id="shift_id" ng-model="formData.shift_id" class="form-control"
+                        ng-disabled="loginData.role == 4 && state.indexOf('edit') > -1" required>
+                    <option value="">Select...</option>
+                    <option ng-repeat="shiftType in yii['ShiftType']['list']"
+                            ng-selected="shiftType.id === formData.shift_id"
+                            value="{{shiftType.id }}">
+                        {{shiftType.name}}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+    <div class="panel" ng-form="secondForm"
+         ng-class="{'panel-danger': secondForm.$invalid, 'panel-success': secondForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">2 The pouring location is free from hazards</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': locationStateForm.$invalid}"
+                 ng-form="locationStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.location" ng-class="{'has-error': locationStateForm.$invalid}"
+                        ng-form="locationStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': locationCmtForm.$invalid}" ng-form="locationCmtForm">
+
+                <label for="locationcmt" class="control-label">Remark</label>
+
+                <input id="locationcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.location_cmt"
+                       required/>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="fourthForm"
+         ng-class="{'panel-danger': fourthForm.$invalid, 'panel-success': fourthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">3 All safety precautions are considered</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': precautionStateForm.$invalid}"
+                 ng-form="precautionStateForm">
+                <label class="control-label"> State </label>
+
+
+                <select class="form-control" ng-model="formData.precaution" ng-class="{'has-error': precautionStateForm.$invalid}"
+                        ng-form="precautionStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': precautionCmtForm.$invalid}" ng-form="precautionCmtForm">
+
+                <label for="precautioncmt" class="control-label"> Remark </label>
+
+                <input id="precautioncmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.precaution_cmt"
+                       required/>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="sixthForm"
+         ng-class="{'panel-danger': sixthForm.$invalid, 'panel-success': sixthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">4 Formwork is firm and withstanding the pouring process </h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': formworkStateForm.$invalid}"
+                 ng-form="formworkStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.formwork" ng-class="{'has-error': formworkStateForm.$invalid}"
+                        ng-form="formworkStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="no">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': formworkCmtForm.$invalid}" ng-form="formworkCmtForm">
+
+                <label for="formworkcmt" class="control-label"> Remark </label>
+
+                <input id="formworkcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.formwork_cmt"
+                       required/>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="fifthForm"
+         ng-class="{'panel-danger': fifthForm.$invalid, 'panel-success': fifthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">5 Contractor supervisor is present during casting</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': contractorStateForm.$invalid}"
+                 ng-form="contractorStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.contractor" ng-class="{'has-error': contractorStateForm.$invalid}"
+                        ng-form="contractorStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': contractorCmtForm.$invalid}" ng-form="contractorCmtForm">
+
+                <label for="contractorcmt" class="control-label"> Remark </label>
+
+                <input id="contractorcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.contractor_cmt"
+                       required/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="sixthForm"
+         ng-class="{'panel-danger': sixthForm.$invalid, 'panel-success': sixthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">6 Consultant supervisor is present during casting</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': consultantStateForm.$invalid}"
+                 ng-form="consultantStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.consultant" ng-class="{'has-error': consultantStateForm.$invalid}"
+                        ng-form="consultantStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': consultantCmtForm.$invalid}" ng-form="consultantCmtForm">
+
+                <label for="consultantcmt" class="control-label"> Remark </label>
+
+                <input id="consultantcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.consultant_cmt"
+                       required/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="seventhForm"
+         ng-class="{'panel-danger': seventhForm.$invalid, 'panel-success': seventhForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">7 concrete drop-height within the limit (< 2 m ) </h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': drop-heightStateForm.$invalid}"
+                 ng-form="drop-heightStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.drop-height" ng-class="{'has-error': drop-heightStateForm.$invalid}"
+                        ng-form="drop-heightStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': drop-heightCmtForm.$invalid}" ng-form="drop-heightCmtForm">
+
+                <label for="drop-heightcmt" class="control-label"> Remark </label>
+
+                <input id="drop-heightcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.drop-height_cmt"
+                       required/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="sixthForm"
+         ng-class="{'panel-danger': eighthForm.$invalid, 'panel-success': eighthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">8 Vibration of concrete is correctly performed</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': vibrationStateForm.$invalid}"
+                 ng-form="vibrationStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.vibration" ng-class="{'has-error': vibrationStateForm.$invalid}"
+                        ng-form="vibrationStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': vibrationCmtForm.$invalid}" ng-form="vibrationCmtForm">
+
+                <label for="vibrationcmt" class="control-label"> Remark </label>
+
+                <input id="vibrationcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.vibration_cmt"
+                       required/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="ninthForm"
+         ng-class="{'panel-danger': ninthForm.$invalid, 'panel-success': ninthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">9 finishing of concrete is properly completed</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': finishingStateForm.$invalid}"
+                 ng-form="finishingStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.finishing" ng-class="{'has-error': finishingStateForm.$invalid}"
+                        ng-form="finishingStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': finishingCmtForm.$invalid}" ng-form="finishingCmtForm">
+
+                <label for="finishingcmt" class="control-label"> Remark </label>
+
+                <input id="finishingcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.finishing_cmt"
+                       required/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="tenthForm"
+         ng-class="{'panel-danger': tenthForm.$invalid, 'panel-success': tenthForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">10 Curing is immediatly done for horizontal elements</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': curingStateForm.$invalid}"
+                 ng-form="curingStateForm">
+                <label class="control-label"> State </label>
+
+                <select class="form-control" ng-model="formData.curing" ng-class="{'has-error': curingStateForm.$invalid}"
+                        ng-form="curingStateForm" required>
+                    <option value="">Select...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': curingCmtForm.$invalid}" ng-form="curingCmtForm">
+
+                <label for="curingcmt" class="control-label"> Remark </label>
+
+                <input id="curingcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.curing_cmt"
+                       required/>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</div>
+</div>
+</div>
+</form>
