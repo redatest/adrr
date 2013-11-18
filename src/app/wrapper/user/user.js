@@ -103,7 +103,17 @@ angular.module('adrrApp.wrapper.user', [], null)
 
         return function (role) {
 
-            return _.find(appConfig.roles, {role: parseInt(role, 10)}).name;
+            var val = _.find(appConfig.roles, {role: parseInt(role, 10)});
+
+            if (typeof val !== 'undefined') {
+
+                return val.name;
+
+            } else {
+
+                return '';
+
+            }
 
         };
 
