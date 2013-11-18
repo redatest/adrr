@@ -56,6 +56,8 @@ class AdrrUserController extends RESTful
                 $profile->last_name = $put_vars['last_name'];
                 $profile->emp_num = $put_vars['emp_num'];
                 $profile->role = $put_vars['role'];
+                $profile->mobile = $put_vars['mobile'];
+                $profile->shift_type_id = $put_vars['shift_type_id'];
 
                 if ($profile->save()) {
 
@@ -94,6 +96,8 @@ class AdrrUserController extends RESTful
                 $model->profile->last_name = $put_vars['last_name'];
                 $model->profile->emp_num = $put_vars['emp_num'];
                 $model->profile->role = $put_vars['role'];
+                $model->profile->mobile = $put_vars['mobile'];
+                $model->profile->shift_type_id = $put_vars['shift_type_id'];
 
                 if ($model->profile->save()) {
 
@@ -110,9 +114,9 @@ class AdrrUserController extends RESTful
 
     public function actionGetNo()
     {
-        if (isset($_GET['emp_num']) && isset($_GET['id'])) {
+        if (isset($_GET['emp_num'])) {
 
-            $model = Profile::model()->find(array('condition' => 'emp_num = ' . $_GET['emp_num'] . ' AND user_id != ' . $_GET['id']));
+            $model = Profile::model()->find(array('condition' => 'emp_num = ' . $_GET['emp_num'] . (isset($_GET['id']) ? (' AND user_id != ' . $_GET['id']) : '')));
 
             if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
         }
@@ -122,9 +126,9 @@ class AdrrUserController extends RESTful
 
     public function actionGetUsername()
     {
-        if (isset($_GET['username']) && isset($_GET['id'])) {
+        if (isset($_GET['username'])) {
 
-            $model = $this->_model->find(array('condition' => 'username = "' . $_GET['username'] . '" AND id != ' . $_GET['id']));
+            $model = $this->_model->find(array('condition' => 'username = "' . $_GET['username'] . (isset($_GET['id']) ? ('" AND id != ' . $_GET['id']) : '')));
 
             if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
         }
@@ -134,9 +138,9 @@ class AdrrUserController extends RESTful
 
     public function actionGetEmail()
     {
-        if (isset($_GET['email']) && isset($_GET['id'])) {
+        if (isset($_GET['email'])) {
 
-            $model = $this->_model->find(array('condition' => 'email = "' . $_GET['email'] . '" AND id != ' . $_GET['id']));
+            $model = $this->_model->find(array('condition' => 'email = "' . $_GET['email'] . (isset($_GET['id']) ? ('" AND id != ' . $_GET['id']) : '')));
 
             if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
         }

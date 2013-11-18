@@ -129,20 +129,28 @@ angular.module('adrrApp.wrapper.user', [], null)
                 displayName: 'No.'
             },
             {
-                field: 'username',
-                displayName: 'Username'
-            },
-            {
-                field: 'email',
-                displayName: 'Email'
-            },
-            {
                 field: 'name',
                 displayName: 'First Name'
             },
             {
                 field: 'last_name',
                 displayName: 'Last Name'
+            },
+            {
+                field: 'username',
+                displayName: 'Username'
+            },
+            {
+                field: 'shift_type_id',
+                displayName: 'Current Shift'
+            },
+            {
+                field: 'mobile',
+                displayName: 'Mobile'
+            },
+            {
+                field: 'bravo',
+                displayName: 'Bravo'
             },
             {
                 field: 'role',

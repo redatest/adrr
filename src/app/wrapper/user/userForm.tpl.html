@@ -70,25 +70,9 @@
                                        ng-model="formData.emp_num" pattern="[0-9]*" required/>
                             </div>
 
-                            <div class="form-group" ng-class="{'has-error': fnameForm.$invalid}" ng-form="fnameForm">
-
-                                <label for="fname" class="control-label">First Name</label>
-
-                                <input id="fname" class="form-control" type="text" ng-model="formData.name"
-                                       required/>
-                            </div>
-
-                            <div class="form-group" ng-class="{'has-error': lnameForm.$invalid}" ng-form="lnameForm">
-
-                                <label for="lname" class="control-label">Last Name</label>
-
-                                <input id="lname" class="form-control" type="text" ng-model="formData.last_name"
-                                       required/>
-                            </div>
-
                             <div class="form-group" ng-class="{'has-error': roleForm.$invalid}" ng-form="roleForm">
 
-                                <label for="role" class="control-label">Last Name</label>
+                                <label for="role" class="control-label">Role</label>
 
                                 <select class="form-control" id="role" ng-model="formData.role" required
                                         ng-class="{'has-error': roleForm.$invalid}" ng-form="roleForm">
@@ -100,14 +84,56 @@
 
                                 </select>
                             </div>
+
+                            <div class="form-group" ng-class="{'has-error': bravoForm.$invalid}" ng-form="bravoForm">
+
+                                <label for="bravo" class="control-label">Bravo</label>
+
+                                <input id="bravo" class="form-control" type="text" ng-model="formData.bravo"
+                                       required/>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': fnameForm.$invalid}" ng-form="fnameForm">
+
+                                <label for="fname" class="control-label">First Name</label>
+
+                                <input id="fname" class="form-control" type="text" ng-model="formData.name"
+                                       required/>
+                            </div>
+
+                            <div class="form-group" ng-form="lnameForm">
+
+                                <label for="lname" class="control-label">Last Name</label>
+
+                                <input id="lname" class="form-control" type="text" ng-model="formData.last_name"/>
+                            </div>
+
+                            <div class="form-group" ng-form="mobForm">
+
+                                <label for="mobile" class="control-label">Mobile</label>
+
+                                <input id="mobile" class="form-control" type="tel" ng-model="formData.mobile"/>
+                            </div>
+
+                            <div class="form-group" ng-form="shiftForm">
+                                <label for="shift" class="control-label">Shift</label>
+
+                                <select id="shift" class="form-control" ng-model="formData.shift_type_id">
+                                    <option value="">Select...</option>
+                                    <option ng-selected="shift.id == formData.shift_type_id" value="{{shift.id}}"
+                                            ng-repeat="shift in yii['ShiftType']['list']">
+                                        {{shift.name}}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div ng-hide="true">
 
-                    <button ng-disabled="controls[0].disabled = (noUsed || usernameUsed || emailUsed || !(formData.repass === formData.password && formData.password !== undefined))">
-                        Save & back to list
+                    <button ng-disabled="controls[0].disabled = (mainForm.$invalid || noUsed || usernameUsed || emailUsed || !(formData.repass === formData.password && formData.password !== undefined))">
+                    Save & back to list
                     </button>
 
                 </div>
