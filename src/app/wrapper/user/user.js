@@ -142,7 +142,8 @@ angular.module('adrrApp.wrapper.user', [], null)
             },
             {
                 field: 'shift_type_id',
-                displayName: 'Current Shift'
+                displayName: 'Current Shift',
+                filters: 'fetchValue:yii["ShiftType"]'
             },
             {
                 field: 'mobile',

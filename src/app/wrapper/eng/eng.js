@@ -371,7 +371,17 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
                 prop = typeof prop === 'undefined' ? 'name' : prop;
 
-                return model['list'][index][prop];
+                var val = model['list'][index];
+
+                if (typeof val !== 'undefined') {
+
+                    return val[prop];
+
+                } else {
+
+                    return '';
+
+                }
             }
 
             return '';
