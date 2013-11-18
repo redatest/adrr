@@ -45,6 +45,8 @@ class Pouring extends ArModel
             'pump_id' => 'Pump',
             'start_time' => 'Start Time',
             'end_time' => 'End Time',
+            'red' => 'Red',
+            'yellow' => 'Yellow',
             'returned' => 'Returned',
             'approved' => 'Approved',
             'archived' => 'Archived',

@@ -9,18 +9,6 @@ class ConcreteType extends ArModel
         return '{{concrete_type}}';
     }
 
-    public function rules()
-    {
-        return array
-        (
-            array('name, category, temp_from, temp_to', 'required'),
-            array('flow_norm_from, flow_norm_to, flow_acpt_from, flow_acpt_to, slump_norm_from, slump_norm_to, slump_acpt_from, slump_acpt_to, temp_from, temp_to, very_frequent, sample_counter', 'numerical', 'integerOnly' => true),
-            array('name', 'length', 'max' => 255),
-            array('category', 'length', 'max' => 5),
-            array('note', 'safe')
-        );
-    }
-
     public function getCatAlias()
     {
         return array
@@ -61,6 +49,8 @@ class ConcreteType extends ArModel
             'slump_acpt_to' => 'To',
             'temp_from' => 'From',
             'temp_to' => 'To',
+            'dept_start' => 'Dept to start',
+            'dept_end' => 'Dept to end',
             'very_frequent' => 'Very Frequent',
             'sample_counter' => 'Sample Counter',
             'note' => 'Note'
