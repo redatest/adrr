@@ -110,7 +110,7 @@ angular.module('adrrApp.wrapper.user', [], null)
                 return val.name;
 
             } else {
-                console.log('test');
+
                 return '';
 
             }
