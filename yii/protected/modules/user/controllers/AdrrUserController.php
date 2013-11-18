@@ -22,7 +22,7 @@ class AdrrUserController extends RESTful
     public function actionView()
     {
         $model = Yii::app()->db->createCommand()
-            ->select('u.id, u.username, u.email, p.name, p.last_name, p.emp_num, p.role')
+            ->select('u.id, u.username, u.email, p.name, p.last_name, p.emp_num, p.role, p.shift_type_id, p.mobile, p.bravo')
             ->from('tbl_users u')
             ->join('tbl_profiles p', 'u.id = p.user_id')
             ->where('u.status = 1 AND u.id = ' . $_GET['id'])
