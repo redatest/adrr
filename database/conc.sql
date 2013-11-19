@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2013 at 05:36 PM
+-- Generation Time: Nov 19, 2013 at 06:28 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -33,29 +33,33 @@ CREATE TABLE IF NOT EXISTS `tbl_before_casting` (
   `user_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `shift_id` int(11) NOT NULL,
+  `ir` int(11) NOT NULL,
   `lre` enum('Yes','No','N/A') NOT NULL,
-  `lre_comment` text NOT NULL,
+  `lre_comment` text,
   `cte` enum('Yes','No','N/A') NOT NULL,
-  `cte_comment` text NOT NULL,
+  `cte_comment` text,
   `lte` enum('Yes','No','N/A') NOT NULL,
-  `lte_comment` text NOT NULL,
+  `lte_comment` text,
   `cpp` enum('Yes','No','N/A') NOT NULL,
-  `cpp_comment` text NOT NULL,
+  `cpp_comment` text,
   `frs` enum('Yes','No','N/A') NOT NULL,
-  `frs_comment` text NOT NULL,
+  `frs_comment` text,
   `cdd` enum('Yes','No','N/A') NOT NULL,
-  `cdd_comment` text NOT NULL,
+  `cdd_comment` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tbl_before_casting`
 --
 
-INSERT INTO `tbl_before_casting` (`id`, `user_id`, `date`, `shift_id`, `lre`, `lre_comment`, `cte`, `cte_comment`, `lte`, `lte_comment`, `cpp`, `cpp_comment`, `frs`, `frs_comment`, `cdd`, `cdd_comment`) VALUES
-(1, 2, '2013-11-14', 2, 'Yes', '123', 'Yes', '123', 'No', '123', 'N/A', '', 'N/A', '123', 'N/A', '123'),
-(2, 2, '2013-11-14', 1, 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123'),
-(3, 2, '2013-11-14', 1, 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123');
+INSERT INTO `tbl_before_casting` (`id`, `user_id`, `date`, `shift_id`, `ir`, `lre`, `lre_comment`, `cte`, `cte_comment`, `lte`, `lte_comment`, `cpp`, `cpp_comment`, `frs`, `frs_comment`, `cdd`, `cdd_comment`) VALUES
+(1, 2, '2013-11-14', 2, 0, 'Yes', '123', 'Yes', '123', 'No', '123', 'N/A', '', 'N/A', '123', 'N/A', '123'),
+(2, 2, '2013-11-14', 1, 0, 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123'),
+(3, 2, '2013-11-14', 1, 0, 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123', 'N/A', '123'),
+(4, 2, '2013-11-17', 2, 12, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL),
+(5, 2, '2013-11-19', 1, 12, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL),
+(6, 2, '2013-11-17', 2, 12, 'N/A', NULL, 'N/A', NULL, 'Yes', NULL, 'No', NULL, 'No', NULL, 'No', NULL);
 
 -- --------------------------------------------------------
 
@@ -94,6 +98,38 @@ INSERT INTO `tbl_concrete_type` (`id`, `name`, `category`, `flow_norm_from`, `fl
 (2, 'Second Concrete Type', 'slump', NULL, NULL, NULL, NULL, 5, 10, 2, 20, 1, 12, '02:00:00', '02:00:00', 1, NULL, ''),
 (3, 'Third Conc Type', 'slump', NULL, NULL, NULL, NULL, 5, 10, 1, 15, 5, 10, '00:00:00', '00:00:00', 1, NULL, ''),
 (4, 'Fourth', 'flow', 5, 10, 1, 15, NULL, NULL, NULL, NULL, 5, 10, '00:00:00', '00:00:00', 0, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_during_casting`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_during_casting` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `shift_id` int(11) NOT NULL,
+  `location` enum('Yes','No','N/A') NOT NULL,
+  `location_cmt` text,
+  `precaution` enum('Yes','No','N/A') NOT NULL,
+  `precaution_cmt` text,
+  `formwork` enum('Yes','No','N/A') NOT NULL,
+  `formwork_cmt` text,
+  `contractor` enum('Yes','No','N/A') NOT NULL,
+  `contractor_cmt` text,
+  `consultant` enum('Yes','No','N/A') NOT NULL,
+  `consultant_cmt` text,
+  `drop_height` enum('Yes','No','N/A') NOT NULL,
+  `drop_height_cmt` text,
+  `vibration` enum('Yes','No','N/A') NOT NULL,
+  `vibration_cmt` text,
+  `finishing` enum('Yes','No','N/A') NOT NULL,
+  `finishing_cmt` text,
+  `curing` enum('Yes','No','N/A') NOT NULL,
+  `curing_cmt` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -478,7 +514,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `role` int(11) NOT NULL,
   `bravo` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `tbl_profiles`
@@ -486,7 +522,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
 
 INSERT INTO `tbl_profiles` (`user_id`, `name`, `last_name`, `emp_num`, `mobile`, `shift_type_id`, `role`, `bravo`) VALUES
 (1, 'Administrator', 'Admin', 1, '', 0, 3, 0),
-(2, 'Raeef', 'Refai', 5, '', 1, 4, 0);
+(2, 'Raeef', '', 5, '', 1, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -665,15 +701,15 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_username` (`username`),
   UNIQUE KEY `user_email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `tbl_users`
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-11-18 14:50:39'),
-(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-18 13:48:28');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-11-19 15:00:27'),
+(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-19 15:00:50');
 
 -- --------------------------------------------------------
 
