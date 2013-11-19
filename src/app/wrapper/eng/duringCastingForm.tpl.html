@@ -106,8 +106,8 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': locationStateForm.$invalid}"
-                 ng-form="locationStateForm">
+            <div class="form-group" ng-class="{'has-error': locationForm.$invalid}"
+                 ng-form="locationForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.location" ng-class="{'has-error': locationStateForm.$invalid}"
@@ -142,8 +142,8 @@
             <h3 class="panel-title">3 All safety precautions are considered</h3>
         </div>
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': precautionStateForm.$invalid}"
-                 ng-form="precautionStateForm">
+            <div class="form-group" ng-class="{'has-error': precautionForm.$invalid}"
+                 ng-form="precautionForm">
                 <label class="control-label"> State </label>
 
 
@@ -172,16 +172,16 @@
 
 <div class="col-xs-12 col-sm-6">
 
-    <div class="panel" ng-form="sixthForm"
-         ng-class="{'panel-danger': sixthForm.$invalid, 'panel-success': sixthForm.$valid}">
+    <div class="panel" ng-form="thirdForm"
+         ng-class="{'panel-danger': thirdForm.$invalid, 'panel-success': thirdForm.$valid}">
 
         <div class="panel-heading">
             <h3 class="panel-title">4 Formwork is firm and withstanding the pouring process </h3>
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': formworkStateForm.$invalid}"
-                 ng-form="formworkStateForm">
+            <div class="form-group" ng-class="{'has-error': formworkForm.$invalid}"
+                 ng-form="formworkForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.formwork" ng-class="{'has-error': formworkStateForm.$invalid}"
@@ -219,8 +219,8 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': contractorStateForm.$invalid}"
-                 ng-form="contractorStateForm">
+            <div class="form-group" ng-class="{'has-error': contractorForm.$invalid}"
+                 ng-form="contractorForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.contractor" ng-class="{'has-error': contractorStateForm.$invalid}"
@@ -257,8 +257,8 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': consultantStateForm.$invalid}"
-                 ng-form="consultantStateForm">
+            <div class="form-group" ng-class="{'has-error': consultantForm.$invalid}"
+                 ng-form="consultantForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.consultant" ng-class="{'has-error': consultantStateForm.$invalid}"
@@ -295,12 +295,12 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': drop-heightStateForm.$invalid}"
-                 ng-form="drop-heightStateForm">
+            <div class="form-group" ng-class="{'has-error': dropheightForm.$invalid}"
+                 ng-form="dropheightForm">
                 <label class="control-label"> State </label>
 
-                <select class="form-control" ng-model="formData.drop-height" ng-class="{'has-error': drop-heightStateForm.$invalid}"
-                        ng-form="drop-heightStateForm" required>
+                <select class="form-control" ng-model="formData.drop_height" ng-class="{'has-error': dropheightStateForm.$invalid}"
+                        ng-form="dropheightStateForm" required>
                     <option value="">Select...</option>
                     <option value="N/A">N/A</option>
                     <option value="No">No</option>
@@ -309,11 +309,11 @@
 
             </div>
 
-            <div class="form-group" ng-class="{'has-error': drop-heightCmtForm.$invalid}" ng-form="drop-heightCmtForm">
+            <div class="form-group" ng-class="{'has-error': dropheightCmtForm.$invalid}" ng-form="dropheightCmtForm">
 
-                <label for="drop-heightcmt" class="control-label"> Remark </label>
+                <label for="dropheightcmt" class="control-label"> Remark </label>
 
-                <input id="drop-heightcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.drop-height_cmt"
+                <input id="dropheightcmt" class="form-control" type="number" pattern="[0-9]*" ng-model="formData.drop_height_cmt"
                        required/>
             </div>
 
@@ -325,7 +325,7 @@
 
 <div class="col-xs-12 col-sm-6">
 
-    <div class="panel" ng-form="sixthForm"
+    <div class="panel" ng-form="eighthForm"
          ng-class="{'panel-danger': eighthForm.$invalid, 'panel-success': eighthForm.$valid}">
 
         <div class="panel-heading">
@@ -333,8 +333,8 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': vibrationStateForm.$invalid}"
-                 ng-form="vibrationStateForm">
+            <div class="form-group" ng-class="{'has-error': vibrationForm.$invalid}"
+                 ng-form="vibrationForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.vibration" ng-class="{'has-error': vibrationStateForm.$invalid}"
@@ -372,8 +372,8 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': finishingStateForm.$invalid}"
-                 ng-form="finishingStateForm">
+            <div class="form-group" ng-class="{'has-error': finishingForm.$invalid}"
+                 ng-form="finishingForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.finishing" ng-class="{'has-error': finishingStateForm.$invalid}"
@@ -410,8 +410,8 @@
         </div>
 
         <div class="panel-body">
-            <div class="form-group" ng-class="{'has-error': curingStateForm.$invalid}"
-                 ng-form="curingStateForm">
+            <div class="form-group" ng-class="{'has-error': curingForm.$invalid}"
+                 ng-form="curingForm">
                 <label class="control-label"> State </label>
 
                 <select class="form-control" ng-model="formData.curing" ng-class="{'has-error': curingStateForm.$invalid}"

@@ -273,6 +273,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
                 function () {
 
                     $scope.formData = {};
+                    console.log($scope.formData);
 
                 }
             );
