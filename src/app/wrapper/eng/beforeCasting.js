@@ -80,8 +80,6 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 (
     'BeforeCastingListCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
 
-        $scope.selectedItems = [];
-
         $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/eng/beforeCasting', 5000, 'date_time');
 
         var columnDefs = [
@@ -154,9 +152,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
             columnDefs: columnDefs,
 
-            multiSelect: false,
-
-            selectedItems: $scope.selectedItems
+            multiSelect: false
 
         };
 

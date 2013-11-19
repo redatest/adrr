@@ -73,18 +73,13 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
     .controller
 (
-    'DuringCastingCtrl', function ($rootScope) {
-
-        $rootScope.createUrl = '#/duringCasting/create';
-
+    'DuringCastingCtrl', function () {
     }
 )
 
     .controller
 (
     'DuringCastingListCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
-
-        $scope.selectedItems = [];
 
         $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/eng/duringCasting', 5000, 'date_time');
 
@@ -95,13 +90,11 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
                 displayName: 'Date',
                 filters: 'stringDate:"dd-MM-yyyy"'
             },
-
             {
                 field: 'shift_id',
                 displayName: 'Shift',
                 filters: 'fetchValue: yii["ShiftType"]'
             },
-
             {
                 field: 'location',
                 displayName: 'location'
@@ -176,16 +169,13 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
             }
         ];
 
-
         $scope.adrrGridOptions = {
 
             data: 'records',
 
             columnDefs: columnDefs,
 
-            multiSelect: false,
-
-            selectedItems: $scope.selectedItems
+            multiSelect: false
 
         };
 
@@ -206,7 +196,6 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
             }
 
         ];
-
 
         $scope.$on
         (
@@ -231,56 +220,64 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
         /* Frequent Date methods */
  
         $scope.setToday = function () {
+
             var date = new Date();
  
             date.setDate(date.getDate());
  
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+
         };
  
         $scope.min1Day = function () {
+
             var date = new Date();
  
             date.setDate(date.getDate() - 1);
  
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+
         };
  
         $scope.min2Days = function () {
+
             var date = new Date();
  
             date.setDate(date.getDate() - 2);
  
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+
         };
  
         $scope.min3Days = function () {
+
             var date = new Date();
  
             date.setDate(date.getDate() - 3);
  
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
+
         };
  
         /* End frequent Date methods */
  
         
         $scope.submit = function () {
- 
-            var q = $q.defer;
-            
+
+            var deferred = $q.defer();
+
             Restangular.all('eng/duringCasting').post($scope.formData).then
             (
                 function () {
  
                     $scope.formData = {};
-                    
-                    q.resolve();
- 
+
+                    deferred.resolve();
+
                 }
             );
- 
-            return q.promise;
+
+            return deferred.promise;
         };
  
         $scope.saveAndBackToList = function () {
@@ -288,6 +285,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
             $scope.submit().then
             (
                 function () {
+
                     setTimeout
                     (
                         function () {
@@ -296,6 +294,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
  
                         }, 100
                     );
+
                 }
             );
  
@@ -310,14 +309,14 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
  
                 visibility: $rootScope.loginData['role'] == 4
             },
-             {
-                 title: 'Save and back to list',
- 
-                 clickHandler: $scope.saveAndBackToList,
- 
-                 visibility: $rootScope.loginData['role'] == 4
-             }
- 
+            {
+                title: 'Save and back to list',
+
+                clickHandler: $scope.saveAndBackToList,
+
+                visibility: $rootScope.loginData['role'] == 4
+            }
+
         ];
  
     }
