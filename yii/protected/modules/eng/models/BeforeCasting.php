@@ -24,7 +24,8 @@ class BeforeCasting extends ArModel
             'id' => 'ID',
             'user_id' => 'User ID',
             'date' => 'Date',
-
+            'shift_id' => 'Shift',
+            'ir' => 'IR',
             'lre' => 'State',
             'lre_comment' => 'Comment',
             'cte' => 'State',

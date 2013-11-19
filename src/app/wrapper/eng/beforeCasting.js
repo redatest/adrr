@@ -86,13 +86,11 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         var columnDefs = [
 
-
             {
                 field: 'date',
                 displayName: 'Date',
                 filters: 'stringDate:"dd-MM-yyyy"'
             },
-
             {
                 field: 'shift_id',
                 displayName: 'Shift',
@@ -146,6 +144,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
                 field: 'cdd_comment',
                 displayName: 'remark'
             }
+
         ];
 
 
@@ -196,7 +195,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
     .controller
 (
-    'BeforeCastingFormCtrl', function ($rootScope, $scope, yii, Restangular) {
+    'BeforeCastingFormCtrl', function ($rootScope, $scope, yii, Restangular, $q, $state) {
 
         $scope.formData = {};
 
@@ -236,8 +235,40 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
         /* End frequent Date methods */
 
+        $scope.$watch
+        (
+            'formData.ir', function (newVal) {
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('settings/ir/getIr').get({ir: newVal}).then
+                    (
+                        function (data) {
+
+                            $scope.zone = yii['Zone']['list'][data['model']['zone_id']].name;
+
+                            $scope.area = data['model']['area'];
+
+                            if (data['als'].length > 0) {
+
+                                $scope.axis = data['als'][0]['axis'];
+                                $scope.level = data['als'][0]['level'];
+
+                            }
+
+                            $scope.pouring_type = yii['PouringType']['list'][data['pts'][0]['pouring_type_id']].name;
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
         $scope.submit = function () {
 
+            var deferred = $q.defer();
 
             Restangular.all('eng/beforeCasting').post($scope.formData).then
             (
@@ -245,9 +276,33 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
                     $scope.formData = {};
 
+                    deferred.resolve();
+
                 }
             );
+
+            return deferred.promise;
         };
+
+        $scope.saveAndBackToList = function () {
+
+            $scope.submit().then
+            (
+                function () {
+
+                    setTimeout
+                    (
+                        function () {
+
+                            $state.go('wrapper.beforeCasting.list');
+
+                        }, 100
+                    );
+
+                }
+            );
+
+        }
 
         $scope.controls = $rootScope.controls = [
 
@@ -256,14 +311,18 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
 
                 clickHandler: $scope.submit,
 
-                visibility: $rootScope.loginData['role'] == 4
+                visibility: $rootScope.loginData['role'] == 4,
+
+                disabled: true
             },
             {
                 title: 'Save and back to list',
 
-                clickHandler: $scope.submit,
+                clickHandler: $scope.saveAndBackToList,
 
-                visibility: $rootScope.loginData['role'] == 4
+                visibility: $rootScope.loginData['role'] == 4,
+
+                disabled: true
             }
 
         ];

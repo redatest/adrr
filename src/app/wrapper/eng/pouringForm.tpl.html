@@ -244,6 +244,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="col-xs-12 col-sm-6">
@@ -312,9 +313,10 @@
     </div>
 </div>
 
-<div class="col-xs-12 col-sm-6 case2">
+<div class="col-xs-12 col-sm-6"
+     ng-class="{'case2': state.indexOf('edit') === -1, 'case3': state.indexOf('edit') !== -1}">
 
-    <div class="panel" ng-form="fourthForm"
+<div class="panel" ng-form="fourthForm"
          ng-class="{'panel-danger': fourthForm.$invalid, 'panel-success': fourthForm.$valid}">
 
         <div class="panel-heading">
@@ -343,6 +345,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <div ng-hide="true">

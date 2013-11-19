@@ -52,12 +52,13 @@ class AdrrUserController extends RESTful
 
                 $profile = new Profile();
                 $profile->user_id = $model->id;
-                $profile->name = $put_vars['name'];
-                $profile->last_name = $put_vars['last_name'];
                 $profile->emp_num = $put_vars['emp_num'];
+                $profile->bravo = $put_vars['bravo'];
                 $profile->role = $put_vars['role'];
-                $profile->mobile = $put_vars['mobile'];
-                $profile->shift_type_id = $put_vars['shift_type_id'];
+                $profile->name = $put_vars['name'];
+                if (isset($put_vars['last_name'])) $profile->last_name = $put_vars['last_name'];
+                if (isset($put_vars['mobile'])) $profile->mobile = $put_vars['mobile'];
+                if (isset($put_vars['shift_type_id'])) $profile->shift_type_id = $put_vars['shift_type_id'];
 
                 if ($profile->save()) {
 
@@ -74,8 +75,6 @@ class AdrrUserController extends RESTful
 
     public function actionUpdate()
     {
-        $this->_checkParams();
-
         $json = file_get_contents('php://input');
 
         $put_vars = CJSON::decode($json, true);
@@ -83,27 +82,32 @@ class AdrrUserController extends RESTful
         $transaction = Yii::app()->db->beginTransaction();
 
         try {
-            $model = $this->_model->findByPk($_GET['id']);
+            $model = $this->_model->findByPk($put_vars['id']);
+            $profile = $model->profile;
+
             $model->username = $put_vars['username'];
             $model->password = md5($put_vars['password']);
             $model->email = $put_vars['email'];
             $model->superuser = $put_vars['role'] === '3' ? 1 : 0;
             $model->status = 1;
 
-            if ($model->save()) {
+            $profile->emp_num = $put_vars['emp_num'];
+            $profile->role = $put_vars['role'];
+            $profile->bravo = $put_vars['bravo'];
+            $profile->name = $put_vars['name'];
 
-                $model->profile->name = $put_vars['name'];
-                $model->profile->last_name = $put_vars['last_name'];
-                $model->profile->emp_num = $put_vars['emp_num'];
-                $model->profile->role = $put_vars['role'];
-                $model->profile->mobile = $put_vars['mobile'];
-                $model->profile->shift_type_id = $put_vars['shift_type_id'];
+            if (isset($put_vars['last_name'])) $profile->last_name = $put_vars['last_name'];
+            if (isset($put_vars['mobile'])) $profile->mobile = $put_vars['mobile'];
+            if (isset($put_vars['shift_type_id'])) $profile->shift_type_id = $put_vars['shift_type_id'];
 
-                if ($model->profile->save()) {
+            if ($model->validate() && $profile->validate()) {
+
+                if ($model->save() && $profile->save()) {
 
                     $transaction->commit();
 
                 }
+
             }
         } catch (Exception $e) {
 

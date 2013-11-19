@@ -2603,6 +2603,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             $scope.used = 0;
 
+            $scope.als = [];
+
+            $scope.pts = [];
+
+            $scope.pouringTypes = [];
+
         };
 
         $scope.reset();

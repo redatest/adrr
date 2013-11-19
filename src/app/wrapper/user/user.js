@@ -136,7 +136,7 @@ angular.module('adrrApp.wrapper.user', [], null)
         var columnDefs = [
             {
                 field: 'emp_num',
-                displayName: 'No.'
+                displayName: 'Employee No.'
             },
             {
                 field: 'name',
