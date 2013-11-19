@@ -222,83 +222,103 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
 ) // end controller
 
-    .controller
+.controller
 (
-    'DuringCastingFormCtrl', function ($rootScope, $scope, yii, Restangular) {
-
+    'DuringCastingFormCtrl', function ($rootScope, $scope, yii, Restangular, $state, $q) {
+ 
         $scope.formData = {};
-
+ 
         /* Frequent Date methods */
-
+ 
         $scope.setToday = function () {
             var date = new Date();
-
+ 
             date.setDate(date.getDate());
-
+ 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
         };
-
+ 
         $scope.min1Day = function () {
             var date = new Date();
-
+ 
             date.setDate(date.getDate() - 1);
-
+ 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
         };
-
+ 
         $scope.min2Days = function () {
             var date = new Date();
-
+ 
             date.setDate(date.getDate() - 2);
-
+ 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
         };
-
+ 
         $scope.min3Days = function () {
             var date = new Date();
-
+ 
             date.setDate(date.getDate() - 3);
-
+ 
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
         };
-
+ 
         /* End frequent Date methods */
-
-        console.log($scope.formData);
+ 
+        
         $scope.submit = function () {
-
-
+ 
+            var q = $q.defer;
+            
             Restangular.all('eng/duringCasting').post($scope.formData).then
             (
                 function () {
-
+ 
                     $scope.formData = {};
-                    console.log($scope.formData);
-
+                    
+                    q.resolve();
+ 
                 }
             );
-
-            console.log("button pressed");
+ 
+            return q.promise;
         };
-
+ 
+        $scope.saveAndBackToList = function () {
+ 
+            $scope.submit().then
+            (
+                function () {
+                    setTimeout
+                    (
+                        function () {
+ 
+                            $state.go('wrapper.duringCasting.list');
+ 
+                        }, 100
+                    );
+                }
+            );
+ 
+        };
+ 
         $scope.controls = $rootScope.controls = [
-
+ 
             {
                 title: 'Save and add',
-
+ 
                 clickHandler: $scope.submit,
-
+ 
                 visibility: $rootScope.loginData['role'] == 4
             },
-            {
-                title: 'Save and back to list',
-
-                clickHandler: $scope.submit,
-
-                visibility: $rootScope.loginData['role'] == 4
-            }
-
+             {
+                 title: 'Save and back to list',
+ 
+                 clickHandler: $scope.saveAndBackToList,
+ 
+                 visibility: $rootScope.loginData['role'] == 4
+             }
+ 
         ];
-
+ 
     }
 );
