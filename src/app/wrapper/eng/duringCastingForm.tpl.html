@@ -3,7 +3,7 @@
     <any ng-hide="alert">Something went wrong.</any>
 </div>
 
-<form id="bcForm" role="form" name="mainForm" class="labForm" novalidate>
+<form id="dcForm" role="form" name="mainForm" class="labForm" novalidate>
 <div class="col-xs-12 col-lg-10 col-lg-offset-1">
 <div class="well well-sm">
 <div class="row">
@@ -132,14 +132,78 @@
         </div>
 
         <div class="panel-body">
-            Here item goes...
+
+            <div class="form-group" ng-form="irForm" ng-class="{'has-error': irForm.$invalid}">
+
+                <label for="ir" class="control-label">IR</label>
+
+                <input id="ir" type="number" pattern="[0-9]*" class="form-control" ng-model="formData.ir" required/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="axis" class="control-label">Axis</label>
+
+                <input id="axis" type="text" class="form-control" ng-model="axis" readonly/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="level" class="control-label">Level</label>
+
+                <input id="level" type="text" class="form-control" ng-model="level" readonly/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="zone" class="control-label">Zone</label>
+
+                <input id="zone" type="text" class="form-control" ng-model="zone" readonly/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="area" class="control-label">Area</label>
+
+                <input id="area" type="text" class="form-control" ng-model="area" readonly/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="pt" class="control-label">Pouring Type</label>
+
+                <input id="pt" type="text" class="form-control" ng-model="pt" readonly/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label class="control-label">Start Time</label>
+
+                <adrr-timepicker ng-model="start" ng-disabled="true"></adrr-timepicker>
+
+            </div>
+
+            <div class="form-group">
+
+                <label class="control-label">End Time</label>
+
+                <adrr-timepicker ng-model="end" ng-disabled="true"></adrr-timepicker>
+
+            </div>
+
         </div>
 
     </div>
 
 </div>
 
-<div class="col-xs-12 col-sm-6">
+<div class="col-xs-12 col-sm-6 case1">
 
     <div class="panel" ng-class="{'panel-danger': secondForm.$invalid, 'panel-success': secondForm.$valid}"
          ng-form="secondForm">
@@ -182,7 +246,7 @@
 
 </div>
 
-<div class="col-xs-12 col-sm-6">
+<div class="col-xs-12 col-sm-6 case2">
 
     <div class="panel" ng-class="{'panel-danger': fourthForm.$invalid, 'panel-success': fourthForm.$valid}"
          ng-form="fourthForm">

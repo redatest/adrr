@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2013 at 06:28 PM
+-- Generation Time: Nov 20, 2013 at 11:39 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -110,6 +110,8 @@ CREATE TABLE IF NOT EXISTS `tbl_during_casting` (
   `user_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `shift_id` int(11) NOT NULL,
+  `ir` int(11) NOT NULL,
+  `pouring_record_id` int(11) NOT NULL,
   `location` enum('Yes','No','N/A') NOT NULL,
   `location_cmt` text,
   `precaution` enum('Yes','No','N/A') NOT NULL,
@@ -514,7 +516,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
   `role` int(11) NOT NULL,
   `bravo` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tbl_profiles`
@@ -701,7 +703,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_username` (`username`),
   UNIQUE KEY `user_email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tbl_users`
@@ -709,7 +711,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-11-19 15:00:27'),
-(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-19 15:00:50');
+(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-20 08:43:38');
 
 -- --------------------------------------------------------
 

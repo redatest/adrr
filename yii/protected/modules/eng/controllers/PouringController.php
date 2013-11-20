@@ -207,6 +207,21 @@ class PouringController extends RESTful
 
         }
     }
+
+    public function actionGetIr()
+    {
+
+        if (isset($_GET['ir'])) {
+
+            $model = $this->_model->findByAttributes(array('ir' => $_GET['ir']), array('order' => 'id DESC'));
+
+            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+
+            $this->_sendResponse(404, 'No records were found.');
+
+        }
+
+    }
 }
 
 ?>

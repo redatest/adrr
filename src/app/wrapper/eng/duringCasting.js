@@ -67,7 +67,8 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
                     }
                 }
             }
-        )
+        );
+
     }
 )
 
@@ -211,57 +212,85 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
 ) // end controller
 
-.controller
+    .controller
 (
     'DuringCastingFormCtrl', function ($rootScope, $scope, yii, Restangular, $state, $q) {
- 
+
         $scope.formData = {};
- 
+
         /* Frequent Date methods */
- 
+
         $scope.setToday = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate());
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         $scope.min1Day = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate() - 1);
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         $scope.min2Days = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate() - 2);
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         $scope.min3Days = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate() - 3);
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         /* End frequent Date methods */
- 
-        
+
+        $scope.$watch
+        (
+            'formData.ir', function (newVal) {
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('eng/pouring/getIr').get({ir: newVal}).then
+                    (
+                        function (data) {
+
+                            $scope.formData.pouring_record_id = data['id'];
+
+                            $scope.axis = data['axis'];
+                            $scope.level = data['level'];
+                            $scope.zone = yii['Zone']['list'][data['zone_id']].name;
+                            $scope.area = data['area'];
+                            $scope.pt = yii['PouringType']['list'][data['pouring_type_id']].name;
+                            $scope.start = data['start_time'];
+                            $scope.end = data['end_time'];
+
+                        }
+                    )
+
+                }
+
+            }
+
+        )
+
         $scope.submit = function () {
 
             var deferred = $q.defer();
@@ -269,7 +298,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
             Restangular.all('eng/duringCasting').post($scope.formData).then
             (
                 function () {
- 
+
                     $scope.formData = {};
 
                     deferred.resolve();
@@ -279,9 +308,9 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
             return deferred.promise;
         };
- 
+
         $scope.saveAndBackToList = function () {
- 
+
             $scope.submit().then
             (
                 function () {
@@ -289,24 +318,24 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
                     setTimeout
                     (
                         function () {
- 
+
                             $state.go('wrapper.duringCasting.list');
- 
+
                         }, 100
                     );
 
                 }
             );
- 
+
         };
- 
+
         $scope.controls = $rootScope.controls = [
- 
+
             {
                 title: 'Save and add',
- 
+
                 clickHandler: $scope.submit,
- 
+
                 visibility: $rootScope.loginData['role'] == 4
             },
             {
@@ -318,6 +347,6 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
             }
 
         ];
- 
+
     }
 );

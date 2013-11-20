@@ -24,6 +24,8 @@ class DuringCasting extends ArModel
             'id' => 'ID',
             'user_id' => 'User ID',
             'date' => 'Date',
+            'ir' => 'IR',
+            'pouring_record_id' => 'Pouring Record',
 
             'location' => 'State',
             'location_cmt' => 'Comment',
