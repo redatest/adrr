@@ -1,0 +1,221 @@
+<div ng-show="showAlert" class="alert" ng-class="{ 'alert-success': alert, 'alert-danger': !alert }">
+    <any ng-show="alert">Successfully saved.</any>
+    <any ng-hide="alert">Something went wrong.</any>
+</div>
+
+<form id="bcForm" role="form" name="mainForm" class="labForm" novalidate>
+<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+<div class="well well-sm">
+<div class="row">
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-class="{'panel-danger': firstForm.$invalid, 'panel-success': firstForm.$valid}"
+         ng-form="firstForm">
+
+        <div class="panel-heading">
+
+            <h3 class="panel-title">1. Basic</h3>
+
+        </div>
+
+        <div class="panel-body">
+
+            <div class="form-group" ng-class="{'has-error': dateForm.$invalid}" ng-form="dateForm">
+
+                <label for="date" class="control-label">Date</label>
+
+                <div class="input-group">
+
+                    <div class="input-group-btn">
+
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#dateModal">
+
+                            Frequents
+
+                        </button>
+
+                    </div>
+
+                    <input id="date" readonly="readonly" type="text" required class="form-control"
+                           ng-model="formData.date"/>
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+
+                </div>
+
+                <div class="modal" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+                     aria-hidden="true">
+
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+
+                                <h4 class="modal-title" id="myModalLabel">Frequents</h4>
+
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="list-group">
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#" ng-click="setToday()"
+                                       onclick="return false;">
+                                        Today
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#" ng-click="min1Day()"
+                                       onclick="return false;">
+                                        Yesterday
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#" ng-click="min2Days()"
+                                       onclick="return false;">
+                                        2 days ago
+                                    </a>
+
+                                    <a data-dismiss="modal" class="list-group-item" href="#" ng-click="min3Days()"
+                                       onclick="return false;">
+                                        3 days ago
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': shiftForm.$invalid}" ng-form="shiftForm">
+
+                <label for="shift_id" class="control-label">Shift</label>
+
+                <select id="shift_id" ng-model="formData.shift_id" class="form-control" required>
+
+                    <option value="">Select...</option>
+
+                    <option ng-repeat="shiftType in yii['ShiftType']['list']" value="{{shiftType.id }}"
+                            ng-selected="shiftType.id === formData.shift_id">
+                        {{shiftType.name}}
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="locationcmt" class="control-label">Supplier</label>
+
+                <input id="supplier" class="form-control" type="number" ng-model="formData.supplier_id"/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="concreteClass" class="control-label">Concrete Class</label>
+
+                <input id="concreteClass" class="form-control" type="text" ng-model="formData.concrete_class"/>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-form="secondForm"
+         ng-class="{'panel-danger': secondForm.$invalid, 'panel-success': secondForm.$valid}">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">2. Pouring Status</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" ng-class="{'has-error': startForm.$invalid, 'has-warning': validateStart()}"
+                 ng-form="startForm">
+                <label class="control-label">Start</label>
+
+                <adrr-timepicker required ng-model="formData.start_time"></adrr-timepicker>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': endForm.$invalid || validateEnd()}" ng-form="endForm">
+                <label class="control-label">End</label>
+
+                <adrr-timepicker required ng-model="formData.end_time"></adrr-timepicker>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="col-xs-12 col-sm-6">
+
+    <div class="panel" ng-class="{'panel-danger': thirdForm.$invalid, 'panel-success': thirdForm.$valid}"
+         ng-form="thirdForm">
+
+        <div class="panel-heading">
+
+            <h3 class="panel-title">3. Samples</h3>
+
+        </div>
+
+        <div class="panel-body">
+
+            <div class="form-group">
+
+                <label for="numset" class="control-label"> Num of Set </label>
+
+                <input id="numset" class="form-control" type="number" ng-model="formData.num_set"/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="numcylinder" class="control-label"> Num of Cylinder </label>
+
+                <input id="numcylinder" class="form-control" type="number" ng-model="formData.num_cylinders"/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="remark" class="control-label"> Remark </label>
+
+                <input id="remark" class="form-control" type="text" ng-model="formData.remark"/>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div ng-hide="true">
+    <button ng-disabled="controls[0].disabled = mainForm.$invalid ">save add new</button>
+    <button ng-disabled="controls[1].disabled = mainForm.$invalid ">save add back to list</button>
+</div>
+
+</div>
+</div>
+</div>
+</form>

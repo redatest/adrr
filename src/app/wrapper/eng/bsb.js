@@ -1,8 +1,8 @@
 /**
- * Created by Mohammed Reda on 11/18/13.
+ * Created by Mohammed Reda & Raeef Refai on 21/18/13.
  */
 
-angular.module('adrrApp.wrapper.duringCasting', [], null)
+angular.module('adrrApp.wrapper.bsb', [], null)
 
     .config
 (
@@ -10,7 +10,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
         $stateProvider.state
         (
-            'wrapper.duringCasting',
+            'wrapper.bsb',
             {
                 abstract: true,
 
@@ -18,9 +18,9 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
                     "@wrapper": {
 
-                        controller: 'DuringCastingCtrl',
+                        controller: 'BsbCtrl',
 
-                        templateUrl: 'wrapper/eng/duringCasting.tpl.html'
+                        templateUrl: 'wrapper/eng/bsb.tpl.html'
                     }
                 }
             }
@@ -28,20 +28,20 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
             .state
         (
-            'wrapper.duringCasting.list',
+            'wrapper.bsb.list',
             {
-                url: '^/during-casting',
-                title: 'During Casting',
-                breadcrumb: ['Home', 'During Casting', 'List'],
+                url: '^/bsb',
+                title: 'Blinding, Screed and Backfilling',
+                breadcrumb: ['Home', 'bsb', 'List'],
                 showControls: true,
 
                 views: {
 
-                    "@wrapper.duringCasting": {
+                    "@wrapper.bsb": {
 
-                        controller: 'DuringCastingListCtrl',
+                        controller: 'BsbListCtrl',
 
-                        templateUrl: 'wrapper/eng/duringCastingList.tpl.html'
+                        templateUrl: 'wrapper/eng/bsbList.tpl.html'
                     }
                 }
 
@@ -50,20 +50,20 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
             .state
         (
-            'wrapper.duringCasting.create',
+            'wrapper.bsb.create',
             {
-                url: '^/during-casting/create',
-                title: 'New during casting',
-                breadcrumb: ['Home', 'During Casting', 'New'],
+                url: '^/bsb/create',
+                title: 'New Blinding, Screed and Backfilling Form',
+                breadcrumb: ['Home', 'bsb', 'New'],
                 showControls: true,
 
                 views: {
 
-                    "@wrapper.duringCasting": {
+                    "@wrapper.bsb": {
 
-                        controller: 'DuringCastingFormCtrl',
+                        controller: 'BsbFormCtrl',
 
-                        templateUrl: 'wrapper/eng/duringCastingForm.tpl.html'
+                        templateUrl: 'wrapper/eng/bsbForm.tpl.html'
                     }
                 }
             }
@@ -73,15 +73,15 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
     .controller
 (
-    'DuringCastingCtrl', function () {
+    'BsbCtrl', function () {
     }
 )
 
     .controller
 (
-    'DuringCastingListCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
+    'BsbListCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
 
-        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/eng/duringCasting', 5000, 'date_time');
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/eng/bsb', 5000, 'date_time');
 
         var columnDefs = [
 
@@ -96,76 +96,36 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
                 filters: 'fetchValue: yii["ShiftType"]'
             },
             {
-                field: 'location',
-                displayName: 'location'
+                field: 'supplier_id',
+                displayName: 'supplier'
             },
             {
-                field: 'location_cmt',
-                displayName: 'remark'
+                field: 'concrete_class',
+                displayName: 'concrete class'
             },
             {
-                field: 'precaution',
-                displayName: 'precaution'
+                field: 'start_time',
+                displayName: 'start_time',
+                filters: 'stringDate:"HH:mm"'
+                
             },
             {
-                field: 'precaution_cmt',
-                displayName: 'remark'
+                field: 'end_time',
+                displayName: 'end time',
+                filters: 'stringDate:"HH:mm"'
+                
             },
             {
-                field: 'formwork',
-                displayName: 'formwork'
+                field: 'num_set',
+                displayName: 'No of sets'
             },
             {
-                field: 'formwork_cmt',
-                displayName: 'remark'
+                field: 'num_cylinders',
+                displayName: 'num cylinders'
             },
-            {
-                field: 'contractor',
-                displayName: 'contractor'
-            },
-            {
-                field: 'contractor_cmt',
-                displayName: 'remark'
-            },
-            {
-                field: 'consultant',
-                displayName: 'consultant'
-            },
-            {
-                field: 'consultant_cmt',
-                displayName: 'remark'
-            },
-            {
-                field: 'drop_height',
-                displayName: 'drop_height'
-            },
-            {
-                field: 'drop_height_cmt',
-                displayName: 'remark'
-            },
-            {
-                field: 'vibration',
-                displayName: 'vibration'
-            },
-            {
-                field: 'vibration_cmt',
-                displayName: 'remark'
-            },
-            {
-                field: 'finishing',
-                displayName: 'finishing'
-            },
-            {
-                field: 'finishing_cmt',
-                displayName: 'remark'
-            },
-            {
-                field: 'curing',
-                displayName: 'curing'
-            },
-            {
-                field: 'curing_cmt',
-                displayName: 'remark'
+	        {
+	           field: 'remark',
+	           displayname: 'remarks'
             }
         ];
 
@@ -183,7 +143,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
         $scope.createClickHandler = function () {
 
-            $state.transitionTo('wrapper.duringCasting.create');
+            $state.transitionTo('wrapper.bsb.create');
 
         };
 
@@ -213,7 +173,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
 
 .controller
 (
-    'DuringCastingFormCtrl', function ($rootScope, $scope, yii, Restangular, $state, $q) {
+    'BsbFormCtrl', function ($rootScope, $scope, yii, Restangular, $state, $q) {
  
         $scope.formData = {};
  
@@ -261,22 +221,30 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
  
         /* End frequent Date methods */
  
-        
         $scope.submit = function () {
-
+ 
+            console.log($scope.formData.start_time);
+            
+            $scope.formData.start_time = '2013-01-01 ' + $scope.formData.start_time;
+            $scope.formData.end_time = '2013-01-01 ' + $scope.formData.end_time;
+ 
+            console.log($scope.formData.start_time);
+ 
             var deferred = $q.defer();
-
-            Restangular.all('eng/duringCasting').post($scope.formData).then
+ 
+            Restangular.all('eng/bsb').post($scope.formData).then
             (
-                function () {
+                function (data) {
+                            
+                    console.log(data['start_time']);
  
                     $scope.formData = {};
-
+ 
                     deferred.resolve();
-
+ 
                 }
             );
-
+ 
             return deferred.promise;
         };
  
@@ -290,7 +258,7 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
                     (
                         function () {
  
-                            $state.go('wrapper.duringCasting.list');
+                            $state.go('wrapper.bsb.list');
  
                         }, 100
                     );

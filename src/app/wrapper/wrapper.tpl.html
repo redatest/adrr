@@ -105,8 +105,12 @@
                         </ul>
                     </li>
 
-                    <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
+                    <li ng-class="{active: state.indexOf('wrapper.bsb.list') > -1}">
                         <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
+                    </li>
+
+                    <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
+                        <a href="#/bsb"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> BSB</a>
                     </li>
 
                     <li ng-switch-when="3" class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
