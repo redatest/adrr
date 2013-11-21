@@ -298,7 +298,7 @@ angular.module('adrrApp.wrapper.beforeCasting', [], null)
                 }
             );
 
-        }
+        };
 
         $scope.controls = $rootScope.controls = [
 
