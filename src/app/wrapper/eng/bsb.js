@@ -223,7 +223,7 @@ angular.module('adrrApp.wrapper.bsb', [], null)
  
         $scope.submit = function () {
  
-            console.log($scope.formData.start_time);
+            
             
             $scope.formData.start_time = '2013-01-01 ' + $scope.formData.start_time;
             $scope.formData.end_time = '2013-01-01 ' + $scope.formData.end_time;
