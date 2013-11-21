@@ -131,7 +131,7 @@ angular.module('adrrApp.wrapper.user', [], null)
 (
     'UserListCtrl', function ($rootScope, $scope, $state, adrrDataFetcher) {
 
-        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/user/adrrUser');
+        $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/user/adrrUser');
 
         var columnDefs = [
             {

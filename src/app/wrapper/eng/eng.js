@@ -806,7 +806,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/lab/getUnarchived');
 
         }
 
@@ -999,7 +999,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/lab/getArchived');
 
         }
 
@@ -1164,7 +1164,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/lab/getReturned');
 
         }
 
@@ -1745,7 +1745,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived');
 
         }
 
@@ -2027,7 +2027,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getReturned');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getReturned');
 
         }
 
@@ -2309,7 +2309,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getArchived');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getArchived');
 
         }
 
@@ -2475,7 +2475,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         } else {
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getDrafts');
+            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getDrafts');
 
         }
 
