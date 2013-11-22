@@ -114,19 +114,40 @@
 
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': supForm.$invalid}" ng-form="supForm">
 
                 <label for="supplier" class="control-label">Supplier</label>
 
-                <input id="supplier" class="form-control" type="number" ng-model="formData.supplier_id"/>
+                <select id="supplier" class="form-control" ng-model="formData.supplier_id" required>
+
+                    <option value=""></option>
+
+                    <option ng-repeat="supplier in yii['Supplier']['list']" value="{{supplier.id}}"
+                            ng-selected="supplier.id == formData.supplier_id">
+
+                        {{supplier.name}}
+
+                    </option>
+                </select>
 
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': concForm.$invalid}" ng-form="concForm">
 
-                <label for="concreteClass" class="control-label">Concrete Class</label>
+                <label for="concrete" class="control-label">Concrete Class</label>
 
-                <input id="concreteClass" class="form-control" type="text" ng-model="formData.concrete_class"/>
+                <select id="concrete" class="form-control" ng-model="formData.conc_type_id" required>
+
+                    <option value=""></option>
+
+                    <option ng-repeat="conc in yii['ConcreteType']['list']" value="{{conc.id}}"
+                            ng-selected="conc.id == formData.conc_type_id">
+
+                        {{conc.name}}
+
+                    </option>
+
+                </select>
 
             </div>
 

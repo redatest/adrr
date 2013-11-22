@@ -24,12 +24,14 @@ class Bsb extends ArModel
             'id' => 'ID',
             'user_id' => 'User ID',
             'date' => 'Date',
-            'concrete_class' => 'Concrete Class',
+            'shift_id' => 'Shift',
+            'supplier_id' => 'Supplier',
+            'conc_type_id' => 'Concrete',
             'start_time' => 'Start',
             'end_time' => 'End',
             'num_set' => 'Num set',
             'num_cylinders' => 'num cylinders',
-            'remark' => 'Remark'
+            'comment' => 'Comment'
 
         );
     }

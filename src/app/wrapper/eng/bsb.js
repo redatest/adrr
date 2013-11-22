@@ -32,7 +32,7 @@ angular.module('adrrApp.wrapper.bsb', [], null)
             {
                 url: '^/bsb',
                 title: 'Blinding, Screed and Backfilling',
-                breadcrumb: ['Home', 'bsb', 'List'],
+                breadcrumb: ['Home', 'Blinding, Screed and Backfilling', 'List'],
                 showControls: true,
 
                 views: {
@@ -53,8 +53,8 @@ angular.module('adrrApp.wrapper.bsb', [], null)
             'wrapper.bsb.create',
             {
                 url: '^/bsb/create',
-                title: 'New Blinding, Screed and Backfilling Form',
-                breadcrumb: ['Home', 'bsb', 'New'],
+                title: 'New Blinding, Screed and Backfilling',
+                breadcrumb: ['Home', 'Blinding, Screed and Backfilling', 'New'],
                 showControls: true,
 
                 views: {
@@ -97,23 +97,23 @@ angular.module('adrrApp.wrapper.bsb', [], null)
             },
             {
                 field: 'supplier_id',
-                displayName: 'supplier'
+                displayName: 'supplier',
+                filters: 'fetchValue: yii["Supplier"]'
             },
             {
-                field: 'concrete_class',
-                displayName: 'concrete class'
+                field: 'conc_type_id',
+                displayName: 'Concrete',
+                filters: 'fetchValue: yii["ConcreteType"]'
             },
             {
                 field: 'start_time',
                 displayName: 'start_time',
                 filters: 'stringDate:"HH:mm"'
-
             },
             {
                 field: 'end_time',
                 displayName: 'end time',
                 filters: 'stringDate:"HH:mm"'
-
             },
             {
                 field: 'num_set',
@@ -122,10 +122,6 @@ angular.module('adrrApp.wrapper.bsb', [], null)
             {
                 field: 'num_cylinders',
                 displayName: 'num cylinders'
-            },
-            {
-                field: 'remark',
-                displayname: 'remarks'
             }
         ];
 
@@ -143,7 +139,7 @@ angular.module('adrrApp.wrapper.bsb', [], null)
 
         $scope.createClickHandler = function () {
 
-            $state.transitionTo('wrapper.bsb.create');
+            $state.go('wrapper.bsb.create');
 
         };
 
@@ -223,7 +219,6 @@ angular.module('adrrApp.wrapper.bsb', [], null)
 
         $scope.submit = function () {
 
-
             $scope.formData.start_time = '2013-01-01 ' + $scope.formData.start_time;
             $scope.formData.end_time = '2013-01-01 ' + $scope.formData.end_time;
 
@@ -233,9 +228,7 @@ angular.module('adrrApp.wrapper.bsb', [], null)
 
             Restangular.all('eng/bsb').post($scope.formData).then
             (
-                function (data) {
-
-                    console.log(data['start_time']);
+                function () {
 
                     $scope.formData = {};
 
