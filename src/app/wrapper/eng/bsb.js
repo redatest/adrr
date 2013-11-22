@@ -107,13 +107,13 @@ angular.module('adrrApp.wrapper.bsb', [], null)
                 field: 'start_time',
                 displayName: 'start_time',
                 filters: 'stringDate:"HH:mm"'
-                
+
             },
             {
                 field: 'end_time',
                 displayName: 'end time',
                 filters: 'stringDate:"HH:mm"'
-                
+
             },
             {
                 field: 'num_set',
@@ -123,9 +123,9 @@ angular.module('adrrApp.wrapper.bsb', [], null)
                 field: 'num_cylinders',
                 displayName: 'num cylinders'
             },
-	        {
-	           field: 'remark',
-	           displayname: 'remarks'
+            {
+                field: 'remark',
+                displayname: 'remarks'
             }
         ];
 
@@ -171,85 +171,84 @@ angular.module('adrrApp.wrapper.bsb', [], null)
 
 ) // end controller
 
-.controller
+    .controller
 (
     'BsbFormCtrl', function ($rootScope, $scope, yii, Restangular, $state, $q) {
- 
+
         $scope.formData = {};
- 
+
         /* Frequent Date methods */
- 
+
         $scope.setToday = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate());
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         $scope.min1Day = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate() - 1);
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         $scope.min2Days = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate() - 2);
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         $scope.min3Days = function () {
 
             var date = new Date();
- 
+
             date.setDate(date.getDate() - 3);
- 
+
             $scope.formData.date = $.datepicker.formatDate('yy-mm-dd', date);
 
         };
- 
+
         /* End frequent Date methods */
- 
+
         $scope.submit = function () {
- 
-            
-            
+
+
             $scope.formData.start_time = '2013-01-01 ' + $scope.formData.start_time;
             $scope.formData.end_time = '2013-01-01 ' + $scope.formData.end_time;
- 
+
             console.log($scope.formData.start_time);
- 
+
             var deferred = $q.defer();
- 
+
             Restangular.all('eng/bsb').post($scope.formData).then
             (
                 function (data) {
-                            
+
                     console.log(data['start_time']);
- 
+
                     $scope.formData = {};
- 
+
                     deferred.resolve();
- 
+
                 }
             );
- 
+
             return deferred.promise;
         };
- 
+
         $scope.saveAndBackToList = function () {
- 
+
             $scope.submit().then
             (
                 function () {
@@ -257,24 +256,24 @@ angular.module('adrrApp.wrapper.bsb', [], null)
                     setTimeout
                     (
                         function () {
- 
+
                             $state.go('wrapper.bsb.list');
- 
+
                         }, 100
                     );
 
                 }
             );
- 
+
         };
- 
+
         $scope.controls = $rootScope.controls = [
- 
+
             {
                 title: 'Save and add',
- 
+
                 clickHandler: $scope.submit,
- 
+
                 visibility: $rootScope.loginData['role'] == 4
             },
             {
@@ -286,6 +285,6 @@ angular.module('adrrApp.wrapper.bsb', [], null)
             }
 
         ];
- 
+
     }
 );

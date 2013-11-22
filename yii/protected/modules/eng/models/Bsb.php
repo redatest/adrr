@@ -30,7 +30,7 @@ class Bsb extends ArModel
             'num_set' => 'Num set',
             'num_cylinders' => 'num cylinders',
             'remark' => 'Remark'
-            
+
         );
     }
 
