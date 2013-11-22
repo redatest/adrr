@@ -28,6 +28,7 @@ var adrrApp = angular.module
             'adrrApp.wrapper.beforeCasting',
             'adrrApp.wrapper.duringCasting',
             'adrrApp.wrapper.report'
+            
         ],
         null
     )
