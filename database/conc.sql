@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2013 at 11:39 AM
+-- Generation Time: Nov 27, 2013 at 07:32 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `conc`
 --
-CREATE DATABASE IF NOT EXISTS `conc` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `conc`;
+-- CREATE DATABASE IF NOT EXISTS `conc` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- USE `conc`;
 
 -- --------------------------------------------------------
 
@@ -60,6 +60,42 @@ INSERT INTO `tbl_before_casting` (`id`, `user_id`, `date`, `shift_id`, `ir`, `lr
 (4, 2, '2013-11-17', 2, 12, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL),
 (5, 2, '2013-11-19', 1, 12, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL),
 (6, 2, '2013-11-17', 2, 12, 'N/A', NULL, 'N/A', NULL, 'Yes', NULL, 'No', NULL, 'No', NULL, 'No', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_bsb`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_bsb` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `shift_id` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `conc_type_id` int(11) NOT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `num_set` int(11) DEFAULT NULL,
+  `num_cylinders` int(11) DEFAULT NULL,
+  `comment` text,
+  `pouring_type_id` int(11) NOT NULL,
+  `ir` int(11) NOT NULL,
+  `zone_id` int(11) NOT NULL,
+  `area` varchar(255) NOT NULL,
+  `axis` varchar(255) NOT NULL,
+  `level` varchar(255) NOT NULL,
+  `est_vol` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tbl_bsb`
+--
+
+INSERT INTO `tbl_bsb` (`id`, `user_id`, `date`, `shift_id`, `supplier_id`, `conc_type_id`, `start_time`, `end_time`, `num_set`, `num_cylinders`, `comment`, `pouring_type_id`, `ir`, `zone_id`, `area`, `axis`, `level`, `est_vol`) VALUES
+(1, 2, '2013-11-27', 2, 2, 2, '2013-01-01 12:12:00', '2013-01-01 13:13:00', 12, 12, '12', 3, 12, 11, 'sadf', '0', '1', 21),
+(2, 2, '2013-11-24', 2, 1, 4, '2013-01-01 12:12:00', '2013-01-01 13:12:00', NULL, NULL, NULL, 3, 12, 11, 'sadf', '1', '1', 21);
 
 -- --------------------------------------------------------
 
@@ -131,7 +167,14 @@ CREATE TABLE IF NOT EXISTS `tbl_during_casting` (
   `curing` enum('Yes','No','N/A') NOT NULL,
   `curing_cmt` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_during_casting`
+--
+
+INSERT INTO `tbl_during_casting` (`id`, `user_id`, `date`, `shift_id`, `ir`, `pouring_record_id`, `location`, `location_cmt`, `precaution`, `precaution_cmt`, `formwork`, `formwork_cmt`, `contractor`, `contractor_cmt`, `consultant`, `consultant_cmt`, `drop_height`, `drop_height_cmt`, `vibration`, `vibration_cmt`, `finishing`, `finishing_cmt`, `curing`, `curing_cmt`) VALUES
+(1, 2, '2013-11-25', 1, 12, 14, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL, 'N/A', NULL);
 
 -- --------------------------------------------------------
 
@@ -710,8 +753,8 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-11-19 15:00:27'),
-(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-20 08:43:38');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-11-27 05:15:41'),
+(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-27 04:23:24');
 
 -- --------------------------------------------------------
 

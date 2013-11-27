@@ -171,7 +171,19 @@ angular.module('adrrApp.wrapper.bsb', [], null)
 (
     'BsbFormCtrl', function ($rootScope, $scope, yii, Restangular, $state, $q) {
 
-        $scope.formData = {};
+        $scope.reset = function () {
+
+            $scope.formData = {};
+
+            $scope.als = [];
+
+            $scope.pts = [];
+
+            $scope.pouringTypes = [];
+
+        };
+
+        $scope.reset();
 
         /* Frequent Date methods */
 
@@ -216,6 +228,104 @@ angular.module('adrrApp.wrapper.bsb', [], null)
         };
 
         /* End frequent Date methods */
+
+        $scope.resetIr = function () {
+
+            $scope.pouringTypes = angular.copy(yii['PouringType']['list']);
+
+            $scope.als = [];
+
+            $scope.formData['zone_id'] = '';
+            $scope.formData['area'] = '';
+            $scope.formData['est_vol'] = '';
+            $scope.formData['pouring_type_id'] = '';
+            $scope.formData['axis'] = '';
+            $scope.formData['level'] = '';
+
+            $scope.irFound = false;
+
+            $scope.onePouringType = false;
+
+            $scope.oneAl = false;
+        };
+
+        $scope.$watch
+        (
+            'formData.ir', function (newVal) {
+
+                $scope.resetIr();
+
+                if (typeof newVal !== 'undefined' && newVal !== '') {
+
+                    Restangular.one('settings/ir/getIr').get({ir: newVal}).then
+                    (
+                        function (data) {
+
+                            $scope.formData['zone_id'] = data['model']['zone_id'];
+                            $scope.formData['area'] = data['model']['area'];
+                            $scope.formData['est_vol'] = parseInt(data['model']['volume'], 10);
+
+                            $scope.irFound = true;
+
+                            if (data['pts'].length == 1) {
+
+                                $scope.formData['pouring_type_id'] = data['pts'][0]['pouring_type_id'];
+
+                                $scope.onePouringType = true;
+
+                            } else if (data['pts'].length > 1) {
+
+                                $scope.onePouringType = false;
+
+                                var numPts = data['pts'].length;
+
+                                angular.forEach
+                                (
+                                    $scope.pouringTypes, function (item, i) {
+
+                                        var checker = false;
+
+                                        for (var j = 0; j < numPts; j++) {
+
+                                            checker = item.id == data['pts'][j]['pouring_type_id'];
+
+                                            if (checker) {
+
+                                                break;
+
+                                            }
+                                        }
+
+                                        if (!checker) {
+
+                                            delete $scope.pouringTypes[i];
+
+                                        }
+
+                                    }
+                                );
+
+                            }
+
+                            if (data['als'].length == 1) {
+
+                                $scope.formData['axis'] = data['als'][0]['axis'];
+                                $scope.formData['level'] = data['als'][0]['level'];
+
+                                $scope.oneAl = true;
+
+                            } else if (data['als'].length > 1) {
+
+                                $scope.formData.level = 1;
+                                $scope.als = data['als'];
+
+                            }
+                        }
+                    )
+
+                }
+            }
+        );
 
         $scope.submit = function () {
 

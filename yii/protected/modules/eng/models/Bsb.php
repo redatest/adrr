@@ -29,10 +29,16 @@ class Bsb extends ArModel
             'conc_type_id' => 'Concrete',
             'start_time' => 'Start',
             'end_time' => 'End',
-            'num_set' => 'Num set',
-            'num_cylinders' => 'num cylinders',
-            'comment' => 'Comment'
-
+            'num_set' => 'Num Set',
+            'num_cylinders' => 'Num Cylinders',
+            'comment' => 'Comment',
+            'pouring_type_id' => 'Pouring Type',
+            'ir' => 'IR',
+            'zone_id' => 'Zone',
+            'area' => 'Area',
+            'axis' => 'Axis',
+            'level' => 'Level',
+            'est_vol' => 'Estimated Volume'
         );
     }
 

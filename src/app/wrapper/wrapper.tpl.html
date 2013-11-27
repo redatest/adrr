@@ -26,7 +26,8 @@
 </nav>
 
 <div id="pagecont" class="container" ng-switch="loginData['role']">
-    <div id="sidenav" class="">
+
+<div id="sidenav" class="">
         <nav class="navbar navbar-default" role="navigation">
             <div class="collapse navbar-collapse navbar-ex8-collapse">
                 <ul class="nav nav-pills nav-stacked">
@@ -105,11 +106,20 @@
                         </ul>
                     </li>
 
+                    <li ng-class="{active: state.indexOf('wrapper.bsb.list') > -1}">
+                        <a href="#/bsb"><i class="fa fa-th-large fa-lg fa-fw"></i> Blinding, Screed...</a>
+                    </li>
+
                     <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
                         <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
                     </li>
 
-                    <li ng-switch-when="3" class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
+                    <li ng-class="{active: state.indexOf('wrapper.duringCasting.list') > -1}">
+                        <a href="#/during-casting"><i class="fa fa-arrow-circle-right fa-lg fa-fw"></i> During
+                            Casting</a>
+                    </li>
+
+                    <li class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
                         <a onclick="return false;" class="accordion-toggle"
                            ng-class="{collapsed: state.indexOf('wrapper.rep') === -1}" data-toggle="collapse"
                            href="#collapseReports"><i class="fa fa-bar-chart-o fa-lg fa-fw"></i> Reports & Statistics <i
@@ -118,13 +128,28 @@
                         <ul id="collapseReports" class="nav nav-pills nav-stacked collapse"
                             ng-class="{collapse: state.indexOf('wrapper.rep') === -1, in: state.indexOf('wrapper.rep') > -1}">
 
-                            <li ng-class="{active: state.indexOf('wrapper.rep.conc') > -1}">
-                                <a href="#/report/conc"><span class="menu-text"><i class="fa fa-angle-double-right"></i>Concrete</span></a>
+                            <li ng-class="{active: state == 'wrapper.rep.conc'}">
+                                <a href="#/report/conc">
+                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>Concrete</span>
+                                </a>
                             </li>
 
-                            <li ng-class="{active: state.indexOf('wrapper.rep.pouring') > -1}">
-                                <a href="#/report/pouring"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Pouring</span></a>
+                            <li ng-class="{active: state == 'wrapper.rep.pouring'}">
+                                <a href="#/report/pouring">
+                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>Pouring</span>
+                                </a>
+                            </li>
+
+                            <li ng-class="{active: state == 'wrapper.rep.endShift'}">
+                                <a href="#/report/end-shift">
+                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>End Shift</span>
+                                </a>
+                            </li>
+
+                            <li ng-class="{active: state == 'wrapper.rep.endDay'}">
+                                <a href="#/report/end-day">
+                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>End Day</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
