@@ -20,7 +20,7 @@ class IrController extends RESTful
                 $data['pts'] = $model->pouringTypes;
                 $data['als'] = $model->als;
 
-                $this->_sendResponse(200, CJSON::encode($data));
+                $this->_sendResponse(200, $data,'json');
             }
 
         }

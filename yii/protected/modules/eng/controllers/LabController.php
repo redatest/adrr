@@ -15,7 +15,7 @@ class LabController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = "date = '" . $date . "' and user_id=" . Yii::app()->user->id;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionNumTodayRecords()
@@ -26,7 +26,7 @@ class LabController extends RESTful
 
         $result['numRows'] = $this->_model->count("date = '" . $date . "' and user_id=" . Yii::app()->user->id);
 
-        $this->_sendResponse(200, CJSON::encode($result));
+        $this->_sendResponse(200, $result,'json');
     }
 
     public function actionGetUnarchived()
@@ -44,7 +44,7 @@ class LabController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionGetArchived()
@@ -62,7 +62,7 @@ class LabController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionGetReturned()
@@ -88,7 +88,7 @@ class LabController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionArchive()
@@ -115,7 +115,7 @@ class LabController extends RESTful
                 }
             }
 
-            $this->_sendResponse(200, CJSON::encode($back));
+            $this->_sendResponse(200, $back,'json');
         }
 
         if (isset($_GET['id'])) {
@@ -168,7 +168,7 @@ class LabController extends RESTful
 
             $model = $this->_model->findByAttributes(array('ticket' => $_GET['ticket'], 'supplier_id' => $_GET['supplier']));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) $this->_sendResponse(200, $model,'json');
 
         }
 

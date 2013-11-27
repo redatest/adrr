@@ -44,7 +44,7 @@ class PouringController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionGetDrafts()
@@ -62,7 +62,7 @@ class PouringController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionGetArchived()
@@ -80,7 +80,7 @@ class PouringController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionGetReturned()
@@ -95,7 +95,7 @@ class PouringController extends RESTful
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
     }
 
     public function actionArchive()
@@ -122,7 +122,7 @@ class PouringController extends RESTful
                 }
             }
 
-            $this->_sendResponse(200, CJSON::encode($back));
+            $this->_sendResponse(200, $back,'json');
         }
 
         if (isset($_GET['id'])) {
@@ -175,7 +175,7 @@ class PouringController extends RESTful
 
             $model = $this->_model->findByAttributes(array('ticket' => $_GET['ticket'], 'supplier_id' => $_GET['supplier']));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) $this->_sendResponse(200, $model,'json');
 
         }
 
@@ -215,7 +215,7 @@ class PouringController extends RESTful
 
             $model = $this->_model->findByAttributes(array('ir' => $_GET['ir']), array('order' => 'id DESC'));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) $this->_sendResponse(200, $model,'json');
 
             $this->_sendResponse(404, 'No records were found.');
 

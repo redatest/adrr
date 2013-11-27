@@ -102,7 +102,8 @@ return array
     ),
     'params' => array('adminEmail' => 'aladdinmhaimeed@gmail.com',
 	    'content_types' => array(
-		    'xlsx'=>"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+		    'xlsx'=>"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+		    'json'=>"application/json"
 	    )
     )
 );

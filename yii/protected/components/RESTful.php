@@ -7,8 +7,8 @@
 		public function actionIndex()
 		{
 			$models = $this->_setPagination();
-			if (empty($models)) $this->_sendResponse(200, sprintf('No items were found.'));
-			else $this->_sendResponse(200, $models);
+			if (empty($models)) $this->_sendResponse(200, sprintf('No items were found.'),'text');
+			else $this->_sendResponse(200, $models,'json');
 		}
 
 		public function actionView()
@@ -18,7 +18,7 @@
 			$model = $this->_model->findByPk($_GET['id']);
 			
 			if (is_null($model)) $this->_sendResponse(404, 'No Item found with id '.$_GET['id']);
-			else $this->_sendResponse(200, $model);
+			else $this->_sendResponse(200, $model,'json');
 		}
 		
 		public function actionCreate()
@@ -35,7 +35,7 @@
 				else $this->_sendResponse(500, sprintf('Parameter <b>%s</b> is not allowed', $var));
 			}
 			
-			if ($model->save()) $this->_sendResponse(200, CJSON::encode($model));
+			if ($model->save()) $this->_sendResponse(200, $model,'json');
 			else
 			{
 				$msg = "<h1>Error</h1>";
@@ -76,7 +76,7 @@
 				else $this->_sendResponse(500, sprintf('Parameter <b>%s</b> is not allowed', $var));
 			}
 			
-			if ($model->save()) $this->_sendResponse(200, CJSON::encode($model));
+			if ($model->save()) $this->_sendResponse(200, $model,'json');
 			else
 			{
 				$msg = "<h1>Error</h1>";
@@ -117,7 +117,7 @@
 		{
 			$result['numRows'] = $this->_model->count();
 			
-			$this->_sendResponse(200, CJSON::encode($result));
+			$this->_sendResponse(200, $result,'json');
 		}
 		
 		public function actionGetRelatedList()
@@ -129,7 +129,7 @@
 			$models = $this->_setPagination();
 			
 			if (empty($models)) $this->_sendResponse(200, sprintf('No items were found.'));
-			else $this->_sendResponse(200, CJSON::encode($models));
+			else $this->_sendResponse(200, $models,'json');
 		}
 		
 		public function actionGetRelated()
@@ -141,7 +141,7 @@
 			$model = $this->_getRelated();
 			
 			if ($model === null) $this->_sendResponse(200, sprintf('No items were found.'));
-			else $this->_sendResponse(200, CJSON::encode($model));
+			else $this->_sendResponse(200, $model,'json');
 		}
 		
 		public function actionUpdateRelated()
@@ -164,7 +164,7 @@
 				else $this->_sendResponse(500, sprintf('Parameter <b>%s</b> is not allowed', $var));
 			}
 			
-			if ($model->save()) $this->_sendResponse(200, CJSON::encode($model));
+			if ($model->save()) $this->_sendResponse(200, $model,'json');
 			else
 			{
 				$msg = "<h1>Error</h1>";
@@ -209,7 +209,7 @@
 			
 			$model->$foreignKey = $_GET['id'];
 			
-			if ($model->save()) $this->_sendResponse(200, CJSON::encode($model));
+			if ($model->save()) $this->_sendResponse(200, $model,'json');
 			else
 			{
 				$msg = "<h1>Error</h1>";
@@ -261,7 +261,7 @@
 				$value['label'] = $labels[$key];
 			}
 			
-			$this->_sendResponse(200, CJSON::encode($meta));
+			$this->_sendResponse(200, $meta,'json');
 		}
 		
 		protected function _setPagination()
@@ -300,10 +300,10 @@
 				}
 			}
 		}
-		
+
 		protected function _sendResponse($status = 200, $body = '', $content_type = 'text/html')
 		{
-			$body = CJSON::encode($body);
+
 
 			if (isset($_REQUEST['content_type']))
 				$content_type = $_REQUEST['content_type'];
@@ -311,7 +311,11 @@
 			if($content_type == 'xlsx'){
 				parent::_sendXlsxResponse();
 				Yii::app()->end();
-				return;
+			}
+
+			if($content_type == 'json'){
+				$content_type = Yii::app()->params['content_types']['json'];
+				$body = CJSON::encode($body);
 			}
 
 			$status_header = 'HTTP/1.1 ' . $status . ' ' . $this->_getStatusCodeMessage($status);

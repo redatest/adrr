@@ -16,7 +16,7 @@ class AdrrUserController extends RESTful
             ->where('u.status = 1')
             ->queryAll();
 
-        $this->_sendResponse(200, CJSON::encode($models));
+        $this->_sendResponse(200, $models,'json');
     }
 
     public function actionView()
@@ -28,7 +28,7 @@ class AdrrUserController extends RESTful
             ->where('u.status = 1 AND u.id = ' . $_GET['id'])
             ->queryRow();
 
-        $this->_sendResponse(200, CJSON::encode($model));
+        $this->_sendResponse(200, $model,'json');
     }
 
     public function actionCreate()
@@ -122,7 +122,7 @@ class AdrrUserController extends RESTful
 
             $model = Profile::model()->find(array('condition' => 'emp_num = ' . $_GET['emp_num'] . (isset($_GET['id']) ? (' AND user_id != ' . $_GET['id']) : '')));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) $this->_sendResponse(200, $model,'json');
         }
 
         $this->_sendResponse(404, 'This no can be taken');
@@ -134,7 +134,7 @@ class AdrrUserController extends RESTful
 
             $model = $this->_model->find(array('condition' => 'username = "' . $_GET['username'] . (isset($_GET['id']) ? ('" AND id != ' . $_GET['id']) : '')));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) $this->_sendResponse(200, $model,'json');
         }
 
         $this->_sendResponse(404, 'This username can be taken');
@@ -146,7 +146,7 @@ class AdrrUserController extends RESTful
 
             $model = $this->_model->find(array('condition' => 'email = "' . $_GET['email'] . (isset($_GET['id']) ? ('" AND id != ' . $_GET['id']) : '')));
 
-            if ($model !== null) $this->_sendResponse(200, CJSON::encode($model));
+            if ($model !== null) $this->_sendResponse(200, $model,'json');
         }
 
         $this->_sendResponse(404, 'This email can be taken');
