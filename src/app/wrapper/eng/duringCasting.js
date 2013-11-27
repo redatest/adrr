@@ -98,76 +98,76 @@ angular.module('adrrApp.wrapper.duringCasting', [], null)
             },
             {
                 field: 'location',
-                displayName: 'location'
+                displayName: 'Location'
             },
-            {
-                field: 'location_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'location_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'precaution',
-                displayName: 'precaution'
+                displayName: 'Precaution'
             },
-            {
-                field: 'precaution_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'precaution_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'formwork',
-                displayName: 'formwork'
+                displayName: 'Formwork'
             },
-            {
-                field: 'formwork_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'formwork_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'contractor',
-                displayName: 'contractor'
+                displayName: 'Contractor'
             },
-            {
-                field: 'contractor_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'contractor_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'consultant',
-                displayName: 'consultant'
+                displayName: 'Consultant'
             },
-            {
-                field: 'consultant_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'consultant_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'drop_height',
-                displayName: 'drop_height'
+                displayName: 'Drop Height'
             },
-            {
-                field: 'drop_height_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'drop_height_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'vibration',
                 displayName: 'vibration'
             },
-            {
-                field: 'vibration_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'vibration_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'finishing',
-                displayName: 'finishing'
+                displayName: 'Finishing'
             },
-            {
-                field: 'finishing_cmt',
-                displayName: 'remark'
-            },
+//            {
+//                field: 'finishing_cmt',
+//                displayName: 'remark'
+//            },
             {
                 field: 'curing',
-                displayName: 'curing'
+                displayName: 'Curing'
             },
-            {
-                field: 'curing_cmt',
-                displayName: 'remark'
-            }
+//            {
+//                field: 'curing_cmt',
+//                displayName: 'remark'
+//            }
         ];
 
         $scope.adrrGridOptions = {

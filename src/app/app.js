@@ -16,6 +16,7 @@ var adrrApp = angular.module
             'adrrDirectives.ssNgGrid',
             'adrrDirectives.jslimscroll',
             'adrrDirectives.notifications',
+            'adrr.directives.filtersDirective',
             'adrrAuth',
             'adrrDataFetcher',
             'redaDirectives',

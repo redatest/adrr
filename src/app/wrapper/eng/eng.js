@@ -1897,6 +1897,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 clickHandler: $scope.archiveSelected,
                 visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: 'data-toggle="modal" data-target="#search"'
             }
 
         ];
@@ -3517,7 +3523,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state, $http) {
+    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
 
         $scope.selectedItems = [];
 
@@ -3590,7 +3596,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             }
         );
-		$scope.xlsx = function(){
+
+        $scope.xlsx = function(){
 			window.location.href  = sourceUrl+'?content_type=xlsx';
 		}
     }
