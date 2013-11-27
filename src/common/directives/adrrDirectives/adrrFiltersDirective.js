@@ -29,7 +29,7 @@ angular.module('adrr.directives.filtersDirective', [], null)
                 '<div class="modal-body">' +
                 '<form class="form-horizontal" role="form">' +
                 '<div class="form-group">' +
-                '<label class="control-label col-xs-2">Whatever</label>' +
+                '<label class="control-label col-xs-2">Filters</label>' +
                 '<div class="col-xs-10">' +
                 '<select class="form-control" ng-model="newFilter" ng-change="newHandler(newFilter)">' +
                 '<option value="">Select...</option>' +
@@ -42,14 +42,14 @@ angular.module('adrr.directives.filtersDirective', [], null)
                 '<ng-switch on="filter[\'double\']">' +
                 '<any ng-switch-when="true" ng-init="filters[filter.name] = []">' +
                 '<div class="col-xs-4">' +
-                '<input ng-model="filters[filter.name][0]" adrr-filters-attrs="filter.attrs" class="form-control" type="text"/>' +
+                '<input ng-model="filters[filter.name][0]" adrr-filters-attrs="filter.attrs" class="form-control" type="text" need-compile/>' +
                 '</div>' +
                 '<div class="col-xs-4">' +
-                '<input ng-model="filters[filter.name][1]" adrr-filters-attrs="filter.attrs" class="form-control" type="text"/>' +
+                '<input ng-model="filters[filter.name][1]" adrr-filters-attrs="filter.attrs" class="form-control" type="text" need-compile/>' +
                 '</div>' +
                 '</any>' +
                 '<div ng-switch-default class="col-xs-8">' +
-                '<input ng-model="filters[filter.name]" adrr-filters-attrs="filter.attrs" class="form-control" type="text"/>' +
+                '<input ng-model="filters[filter.name]" adrr-filters-attrs="filter.attrs" class="form-control" type="text" need-compile/>' +
                 '</div>' +
                 '</ng-switch>' +
                 '<div class="col-xs-2">' +
@@ -114,9 +114,9 @@ angular.module('adrr.directives.filtersDirective', [], null)
 )
 
     .directive
-(
+    (
 
-    'adrrFiltersAttrs', function () {
+        'adrrFiltersAttrs', ['$compile', function ($compile) {
 
         return {
 
@@ -124,20 +124,28 @@ angular.module('adrr.directives.filtersDirective', [], null)
 
             scope: false,
 
+            replace: true,
+
             link: function (scope, element, iAttrs) {
 
                 var attrs = scope.$eval(iAttrs['adrrFiltersAttrs']);
 
-                angular.forEach(
-
+                angular.forEach
+                (
                     attrs, function (val, key) {
 
                         element.attr(key, val);
 
                     }
                 );
+
+                element.removeAttr('adrr-filters-attrs');
+
+                if (typeof iAttrs['needCompile'] !== 'undefined') {
+                    $compile(element)(scope);
+                }
             }
         };
-    }
+    }]
 
-);
+    );

@@ -1885,6 +1885,37 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date1',
+                displayName: 'Date1',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'date2',
+                displayName: 'Date2'
+            },
+            {
+                name: 'date3',
+                displayName: 'Date3'
+            },
+            {
+                name: 'date4',
+                displayName: 'Date4'
+            },
+            {
+                name: 'date5',
+                displayName: 'Date5'
+            }
+
+        ];
+
         $rootScope.controls = [
 
             {
@@ -1902,7 +1933,10 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 title: 'Search',
                 visibility: true,
                 disabled: false,
-                attrs: 'data-toggle="modal" data-target="#search"'
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];

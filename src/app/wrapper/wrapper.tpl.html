@@ -28,203 +28,209 @@
 <div id="pagecont" class="container" ng-switch="loginData['role']">
 
 <div id="sidenav" class="">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="collapse navbar-collapse navbar-ex8-collapse">
-                <ul class="nav nav-pills nav-stacked">
-                    <li ng-class="{active: state === 'wrapper.dashboard'}">
-                        <a href="#/dashboard"><i class="fa fa-dashboard fa-fw fa-lg"></i> Dashboard</a>
-                    </li>
 
-                    <li ng-class="{active: state === 'wrapper.user.list'}" ng-show="loginData['role'] == 3">
-                        <a href="#/user/list"><i class="fa fa-user fa-fw fa-lg"></i> Users</a>
-                    </li>
+    <nav class="navbar navbar-default" role="navigation">
 
-                    <li ng-class="{active: state.indexOf('wrapper.eng.temp') > -1}">
-                        <a href="#/lab-temp"><i class="fa fa-sun-o fa-lg fa-fw"></i> Lab Temperature</a>
-                    </li>
+        <div class="collapse navbar-collapse navbar-ex8-collapse">
 
-                    <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.lab') > -1}">
-                        <a onclick="return false;" class="accordion-toggle"
-                           ng-class="{collapsed: state.indexOf('wrapper.eng.lab') === -1}" data-toggle="collapse"
-                           href="#collapseLab"><i class="fa fa-truck fa-lg fa-fw"></i> Concrete Field <i
-                                class="fa fa-chevron-down pull-right"></i></a>
+            <ul class="nav nav-pills nav-stacked">
 
-                        <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
-                            ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
-                            <li ng-class="{active: state.indexOf('wrapper.eng.lab.inbox') > -1}">
-                                <a href="#/labs/inbox">
+                <li ng-class="{active: state === 'wrapper.dashboard'}">
+                    <a href="#/dashboard"><i class="fa fa-dashboard fa-fw fa-lg"></i> Dashboard</a>
+                </li>
+
+                <li ng-class="{active: state === 'wrapper.user.list'}" ng-show="loginData['role'] == 3">
+                    <a href="#/user/list"><i class="fa fa-user fa-fw fa-lg"></i> Users</a>
+                </li>
+
+                <li ng-class="{active: state.indexOf('wrapper.eng.temp') > -1}">
+                    <a href="#/lab-temp"><i class="fa fa-sun-o fa-lg fa-fw"></i> Lab Temperature</a>
+                </li>
+
+                <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.lab') > -1}">
+                    <a onclick="return false;" class="accordion-toggle"
+                       ng-class="{collapsed: state.indexOf('wrapper.eng.lab') === -1}" data-toggle="collapse"
+                       href="#collapseLab"><i class="fa fa-truck fa-lg fa-fw"></i> Concrete Field <i
+                            class="fa fa-chevron-down pull-right"></i></a>
+
+                    <ul id="collapseLab" class="nav nav-pills nav-stacked collapse"
+                        ng-class="{collapse: state.indexOf('wrapper.eng.lab') === -1, in: state.indexOf('wrapper.eng.lab') > -1}">
+
+                        <li ng-class="{active: state.indexOf('wrapper.eng.lab.inbox') > -1}">
+
+                            <a href="#/labs/inbox">
+
                                     <span class="menu-text">
                                         <i class="fa fa-angle-double-right"></i>{{loginData.role == 3 ? 'Inbox' : 'Sent'}} <span
                                             class="badge badge-primary pull-right stat-blue">{{menuStats[0].lab.inbox}}</span>
                                     </span>
-                                </a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
-                                <a href="#/labs/returned"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i> Returned <span
-                                        class="badge badge-primary pull-right stat-red">{{menuStats[0].lab.returned}}</span></span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.eng.lab.archive') > -1}">
-                                <a href="#/labs/archive"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Archive <span
-                                        class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['labArchive']}}</span></span></a>
-                            </li>
-                        </ul>
-                    </li>
+                            </a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.eng.lab.return') > -1}">
+                            <a href="#/labs/returned"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i> Returned <span
+                                    class="badge badge-primary pull-right stat-red">{{menuStats[0].lab.returned}}</span></span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.eng.lab.archive') > -1}">
+                            <a href="#/labs/archive"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Archive <span
+                                    class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['labArchive']}}</span></span></a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
-                        <a onclick="return false;" class="accordion-toggle"
-                           ng-class="{collapsed: state.indexOf('wrapper.eng.pouring') === -1}" data-toggle="collapse"
-                           href="#collapsePouring"><i class="fa fa-tint fa-lg fa-fw"></i> Pouring <i
-                                class="fa fa-chevron-down pull-right"></i></a>
+                <li class="sub" ng-class="{active: state.indexOf('wrapper.eng.pouring') > -1}">
+                    <a onclick="return false;" class="accordion-toggle"
+                       ng-class="{collapsed: state.indexOf('wrapper.eng.pouring') === -1}" data-toggle="collapse"
+                       href="#collapsePouring"><i class="fa fa-tint fa-lg fa-fw"></i> Pouring <i
+                            class="fa fa-chevron-down pull-right"></i></a>
 
-                        <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
-                            ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
-                            <li ng-class="{active: state == 'wrapper.eng.pouring.inbox'}">
-                                <a href="#/pourings/inbox">
+                    <ul id="collapsePouring" class="nav nav-pills nav-stacked collapse"
+                        ng-class="{collapse: state.indexOf('wrapper.eng.pouring') === -1, in: state.indexOf('wrapper.eng.pouring') > -1}">
+                        <li ng-class="{active: state == 'wrapper.eng.pouring.inbox'}">
+                            <a href="#/pourings/inbox">
                                     <span class="menu-text">
                                         <i class="fa fa-angle-double-right"></i>{{loginData.role == 3 ? 'Inbox' : 'Sent'}} <span
                                             class="badge badge-primary pull-right stat-blue">{{menuStats[0].pouring.inbox}}</span>
                                     </span>
-                                </a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
-                                <a href="#/pourings/returned"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Return <span
-                                        class="badge badge-primary pull-right stat-red">{{menuStats[0].pouring.returned}}</span></span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.archive') > -1}">
-                                <a href="#/pourings/archive"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Archive <span
-                                        class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['pouringArchive']}}</span></span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}">
-                                <a href="#/pourings/drafts"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Draft <span
-                                        class="badge badge-primary pull-right stat-blue">{{menuStats[0].pouring.drafts}}</span></span></a>
-                            </li>
-                        </ul>
-                    </li>
+                            </a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.eng.pouring.return') > -1}">
+                            <a href="#/pourings/returned"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Return <span
+                                    class="badge badge-primary pull-right stat-red">{{menuStats[0].pouring.returned}}</span></span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.eng.pouring.archive') > -1}">
+                            <a href="#/pourings/archive"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Archive <span
+                                    class="badge badge-primary pull-right stat-blue">{{yii['Gen']['stat']['pouringArchive']}}</span></span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.eng.pouring.draft') > -1}">
+                            <a href="#/pourings/drafts"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Draft <span
+                                    class="badge badge-primary pull-right stat-blue">{{menuStats[0].pouring.drafts}}</span></span></a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li ng-class="{active: state.indexOf('wrapper.bsb.list') > -1}">
-                        <a href="#/bsb"><i class="fa fa-th-large fa-lg fa-fw"></i> Blinding, Screed...</a>
-                    </li>
+                <li ng-class="{active: state.indexOf('wrapper.bsb.list') > -1}">
+                    <a href="#/bsb"><i class="fa fa-th-large fa-lg fa-fw"></i> Blinding, Screed...</a>
+                </li>
 
-                    <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
-                        <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
-                    </li>
+                <li ng-class="{active: state.indexOf('wrapper.beforeCasting.list') > -1}">
+                    <a href="#/before-casting"><i class="fa fa-arrow-circle-o-left fa-lg fa-fw"></i> Before Casting</a>
+                </li>
 
-                    <li ng-class="{active: state.indexOf('wrapper.duringCasting.list') > -1}">
-                        <a href="#/during-casting"><i class="fa fa-arrow-circle-right fa-lg fa-fw"></i> During
-                            Casting</a>
-                    </li>
+                <li ng-class="{active: state.indexOf('wrapper.duringCasting.list') > -1}">
+                    <a href="#/during-casting"><i class="fa fa-arrow-circle-right fa-lg fa-fw"></i> During
+                        Casting</a>
+                </li>
 
-                    <li class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
-                        <a onclick="return false;" class="accordion-toggle"
-                           ng-class="{collapsed: state.indexOf('wrapper.rep') === -1}" data-toggle="collapse"
-                           href="#collapseReports"><i class="fa fa-bar-chart-o fa-lg fa-fw"></i> Reports & Statistics <i
-                                class="fa fa-chevron-down pull-right"></i></a>
+                <li class="sub" ng-class="{active: state.indexOf('wrapper.rep') > -1}">
+                    <a onclick="return false;" class="accordion-toggle"
+                       ng-class="{collapsed: state.indexOf('wrapper.rep') === -1}" data-toggle="collapse"
+                       href="#collapseReports"><i class="fa fa-bar-chart-o fa-lg fa-fw"></i> Reports & Statistics <i
+                            class="fa fa-chevron-down pull-right"></i></a>
 
-                        <ul id="collapseReports" class="nav nav-pills nav-stacked collapse"
-                            ng-class="{collapse: state.indexOf('wrapper.rep') === -1, in: state.indexOf('wrapper.rep') > -1}">
+                    <ul id="collapseReports" class="nav nav-pills nav-stacked collapse"
+                        ng-class="{collapse: state.indexOf('wrapper.rep') === -1, in: state.indexOf('wrapper.rep') > -1}">
 
-                            <li ng-class="{active: state == 'wrapper.rep.conc'}">
-                                <a href="#/report/conc">
-                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>Concrete</span>
-                                </a>
-                            </li>
+                        <li ng-class="{active: state == 'wrapper.rep.conc'}">
+                            <a href="#/report/conc">
+                                <span class="menu-text"><i class="fa fa-angle-double-right"></i>Concrete</span>
+                            </a>
+                        </li>
 
-                            <li ng-class="{active: state == 'wrapper.rep.pouring'}">
-                                <a href="#/report/pouring">
-                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>Pouring</span>
-                                </a>
-                            </li>
+                        <li ng-class="{active: state == 'wrapper.rep.pouring'}">
+                            <a href="#/report/pouring">
+                                <span class="menu-text"><i class="fa fa-angle-double-right"></i>Pouring</span>
+                            </a>
+                        </li>
 
-                            <li ng-class="{active: state == 'wrapper.rep.endShift'}">
-                                <a href="#/report/end-shift">
-                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>End Shift</span>
-                                </a>
-                            </li>
+                        <li ng-class="{active: state == 'wrapper.rep.endShift'}">
+                            <a href="#/report/end-shift">
+                                <span class="menu-text"><i class="fa fa-angle-double-right"></i>End Shift</span>
+                            </a>
+                        </li>
 
-                            <li ng-class="{active: state == 'wrapper.rep.endDay'}">
-                                <a href="#/report/end-day">
-                                    <span class="menu-text"><i class="fa fa-angle-double-right"></i>End Day</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li ng-class="{active: state == 'wrapper.rep.endDay'}">
+                            <a href="#/report/end-day">
+                                <span class="menu-text"><i class="fa fa-angle-double-right"></i>End Day</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li ng-switch-when="3" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
-                        <a onclick="return false;" class="accordion-toggle"
-                           ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse"
-                           href="#collapseOne"><i class="fa fa-cogs fa-lg fa-fw"></i> Settings <i
-                                class="fa fa-chevron-down pull-right"></i> </a>
+                <li ng-switch-when="3" class="sub" ng-class="{active: state.indexOf('wrapper.settings') > -1}">
+                    <a onclick="return false;" class="accordion-toggle"
+                       ng-class="{collapsed: state.indexOf('wrapper.settings') === -1}" data-toggle="collapse"
+                       href="#collapseOne"><i class="fa fa-cogs fa-lg fa-fw"></i> Settings <i
+                            class="fa fa-chevron-down pull-right"></i> </a>
 
-                        <ul id="collapseOne" class="nav nav-pills nav-stacked collapse"
-                            ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
-                            <li ng-class="{active: state.indexOf('wrapper.settings.ir') > -1}">
-                                <a href="#/settings/ir/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>IR</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.zone') > -1}">
-                                <a href="#/settings/zone/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Zones</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.pump') > -1}">
-                                <a href="#/settings/pump/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Pumps</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.project') > -1}">
-                                <a href="#/settings/project/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Projects</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.supplier') > -1}">
-                                <a href="#/settings/supplier/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Suppliers</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.shiftList') > -1}">
-                                <a href="#/settings/shift-list/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Shift Lists</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.shiftType') > -1}">
-                                <a href="#/settings/shift-type/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Shift Types</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.pouringType') > -1}">
-                                <a href="#/settings/pouring-type/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Pouring Types</span></a>
-                            </li>
-                            <li ng-class="{active: state.indexOf('wrapper.settings.concreteType') > -1}">
-                                <a href="#/settings/concrete-type/create"><span class="menu-text"><i
-                                        class="fa fa-angle-double-right"></i>Concrete Types</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                    <ul id="collapseOne" class="nav nav-pills nav-stacked collapse"
+                        ng-class="{collapse: state.indexOf('wrapper.settings') === -1, in: state.indexOf('wrapper.settings') > -1}">
+                        <li ng-class="{active: state.indexOf('wrapper.settings.ir') > -1}">
+                            <a href="#/settings/ir/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>IR</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.zone') > -1}">
+                            <a href="#/settings/zone/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Zones</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.pump') > -1}">
+                            <a href="#/settings/pump/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Pumps</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.project') > -1}">
+                            <a href="#/settings/project/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Projects</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.supplier') > -1}">
+                            <a href="#/settings/supplier/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Suppliers</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.shiftList') > -1}">
+                            <a href="#/settings/shift-list/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Shift Lists</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.shiftType') > -1}">
+                            <a href="#/settings/shift-type/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Shift Types</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.pouringType') > -1}">
+                            <a href="#/settings/pouring-type/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Pouring Types</span></a>
+                        </li>
+                        <li ng-class="{active: state.indexOf('wrapper.settings.concreteType') > -1}">
+                            <a href="#/settings/concrete-type/create"><span class="menu-text"><i
+                                    class="fa fa-angle-double-right"></i>Concrete Types</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div id="maincont" class="container">
+    <ol class="breadcrumb">
+        <i class="fa fa-home fa-lg" style="margin-right: 10px; font-size: 1.5em;"></i>
+        <li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">
+            {{item}}
+        </li>
+    </ol>
+
+    <div class="well well-small controls" ng-show="showControls">
+        <button ng-show="control.visibility" ng-repeat="control in controls" ng-click="control.clickHandler()"
+                ng-disabled="control.disabled" class="btn btn-primary btn-sm" adrr-filters-attrs="control.attrs">
+            {{control.title}}
+        </button>
     </div>
 
-    <div id="maincont" class="container">
-        <ol class="breadcrumb">
-            <i class="fa fa-home fa-lg" style="margin-right: 10px; font-size: 1.5em;"></i>
-            <li ng-repeat="(i, item) in breadcrumbItems" ng-class="{active: i !== breadcrumbItems.length - 1}">
-                {{item}}
-            </li>
-        </ol>
-
-        <div class="well well-small controls" ng-show="showControls">
-            <button ng-show="control.visibility" ng-repeat="control in controls" ng-click="control.clickHandler()"
-                    ng-disabled="control.disabled"
-                    class="btn btn-primary btn-sm">
-                {{control.title}}
-            </button>
-        </div>
-
-        <div id="mainview">
-            <view ui-view></view>
-        </div>
+    <div id="mainview">
+        <view ui-view></view>
     </div>
+</div>
 
 </div>
 
