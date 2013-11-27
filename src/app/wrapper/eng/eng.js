@@ -3517,11 +3517,12 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
+    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state, $http) {
 
         $scope.selectedItems = [];
 
-        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/eng/labTemperature', 5000, 'date_time');
+	    var sourceUrl = appConfig.yiiUrl + '/eng/labTemperature';
+	    $scope.records = adrrDataFetcher.set(sourceUrl, 5000, 'date_time');
 
         var columnDefs = [
 
@@ -3589,7 +3590,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             }
         );
-
+		$scope.xlsx = function(){
+			window.location.href  = sourceUrl+'?content_type=xlsx';
+		}
     }
 )
 

@@ -12,15 +12,14 @@ return array
     'import' => array
     (
         'application.models.*',
-
         'application.components.*',
         'application.components.AdrrNotificationPump.*',
         'application.components.AdrrNotificationPump.models.*',
-
         'application.modules.user.models.*',
         'application.modules.user.components.*',
         'application.modules.eng.models.*',
-        'application.modules.settings.models.*'
+        'application.modules.settings.models.*',
+	    'ext.EExcelView.*',
     ),
 
     'modules' => array
@@ -101,8 +100,11 @@ return array
             )
         )
     ),
-
-    'params' => array('adminEmail' => 'webmaster@example.com')
+    'params' => array('adminEmail' => 'aladdinmhaimeed@gmail.com',
+	    'content_types' => array(
+		    'xlsx'=>"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+	    )
+    )
 );
 
 ?>

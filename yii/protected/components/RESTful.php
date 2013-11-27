@@ -1,18 +1,16 @@
 <?php
-	class RESTful extends CController
+	class RESTful extends AdrrController
 	{
 		protected $_model;
-		
 		protected $_relationship;
 		
 		public function actionIndex()
 		{
 			$models = $this->_setPagination();
-			
 			if (empty($models)) $this->_sendResponse(200, sprintf('No items were found.'));
-			else $this->_sendResponse(200, CJSON::encode($models));
+			else $this->_sendResponse(200, $models);
 		}
-		
+
 		public function actionView()
 		{
 			$this->_checkParams();
@@ -20,13 +18,13 @@
 			$model = $this->_model->findByPk($_GET['id']);
 			
 			if (is_null($model)) $this->_sendResponse(404, 'No Item found with id '.$_GET['id']);
-			else $this->_sendResponse(200, CJSON::encode($model));
+			else $this->_sendResponse(200, $model);
 		}
 		
 		public function actionCreate()
 		{
 			$json = file_get_contents('php://input');
-			
+
 			$put_vars = CJSON::decode($json, true);
 			
 			$model = new $this->_model;
@@ -305,6 +303,17 @@
 		
 		protected function _sendResponse($status = 200, $body = '', $content_type = 'text/html')
 		{
+			$body = CJSON::encode($body);
+
+			if (isset($_REQUEST['content_type']))
+				$content_type = $_REQUEST['content_type'];
+
+			if($content_type == 'xlsx'){
+				parent::_sendXlsxResponse();
+				Yii::app()->end();
+				return;
+			}
+
 			$status_header = 'HTTP/1.1 ' . $status . ' ' . $this->_getStatusCodeMessage($status);
 			
 			header($status_header);
@@ -313,47 +322,7 @@
 			if ($body != '') echo $body;
 			else
 			{
-				$message = '';
-				
-				switch($status)
-				{
-					case 401:
-						$message = 'You must be authorized to view this page.';
-					break;
-					
-					case 404:
-						$message = 'The requested URL ' . $_SERVER['REQUEST_URI'] . ' was not found.';
-					break;
-					
-					case 500:
-						$message = 'The server encountered an error processing your request.';
-					break;
-					
-					case 501:
-						$message = 'The requested method is not implemented.';
-					break;
-				}
-				
-				$signature = ($_SERVER['SERVER_SIGNATURE'] == '') ? $_SERVER['SERVER_SOFTWARE'] . ' Server at ' . $_SERVER['SERVER_NAME'] . ' Port ' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_SIGNATURE'];
-				
-				$body =
-				'
-					<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-					<html>
-					<head>
-						<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-						<title>' . $status . ' ' . $this->_getStatusCodeMessage($status) . '</title>
-					</head>
-					<body>
-						<h1>' . $this->_getStatusCodeMessage($status) . '</h1>
-						<p>' . $message . '</p>
-						<hr />
-						<address>' . $signature . '</address>
-					</body>
-					</html>
-				';
-		 
-				echo $body;
+				$this->_sendErrorMessage($status);
 			}
 			
 			Yii::app()->end();
@@ -388,6 +357,54 @@
 			$relatedClass = $this->_relationship->className;
 			
 			return $relatedClass::model()->findByAttributes(array('id' => $_GET['related_id'], $this->_relationship->foreignKey => $_GET['id']));
+		}
+
+		/**
+		 * @param $status
+		 * @param $body
+		 */
+		protected function _sendErrorMessage($status)
+		{
+			$message = '';
+
+			switch ($status) {
+				case 401:
+					$message = 'You must be authorized to view this page.';
+					break;
+
+				case 404:
+					$message = 'The requested URL ' . $_SERVER['REQUEST_URI'] . ' was not found.';
+					break;
+
+				case 500:
+					$message = 'The server encountered an error processing your request.';
+					break;
+
+				case 501:
+					$message = 'The requested method is not implemented.';
+					break;
+			}
+
+			$signature = ($_SERVER['SERVER_SIGNATURE'] == '') ? $_SERVER['SERVER_SOFTWARE'] . ' Server at ' . $_SERVER['SERVER_NAME'] . ' Port ' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_SIGNATURE'];
+
+			$body =
+				'
+					<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+					<html>
+					<head>
+						<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+						<title>' . $status . ' ' . $this->_getStatusCodeMessage($status) . '</title>
+					</head>
+					<body>
+						<h1>' . $this->_getStatusCodeMessage($status) . '</h1>
+						<p>' . $message . '</p>
+						<hr />
+						<address>' . $signature . '</address>
+					</body>
+					</html>
+				';
+
+			echo $body;
 		}
 	}
 ?>
