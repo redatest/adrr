@@ -103,9 +103,27 @@
             <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
                 <label for="plant" class="control-label">{{yii['Lab']['cols']['plant'].label}}</label>
 
-                <input id="plant" adrr-num-range min="0" class="form-control" type="number" autocomplete="off"
+                <!-- <input id="plant" adrr-num-range min="0" class="form-control" type="number" autocomplete="off"
                        pattern="[0-9]*" ng-model="formData.plant" required
-                       typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"/>
+                       typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"/> -->
+
+                <!-- test autocomplete -->
+
+                <div ng-controller="myCtrl">
+                    <input type="number" placeholder="Plant Search ..."
+                           id="plant"
+                           adrr-num-range
+                           min="0"
+                           class="form-control"
+                           pattern="[0-9]*"
+                           requierd
+                           data-plan-autocomplete
+                           data-append-to=".autocomplete-container"
+                           data-ng-model="plan" />
+                    <div class="autocomplete-container"></div>
+                    <br/>
+                </div> <!-- end test typeahead -->
+
             </div>
         </div>
     </div>
