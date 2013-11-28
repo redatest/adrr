@@ -41,6 +41,8 @@ angular.module('adrr.directives.filtersDirective', [], null)
                 '<label class="control-label col-xs-2">{{filter.displayName}}</label>' +
                 '<ng-switch on="filter[\'double\']">' +
                 '<any ng-switch-when="true" ng-init="filters[filter.name] = []">' +
+                '<ng-switch on="filter[\'type\']">' +
+                '<any ng-switch-default>' +
                 '<div class="col-xs-4">' +
                 '<input ng-model="filters[filter.name][0]" adrr-filters-attrs="filter.attrs" class="form-control" type="text" need-compile/>' +
                 '</div>' +
@@ -48,8 +50,37 @@ angular.module('adrr.directives.filtersDirective', [], null)
                 '<input ng-model="filters[filter.name][1]" adrr-filters-attrs="filter.attrs" class="form-control" type="text" need-compile/>' +
                 '</div>' +
                 '</any>' +
+                '<any ng-switch-when="select">' +
+                '<div class="col-xs-4">' +
+                '<select ng-model="filters[filter.name][0]" adrr-filters-attrs="filter.attrs" class="form-control" need-compile>' +
+                '<option value="">Select...</option>' +
+                '<option ng-repeat="item in filter.source" value="{{item.id}}">{{item.name}}</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class="col-xs-4">' +
+                '<select ng-model="filters[filter.name][1]" adrr-filters-attrs="filter.attrs" class="form-control" need-compile>' +
+                '<option value="">Select...</option>' +
+                '<option ng-repeat="item in filter.source" value="{{item.id}}">{{item.name}}</option>' +
+                '</select>' +
+                '</div>' +
+                '</any>' +
+                '</ng-switch>' +
+                '</any>' +
                 '<div ng-switch-default class="col-xs-8">' +
+                '<ng-switch on="filter[\'type\']">' +
+                '<any ng-switch-when="select">' +
+                '<select ng-model="filters[filter.name]" adrr-filters-attrs="filter.attrs" class="form-control" need-compile>' +
+                '<option value="">Select...</option>' +
+                '<option ng-repeat="item in filter.source" value="{{item.id}}">{{item.name}}</option>' +
+                '</select>' +
+                '</any>' +
+                '<any ng-switch-when="time">' +
+                '<adrr-timepicker ng-model="filters[filter.name]"></adrr-timepicker>' +
+                '</any>' +
+                '<any ng-switch-default>' +
                 '<input ng-model="filters[filter.name]" adrr-filters-attrs="filter.attrs" class="form-control" type="text" need-compile/>' +
+                '</any>' +
+                '</ng-switch>' +
                 '</div>' +
                 '</ng-switch>' +
                 '<div class="col-xs-2">' +

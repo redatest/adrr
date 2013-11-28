@@ -1888,8 +1888,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.filtersDef = [
 
             {
-                name: 'date1',
-                displayName: 'Date1',
+                name: 'date',
+                displayName: 'Date',
                 double: true,
                 attrs: {
                     'ui-date': '{dateFormat: \'yy-mm-dd\'}',
@@ -1898,22 +1898,42 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 }
             },
             {
-                name: 'date2',
-                displayName: 'Date2'
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
             },
             {
-                name: 'date3',
-                displayName: 'Date3'
+                name: 'pouring_type_id',
+                displayName: 'Pouring',
+                type: 'select',
+                source: yii['PouringType']['list']
             },
             {
-                name: 'date4',
-                displayName: 'Date4'
+                name: 'ir',
+                displayName: 'IR'
             },
             {
-                name: 'date5',
-                displayName: 'Date5'
+                name: 'zone_id',
+                displayName: 'Zone',
+                type: 'select',
+                source: yii['Zone']['list']
+            },
+            {
+                name: 'dept_start',
+                displayName: 'Dept. Start',
+                type: 'time'
+            },
+            {
+                name: 'dept_end',
+                displayName: 'Dept. End',
+                type: 'time'
+            },
+            {
+                name: 'start_end',
+                displayName: 'Start End',
+                type: 'time'
             }
-
         ];
 
         $rootScope.controls = [
