@@ -713,6 +713,52 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'supplier_id',
+                displayName: 'Supplier',
+                type: 'select',
+                source: yii['Supplier']['list']
+            },
+            {
+                name: 'conc_type_id',
+                displayName: 'Concrete',
+                type: 'select',
+                source: yii['ConcreteType']['list']
+            },
+            {
+                name: 'temp',
+                displayName: 'Temp'
+            },
+            {
+                name: 'dept_time',
+                displayName: 'Dept. Time',
+                type: 'time'
+            },
+            {
+                name: 'arriv_time',
+                displayName: 'Arrival End',
+                type: 'time'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
@@ -726,6 +772,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 clickHandler: $scope.archiveSelected,
                 visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
@@ -857,7 +912,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
             )
 
         };
-
 
         $scope.afterSelectionChangeHandler = function () {
 
@@ -1052,7 +1106,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
             multiSelect: true
         };
 
-        $rootScope.showControls = $rootScope.loginData['eng'];
+//        $rootScope.showControls = $rootScope.loginData['eng'];
 
         $scope.createClickHandler = function () {
 
@@ -1060,12 +1114,67 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'supplier_id',
+                displayName: 'Supplier',
+                type: 'select',
+                source: yii['Supplier']['list']
+            },
+            {
+                name: 'conc_type_id',
+                displayName: 'Concrete',
+                type: 'select',
+                source: yii['ConcreteType']['list']
+            },
+            {
+                name: 'temp',
+                displayName: 'Temp'
+            },
+            {
+                name: 'dept_time',
+                displayName: 'Dept. Time',
+                type: 'time'
+            },
+            {
+                name: 'arriv_time',
+                displayName: 'Arrival End',
+                type: 'time'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['role'] == 4
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
@@ -1302,6 +1411,52 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'supplier_id',
+                displayName: 'Supplier',
+                type: 'select',
+                source: yii['Supplier']['list']
+            },
+            {
+                name: 'conc_type_id',
+                displayName: 'Concrete',
+                type: 'select',
+                source: yii['ConcreteType']['list']
+            },
+            {
+                name: 'temp',
+                displayName: 'Temp'
+            },
+            {
+                name: 'dept_time',
+                displayName: 'Dept. Time',
+                type: 'time'
+            },
+            {
+                name: 'arriv_time',
+                displayName: 'Arrival End',
+                type: 'time'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
@@ -1315,6 +1470,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 clickHandler: $scope.archiveSelected,
                 visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
@@ -1973,7 +2137,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringReturnedCtrl', function ($rootScope, $scope, $state, Restangular, adrrDataFetcher) {
+    'PouringReturnedCtrl', function ($rootScope, $scope, $state, Restangular, adrrDataFetcher, yii) {
 
         $scope.selectedItems = [];
 
@@ -2227,6 +2391,57 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'pouring_type_id',
+                displayName: 'Pouring',
+                type: 'select',
+                source: yii['PouringType']['list']
+            },
+            {
+                name: 'ir',
+                displayName: 'IR'
+            },
+            {
+                name: 'zone_id',
+                displayName: 'Zone',
+                type: 'select',
+                source: yii['Zone']['list']
+            },
+            {
+                name: 'dept_start',
+                displayName: 'Dept. Start',
+                type: 'time'
+            },
+            {
+                name: 'dept_end',
+                displayName: 'Dept. End',
+                type: 'time'
+            },
+            {
+                name: 'start_end',
+                displayName: 'Start End',
+                type: 'time'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
@@ -2239,6 +2454,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
                 clickHandler: $scope.archiveSelected,
                 visibility: $rootScope.loginData['role'] == 3,
                 disabled: true
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
@@ -2255,7 +2479,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringArchiveCtrl', function ($rootScope, $scope, $state, Restangular, adrrDataFetcher) {
+    'PouringArchiveCtrl', function ($rootScope, $scope, $state, Restangular, adrrDataFetcher, yii) {
 
         $scope.selectedItems = [];
 
@@ -2434,12 +2658,72 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $rootScope.showControls = $rootScope.loginData['role'] == 4;
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'pouring_type_id',
+                displayName: 'Pouring',
+                type: 'select',
+                source: yii['PouringType']['list']
+            },
+            {
+                name: 'ir',
+                displayName: 'IR'
+            },
+            {
+                name: 'zone_id',
+                displayName: 'Zone',
+                type: 'select',
+                source: yii['Zone']['list']
+            },
+            {
+                name: 'dept_start',
+                displayName: 'Dept. Start',
+                type: 'time'
+            },
+            {
+                name: 'dept_end',
+                displayName: 'Dept. End',
+                type: 'time'
+            },
+            {
+                name: 'start_end',
+                displayName: 'Start End',
+                type: 'time'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['role'] == 4
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
@@ -2456,7 +2740,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'PouringDraftCtrl', function ($rootScope, $scope, adrrDataFetcher, $state, Restangular) {
+    'PouringDraftCtrl', function ($rootScope, $scope, adrrDataFetcher, $state, Restangular, yii) {
 
         var columnDefs = [
 
@@ -2630,12 +2914,72 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $rootScope.showControls = $rootScope.loginData['role'] == 4;
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'pouring_type_id',
+                displayName: 'Pouring',
+                type: 'select',
+                source: yii['PouringType']['list']
+            },
+            {
+                name: 'ir',
+                displayName: 'IR'
+            },
+            {
+                name: 'zone_id',
+                displayName: 'Zone',
+                type: 'select',
+                source: yii['Zone']['list']
+            },
+            {
+                name: 'dept_start',
+                displayName: 'Dept. Start',
+                type: 'time'
+            },
+            {
+                name: 'dept_end',
+                displayName: 'Dept. End',
+                type: 'time'
+            },
+            {
+                name: 'start_end',
+                displayName: 'Start End',
+                type: 'time'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['role'] == 4
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
@@ -3577,7 +3921,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
     .controller
 (
-    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state) {
+    'TempInboxCtrl', function ($rootScope, $scope, adrrDataFetcher, $state, yii) {
 
         $scope.selectedItems = [];
 
@@ -3632,12 +3976,50 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         };
 
+        $scope.filtersDef = [
+
+            {
+                name: 'date',
+                displayName: 'Date',
+                double: true,
+                attrs: {
+                    'ui-date': '{dateFormat: \'yy-mm-dd\'}',
+                    'ui-date-format': 'yy-mm-dd',
+                    'readonly': 'readonly'
+                }
+            },
+            {
+                name: 'shift_id',
+                displayName: 'Shift',
+                type: 'select',
+                source: yii['ShiftType']['list']
+            },
+            {
+                name: 'time',
+                displayName: 'Time',
+                type: 'time'
+            },
+            {
+                name: 'temp',
+                displayName: 'Temperature'
+            }
+        ];
+
         $rootScope.controls = [
 
             {
                 title: 'New record',
                 clickHandler: $scope.createClickHandler,
                 visibility: $rootScope.loginData['role'] == 4
+            },
+            {
+                title: 'Search',
+                visibility: true,
+                disabled: false,
+                attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#search"
+                }
             }
 
         ];
