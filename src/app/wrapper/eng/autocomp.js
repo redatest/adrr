@@ -1,46 +1,50 @@
-angular.module('adrrApp.wrapper.autocomp', [], null).
+var app = angular.module('adrrApp.wrapper.autocomp', [], null);
 
-    
-    controller('myCtrl', function($scope, Restangular){
-        
-        
-        $scope.planlist = [];
-        var li = [];
-
-        // getting list of available Plants
-        Restangular.all('eng/labPlant').getList().then(function(data){
-
-            for (var i = data.length - 1; i >= 0; i--) {
-                var elem = {};
-                elem.plant = data[i]['plant'];
-                li.push(elem);
-            };
-            $scope.planlist = li;
-
-        });
-
-        // for testing : to be deleted later
-        $scope.planlist2 = [
-            { 'plant' : 'Blaze Commando' },
-            { 'plant' : 'Uncovered Clues' },
-            { 'plant' :  '1112323'},
-            { 'plant' :  '11'}
-        ];
-
-        $scope.plan = null;
-        
-        
-
-    }).
-    directive('planAutocomplete', ['$http', function($http) {
+app.directive('planAutocomplete', ['$http', 'Restangular', function($http, Restangular) {
     return {
         restrict: 'A',
+        // scope: {},
         link: function(scope, elem, attr) {
+
+
+            var taken_list = null;
+
+            // test on witch element -id- we are appliying the autocompletion
+            var theid = elem.attr('id')
+            switch (theid)
+            {
+                case 'plant':
+                    var li = [];
+                    Restangular.all('eng/labPlant').getList().then(function(data){
+
+                        for (var i = data.length - 1; i >= 0; i--) {
+                            var elem = {};
+                            elem.key = data[i]['plant'];
+                            li.push(elem);
+                        };
+                    });
+                    taken_list = li;
+                    break;
+
+                case 'truck':
+                    var li = [];
+                    Restangular.all('eng/labTruck').getList().then(function(data){
+
+                        for (var i = data.length - 1; i >= 0; i--) {
+                            var elem = {};
+                            elem.key = data[i]['truck'];
+                            li.push(elem);
+                        };
+                    });
+                    taken_list = li;
+                    break;
+            }
+
 
             function filterPlan(array, term) {
                 var matcher = new RegExp('(' + $.ui.autocomplete.escapeRegex(term) + ')', 'gi');
                 return $.grep(array, function (item) {
-                    return matcher.test(item.plant);
+                    return matcher.test(item.key);
                 });
             }
 
@@ -49,13 +53,12 @@ angular.module('adrrApp.wrapper.autocomp', [], null).
                 return text.replace(matcher, '<strong>$1</strong>');
             }
 
-            // elem is a jquery lite object if jquery is not present, but with jquery and jquery ui, it will be a full jquery object.
             elem.autocomplete({
                 source: function(request, response) {
 
                     // console.log(Restangular.all('eng/labPlant').getList());
 
-                    response(filterPlan(scope.planlist, this.term));
+                    response(filterPlan(taken_list, this.term));
                 },
                 focus: function(event, ui) {
 
@@ -71,9 +74,9 @@ angular.module('adrrApp.wrapper.autocomp', [], null).
 
             }).data("ui-autocomplete")._renderItem = function(ul, item) {
 
-                item.label = item.plant;
+                item.label = item.key;
 
-                var planNameHighlighted = highlightPlan(item.plant, this.term);
+                var planNameHighlighted = highlightPlan(item.key, this.term);
 
 
                 var planLine = $("<div>").html(planNameHighlighted);
@@ -83,3 +86,7 @@ angular.module('adrrApp.wrapper.autocomp', [], null).
         }
     }
 }]);
+
+
+
+
