@@ -129,26 +129,14 @@ var adrrDataFetcher = angular.module('adrrDataFetcher', [], null).factory
                 (
                     function (data) {
 
-                        target.splice(0, target.length);
-
-                        if (angular.isArray(data)) {
-
-                            var numRecords = data.length;
-
-                            for (var i = 0; i < numRecords; i++) {
-
-                                target.push(data[i]);
-
-                            }
-
-                        }
+                        target = angular.isArray(data) ? angular.copy(data, target) : [];
 
                     }
                 );
 
                 return target;
 
-            }
+            };
 
             var updateTime = function (target, time) {
 

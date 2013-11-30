@@ -110,9 +110,8 @@
                 <!-- test autocomplete ng-controller="myCtrl"  -->
 
                 <div>
-                    <input type="number" placeholder="Plant Search ..." id="plant" adrr-num-range min="0" required
-                           class="form-control" pattern="[0-9]*" data-plan-autocomplete data-ng-model="plan"
-                           data-append-to=".autocomplete-container"/>
+                    <input type="number" id="plant" adrr-num-range min="0" required ng-model="formData.plant"
+                           class="form-control" pattern="[0-9]*"/>
 
                     <div class="autocomplete-container"></div>
                     <br/>
@@ -135,20 +134,12 @@
                 <label for="truck" class="control-label">{{yii['Lab']['cols']['truck'].label}}</label>
 
                 <!--  ng-controller="myCtrl2" -->
-               <div>
-                   
+                <div>
+
                     <input id="truck" adrr-num-range min="0" class="form-control" type="number"
-                        placeholder='truck search ....'
-                       pattern="[0-9]*"
-                       required
-                       data-plan-autocomplete
-                       ng-model="truck"
-                       data-append-to=".autocomplete-container"
-                       />
+                           ng-model="formData.truck" pattern="[0-9]*" required/>
 
-                    <div class="autocomplete-container"></div>
-
-               </div>
+                </div>
             </div>
 
             <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}"

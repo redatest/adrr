@@ -2100,6 +2100,15 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         ];
 
+        $scope.$watch
+        (
+            'filters', function (newVal) {
+
+                console.log(newVal);
+
+            }, true
+        );
+
         $rootScope.controls = [
 
             {
@@ -3925,8 +3934,8 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.selectedItems = [];
 
-	    var sourceUrl = appConfig.yiiUrl + '/eng/labTemperature';
-	    $scope.records = adrrDataFetcher.set(sourceUrl, 5000, 'date_time');
+        var sourceUrl = appConfig.yiiUrl + '/eng/labTemperature';
+        $scope.records = adrrDataFetcher.set(sourceUrl, 5000, 'date_time');
 
         var columnDefs = [
 
@@ -4033,9 +4042,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
             }
         );
 
-        $scope.xlsx = function(){
-			window.location.href  = sourceUrl+'?content_type=xlsx';
-		}
+        $scope.xlsx = function () {
+            window.location.href = sourceUrl + '?content_type=xlsx';
+        }
     }
 )
 
