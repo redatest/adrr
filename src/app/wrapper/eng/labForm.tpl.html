@@ -107,9 +107,9 @@
                        pattern="[0-9]*" ng-model="formData.plant" required
                        typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"/> -->
 
-                <!-- test autocomplete -->
+                <!-- test autocomplete ng-controller="myCtrl"  -->
 
-                <div ng-controller="myCtrl">
+                <div>
                     <input type="number" placeholder="Plant Search ..." id="plant" adrr-num-range min="0" required
                            class="form-control" pattern="[0-9]*" data-plan-autocomplete data-ng-model="plan"
                            data-append-to=".autocomplete-container"/>
@@ -134,11 +134,21 @@
             <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
                 <label for="truck" class="control-label">{{yii['Lab']['cols']['truck'].label}}</label>
 
-                <input id="truck" adrr-num-range min="0" class="form-control" type="number"
+                <!--  ng-controller="myCtrl2" -->
+               <div>
+                   
+                    <input id="truck" adrr-num-range min="0" class="form-control" type="number"
+                        placeholder='truck search ....'
                        pattern="[0-9]*"
-                       ng-model="formData.truck"
-                       typeahead="obj.truck for obj in yii['LabTruck']['list'] | filter:$viewValue | limitTo:8"
-                       required/>
+                       required
+                       data-plan-autocomplete
+                       ng-model="truck"
+                       data-append-to=".autocomplete-container"
+                       />
+
+                    <div class="autocomplete-container"></div>
+
+               </div>
             </div>
 
             <div class="form-group" ng-class="{'has-error': truckLoadForm.$invalid}"
