@@ -6,96 +6,94 @@ class PouringController extends RESTful
         $this->_model = Pouring::model();
     }
 
-    /*public function actionTodayRecords()
+    protected function filterCondition()
     {
-        date_default_timezone_set('Asia/Riyadh');
+        $condition = '';
 
-        $date = date('Y-m-d');
+        foreach ($_POST as $name => $param) {
 
-        $criteria = new CDbCriteria();
-        $criteria->condition = "date = '" . $date . "' and user_id=" . Yii::app()->user->id;
+            if ($name !== 'updateTrucker' && $name !== 'trucker') {
 
-        $this->_sendResponse(200, CJSON::encode($this->_model->findAll($criteria)));
+                if (is_array($param)) {
+
+                    $condition .= ' AND ' . $name . ' BETWEEN "' . $param[0] . '" AND "' . $param[1] . '"';
+
+                } else {
+
+                    if (preg_match('/^\d{2}:\d{2}:\d{2}$/', $param)) {
+
+                        $condition .= ' AND ' . $name . '>="' . (strtotime($param) - strtotime('00:00:00')) . '"';
+
+                    } else {
+
+                        $condition .= ' AND ' . $name . '="' . $param . '"';
+
+                    }
+
+                }
+            } elseif ($name == 'trucker') {
+
+                $condition .= ' AND t.update > "' . $_POST['trucker'] . '"';
+
+            }
+        }
+
+        return $condition;
     }
-
-    public function actionNumTodayRecords()
-    {
-        date_default_timezone_set('Asia/Riyadh');
-
-        $date = date('Y-m-d');
-
-        $result['numRows'] = $this->_model->count("date = '" . $date . "' and user_id=" . Yii::app()->user->id);
-
-        $this->_sendResponse(200, CJSON::encode($result));
-    }*/
 
     public function actionGetUnarchived()
     {
         $condition = 'archived = 0 AND returned = 0 AND approved = 0 AND draft = 0';
 
-        if (isset($_GET['trucker'])) {
-
-            $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
-
-        }
+        $condition .= $this->filterCondition();
 
         if (!Yii::app()->user->role == 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
+        $this->_sendResponse(200, $this->_model->findAll($criteria), 'json');
     }
 
     public function actionGetDrafts()
     {
         $condition = 'archived = 0 AND returned = 0 AND approved = 0 AND draft = 1';
 
-        if (isset($_GET['trucker'])) {
-
-            $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
-
-        }
+        $condition .= $this->filterCondition();
 
         if (!Yii::app()->user->role == 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
+        $this->_sendResponse(200, $this->_model->findAll($criteria), 'json');
     }
 
     public function actionGetArchived()
     {
         $condition = 'archived = 1 AND returned = 0 AND approved = 0 AND draft = 0';
 
-        if (isset($_GET['trucker'])) {
-
-            $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
-
-        }
-
-//        if (!Yii::app()->user->role == 3) $condition .= ' AND t.user_id = ' . Yii::app()->user->id;
+        $condition .= $this->filterCondition();
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
+        $this->_sendResponse(200, $this->_model->findAll($criteria), 'json');
     }
 
     public function actionGetReturned()
     {
         $condition = 'archived = 0';
 
-        if (isset($_GET['trucker'])) $condition .= ' AND t.update > "' . $_GET['trucker'] . '"';
-
         if (Yii::app()->user->role == 3) $condition .= ' AND returned = 0 AND approved = 1';
         else $condition .= ' AND returned = 1 AND draft = 0 AND approved = 0 AND user_id = ' . Yii::app()->user->id;
+
+        $condition .= $this->filterCondition();
 
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
 
-        $this->_sendResponse(200, $this->_model->findAll($criteria),'json');
+        $this->_sendResponse(200, $this->_model->findAll($criteria), 'json');
     }
 
     public function actionArchive()
@@ -122,7 +120,7 @@ class PouringController extends RESTful
                 }
             }
 
-            $this->_sendResponse(200, $back,'json');
+            $this->_sendResponse(200, $back, 'json');
         }
 
         if (isset($_GET['id'])) {
@@ -175,7 +173,7 @@ class PouringController extends RESTful
 
             $model = $this->_model->findByAttributes(array('ticket' => $_GET['ticket'], 'supplier_id' => $_GET['supplier']));
 
-            if ($model !== null) $this->_sendResponse(200, $model,'json');
+            if ($model !== null) $this->_sendResponse(200, $model, 'json');
 
         }
 
@@ -215,7 +213,7 @@ class PouringController extends RESTful
 
             $model = $this->_model->findByAttributes(array('ir' => $_GET['ir']), array('order' => 'id DESC'));
 
-            if ($model !== null) $this->_sendResponse(200, $model,'json');
+            if ($model !== null) $this->_sendResponse(200, $model, 'json');
 
             $this->_sendResponse(404, 'No records were found.');
 

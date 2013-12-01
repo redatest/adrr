@@ -618,56 +618,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 (
     'LabInboxCtrl', function ($rootScope, $scope, yii, adrrDataFetcher, Restangular, $state) {
 
-//        if (parseInt($scope.loginData.eng, 10)) {
-//
-//            $scope.pagingOptions =
-//            {
-//                pageSizes: [10, 20, 30],
-//
-//                pageSize: 10,
-//
-//                currentPage: 1
-//            };
-//
-//            $scope.gridOptions =
-//            {
-//                data: 'motherFucker',
-//                enablePaging: true,
-//                showFooter: true,
-//                totalServerItems: 'totalServerItems',
-//                pagingOptions: $scope.pagingOptions,
-//                adrrPagingOptions: 'pagingOptions',
-//                numRowsUrl: appConfig.yiiUrl + '/api/eng/lab/numTodayRecords',
-//                dataSource: appConfig.yiiUrl + '/api/eng/lab/todayRecords',
-//                multiSelect: false,
-//                plugins: [new ngGridFlexibleHeightPlugin({ minHeight: 150 })],
-//                columnDefs: [
-//                    { field: 'date', displayName: 'Date' },
-//                    { field: 'shift_id', displayName: 'Shift' },
-//                    { field: 'supplier_id', displayName: 'Supplier' },
-//                    { field: 'conc_type_id', displayName: 'concrete Type' },
-//                    { field: 'plant', displayName: 'Plant' },
-//                    { field: 'truck', displayName: 'Truck' },
-//                    { field: 'ticket', displayName: 'Ticket' },
-//                    { field: 'dept_time', displayName: 'Departure Time', cellFilter: 'removeDateAndSeconds' },
-//                    { field: 'arriv_time', displayName: 'Arrival Time', cellFilter: 'removeDateAndSeconds' },
-//                    { field: 'truck_load', displayName: 'Truck Load' },
-//                    { field: 'temp', displayName: 'Temperature' },
-//                    { field: 'slump', displayName: 'Slump' },
-//                    { field: 'flow', displayName: 'Flow' },
-//                    { field: 'accepted', displayName: 'Accepted' }
-//                ],
-//
-//                rowTemplate: '<div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="{\'yellowBg\': row.getProperty(\'yellow\') !== null, \'redBg\': row.getProperty(\'red\') !== null}" class="ngCell {{col.cellClass}} {{col.colIndex()}}">' +
-//                    '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }">' +
-//                    '&nbsp;' +
-//                    '</div>' +
-//                    '<div ng-cell></div>' +
-//                    '</div>'
-//            };
-//
-//        } else {
-
         $scope.yii = yii;
 
         $scope.metaData = yii['Lab'].cols;
@@ -959,7 +909,6 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             onAfterSelectionChangeHandler: $scope.afterSelectionChangeHandler
         };
-//        }
 
         $scope.$on
         (
@@ -1905,7 +1854,7 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived', 5000, 'update');
+            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived', 5000, 'update', 'POST');
 
         } else {
 
@@ -2102,9 +2051,13 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
         $scope.$watch
         (
-            'filters', function (newVal) {
+            'filters', function (newVal, oldVal) {
 
-                console.log(newVal);
+                if (typeof newVal !== 'undefined' && typeof oldVal !== 'undefined') {
+
+                    $scope.records = adrrDataFetcher.updateArgs($scope.records, $scope.filters);
+
+                }
 
             }, true
         );
@@ -2137,7 +2090,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
         $scope.$on
         (
             '$destroy', function () {
+
                 adrrDataFetcher.unset($scope.records);
+
             }
         );
 
