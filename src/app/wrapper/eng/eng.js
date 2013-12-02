@@ -807,13 +807,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', 5000, 'update');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/lab/getUnarchived');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getUnarchived', 5000, 'update');
 
         $scope.loadComments = function (row) {
 
@@ -998,13 +994,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', 5000, 'update');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/lab/getArchived');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getArchived', 5000, 'update');
 
         $scope.loadComments = function (row) {
 
@@ -1218,13 +1210,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', 5000, 'update');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/lab/getReturned');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/lab/getReturned', 5000, 'update');
 
         $scope.archive = function (record) {
 
@@ -1854,13 +1842,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived', 5000, 'update', 'POST');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getUnarchived', 5000, 'update', 'POST');
 
         $scope.afterSelectionChangeHandler = function () {
 
@@ -2211,13 +2195,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getReturned', 5000, 'update');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getReturned');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getReturned', 5000, 'update');
 
         $scope.afterSelectionChangeHandler = function () {
 
@@ -2553,13 +2533,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getArchived', 5000, 'update');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getArchived');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getArchived', 5000, 'update');
 
         $scope.adrrGridOptions = {
 
@@ -2779,13 +2755,9 @@ angular.module('adrrApp.wrapper.eng', [], null)
 
             columnDefs.splice(1, 0, { field: 'user_id', displayName: 'User', filters: 'fetchValue: yii["User"]:"username"' });
 
-            $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getDrafts', 5000, 'update');
-
-        } else {
-
-            $scope.records = adrrDataFetcher.get(appConfig.yiiUrl + '/api/eng/pouring/getDrafts');
-
         }
+
+        $scope.records = adrrDataFetcher.set(appConfig.yiiUrl + '/api/eng/pouring/getDrafts', 5000, 'update');
 
         $scope.adrrGridOptions = {
 
