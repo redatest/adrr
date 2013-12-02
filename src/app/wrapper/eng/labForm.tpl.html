@@ -103,20 +103,11 @@
             <div class="form-group" ng-class="{'has-error': plantForm.$invalid}" ng-form="plantForm">
                 <label for="plant" class="control-label">{{yii['Lab']['cols']['plant'].label}}</label>
 
-                <!-- <input id="plant" adrr-num-range min="0" class="form-control" type="number" autocomplete="off"
-                       pattern="[0-9]*" ng-model="formData.plant" required
-                       typeahead="obj.plant for obj in yii['LabPlant']['list'] | filter:$viewValue | limitTo:8"/> -->
-
-                <!-- test autocomplete ng-controller="myCtrl"  -->
-
                 <div>
                     <input type="number" id="plant" adrr-num-range min="0" required ng-model="formData.plant"
-                           class="form-control" pattern="[0-9]*"/>
-
-                    <div class="autocomplete-container"></div>
-                    <br/>
+                           class="form-control" pattern="[0-9]*" adrr-autocomplete adrr-key="plant"
+                           adrr-data="yii['LabPlant']['list']"/>
                 </div>
-                <!-- end test typeahead -->
 
             </div>
         </div>
@@ -131,13 +122,14 @@
         </div>
         <div class="panel-body">
             <div class="form-group" ng-class="{'has-error': truckForm.$invalid}" ng-form="truckForm">
+
                 <label for="truck" class="control-label">{{yii['Lab']['cols']['truck'].label}}</label>
 
-                <!--  ng-controller="myCtrl2" -->
                 <div>
 
-                    <input id="truck" adrr-num-range min="0" class="form-control" type="number"
-                           ng-model="formData.truck" pattern="[0-9]*" required/>
+                    <input id="truck" adrr-num-range min="0" class="form-control" type="number" pattern="[0-9]*"
+                           ng-model="formData.truck" adrr-data="yii['LabTruck']['list']" adrr-key="truck" required
+                           adrr-autocomplete/>
 
                 </div>
             </div>

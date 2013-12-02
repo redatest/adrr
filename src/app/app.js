@@ -9,7 +9,7 @@ var adrrApp = angular.module
             'ui.bootstrap',
             'restangular',
             'ui.date',
-            'adrrApp.wrapper.autocomp',
+            'adrr.directives.autocomplete',
             'adrrDirectives',
             'adrrDirectives.grid',
             'adrrDirectives.popover',
