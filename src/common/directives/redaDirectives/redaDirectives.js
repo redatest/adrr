@@ -73,7 +73,7 @@ angular.module('redaDirectives', [], null)
                             });
 
                     }
-                })
+                }, true)
             }
         }
     }
