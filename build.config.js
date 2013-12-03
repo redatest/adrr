@@ -22,7 +22,6 @@ module.exports =
             'vendor/jquery-file-upload/js/jquery.fileupload-audio.js',
             'vendor/jquery-file-upload/js/jquery.fileupload-video.js',
             'vendor/jquery-file-upload/js/jquery.fileupload-jquery-ui.js',
-            'vendor/jquery-file-upload/js/jquery.fileupload-angular.js',
             'vendor/jquery-file-upload/js/fileupload-validate.js',
             'vendor/jquery-file-upload/js/jquery.fileupload-ui.js',
 
@@ -37,6 +36,7 @@ module.exports =
             'vendor/ng-grid/build/ng-grid.min.js',
             'vendor/angular-ui-date/src/date.js',
             'vendor/angular-ui-select2/src/select2.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-angular.js',
 
             'vendor/restangular/dist/restangular.js',
             'vendor/jquery-backstretch/jquery.backstretch.min.js',
