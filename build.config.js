@@ -15,7 +15,16 @@ module.exports =
 
             'vendor/jquery/jquery.min.js',
             'vendor/jquery-ui/ui/minified/jquery-ui.min.js',
-//            'vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js',
+            'vendor/jquery-file-upload/js/jquery.iframe-transport.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-process.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-image.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-audio.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-video.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-jquery-ui.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-angular.js',
+            'vendor/jquery-file-upload/js/fileupload-validate.js',
+            'vendor/jquery-file-upload/js/jquery.fileupload-ui.js',
 
             'vendor/select2/select2.js',
 
@@ -42,7 +51,6 @@ module.exports =
             'vendor/ng-grid/ng-grid.min.css',
             'vendor/jquery-ui/themes/flick/jquery-ui.min.css',
             'vendor/select2/select2.css'
-//            'vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css'
         ]
     }
 };
