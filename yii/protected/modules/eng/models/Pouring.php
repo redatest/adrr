@@ -52,7 +52,10 @@ class Pouring extends ArModel
             'archived' => 'Archived',
             'draft' => 'Draft',
             'create_time' => 'Create Time',
-            'update' => 'Update'
+            'update' => 'Update',
+            'dept_start' => 'Dept. to Start',
+            'dept_end' => 'Dept. to End',
+            'start_end' => 'Start to end'
         );
     }
 
@@ -86,6 +89,16 @@ class Pouring extends ArModel
         date_default_timezone_set('Asia/Riyadh');
 
         $this->update = date('Y:m:d H:i:s');
+
+        if ($this->dept_time !== '' && $this->dept_time !== null) {
+
+            $this->dept_start = ($this->start_time !== null && $this->start_time !== '') ? strtotime($this->start_time) - strtotime($this->dept_time) : 0;
+
+            $this->dept_end = ($this->end_time !== null && $this->end_time !== '') ? strtotime($this->end_time) - strtotime($this->dept_time) : 0;
+
+        }
+
+        $this->start_end = ($this->end_time !== null && $this->end_time !== '' && $this->start_time !== null && $this->start_time !== '') ? strtotime($this->end_time) - strtotime($this->start_time) : 0;
 
         return parent::save($runValidation, $attributes);
     }

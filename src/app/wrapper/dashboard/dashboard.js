@@ -35,12 +35,47 @@ angular.module('adrrApp.wrapper.dashboard', [], null)
             {   "id": "id1",
                 "name": "the name 1",
                 "values": [
-                    { "age": "East", "population": 6 },
-                    { "age": "West", "population": 5 },
-                    { "age": "North", "population": 12 }
+                    { "age": "Normal", "population": 12 },
+                    { "age": "Acceptable", "population": 13 },
+                    { "age": "Out", "population": 6 }
                 ]
             }
         ];
+
+        $scope.changeDatas = function (val) {
+
+            if (val == 1) {
+
+                $('svg').remove();
+
+                $scope.datas = [
+                    {   "id": "id1",
+                        "name": "the name 1",
+                        "values": [
+                            { "age": "Normal", "population": 12 },
+                            { "age": "Acceptable", "population": 13 },
+                            { "age": "Out", "population": 6 }
+                        ]
+                    }
+                ];
+
+            } else {
+
+                $('svg').remove();
+
+                $scope.datas = [
+                    {   "id": "id1",
+                        "name": "the name 1",
+                        "values": [
+                            { "age": "Normal", "population": 64 },
+                            { "age": "Acceptable", "population": 35 },
+                            { "age": "Out", "population": 22 }
+                        ]
+                    }
+                ];
+
+            }
+        }
 
 //        var give_data = function () {
 //

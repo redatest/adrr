@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2013 at 07:32 AM
+-- Generation Time: Dec 01, 2013 at 10:18 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `tbl_lab` (
   `archived` tinyint(1) NOT NULL DEFAULT '0',
   `update` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `tbl_lab`
@@ -305,7 +305,9 @@ INSERT INTO `tbl_lab` (`id`, `user_id`, `date`, `shift_id`, `supplier_id`, `conc
 (23, 2, '2013-11-05', 1, 2, 2, 99, 99, '888', '2013-11-05 12:00:00', '2013-11-05 14:00:00', 8, 999, 99, NULL, 0, 'slump,temp', NULL, '2013-11-06 19:58:50', 0, 0, 0, '2013-11-11 05:41:45'),
 (24, 2, '2013-11-05', 1, 2, 2, 9, 99, '999', '2013-11-05 12:00:00', '2013-11-05 13:05:00', 9, 99, 99, NULL, 1, 'slump,temp', NULL, '2013-11-06 20:08:06', 0, 0, 0, '2013-11-11 05:41:45'),
 (25, 2, '2013-11-05', 1, 2, 2, 99, 99, '1111', '2013-11-05 12:00:00', '2013-11-05 13:03:00', 9, 999, 999, NULL, 1, 'slump,temp', NULL, '2013-11-06 20:08:59', 0, 0, 0, '2013-11-11 05:41:45'),
-(26, 2, '2013-11-07', 1, 1, 2, 123, 123, '2222', '2013-11-07 01:01:00', '2013-11-07 02:02:00', 12, 123, 123, NULL, 1, 'slump,temp', '', '2013-11-07 19:28:57', 0, 0, 0, '2013-11-11 05:41:45');
+(26, 2, '2013-11-07', 1, 1, 2, 123, 123, '2222', '2013-11-07 01:01:00', '2013-11-07 02:02:00', 12, 123, 123, NULL, 1, 'slump,temp', '', '2013-11-07 19:28:57', 0, 0, 0, '2013-11-11 05:41:45'),
+(27, 2, '2013-10-07', 1, 1, 1, 0, 0, '12', '2013-10-07 12:12:00', '2013-10-07 13:13:00', 2, 12, NULL, 12, 1, NULL, 'flow', '2013-11-30 15:10:12', 0, 0, 0, '2013-11-30 15:10:12'),
+(28, 2, '2013-10-07', 1, 1, 2, 123, 123, '123', '2013-10-07 12:12:00', '2013-10-07 13:13:00', 12, 12, 12, NULL, 1, NULL, 'slump', '2013-11-30 15:20:30', 0, 0, 0, '2013-11-30 15:20:30');
 
 -- --------------------------------------------------------
 
@@ -320,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `tbl_lab_comment` (
   `comment` text NOT NULL,
   `date_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tbl_lab_comment`
@@ -328,7 +330,9 @@ CREATE TABLE IF NOT EXISTS `tbl_lab_comment` (
 
 INSERT INTO `tbl_lab_comment` (`id`, `lab_id`, `user_id`, `comment`, `date_time`) VALUES
 (1, 1, 1, '123', '2013-11-13 11:37:16'),
-(2, 3, 1, 'asdf', '2013-11-13 19:29:56');
+(2, 3, 1, 'asdf', '2013-11-13 19:29:56'),
+(3, 27, 2, '12', '2013-11-30 15:10:12'),
+(4, 28, 2, '12', '2013-11-30 15:20:30');
 
 -- --------------------------------------------------------
 
@@ -369,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `tbl_notification` (
   `user_id` int(11) NOT NULL,
   `read` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `tbl_notification`
@@ -390,7 +394,9 @@ INSERT INTO `tbl_notification` (`id`, `message_id`, `user_id`, `read`) VALUES
 (12, 12, 1, 0),
 (13, 13, 1, 0),
 (14, 14, 1, 0),
-(15, 15, 1, 0);
+(15, 15, 1, 0),
+(16, 16, 1, 0),
+(17, 17, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -410,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `tbl_notification_message` (
   `unregistered` tinyint(1) NOT NULL DEFAULT '0',
   `read` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `tbl_notification_message`
@@ -431,7 +437,9 @@ INSERT INTO `tbl_notification_message` (`id`, `message`, `link`, `target`, `mode
 (12, '@Lab in temp,slump', 'the link goes here', '{"roles":["senior"]}', 'Lab', 23, 'red', 1, 0, 0),
 (13, '@Lab in temp,slump', 'the link goes here', '{"roles":["senior"]}', 'Lab', 24, 'red', 1, 0, 0),
 (14, '@Lab in temp,slump', 'the link goes here', '{"roles":["senior"]}', 'Lab', 25, 'red', 1, 0, 0),
-(15, '@Lab in temp,slump', 'the link goes here', '{"roles":["senior"]}', 'Lab', 26, 'red', 1, 0, 0);
+(15, '@Lab in temp,slump', 'the link goes here', '{"roles":["senior"]}', 'Lab', 26, 'red', 1, 0, 0),
+(16, '@Lab in flow', 'the link goes here', '{"roles":["senior"]}', 'Lab', 27, 'yellow', 1, 0, 0),
+(17, '@Lab in slump', 'the link goes here', '{"roles":["senior"]}', 'Lab', 28, 'yellow', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -474,24 +482,28 @@ CREATE TABLE IF NOT EXISTS `tbl_pouring` (
   `draft` tinyint(1) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `update` datetime NOT NULL,
+  `dept_start` int(11) NOT NULL,
+  `dept_end` int(11) NOT NULL,
+  `start_end` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `tbl_pouring`
 --
 
-INSERT INTO `tbl_pouring` (`id`, `date`, `user_id`, `shift_id`, `supplier_id`, `pouring_type_id`, `ir`, `zone_id`, `area`, `axis`, `level`, `est_vol`, `ticket`, `truck`, `conc_type_id`, `truck_load`, `poured_qty`, `dept_time`, `slump_b`, `hrwr`, `water`, `slump_a`, `accepted`, `pump_id`, `start_time`, `end_time`, `red`, `yellow`, `returned`, `approved`, `archived`, `draft`, `create_time`, `update`) VALUES
-(5, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 1, '2013-11-01 11:01:00', 56, 345, 345, 345, 1, 3, '2013-10-07 03:04:00', '2013-10-07 04:04:00', 0, 0, 0, 0, 0, 0, '2013-11-14 17:16:45', '2013-11-16 14:20:17'),
-(6, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 2, '2013-11-01 11:01:00', 12, 21, 12, 21, 1, 3, '2013-10-07 12:12:00', '2013-10-07 12:12:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:48:41', '2013-11-15 14:48:41'),
-(7, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 2, '2013-11-01 11:01:00', 3, 3, 3, 3, 1, 3, '2013-10-07 01:01:00', '2013-10-07 01:01:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:50:40', '2013-11-15 14:50:40'),
-(8, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 1, '2013-11-01 11:01:00', 2, 2, 2, 2, 1, 4, '2013-10-07 03:03:00', '2013-10-07 03:03:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:52:38', '2013-11-15 14:52:38'),
-(9, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 1, '2013-11-01 11:01:00', 21, 12, 12, 21, 1, 4, '2013-10-07 01:01:00', '2013-10-07 01:01:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:54:51', '2013-11-16 14:11:05'),
-(10, '2013-10-07', 2, 1, 1, 1, 123, 13, 'asdf', 'asdf', 'asdf', 123, 22, 9, 1, 9, 1, '2013-11-01 23:09:00', 9, 9, 9, 9, 1, 3, '2013-10-07 03:03:00', '2013-10-07 03:03:00', 0, 0, 0, 0, 0, 0, '2013-11-15 16:07:38', '2013-11-16 14:20:45'),
-(11, '2013-11-15', 2, 2, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, 0, 0, 0, 0, 1, '2013-11-16 14:21:20', '2013-11-16 14:21:20'),
-(12, '2013-10-07', 2, 1, 1, 1, 123, 13, 'asdf', 'asdf', 'asdf', 123, 11, 11, 1, 11, 4, '2013-11-01 11:01:00', 3, 3, 3, 3, 1, 3, '2013-10-07 03:03:00', '2013-10-07 03:03:00', 0, 0, 0, 0, 0, 0, '2013-11-16 14:57:45', '2013-11-16 14:57:45'),
-(13, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 22, 9, 1, 9, 2, '2013-11-01 23:09:00', NULL, NULL, NULL, NULL, 1, 4, '2013-10-07 01:30:00', '2013-10-07 01:39:00', 0, 1, 0, 0, 0, 0, '2013-11-18 16:03:08', '2013-11-18 16:03:08'),
-(14, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 22, 9, 1, 9, 2, '2013-11-01 23:09:00', NULL, NULL, NULL, NULL, 1, 4, '2013-10-07 01:30:00', '2013-10-07 01:40:00', 1, 1, 0, 0, 0, 0, '2013-11-18 16:04:07', '2013-11-18 16:28:04');
+INSERT INTO `tbl_pouring` (`id`, `date`, `user_id`, `shift_id`, `supplier_id`, `pouring_type_id`, `ir`, `zone_id`, `area`, `axis`, `level`, `est_vol`, `ticket`, `truck`, `conc_type_id`, `truck_load`, `poured_qty`, `dept_time`, `slump_b`, `hrwr`, `water`, `slump_a`, `accepted`, `pump_id`, `start_time`, `end_time`, `red`, `yellow`, `returned`, `approved`, `archived`, `draft`, `create_time`, `update`, `dept_start`, `dept_end`, `start_end`) VALUES
+(5, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 1, '2013-11-01 11:01:00', 56, 345, 345, 345, 1, 3, '2013-10-07 03:04:00', '2013-10-07 04:04:00', 0, 0, 0, 0, 0, 0, '2013-11-14 17:16:45', '2013-11-16 14:20:17', 0, 0, 0),
+(6, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 2, '2013-11-01 11:01:00', 12, 21, 12, 21, 1, 3, '2013-10-07 12:12:00', '2013-10-07 12:12:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:48:41', '2013-11-15 14:48:41', 0, 0, 0),
+(7, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 2, '2013-11-01 11:01:00', 3, 3, 3, 3, 1, 3, '2013-10-07 01:01:00', '2013-10-07 01:01:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:50:40', '2013-11-15 14:50:40', 0, 0, 0),
+(8, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 1, '2013-11-01 11:01:00', 2, 2, 2, 2, 1, 4, '2013-10-07 03:03:00', '2013-10-07 03:03:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:52:38', '2013-11-15 14:52:38', 0, 0, 0),
+(9, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 11, 11, 1, 11, 1, '2013-11-01 11:01:00', 21, 12, 12, 21, 1, 4, '2013-10-07 01:01:00', '2013-10-07 01:01:00', 0, 0, 0, 0, 0, 0, '2013-11-15 14:54:51', '2013-11-16 14:11:05', 0, 0, 0),
+(10, '2013-10-07', 2, 1, 1, 1, 123, 13, 'asdf', 'asdf', 'asdf', 123, 22, 9, 1, 9, 1, '2013-11-01 23:09:00', 9, 9, 9, 9, 1, 3, '2013-10-07 03:03:00', '2013-10-07 03:03:00', 0, 0, 0, 0, 0, 0, '2013-11-15 16:07:38', '2013-11-16 14:20:45', 0, 0, 0),
+(11, '2013-11-15', 2, 2, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, 0, 0, 0, 0, 1, '2013-11-16 14:21:20', '2013-11-16 14:21:20', 0, 0, 0),
+(12, '2013-10-07', 2, 1, 1, 1, 123, 13, 'asdf', 'asdf', 'asdf', 123, 11, 11, 1, 11, 4, '2013-11-01 11:01:00', 3, 3, 3, 3, 1, 3, '2013-10-07 03:03:00', '2013-10-07 03:03:00', 0, 0, 0, 0, 0, 0, '2013-11-16 14:57:45', '2013-11-16 14:57:45', 0, 0, 0),
+(13, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 22, 9, 1, 9, 2, '2013-11-01 23:09:00', NULL, NULL, NULL, NULL, 1, 4, '2013-10-07 01:30:00', '2013-10-07 01:39:00', 0, 1, 0, 0, 0, 0, '2013-11-18 16:03:08', '2013-11-18 16:03:08', 0, 0, 0),
+(14, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 22, 9, 1, 9, 2, '2013-11-01 23:09:00', NULL, NULL, NULL, NULL, 1, 4, '2013-10-07 01:30:00', '2013-10-07 01:40:00', 1, 1, 0, 0, 0, 0, '2013-11-18 16:04:07', '2013-11-18 16:28:04', 0, 0, 0),
+(15, '2013-10-07', 2, 1, 1, 3, 12, 11, 'sadf', 'asdf', 'asd', 21, 12, 0, 1, 2, 2, '2013-10-07 12:12:00', NULL, NULL, NULL, NULL, 1, 3, '2013-10-07 13:12:00', '2013-10-07 14:12:00', 0, 0, 0, 0, 0, 0, '2013-12-02 01:01:45', '2013-12-02 01:01:45', 3600, 7200, 3600);
 
 -- --------------------------------------------------------
 
@@ -753,8 +765,8 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-11-27 05:15:41'),
-(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-11-27 04:23:24');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '9a40f7b4a621974f14d93103bd64e82e', 1, 1, '2013-08-22 16:51:20', '2013-12-01 20:08:04'),
+(2, 'rstars', '213a4202e9302b6ec7e893316a1c3f31', 'raeef.refai@live.com', 'dce72f672eeff1bafc2b9512bffa2137', 0, 1, '2013-10-25 11:44:00', '2013-12-01 19:51:25');
 
 -- --------------------------------------------------------
 
